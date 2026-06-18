@@ -11,7 +11,7 @@ requires-python = ">=3.12"
 license = "MIT"
 
 [tool.setuptools.packages.find]
-include = ["connectors*"]
+include = ["connectors*", "eurostat-mcp*"]
 
 [project.optional-dependencies]
 dev = [

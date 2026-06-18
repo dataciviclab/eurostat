@@ -2,12 +2,12 @@
 
 ## Adding a new dataset
 
-Each Eurostat dataflow maps to one dataset directory. The connector handles TSV parsing and 
+Each Eurostat dataflow maps to one dataset directory. The connector handles TSV parsing and
 unpivot automatically — you only need to configure the pipeline and write a mart view.
 
 ### Steps
 
-1. **Identify the dataflow ID** — e.g. `NAMA_10R_3GDP`. Search the Eurostat catalog 
+1. **Identify the dataflow ID** — e.g. `NAMA_10R_3GDP`. Search the Eurostat catalog
    or use the [online data browser](https://ec.europa.eu/eurostat/web/main/data/database).
 
 2. **Create a dataset directory**:
@@ -90,8 +90,10 @@ SELECT
     g.nuts_level,
     g.parent_code AS nuts_parent_code,
     gp.label_en AS nuts_parent_label_en,
-    -- Add dimension labels here if your DSD has extra columns
-    -- e.g. r.sex, r.age, r.nace_r2, r.iccs, r.wstatus
+    -- Dimension labels: JOIN on existing codelist or create a new one
+    -- Examples:
+    -- LEFT JOIN read_csv('codelists/nace_r2.csv', …) n ON r.nace_r2 = n.code
+    -- LEFT JOIN read_csv('codelists/sex.csv', …) s ON r.sex = s.code
     r.value,
     r.flag,
     fl.description_en AS flag_desc_en
@@ -103,8 +105,13 @@ LEFT JOIN read_csv('codelists/geo.csv', auto_detect=true, delim=',', header=true
 LEFT JOIN read_csv('codelists/flags.csv', auto_detect=true, delim=',', header=true) fl ON r.flag = fl.flag
 ```
 
-See existing datasets for examples with sex/age labels (`eurostat-pop-nuts3`) 
-or NACE sector labels (`eurostat-gva-nuts3`).
+See existing datasets for examples with sex/age labels (`eurostat-pop-nuts3`)
+or NACE sector labels (`eurostat-gva-nuts3` and `eurostat-emp-nuts3`).
+
+> **Adding a new dimension codelist**: if your dataflow has a DSD dimension not yet
+> in `codelists/` (e.g. `sex`, `age`, `iccs`), create a new CSV with columns `code,label_en`
+> (and optional `label_it`). Use `LEFT JOIN` in `clean.sql` as shown above. Avoid
+> `CASE WHEN` chains — they duplicate logic across datasets.
 
 ### mart.sql template
 
@@ -128,7 +135,9 @@ ORDER BY year DESC, geo
 ## Guidelines
 
 - **clean.sql** — always the same pattern: codelist enrichment. Add dimension-specific labels
-  (sex, age, nace) as `CASE` expressions or additional JOINs.
+  as `LEFT JOIN` on `codelists/{dim}.csv`. If no CSV exists for the dimension, create one
+  (columns: `code,label_en[,label_it]`). Prefer JOINs over `CASE WHEN` chains — they
+  avoid logic duplication when the same dimension appears in multiple datasets.
 - **mart.sql** — business logic only: filter, derive, rename. No codelist JOINs (already in clean).
 - **`sample_size: -1`** — add to `dataset.yml` `clean.read` if DuckDB mis-detects a column type
   (common with `sex` values `T`/`M`/`F`).

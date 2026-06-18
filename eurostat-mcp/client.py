@@ -9,6 +9,7 @@ limit capping (max 500 rows), no multi-statement.
 
 from __future__ import annotations
 
+import csv
 import re
 import urllib.request
 from datetime import date
@@ -104,7 +105,10 @@ _FILESYSTEM_PATTERNS = re.compile(
     re.IGNORECASE,
 )
 
-# ── Codelists (embedded, no GCS dependency) ──────────────────────────────────
+# ── Codelists ────────────────────────────────────────────────────────────────
+# Small codelists are embedded for speed and zero-dependency operation.
+# For larger datasets (geo, nace_r2), the CSV files in codelists/ are the
+# canonical source — data is loaded at import time to avoid file-based drift.
 
 CODELISTS: dict[str, dict[str, str]] = {
     "freq": {
@@ -129,29 +133,27 @@ CODELISTS: dict[str, dict[str, str]] = {
     },
 }
 
-NUTS_ITALY: dict[str, str] = {
-    "ITC1": "Piemonte",
-    "ITC2": "Valle d'Aosta",
-    "ITC3": "Liguria",
-    "ITC4": "Lombardia",
-    "ITH1": "Bolzano",
-    "ITH2": "Trento",
-    "ITH3": "Veneto",
-    "ITH4": "Friuli-Venezia Giulia",
-    "ITH5": "Emilia-Romagna",
-    "ITI1": "Toscana",
-    "ITI2": "Umbria",
-    "ITI3": "Marche",
-    "ITI4": "Lazio",
-    "ITF1": "Abruzzo",
-    "ITF2": "Molise",
-    "ITF3": "Campania",
-    "ITF4": "Puglia",
-    "ITF5": "Basilicata",
-    "ITF6": "Calabria",
-    "ITG1": "Sicilia",
-    "ITG2": "Sardegna",
-}
+
+def _load_nuts_italy() -> dict[str, str]:
+    """Load Italian NUTS2 regions from codelists/geo.csv (canonical source).
+
+    Filters for Italian NUTS2 entries and excludes the ITZZ placeholder
+    (special 'outside' code not corresponding to an actual region).
+    """
+    geo_path = _REPO_ROOT / "codelists" / "geo.csv"
+    if not geo_path.exists():
+        return {}  # graceful fallback — tests may run from a non-repo env
+    result: dict[str, str] = {}
+    with open(geo_path, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            code = row.get("code", "")
+            level = row.get("nuts_level", "")
+            if code.startswith("IT") and level == "NUTS2" and code != "ITZZ":
+                result[code] = row.get("label_en", code)
+    return result
+
+
+NUTS_ITALY: dict[str, str] = _load_nuts_italy()
 
 _cache = TtlCache(ttl_seconds=120)
 
