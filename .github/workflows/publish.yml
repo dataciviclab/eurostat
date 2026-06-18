@@ -108,7 +108,7 @@ jobs:
           # Clean: out/data/clean/{slug}/{year}/{slug}_{year}_clean.parquet
           #   → gs://dataciviclab-clean/eurostat/{slug}/{slug}_clean.parquet
           for slug_dir in ${{ steps.datasets.outputs.datasets }}; do
-            slug=$(basename "$slug_dir")
+            slug=$(grep '^  name:' "$slug_dir/dataset.yml" | sed 's/.*: "//;s/"//')
             year=$(ls "out/data/clean/$slug/" 2>/dev/null | sort -rn | head -1)
             [ -z "$year" ] && echo "⚠️  No clean output for $slug" && continue
             src=$(ls "out/data/clean/$slug/$year/"*_clean.parquet 2>/dev/null | head -1)
@@ -120,7 +120,7 @@ jobs:
           # Mart: out/data/mart/{slug}/{year}/*.parquet
           #   → gs://dataciviclab-mart/eurostat/{slug}/
           for slug_dir in ${{ steps.datasets.outputs.datasets }}; do
-            slug=$(basename "$slug_dir")
+            slug=$(grep '^  name:' "$slug_dir/dataset.yml" | sed 's/.*: "//;s/"//')
             year=$(ls "out/data/mart/$slug/" 2>/dev/null | sort -rn | head -1)
             [ -z "$year" ] && echo "⚠️  No mart output for $slug" && continue
             gsutil -m cp "out/data/mart/$slug/$year/"*.parquet "gs://dataciviclab-mart/eurostat/$slug/"
