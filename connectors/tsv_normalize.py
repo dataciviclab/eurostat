@@ -57,7 +57,7 @@ def parse_value(raw: str) -> tuple[float | None, str | None]:
         return None, flag
 
 
-def normalize(flow: str, output: Path | None = None) -> str:
+def normalize(flow: str, output: Path | None = None, filter_geo: str | None = None) -> str:
     """Download TSV, normalize, return CSV content."""
     url = eurostat_url(flow)
     sys.stderr.write(f"Fetching {url}...\n")
@@ -67,6 +67,11 @@ def normalize(flow: str, output: Path | None = None) -> str:
     raw_header = response.readline().decode("utf-8")
     dims = detect_dims(raw_header)
     sys.stderr.write(f"Detected dimensions: {dims}\n")
+    
+    # Geo is always the last dimension before TIME_PERIOD
+    geo_dim_index = len(dims) - 1
+    if filter_geo:
+        sys.stderr.write(f"Filtering geo: {filter_geo}*\n")
     
     # Parse year columns from header
     parts = raw_header.strip().split("\t")
@@ -91,6 +96,13 @@ def normalize(flow: str, output: Path | None = None) -> str:
         
         # Parse dimension values from first column
         dim_values = [v.strip() for v in cols[0].split(",")]
+        
+        # Apply geo filter early (skip entire row if geo doesn't match)
+        if filter_geo:
+            geo_val = dim_values[geo_dim_index] if geo_dim_index < len(dim_values) else ""
+            if not geo_val.startswith(filter_geo):
+                continue
+        
         base_row = {}
         for i, d in enumerate(dims):
             base_row[d] = dim_values[i] if i < len(dim_values) else ""
@@ -123,9 +135,10 @@ def main():
     parser = argparse.ArgumentParser(description="Eurostat TSV normalizer")
     parser.add_argument("--flow", required=True, help="Eurostat dataflow ID (e.g. NAMA_10R_3GDP)")
     parser.add_argument("--output", type=Path, default=None, help="Output CSV path (default: stdout)")
+    parser.add_argument("--filter-geo", default=None, help="Filter by geo prefix (e.g. IT, DE, FR)")
     args = parser.parse_args()
     
-    normalize(args.flow, args.output)
+    normalize(args.flow, args.output, filter_geo=args.filter_geo)
 
 
 if __name__ == "__main__":

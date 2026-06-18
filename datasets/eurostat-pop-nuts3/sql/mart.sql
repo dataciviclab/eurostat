@@ -1,20 +1,22 @@
--- mart.sql: Popolazione NUTS3 — Italia
+-- mart.sql: Popolazione NUTS3 — Italia, totale
 SELECT
     anno,
     geo,
-    geo_label_en,
-    nuts_level,
+    g.label_en AS geo_label_en,
+    g.nuts_level,
     sex,
-    sex_label_en,
+    CASE sex
+        WHEN 'F' THEN 'Female' WHEN 'M' THEN 'Male' WHEN 'T' THEN 'Total'
+    END AS sex_label_en,
     age,
-    age_label_en,
-    unit,
     valore,
     flag
 FROM clean_input
+LEFT JOIN read_csv('codelists/geo.csv', auto_detect=true, delim=',', header=true) g
+    ON geo = g.code
 WHERE geo LIKE 'IT%'
-  AND unit = 'NR'  -- number of residents
-  AND sex = 'T'    -- total (M+F)
+  AND unit = 'NR'
+  AND sex = 'T'
   AND age = 'TOTAL'
   AND valore IS NOT NULL
 ORDER BY anno DESC, geo

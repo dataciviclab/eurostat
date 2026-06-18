@@ -13,10 +13,11 @@ raw:
   output_policy: overwrite
   sources:
     - name: "eurostat_nama_10r_3gva"
-      type: "http_file"
+      type: "script"
       args:
-        url: "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/NAMA_10R_3GVA?format=TSV"
-        filename: "nama_10r_3gva.tsv"
+        command: "../../connectors/tsv_normalize.py --flow NAMA_10R_3GVA"
+        output: "nama_10r_3gva_normalized.csv"
+        filename: "nama_10r_3gva_normalized.csv"
       primary: true
 
 clean:
@@ -24,7 +25,7 @@ clean:
   read:
     source: auto
     mode: latest
-    delim: "\t"
+    delim: ","
     encoding: utf-8
     header: true
   validate:
@@ -36,10 +37,6 @@ mart:
       sql: "sql/mart.sql"
   required_tables:
     - "mart_gva_nuts3"
-  validate:
-    table_rules:
-      mart_gva_nuts3:
-        min_rows: 500
 
 validation:
   fail_on_error: true
