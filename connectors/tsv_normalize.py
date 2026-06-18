@@ -57,56 +57,67 @@ def parse_value(raw: str) -> tuple[float | None, str | None]:
         return None, flag
 
 
-def normalize(flow: str, output: Path | None = None, filter_geo: str | None = None) -> str:
-    """Download TSV, normalize, return CSV content."""
-    url = eurostat_url(flow)
-    sys.stderr.write(f"Fetching {url}...\n")
-    
-    response = urllib.request.urlopen(url)
-    # Read header
-    raw_header = response.readline().decode("utf-8")
+def normalize_stream(
+    input_stream: io.TextIOBase,
+    output: Path | None = None,
+    filter_geo: str | None = None,
+) -> str:
+    """Normalize TSV from a text stream to unpivoted CSV.
+
+    Parses the SDMX-TSV header to detect dimensions, then unpivots
+    year columns into rows with columns [dim1..dimN, anno, valore, flag].
+
+    Args:
+        input_stream: Text stream containing the TSV data.
+        output: Optional path to write CSV file. If None, returns CSV as string.
+        filter_geo: Optional geo prefix filter (e.g. 'IT' for Italy only).
+
+    Returns:
+        CSV content as string.
+    """
+    raw_header = input_stream.readline()
     dims = detect_dims(raw_header)
     sys.stderr.write(f"Detected dimensions: {dims}\n")
-    
+
     # Geo is always the last dimension before TIME_PERIOD
     geo_dim_index = len(dims) - 1
     if filter_geo:
         sys.stderr.write(f"Filtering geo: {filter_geo}*\n")
-    
+
     # Parse year columns from header
     parts = raw_header.strip().split("\t")
     year_cols = [y.strip() for y in parts[1:] if y.strip()]
     sys.stderr.write(f"Year columns: {year_cols[0]}..{year_cols[-1]} ({len(year_cols)} years)\n")
-    
-    # Output CSV
+
+    # Output CSV — lineterminator='\n' per evitare \r\n in stdout/pipe
     buf = io.StringIO()
     fieldnames = list(dims) + ["anno", "valore", "flag"]
-    writer = csv.DictWriter(buf, fieldnames=fieldnames)
+    writer = csv.DictWriter(buf, fieldnames=fieldnames, lineterminator="\n")
     writer.writeheader()
-    
+
     row_count = 0
-    for line_bytes in response:
-        line = line_bytes.decode("utf-8").strip()
+    for line in input_stream:
+        line = line.strip()
         if not line:
             continue
-        
+
         cols = line.split("\t")
         if not cols:
             continue
-        
+
         # Parse dimension values from first column
         dim_values = [v.strip() for v in cols[0].split(",")]
-        
+
         # Apply geo filter early (skip entire row if geo doesn't match)
         if filter_geo:
             geo_val = dim_values[geo_dim_index] if geo_dim_index < len(dim_values) else ""
             if not geo_val.startswith(filter_geo):
                 continue
-        
+
         base_row = {}
         for i, d in enumerate(dims):
             base_row[d] = dim_values[i] if i < len(dim_values) else ""
-        
+
         # Each subsequent column is a year
         for i, year in enumerate(year_cols):
             if i + 1 >= len(cols):
@@ -118,17 +129,29 @@ def normalize(flow: str, output: Path | None = None, filter_geo: str | None = No
             row["flag"] = flag or ""
             writer.writerow(row)
             row_count += 1
-    
+
     csv_content = buf.getvalue()
-    
+
     if output:
         output.write_text(csv_content, encoding="utf-8")
         sys.stderr.write(f"Written {row_count} rows to {output}\n")
     else:
         sys.stdout.write(csv_content)
         sys.stderr.write(f"Written {row_count} rows to stdout\n")
-    
+
     return csv_content
+
+
+def normalize(flow: str, output: Path | None = None, filter_geo: str | None = None) -> str:
+    """Download TSV from Eurostat SDMX API, normalize to CSV.
+
+    Wraps normalize_stream with an HTTP fetch.
+    """
+    url = eurostat_url(flow)
+    sys.stderr.write(f"Fetching {url}...\n")
+    response = urllib.request.urlopen(url)
+    text_stream = io.TextIOWrapper(response, encoding="utf-8")
+    return normalize_stream(text_stream, output, filter_geo)
 
 
 def main():
