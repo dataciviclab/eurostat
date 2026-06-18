@@ -8,7 +8,7 @@ Usage:
 Reads TSV from Eurostat SDMX API, detects dimensions automatically
 from the header, unpivots years into rows, parses flags and missing values.
 
-Output: CSV with columns [dim1, dim2, ..., dimN, anno, valore, flag]
+Output: CSV with columns [dim1, dim2, ..., dimN, year, value, flag]
          EU-wide, no filtering.
 """
 
@@ -65,7 +65,7 @@ def normalize_stream(
     """Normalize TSV from a text stream to unpivoted CSV.
 
     Parses the SDMX-TSV header to detect dimensions, then unpivots
-    year columns into rows with columns [dim1..dimN, anno, valore, flag].
+    year columns into rows with columns [dim1..dimN, year, value, flag].
 
     Args:
         input_stream: Text stream containing the TSV data.
@@ -91,7 +91,7 @@ def normalize_stream(
 
     # Output CSV — lineterminator='\n' per evitare \r\n in stdout/pipe
     buf = io.StringIO()
-    fieldnames = list(dims) + ["anno", "valore", "flag"]
+    fieldnames = list(dims) + ["year", "value", "flag"]
     writer = csv.DictWriter(buf, fieldnames=fieldnames, lineterminator="\n")
     writer.writeheader()
 
@@ -122,10 +122,10 @@ def normalize_stream(
         for i, year in enumerate(year_cols):
             if i + 1 >= len(cols):
                 continue
-            valore, flag = parse_value(cols[i + 1])
+            value_parsed, flag = parse_value(cols[i + 1])
             row = dict(base_row)
-            row["anno"] = year
-            row["valore"] = str(valore) if valore is not None else ""
+            row["year"] = year
+            row["value"] = str(value_parsed) if value_parsed is not None else ""
             row["flag"] = flag or ""
             writer.writerow(row)
             row_count += 1

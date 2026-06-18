@@ -60,7 +60,7 @@ TOOLKIT_ALLOW_SCRIPT_SOURCE=1 \
 
 ## How it works
 
-The connector (`tsv_normalize.py`) downloads SDMX-TSV from the Eurostat API, auto-detects dimensions from the header, and unpivots year columns into analytical rows. Output is a CSV with columns `[dim1..dimN, anno, valore, flag]`.
+The connector (`tsv_normalize.py`) downloads SDMX-TSV from the Eurostat API, auto-detects dimensions from the header, and unpivots year columns into analytical rows. Output is a CSV with columns `[dim1..dimN, year, value, flag]`.
 
 The toolkit pipeline then:
 1. Runs the connector (`type: script`) → raw CSV

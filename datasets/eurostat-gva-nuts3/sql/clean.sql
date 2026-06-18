@@ -1,8 +1,9 @@
 -- clean.sql: arricchimento GVA — dimensione extra nace_r2
 SELECT
-    r.* EXCLUDE (valore, flag),
+    r.* EXCLUDE (value, flag),
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
+    u.label_it AS unit_label_it,
     u.label_it AS unit_label_it,
     CASE r.nace_r2
         WHEN 'A' THEN 'Agriculture, forestry and fishing'
@@ -21,7 +22,7 @@ SELECT
     g.nuts_level,
     g.parent_code AS nuts_parent_code,
     gp.label_en AS nuts_parent_label_en,
-    r.valore,
+    r.value,
     r.flag,
     fl.description_en AS flag_desc_en
 FROM raw_input r
