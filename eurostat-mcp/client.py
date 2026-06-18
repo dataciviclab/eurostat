@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import re
 import urllib.request
+from datetime import date
 from typing import Any
 
 from lab_connectors.duckdb import gcs_connect
@@ -22,24 +23,34 @@ GCS_BASE = "https://storage.googleapis.com/dataciviclab-clean/eurostat"
 _FALLBACK_YEAR: str | None = None
 
 
+_YEAR_CACHE: str | None = None
+
+
 def _parquet_url(slug: str) -> str:
     """Build the GCS URL for a dataset slug.
 
-    Prefers the no-year path (multi-year parquet). Falls back to
-    year-based path for backward compat during migration.
+    The toolkit produces files named {slug}_{year}_clean.parquet.
+    We probe for the current year, then previous years as fallback.
     """
-    url = f"{GCS_BASE}/{slug}/{slug}_clean.parquet"
-    # Probe the no-year URL; if probing fails (slow GCS), still use the
-    # no-year URL — that's where the current data lives.
-    try:
-        req = urllib.request.Request(url, method="HEAD")
-        resp = urllib.request.urlopen(req, timeout=2)
-        if resp.status == 200:
-            return url
-    except Exception:
-        pass
-    # Probing timed out — no-year URL is the only valid one after migration
-    return url
+    global _YEAR_CACHE
+    if _YEAR_CACHE:
+        year = _YEAR_CACHE
+    else:
+        this_year = date.today().year
+        for y in range(this_year, this_year - 3, -1):
+            probe = f"{GCS_BASE}/{slug}/{slug}_{y}_clean.parquet"
+            try:
+                req = urllib.request.Request(probe, method="HEAD")
+                resp = urllib.request.urlopen(req, timeout=2)
+                if resp.status == 200:
+                    _YEAR_CACHE = str(y)
+                    year = str(y)
+                    break
+            except Exception:
+                continue
+        else:
+            year = str(this_year)
+    return f"{GCS_BASE}/{slug}/{slug}_{year}_clean.parquet"
 
 
 # ── Registry ─────────────────────────────────────────────────────────────────
