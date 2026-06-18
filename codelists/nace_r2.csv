@@ -1,11 +1,11 @@
 code,label_en
-A,Agriculture, forestry and fishing
+A,"Agriculture, forestry and fishing"
 B-E,Industry (except construction)
 C,Manufacturing
 F,Construction
-G-I,Wholesale, retail, transport
-G-J,Wholesale, retail, transport, ICT
+G-I,"Wholesale, retail, transport"
+G-J,"Wholesale, retail, transport, ICT"
 J,ICT
 K-N,Financial and business services
-O-U,Public admin, education, health
+O-U,"Public admin, education, health"
 TOTAL,All NACE activities
