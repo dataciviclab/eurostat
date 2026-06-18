@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       datasets:
-        description: "Datasets to run (comma-separated, or 'all')"
+        description: "Dataset slugs to run (comma-separated), or 'all'"
         default: "all"
       smoke:
-        description: "Smoke mode (--sample-rows 1000, dry-run without GCS sync)"
+        description: "Smoke mode (--sample-rows 1000, skips GCS sync)"
         default: false
         type: boolean
   schedule:
@@ -29,37 +29,50 @@ jobs:
           pip install git+https://github.com/dataciviclab/toolkit.git
           pip install git+https://github.com/dataciviclab/lab-connectors.git
 
-      - name: Determine datasets to run
+      # ── Dataset discovery ────────────────────────────────────────────
+      # Discover all dataset configs dynamically: any datasets/*/dataset.yml
+      - name: Discover datasets
         id: datasets
         run: |
-          if [ "${{ inputs.datasets }}" = "all" ] || [ "${{ github.event_name }}" = "schedule" ]; then
-            DATASETS=$(ls -d datasets/eurostat-*-nuts3 | tr '\n' ' ')
+          if [ "${{ inputs.datasets }}" = "all" ] || [ -z "${{ inputs.datasets }}" ]; then
+            # Find all dataset configs, extract their directory paths
+            DIRS=$(find datasets -maxdepth 2 -name dataset.yml -exec dirname {} \; | sort)
+            echo "datasets=$DIRS" >> $GITHUB_OUTPUT
           else
-            DATASETS=""
+            LIST=""
             for slug in $(echo "${{ inputs.datasets }}" | tr ',' ' '); do
-              DATASETS="$DATASETS datasets/$slug"
+              if [ -d "datasets/$slug" ]; then
+                LIST="$LIST datasets/$slug"
+              else
+                echo "⚠️  Dataset '$slug' not found at datasets/$slug — skipping"
+              fi
             done
+            echo "datasets=$LIST" >> $GITHUB_OUTPUT
           fi
-          echo "datasets=$DATASETS" >> $GITHUB_OUTPUT
 
-      - name: Run all datasets
+      # ── Run pipeline ─────────────────────────────────────────────────
+      - name: Run datasets
         env:
           TOOLKIT_ALLOW_SCRIPT_SOURCE: 1
         run: |
           SMOKE="${{ inputs.smoke && '--sample-rows 1000' || '' }}"
-          for cfg in ${{ steps.datasets.outputs.datasets }}; do
-            echo "=== $cfg ==="
-            toolkit run full --config "$cfg/dataset.yml" --years 2024 $SMOKE
+          for dir in ${{ steps.datasets.outputs.datasets }}; do
+            echo "=== $dir ==="
+            toolkit run full --config "$dir/dataset.yml" --years 2024 $SMOKE
           done
 
-      - name: Auth GCP and sync to GCS
+      # ── GCS auth ─────────────────────────────────────────────────────
+      - name: Auth GCP
+        id: gcs
         if: ${{ !inputs.smoke }}
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
         run: |
           if [ -z "$GCP_SA_KEY" ]; then
-            echo "GCP_SA_KEY not configured — skipping GCS sync"
-            exit 0
+            echo "❌ GCP_SA_KEY secret not configured. Publish requires it."
+            echo "Set it in GitHub repo → Settings → Secrets → Actions."
+            echo "ready=false" >> $GITHUB_OUTPUT
+            exit 1
           fi
           # Supports both raw JSON and base64-encoded key
           if echo "$GCP_SA_KEY" | python3 -c "import json,sys; json.load(sys.stdin)" 2>/dev/null; then
@@ -68,15 +81,17 @@ jobs:
             printf '%s\n' "$GCP_SA_KEY" | base64 -d > /tmp/gcp-key.json 2>/dev/null
           fi
           gcloud auth activate-service-account --key-file=/tmp/gcp-key.json
+          echo "ready=true" >> $GITHUB_OUTPUT
 
+      # ── Sync to GCS ──────────────────────────────────────────────────
       - name: Sync clean to GCS
-        if: ${{ !inputs.smoke }}
+        if: ${{ !inputs.smoke && steps.gcs.outputs.ready == 'true' }}
         run: |
           gsutil -m rsync -r out/data/clean/ gs://dataciviclab-clean/eurostat/
           echo "✅ Clean synced to gs://dataciviclab-clean/eurostat/"
 
       - name: Sync mart to GCS
-        if: ${{ !inputs.smoke }}
+        if: ${{ !inputs.smoke && steps.gcs.outputs.ready == 'true' }}
         run: |
           gsutil -m rsync -r out/data/mart/ gs://dataciviclab-mart/eurostat/
           echo "✅ Mart synced to gs://dataciviclab-mart/eurostat/"

@@ -48,7 +48,7 @@ jobs:
 
       - name: Validate all dataset configs
         run: |
-          for cfg in datasets/eurostat-*-nuts3/dataset.yml; do
+          for cfg in $(find datasets -maxdepth 2 -name dataset.yml | sort); do
             echo "→ $cfg"
             toolkit inspect paths --config "$cfg" --year 2024 > /dev/null 2>&1
           done
