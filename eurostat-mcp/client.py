@@ -282,8 +282,14 @@ def query(
     return [dict(zip(columns, row)) for row in rows]
 
 
-def describe_dataset(slug: str) -> dict[str, Any]:
-    """Return schema, row count, year range and dimension values for a dataset."""
+def describe_dataset(slug: str, dimension_limit: int = 20) -> dict[str, Any]:
+    """Return schema, row count, year range and dimension values for a dataset.
+
+    Args:
+        slug: Dataset slug (e.g. eurostat_gdp_nuts3).
+        dimension_limit: Max distinct values shown per dimension (default 20).
+                         Use 0 for no limit (may return large responses).
+    """
     slug = _validate_slug(slug)
     path = DATASETS[slug].get("parquet_url") or _parquet_url(slug)
     meta = DATASETS[slug]
@@ -310,7 +316,7 @@ def describe_dataset(slug: str) -> dict[str, Any]:
             pass
 
         # Dimension values (from registry dimensions)
-        dimensions: dict[str, list[dict[str, Any]]] = {}
+        dimensions: dict[str, dict[str, Any]] = {}
         for dim in meta.get("dimensions", []):
             label_col = f"{dim}_label_en"
             try:
@@ -319,9 +325,18 @@ def describe_dataset(slug: str) -> dict[str, Any]:
                     f"FROM read_parquet('{path}') "
                     f"WHERE \"{dim}\" IS NOT NULL ORDER BY 1"
                 ).fetchall()
-                dimensions[dim] = [
-                    {"code": r[0], "label": r[1]} for r in rows
+                total = len(rows)
+                limit = dimension_limit if dimension_limit > 0 else total
+                truncated = total > limit
+                items = [
+                    {"code": r[0], "label": r[1]} for r in rows[:limit]
                 ]
+                dimensions[dim] = {
+                    "values": items,
+                    "total_count": total,
+                    "truncated": truncated,
+                    "limit": limit,
+                }
             except Exception:
                 # Fallback: code only (no label column)
                 try:
@@ -329,9 +344,23 @@ def describe_dataset(slug: str) -> dict[str, Any]:
                         f"SELECT DISTINCT \"{dim}\" FROM read_parquet('{path}') "
                         f"WHERE \"{dim}\" IS NOT NULL ORDER BY 1"
                     ).fetchall()
-                    dimensions[dim] = [{"code": r[0]} for r in rows]
+                    total = len(rows)
+                    limit = dimension_limit if dimension_limit > 0 else total
+                    truncated = total > limit
+                    items = [{"code": r[0]} for r in rows[:limit]]
+                    dimensions[dim] = {
+                        "values": items,
+                        "total_count": total,
+                        "truncated": truncated,
+                        "limit": limit,
+                    }
                 except Exception:
-                    dimensions[dim] = []
+                    dimensions[dim] = {
+                        "values": [],
+                        "total_count": 0,
+                        "truncated": False,
+                        "limit": dimension_limit,
+                    }
 
     return {
         "slug": slug,
@@ -342,7 +371,7 @@ def describe_dataset(slug: str) -> dict[str, Any]:
         "columns": columns_def,
         "row_count": count,
         "year_range": year_range,
-        "dimensions": {k: v[:20] for k, v in dimensions.items()},  # cap at 20
+        "dimensions": dimensions,
     }
 
 

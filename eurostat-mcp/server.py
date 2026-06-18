@@ -38,6 +38,7 @@ mcp = create_mcp_server(
         "All data covers all EU countries and multiple years.\n\n"
         "Tools available:\n"
         "- eurostat_list_datasets — see what's available\n"
+        "- eurostat_describe_dataset — inspect schema, years, and dimension values\n"
         "- eurostat_query — run SQL against a dataset (FROM data)\n"
         "- eurostat_get_codelist — resolve geo/unit/freq codes\n\n"
         "Example queries:\n"
@@ -68,9 +69,11 @@ def eurostat_list_datasets() -> dict[str, Any]:
 
 @mcp.tool(
     description=(
-        "Get full schema and dimension values for a Eurostat dataset. "
+        "Get schema and dimension values for a Eurostat dataset. "
         "Returns columns with types, total row count, year range, "
-        "and the distinct values for each dimension (unit, geo, freq, ...). "
+        "and up to 20 distinct values per dimension (unit, geo, freq, ...). "
+        "Each dimension reports total_count and a truncated flag — "
+        "pass dimension_limit=0 for no cap. "
         "Use this before eurostat_query to discover available codes and filters."
     ),
     structured_output=True,

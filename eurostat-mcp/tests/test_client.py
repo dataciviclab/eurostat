@@ -11,6 +11,7 @@ from client import (
     _validate_slug,
     _validate_limit,
     _validate_sql_safe,
+    describe_dataset,
     get_codelist,
     list_datasets,
     query,
@@ -242,3 +243,73 @@ class TestQueryContract:
     def test_query_blocked_keyword(self):
         with pytest.raises(ValueError, match="blocked"):
             query("eurostat_gdp_nuts3", "SELECT * FROM read_parquet('/etc/passwd')")
+
+
+# ── describe_dataset (contract, no network) ────────────────────────────────────
+
+class TestDescribeDataset:
+    """Test describe_dataset() using a local parquet file (no GCS)."""
+
+    @pytest.fixture(autouse=True)
+    def _setup_parquet(self):
+        """Create a small parquet on disk and patch a dataset's path."""
+        self._tmpdir = tempfile.mkdtemp()
+        self._parquet_path = os.path.join(self._tmpdir, "test.parquet")
+
+        duckdb.sql(
+            """
+            SELECT 'A' AS freq, 'EUR_HAB' AS unit, 'ITC4' AS geo,
+                   2024 AS year, 42000.0 AS value, '' AS flag
+            UNION ALL
+            SELECT 'A', 'EUR_HAB', 'ITH5', 2024, 38000.0, ''
+            UNION ALL
+            SELECT 'A', 'EUR_HAB', 'ITI4', 2024, 35000.0, ''
+            """
+        ).write_parquet(self._parquet_path)
+
+        self._orig_url = DATASETS["eurostat_gdp_nuts3"]["parquet_url"]
+        DATASETS["eurostat_gdp_nuts3"]["parquet_url"] = self._parquet_path
+        yield
+        DATASETS["eurostat_gdp_nuts3"]["parquet_url"] = self._orig_url
+
+    def test_describe_valid_slug(self):
+        result = describe_dataset("eurostat_gdp_nuts3")
+        assert isinstance(result, dict)
+        assert result["slug"] == "eurostat_gdp_nuts3"
+        assert result["row_count"] == 3
+        assert result["year_range"] == {"min": 2024, "max": 2024}
+
+    def test_describe_invalid_slug(self):
+        with pytest.raises(ValueError, match="Unknown dataset slug"):
+            describe_dataset("nonexistent")
+
+    def test_describe_columns_shape(self):
+        result = describe_dataset("eurostat_gdp_nuts3")
+        assert "columns" in result
+        assert len(result["columns"]) >= 3
+        col_names = [c["name"] for c in result["columns"]]
+        assert "geo" in col_names
+        assert "value" in col_names
+        assert "year" in col_names
+        assert all("type" in c for c in result["columns"])
+
+    def test_describe_dimensions(self):
+        result = describe_dataset("eurostat_gdp_nuts3")
+        assert "dimensions" in result
+        assert "geo" in result["dimensions"]
+        geo = result["dimensions"]["geo"]
+        assert "values" in geo
+        assert "total_count" in geo
+        assert "truncated" in geo
+        geo_codes = [v.get("code") for v in geo["values"]]
+        assert "ITC4" in geo_codes
+        assert "ITH5" in geo_codes
+        assert "ITI4" in geo_codes
+
+    def test_describe_dimension_truncation(self):
+        result = describe_dataset("eurostat_gdp_nuts3")
+        # geo has exactly 3 distinct values, well under limit
+        assert result["dimensions"]["geo"]["total_count"] >= 3
+        assert result["dimensions"]["geo"]["truncated"] is False
+        # freq has 1 value
+        assert len(result["dimensions"]["freq"]["values"]) == 1
