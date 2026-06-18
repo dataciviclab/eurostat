@@ -30,7 +30,8 @@ def _parquet_url(slug: str) -> str:
     year-based path for backward compat during migration.
     """
     url = f"{GCS_BASE}/{slug}/{slug}_clean.parquet"
-    # Probe the no-year URL; fall back to year-based if it doesn't exist
+    # Probe the no-year URL; if probing fails (slow GCS), still use the
+    # no-year URL — that's where the current data lives.
     try:
         req = urllib.request.Request(url, method="HEAD")
         resp = urllib.request.urlopen(req, timeout=2)
@@ -38,23 +39,8 @@ def _parquet_url(slug: str) -> str:
             return url
     except Exception:
         pass
-    # Fallback: try latest known year (fast — single HEAD)
-    global _FALLBACK_YEAR
-    if _FALLBACK_YEAR is None:
-        this_year = date.today().year
-        for y in [this_year, this_year - 1]:
-            probe = f"{GCS_BASE}/{slug}/{y}/{slug}_{y}_clean.parquet"
-            try:
-                req = urllib.request.Request(probe, method="HEAD")
-                resp = urllib.request.urlopen(req, timeout=2)
-                if resp.status == 200:
-                    _FALLBACK_YEAR = str(y)
-                    break
-            except Exception:
-                continue
-        if _FALLBACK_YEAR is None:
-            _FALLBACK_YEAR = "2024"
-    return f"{GCS_BASE}/{slug}/{_FALLBACK_YEAR}/{slug}_{_FALLBACK_YEAR}_clean.parquet"
+    # Probing timed out — no-year URL is the only valid one after migration
+    return url
 
 
 # ── Registry ─────────────────────────────────────────────────────────────────
