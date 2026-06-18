@@ -10,18 +10,54 @@ limit capping (max 500 rows), no multi-statement.
 from __future__ import annotations
 
 import re
+import urllib.request
+from datetime import date
 from typing import Any
 
 from lab_connectors.duckdb import gcs_connect
 from lab_connectors.mcp.cache import TtlCache
 
-# ── Registry ─────────────────────────────────────────────────────────────────
+# ── GCS paths (multi-year parquet, no year in path) ─────────────────────────
 
 GCS_BASE = "https://storage.googleapis.com/dataciviclab-clean/eurostat"
+_FALLBACK_YEAR: str | None = None
 
-# Currently all data is under year=2024 directory.
-# Each parquet contains all available years (2000-2024).
-_CURRENT_YEAR = "2024"
+
+def _parquet_url(slug: str) -> str:
+    """Build the GCS URL for a dataset slug.
+
+    Prefers the no-year path (multi-year parquet). Falls back to
+    year-based path for backward compat during migration.
+    """
+    url = f"{GCS_BASE}/{slug}/{slug}_clean.parquet"
+    # Probe the no-year URL; fall back to year-based if it doesn't exist
+    try:
+        req = urllib.request.Request(url, method="HEAD")
+        resp = urllib.request.urlopen(req, timeout=2)
+        if resp.status == 200:
+            return url
+    except Exception:
+        pass
+    # Fallback: try latest known year (fast — single HEAD)
+    global _FALLBACK_YEAR
+    if _FALLBACK_YEAR is None:
+        this_year = date.today().year
+        for y in [this_year, this_year - 1]:
+            probe = f"{GCS_BASE}/{slug}/{y}/{slug}_{y}_clean.parquet"
+            try:
+                req = urllib.request.Request(probe, method="HEAD")
+                resp = urllib.request.urlopen(req, timeout=2)
+                if resp.status == 200:
+                    _FALLBACK_YEAR = str(y)
+                    break
+            except Exception:
+                continue
+        if _FALLBACK_YEAR is None:
+            _FALLBACK_YEAR = "2024"
+    return f"{GCS_BASE}/{slug}/{_FALLBACK_YEAR}/{slug}_{_FALLBACK_YEAR}_clean.parquet"
+
+
+# ── Registry ─────────────────────────────────────────────────────────────────
 
 DATASETS: dict[str, dict[str, Any]] = {
     "eurostat_gdp_nuts3": {
@@ -29,10 +65,6 @@ DATASETS: dict[str, dict[str, Any]] = {
         "theme": "Economy / GDP per capita",
         "nuts_level": 3,
         "dimensions": ["freq", "unit", "geo"],
-        "parquet_url": (
-            f"{GCS_BASE}/eurostat_gdp_nuts3/{_CURRENT_YEAR}"
-            f"/eurostat_gdp_nuts3_{_CURRENT_YEAR}_clean.parquet"
-        ),
         "description": "GDP at current market prices by NUTS 3 region",
     },
     "eurostat_gva_nuts3": {
@@ -40,10 +72,6 @@ DATASETS: dict[str, dict[str, Any]] = {
         "theme": "Economy / Gross Value Added",
         "nuts_level": 3,
         "dimensions": ["freq", "nace_r2", "unit", "geo"],
-        "parquet_url": (
-            f"{GCS_BASE}/eurostat_gva_nuts3/{_CURRENT_YEAR}"
-            f"/eurostat_gva_nuts3_{_CURRENT_YEAR}_clean.parquet"
-        ),
         "description": "Gross Value Added by NUTS 3 region and NACE sector",
     },
     "eurostat_crime_nuts3": {
@@ -51,10 +79,6 @@ DATASETS: dict[str, dict[str, Any]] = {
         "theme": "Crime / Recorded offences",
         "nuts_level": 3,
         "dimensions": ["freq", "iccs", "unit", "geo"],
-        "parquet_url": (
-            f"{GCS_BASE}/eurostat_crime_nuts3/{_CURRENT_YEAR}"
-            f"/eurostat_crime_nuts3_{_CURRENT_YEAR}_clean.parquet"
-        ),
         "description": "Recorded crimes by NUTS 3 region and ICCS category",
     },
     "eurostat_pop_nuts3": {
@@ -62,13 +86,13 @@ DATASETS: dict[str, dict[str, Any]] = {
         "theme": "Demography / Population",
         "nuts_level": 3,
         "dimensions": ["freq", "unit", "sex", "age", "geo"],
-        "parquet_url": (
-            f"{GCS_BASE}/eurostat_pop_nuts3/{_CURRENT_YEAR}"
-            f"/eurostat_pop_nuts3_{_CURRENT_YEAR}_clean.parquet"
-        ),
         "description": "Population on 1 January by NUTS 3 region, sex and age",
     },
 }
+
+# Each dataset also carries a parquet_url (computed, can be overridden for tests)
+for _slug in list(DATASETS):
+    DATASETS[_slug]["parquet_url"] = _parquet_url(_slug)
 
 VALID_SLUGS: set[str] = set(DATASETS.keys())
 
@@ -148,10 +172,24 @@ def _validate_limit(limit: int) -> int:
     return limit
 
 
+def _strip_sql_comments(sql: str) -> str:
+    """Remove SQL comments (-- and /* */) from the start of a query."""
+    # Remove single-line comments (-- ...)
+    sql = re.sub(r'^--.*$', '', sql, flags=re.MULTILINE)
+    # Remove block comments (/* ... */)
+    sql = re.sub(r'/\*.*?\*/', '', sql, flags=re.DOTALL)
+    return sql.strip()
+
+
 def _validate_sql_safe(sql: str) -> None:
     """Reject SQL containing dangerous functions or filesystem paths."""
-    if not sql.strip().upper().startswith("SELECT"):
-        raise ValueError("Only SELECT queries are allowed")
+    # Strip comments before checking the starting keyword
+    stripped = _strip_sql_comments(sql).upper()
+    if not (stripped.startswith("SELECT") or stripped.startswith("WITH")):
+        raise ValueError(
+            "Only SELECT queries (or WITH...SELECT CTEs) are allowed. "
+            "Your query must start with SELECT or WITH."
+        )
     if ";" in sql:
         raise ValueError("Multi-statement queries are not allowed")
     if _BLOCKED_KEYWORDS.search(sql):
@@ -220,7 +258,7 @@ def query(
     slug = _validate_slug(slug)
     _validate_sql_safe(sql)
 
-    path = DATASETS[slug]["parquet_url"]
+    path = DATASETS[slug].get("parquet_url") or _parquet_url(slug)
     limit = _validate_limit(limit)
 
     # Replace FROM data (case-insensitive) with parquet read, first occurence only

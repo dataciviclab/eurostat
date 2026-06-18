@@ -50,15 +50,21 @@ jobs:
             echo "datasets=$LIST" >> $GITHUB_OUTPUT
           fi
 
+      # ── Fetch latest geo codelist from SDMX ───────────────────────────
+      - name: Update geo codelist
+        run: |
+          python scripts/fetch_geo_sdmx.py
+
       # ── Run pipeline ─────────────────────────────────────────────────
       - name: Run datasets
         env:
           TOOLKIT_ALLOW_SCRIPT_SOURCE: 1
         run: |
+          YEAR=$(date +%Y)
           SMOKE="${{ inputs.smoke && '--sample-rows 1000' || '' }}"
           for dir in ${{ steps.datasets.outputs.datasets }}; do
             echo "=== $dir ==="
-            toolkit run full --config "$dir/dataset.yml" --years 2024 $SMOKE
+            toolkit run full --config "$dir/dataset.yml" --years $YEAR $SMOKE
           done
 
       # ── GCS auth ─────────────────────────────────────────────────────
@@ -70,14 +76,17 @@ jobs:
         run: |
           if [ -z "$GCP_SA_KEY" ]; then
             echo "❌ GCP_SA_KEY_EUROSTAT secret not configured."
-            echo "Create a dedicated service account:"
+            echo "To enable automatic GCS publishing:"
             echo "  1. GCP Console → IAM → Service Accounts → Create"
             echo "     Name: eurostat-pipeline"
             echo "     ID: eurostat-pipeline@dataciviclab.iam.gserviceaccount.com"
             echo "  2. Add Storage Object Admin on:"
             echo "     - gs://dataciviclab-clean/eurostat/*"
             echo "     - gs://dataciviclab-mart/eurostat/*"
-            echo "  3. Create JSON key → set as GCP_SA_KEY_EUROSTAT secret"
+            echo "  3. GCP Console → IAM → Service Accounts → Keys → Add JSON key"
+            echo "  4. GitHub repo → Settings → Secrets → Actions → Add"
+            echo "     Name: GCP_SA_KEY_EUROSTAT"
+            echo "     Value: content of the JSON key file"
             echo "ready=false" >> $GITHUB_OUTPUT
             exit 1
           fi
@@ -90,15 +99,28 @@ jobs:
           gcloud auth activate-service-account --key-file=/tmp/gcp-key.json
           echo "ready=true" >> $GITHUB_OUTPUT
 
-      # ── Sync to GCS ──────────────────────────────────────────────────
-      - name: Sync clean to GCS
+      # ── Sync to GCS (struttura senza anno, i parquet sono multi-anno) ──
+      - name: Sync to GCS
         if: ${{ !inputs.smoke && steps.gcs.outputs.ready == 'true' }}
         run: |
-          gsutil -m rsync -r out/data/clean/ gs://dataciviclab-clean/eurostat/
-          echo "✅ Clean synced to gs://dataciviclab-clean/eurostat/"
+          # Clean: out/data/clean/{slug}/{year}/{slug}_{year}_clean.parquet
+          #   → gs://dataciviclab-clean/eurostat/{slug}/{slug}_clean.parquet
+          for slug_dir in ${{ steps.datasets.outputs.datasets }}; do
+            slug=$(basename "$slug_dir")
+            year=$(ls "out/data/clean/$slug/" 2>/dev/null | sort -rn | head -1)
+            [ -z "$year" ] && echo "⚠️  No clean output for $slug" && continue
+            src=$(ls "out/data/clean/$slug/$year/"*_clean.parquet 2>/dev/null | head -1)
+            [ -z "$src" ] && echo "⚠️  No clean parquet for $slug" && continue
+            gsutil cp "$src" "gs://dataciviclab-clean/eurostat/$slug/${slug}_clean.parquet"
+            echo "✅ $slug clean → gs://dataciviclab-clean/eurostat/$slug/${slug}_clean.parquet"
+          done
 
-      - name: Sync mart to GCS
-        if: ${{ !inputs.smoke && steps.gcs.outputs.ready == 'true' }}
-        run: |
-          gsutil -m rsync -r out/data/mart/ gs://dataciviclab-mart/eurostat/
-          echo "✅ Mart synced to gs://dataciviclab-mart/eurostat/"
+          # Mart: out/data/mart/{slug}/{year}/*.parquet
+          #   → gs://dataciviclab-mart/eurostat/{slug}/
+          for slug_dir in ${{ steps.datasets.outputs.datasets }}; do
+            slug=$(basename "$slug_dir")
+            year=$(ls "out/data/mart/$slug/" 2>/dev/null | sort -rn | head -1)
+            [ -z "$year" ] && echo "⚠️  No mart output for $slug" && continue
+            gsutil -m cp "out/data/mart/$slug/$year/"*.parquet "gs://dataciviclab-mart/eurostat/$slug/"
+            echo "✅ $slug mart → gs://dataciviclab-mart/eurostat/$slug/"
+          done

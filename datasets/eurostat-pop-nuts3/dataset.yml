@@ -4,7 +4,7 @@ schema_version: 1
 dataset:
   name: "eurostat_pop_nuts3"
   source_id: "eurostat"
-  years: [2024]
+  years: [2026]
   time_coverage:
     start_year: 1990
     end_year: 2025

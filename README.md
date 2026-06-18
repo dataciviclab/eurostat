@@ -72,7 +72,7 @@ import duckdb
 # GDP per capita of Italian provinces
 duckdb.sql("""
     SELECT geo, value
-    FROM read_parquet('gs://dataciviclab-clean/eurostat/eurostat_gdp_nuts3/*/*.parquet')
+    FROM read_parquet('gs://dataciviclab-clean/eurostat/eurostat_gdp_nuts3/eurostat_gdp_nuts3_clean.parquet')
     WHERE geo LIKE 'IT%' AND unit = 'EUR_HAB'
     ORDER BY value DESC
 """).show()
@@ -80,7 +80,7 @@ duckdb.sql("""
 # Population by region (from mart, Italy-filtered)
 duckdb.sql("""
     SELECT geo, SUM(value) AS pop
-    FROM read_parquet('gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/*/mart_pop_nuts3.parquet')
+    FROM read_parquet('gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/mart_pop_nuts3.parquet')
     WHERE sex = 'T' AND age = 'TOTAL'
     GROUP BY geo
     ORDER BY pop DESC
@@ -88,8 +88,8 @@ duckdb.sql("""
 ```
 
 GCS paths:
-- **Clean** (all EU, all years): `gs://dataciviclab-clean/eurostat/{slug}/*/*.parquet`
-- **Mart** (Italy-filtered): `gs://dataciviclab-mart/eurostat/{slug}/*/mart_{slug}.parquet`
+- **Clean** (all EU, all years): `gs://dataciviclab-clean/eurostat/{slug}/{slug}_clean.parquet`
+- **Mart** (Italy-filtered): `gs://dataciviclab-mart/eurostat/{slug}/`
 
 ## Structure
 
