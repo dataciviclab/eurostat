@@ -45,7 +45,7 @@ mart:
 validation:
   fail_on_error: true
 
-# ── Registry metadata (consumed by registry/generate.py) ──────────────────────
+# ── Registry metadata (for MCP client + CLI auto-discovery) ──────────────────
 registry:
   dataflow: "NAMA_10R_3GDP"
   theme: "Economy / GDP per capita"

@@ -50,6 +50,7 @@ jobs:
       - name: Install toolkit
         run: |
           pip install git+https://github.com/dataciviclab/toolkit.git
+          pip install pyyaml
 
       - name: Validate all dataset configs
         run: |
@@ -58,10 +59,3 @@ jobs:
             toolkit inspect paths --config "$cfg" --year 2024 > /dev/null 2>&1
           done
           echo "✅ All configs valid"
-
-      - name: Validate registry is up-to-date
-        run: |
-          pip install pyyaml
-          python registry/generate.py
-          git diff --exit-code registry/datasets.json
-          echo "✅ registry/datasets.json is up to date"

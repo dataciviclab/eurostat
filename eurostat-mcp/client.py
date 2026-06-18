@@ -9,20 +9,62 @@ limit capping (max 500 rows), no multi-statement.
 
 from __future__ import annotations
 
-import json
 import re
 from pathlib import Path
 from typing import Any
 
+import yaml
+
 from lab_connectors.duckdb import gcs_connect
 from lab_connectors.mcp.cache import TtlCache
 
-# ── Registry (from canonical datasets.json) ───────────────────────────────────
+# ── Registry (reads directly from datasets/*/dataset.yml) ─────────────────────
 
-_REGISTRY_PATH = Path(__file__).resolve().parent.parent / "registry" / "datasets.json"
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+_DATASETS_DIR = _REPO_ROOT / "datasets"
+_GCS_CLEAN_BASE = "https://storage.googleapis.com/dataciviclab-clean/eurostat"
+_CURRENT_YEAR = "2024"
+# Cache survives MCP keep-alive (module-level)
+_DATASETS_CACHE: dict[str, dict[str, Any]] | None = None
 
-DATASETS: dict[str, dict[str, Any]] = json.loads(_REGISTRY_PATH.read_text()).get("datasets", {})
 
+def _load_datasets() -> dict[str, dict[str, Any]]:
+    global _DATASETS_CACHE
+    if _DATASETS_CACHE is not None:
+        return _DATASETS_CACHE
+
+    datasets: dict[str, dict[str, Any]] = {}
+    for dir_entry in sorted(_DATASETS_DIR.iterdir()):
+        if not dir_entry.is_dir():
+            continue
+        yml = dir_entry / "dataset.yml"
+        if not yml.exists():
+            continue
+        data = yaml.safe_load(yml.read_text())
+        if not isinstance(data, dict):
+            continue
+        ds = data.get("dataset", {}) or {}
+        reg = data.get("registry", {}) or {}
+        slug = ds.get("name", "")
+        if not slug:
+            continue
+
+        datasets[slug] = {
+            "dataflow": reg.get("dataflow", ""),
+            "theme": reg.get("theme", ""),
+            "nuts_level": reg.get("nuts_level", 3),
+            "dimensions": list(reg.get("dimensions", [])),
+            "description": reg.get("description", slug),
+            "parquet_url": (
+                f"{_GCS_CLEAN_BASE}/{slug}/{_CURRENT_YEAR}"
+                f"/{slug}_{_CURRENT_YEAR}_clean.parquet"
+            ),
+        }
+    _DATASETS_CACHE = datasets
+    return datasets
+
+
+DATASETS: dict[str, dict[str, Any]] = _load_datasets()
 VALID_SLUGS: set[str] = set(DATASETS.keys())
 
 # ── SQL guard — blocked keywords (case-insensitive match) ────────────────────

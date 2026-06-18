@@ -84,8 +84,13 @@ def _connect(slug: str) -> Iterator[Any]:
         con.execute(f"CREATE VIEW data AS SELECT * FROM read_parquet('{path}')")
         try:
             yield con
+        except Exception:
+            raise
         finally:
-            con.execute("DROP VIEW IF EXISTS data")
+            try:
+                con.execute("DROP VIEW IF EXISTS data")
+            except Exception:
+                pass  # connection may be invalidated by DuckDB fatal error
 
 
 def _is_category_col(con: Any, col: str) -> bool:
