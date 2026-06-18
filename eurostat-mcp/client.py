@@ -282,6 +282,70 @@ def query(
     return [dict(zip(columns, row)) for row in rows]
 
 
+def describe_dataset(slug: str) -> dict[str, Any]:
+    """Return schema, row count, year range and dimension values for a dataset."""
+    slug = _validate_slug(slug)
+    path = DATASETS[slug].get("parquet_url") or _parquet_url(slug)
+    meta = DATASETS[slug]
+
+    with gcs_connect(path) as con:
+        # Schema
+        schema = con.sql(f"DESCRIBE SELECT * FROM read_parquet('{path}')").fetchall()
+        columns_def = [
+            {"name": r[0], "type": r[1], "nullable": r[2] == "YES"}
+            for r in schema
+        ]
+
+        # Row count
+        count = con.sql(f"SELECT COUNT(*) FROM read_parquet('{path}')").fetchone()[0]
+
+        # Year range
+        year_range: dict[str, int | None] = {"min": None, "max": None}
+        try:
+            r = con.sql(
+                f"SELECT MIN(year), MAX(year) FROM read_parquet('{path}')"
+            ).fetchone()
+            year_range = {"min": r[0], "max": r[1]}
+        except Exception:
+            pass
+
+        # Dimension values (from registry dimensions)
+        dimensions: dict[str, list[dict[str, Any]]] = {}
+        for dim in meta.get("dimensions", []):
+            label_col = f"{dim}_label_en"
+            try:
+                rows = con.sql(
+                    f"SELECT DISTINCT \"{dim}\" AS code, \"{label_col}\" AS label "
+                    f"FROM read_parquet('{path}') "
+                    f"WHERE \"{dim}\" IS NOT NULL ORDER BY 1"
+                ).fetchall()
+                dimensions[dim] = [
+                    {"code": r[0], "label": r[1]} for r in rows
+                ]
+            except Exception:
+                # Fallback: code only (no label column)
+                try:
+                    rows = con.sql(
+                        f"SELECT DISTINCT \"{dim}\" FROM read_parquet('{path}') "
+                        f"WHERE \"{dim}\" IS NOT NULL ORDER BY 1"
+                    ).fetchall()
+                    dimensions[dim] = [{"code": r[0]} for r in rows]
+                except Exception:
+                    dimensions[dim] = []
+
+    return {
+        "slug": slug,
+        "dataflow": meta["dataflow"],
+        "theme": meta["theme"],
+        "nuts_level": meta["nuts_level"],
+        "description": meta["description"],
+        "columns": columns_def,
+        "row_count": count,
+        "year_range": year_range,
+        "dimensions": {k: v[:20] for k, v in dimensions.items()},  # cap at 20
+    }
+
+
 def get_codelist(codelist_id: str) -> dict[str, Any]:
     """Resolve a codelist by ID (freq, unit, flag, nuts_italy)."""
     codelist_id = codelist_id.lower().strip()

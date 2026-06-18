@@ -14,6 +14,7 @@ from typing import Any
 from lab_connectors.mcp import create_mcp_server, guard_timed
 
 from client import (
+    describe_dataset,
     get_codelist,
     list_datasets,
     query,
@@ -63,6 +64,19 @@ mcp = create_mcp_server(
 )
 def eurostat_list_datasets() -> dict[str, Any]:
     return _list_response(guard_timed(list_datasets, "eurostat_list_datasets", logger_name=SERVER))
+
+
+@mcp.tool(
+    description=(
+        "Get full schema and dimension values for a Eurostat dataset. "
+        "Returns columns with types, total row count, year range, "
+        "and the distinct values for each dimension (unit, geo, freq, ...). "
+        "Use this before eurostat_query to discover available codes and filters."
+    ),
+    structured_output=True,
+)
+def eurostat_describe_dataset(slug: str) -> dict[str, Any]:
+    return guard_timed(describe_dataset, "eurostat_describe_dataset", slug, logger_name=SERVER)
 
 
 @mcp.tool(
