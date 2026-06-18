@@ -8,7 +8,6 @@ SELECT
     r.* EXCLUDE (value, flag),
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
-    u.label_it AS unit_label_it,
     g.label_en AS geo_label_en,
     g.nuts_level,
     g.parent_code AS nuts_parent_code,

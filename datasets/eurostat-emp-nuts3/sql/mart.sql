@@ -12,7 +12,6 @@ SELECT
     nace_label_en,
     unit,
     unit_label_en,
-    unit_label_it,
     value,
     flag,
     flag_desc_en

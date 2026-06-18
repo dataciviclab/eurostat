@@ -1,11 +1,746 @@
-unit,label_en,label_it
-CP_MEUR,Current prices (million EUR),Prezzi correnti (milioni EUR)
-THS,Thousands (persons),Migliaia (persone)
-EUR_HAB,EUR per inhabitant,EUR per abitante
-EUR_HAB_EU27_2020,% of EU27 average (from 2020),% media EU27 (dal 2020)
-MIO_EUR,Million EUR,Milioni di EUR
-MIO_NAC,National currency (million),Valuta nazionale (milioni)
-MIO_PPS_EU27_2020,Million PPS (EU27 from 2020),Milioni di SPA (EU27 dal 2020)
-NR,Number,Numero
-PPS_EU27_2020_HAB,PPS per inhabitant (EU27 from 2020),SPA per abitante (EU27 dal 2020)
-PPS_HAB_EU27_2020,PPS per inhabitant (EU27 from 2020),SPA per abitante (EU27 dal 2020)
+unit,label_en
+AVG,Average
+AVG_3Y,Three-year average
+AVG_A,Annual average
+AWU,Annual working unit (AWU)
+BAL,Balance
+BN,Billion
+BN_EUR,Billion euro
+BN_M3Y,Billion cubic metres per year
+BN_NAC,Billion units of national currency
+CAP_1000T_Y,Annual capacity/inputs in 1000T
+CFU,Colony-forming unit (CFU)
+CID_A_AVG,"Annual average core inflation differential (overall rate of change excluding energy, food, alcohol and tobacco)"
+CID_EA,Core inflation differential vis-à-vis the euro area
+CID_EA20,Core inflation differential vis-à-vis the euro area - 20 countries (2023-2025)
+CID_EA21,Core inflation differential vis-à-vis the euro area - 21 countries (from 2026)
+CLV05_MEUR,"Chain linked volumes (2005), million euro"
+CLV05_MNAC,"Chain linked volumes (2005), million units of national currency"
+CLV10_EUR_HAB,"Chain linked volumes (2010), euro per capita"
+CLV10_MEUR,"Chain linked volumes (2010), million euro"
+CLV10_MNAC,"Chain linked volumes (2010), million units of national currency"
+CLV10_MPPS,"Chain linked volumes (2010), million purchasing power standards (PPS)"
+CLV15_EUR_AWU,"Chain linked volumes (2015), euro per annual work unit (AWU)"
+CLV15_EUR_HAB,"Chain linked volumes (2015), euro per capita"
+CLV15_MEUR,"Chain linked volumes (2015), million euro"
+CLV15_MEUR_ENV,"Chain linked volumes (2015), million euro (according to environmental purposes)"
+CLV15_MNAC,"Chain linked volumes (2015), million units of national currency"
+CLV15_MPPS,"Chain linked volumes (2015), million purchasing power standards (PPS)"
+CLV20_EUR_AWU,"Chain linked volumes (2020), euro per annual work unit (AWU)"
+CLV20_EUR_HAB,"Chain linked volumes (2020), euro per capita"
+CLV20_MEUR,"Chain linked volumes (2020), million euro"
+CLV20_MEUR_ENV,"Chain linked volumes (2020), million euro (according to environmental purposes)"
+CLV20_MNAC,"Chain linked volumes (2020), million units of national currency"
+CLV20_MPPS,"Chain linked volumes (2020), million purchasing power standards (PPS)"
+CLV_I05,"Chain linked volumes, index 2005=100"
+CLV_I10,"Chain linked volumes, index 2010=100"
+CLV_I10_HAB,"Chain linked volumes, Index 2010=100, per capita"
+CLV_I15,"Chain linked volumes, index 2015=100"
+CLV_I15_HAB,"Chain linked volumes, Index 2015=100, per capita"
+CLV_I20,"Chain linked volumes, index 2020=100"
+CLV_I20_HAB,"Chain linked volumes, Index 2020=100, per capita"
+CLV_PCH_ANN,"Chain linked volumes, annualized percentage change on previous period"
+CLV_PCH_PRE,"Chain linked volumes, percentage change on previous period"
+CLV_PCH_PRE_HAB,"Chain linked volumes, percentage change on previous period, per capita"
+CLV_PCH_SM,"Chain linked volumes, percentage change compared to same period in previous year"
+CLV_PCH_SM_HAB,"Chain linked volumes, percentage change compared to same period in previous year, per capita"
+CLV_PY_MEUR,"Chain linked volumes, previous year, million euro"
+CLV_PY_MNAC,"Chain linked volumes, previous year, million units of national currency"
+CON_PPCH_PRE,"Contribution to GDP growth, percentage point change on previous period"
+CON_PPCH_SM,"Contribution to GDP growth, percentage point change compared to same period in previous year"
+CP_EUR_HAB,"Current prices, euro per capita"
+CP_MEUR,"Current prices, million euro"
+CP_MNAC,"Current prices, million units of national currency"
+CP_MPPS,"Current prices, million purchasing power standards"
+CP_MPPS_EU27_2020,"Current prices, million purchasing power standards (PPS, EU27 from 2020)"
+CP_MUSD,"Current prices, million US dollars"
+CP_NAC_HAB,"Current prices, units of national currency per capita"
+CP_PPS_EU27_2020_HAB,"Current prices, purchasing power standard (PPS, EU27 from 2020) per capita"
+CP_PPS_HAB,"Current prices, purchasing power standard per capita"
+CRC_MEUR,"Current replacement costs, million euro"
+CRC_MNAC,"Current replacement costs, million units of national currency"
+CT,Euro cent
+CV1,"Coefficient of variation for relative value, relating to all enterprises"
+CV10,"Coefficient of variation for relative value, relating to innovating enterprises with not even started projects"
+CV11,"Coefficient of variation for relative value, relating to enterprises in the corresponding level of export intensity"
+CV12,"Coefficient of variation for relative value, relating to enterprises in the corresponding type of firm"
+CV2,"Coefficient of variation for relative value, relating to innovating enterprises"
+CV3,"Coefficient of variation for relative value, relating to product innovators"
+CV4,"Coefficient of variation for relative value, relating to process innovators"
+CV5,"Coefficient of variation for relative value, relating to service innovators"
+CV6,"Coefficient of variation for relative value, relating to total innovation expenditure"
+CV7,"Coefficient of variation for relative value, relating to enterprises with innovation cooperation"
+CV8,"Coefficient of variation for relative value, relating to innovating enterprises with seriously delayed projects"
+CV9,"Coefficient of variation for relative value, relating to innovating enterprises with abolished projects"
+CVA,Coefficient of variation for absolute value
+DAY,Day
+DEGC,Degree Celsius
+EB,Exabyte
+ECU,European currency unit (Ecu)
+ESU,European size unit (ESU)
+EUR,Euro
+EUR_AE,Euro per adult equivalent
+EUR_BGDP,Euro per billion GDP
+EUR_GDP,Euro per GDP
+EUR_GJ,Euro per gigajoule
+EUR_HA,Euro per hectare
+EUR_HAB,Euro per inhabitant
+EUR_HAB_EU,Euro per inhabitant in percentage of the EU average
+EUR_HAB_EU27_2020,Euro per inhabitant in percentage of the EU27 (from 2020) average
+EUR_HAB_KP,Euro per inhabitant (at constant prices)
+EUR_HAB_KP08,Euro per inhabitant (at constant 2008 prices)
+EUR_HAB_KP10,Euro per inhabitant (at constant 2010 prices)
+EUR_HAB_KP15,Euro per inhabitant (at constant 2015 prices)
+EUR_HD,Euro per head (animal)
+EUR_HH,Euro per household
+EUR_HHD,Euro per hundred heads (animals)
+EUR_HIVE,Euro per beehive
+EUR_HL,Euro per hectoliter
+EUR_HM2,Euro per hundred square metres
+EUR_KG,Euro per kilogram
+EUR_KGOE,Euro per kilogram of oil equivalent (KGOE)
+EUR_KG_CLV10,"Euro per kilogram, chain linked volumes (2010)"
+EUR_KG_CLV15,"Euro per kilogram, chain linked volumes (2015)"
+EUR_KWH,Euro per kilowatt-hour
+EUR_T,Euro per tonne
+EUR_THS_KWH,Euro per thousand kilowatt-hour
+EUR_TOE,Euro per tonne of oil equivalent (TOE)
+FLIGHT,Flight
+FTE,Full-time equivalent (FTE)
+FTE_HTHAB,Full time equivalent per hundred thousand inhabitants
+G,Gram
+GB_SUBSC,Gigabyte per subscription
+GDP_BEUR,Nominal GDP in billion euro
+GDP_HAB,GDP per capita
+GJ,Gigajoule
+GJ_GCV,Gigajoule (gross calorific value - GCV)
+GJ_HAB,Gigajoule per capita
+GT,Gross tonnage (GT)
+GW,Gigawatt
+GWD_THM,Gigawatt-days per tonne of heavy metal
+GWH,Gigawatt-hour
+G_EUR_CLV10,"Grams per euro, chain linked volumes (2010)"
+G_EUR_CLV20,"Grams per euro, chain linked volumes (2020)"
+G_EUR_CP,"Grams per euro, current prices"
+G_HAB,Grams per capita
+G_KM,Grams per kilometre
+G_PKM,Grams per passenger-kilometre
+G_TKM,Grams per tonne-kilometre
+HA,Hectare
+HAB,Inhabitant/person/capita
+HAB_FTE,Inhabitants per ... (full time equivalent)
+HAB_HC,Inhabitants per ... (head count)
+HAB_KM2,Inhabitants per square kilometre
+HAB_P,Inhabitants per ...
+HC,Head count
+HC_HTHAB,Head count per hundred thousand inhabitants
+HD,Head (animal)
+HD_AVG,Average of heads
+HICP2015,"Harmonized consumer price index, 2015=100"
+HICP2025,"Harmonized consumer price index, 2025=100"
+HIVE,Beehives
+HL,Hectolitre
+HLD,Holding
+HR,Hour
+HR_SAL,Hours per employee
+HW,Hours worked
+I00,"Index, 2000=100"
+I01,"Index, 2001=100"
+I05,"Index, 2005=100"
+I06,"Index, 2006=100"
+I08,"Index, 2008=100"
+I09,"Index, 2009=100"
+I10,"Index, 2010=100"
+I10_A_AVG,"Annual average index, 2010=100"
+I10_HW,"Index, 2010=100 (based on hours worked)"
+I10_JOB,"Index, 2010=100 (based on jobs)"
+I10_PER,"Index, 2010=100 (based on persons)"
+I10_Q,"Quarterly index, 2010=100"
+I11-13_AVG,"Index, 2011-2013 average =100"
+I12,"Index, 2012=100"
+I13,"Index, 2013=100"
+I15,"Index, 2015=100"
+I15-17_AVG,"Index, 2015-2017 average =100"
+I15_A_AVG,"Annual average index, 2015=100"
+I15_HW,"Index, 2015=100 (based on hours worked)"
+I15_JOB,"Index, 2015=100 (based on jobs)"
+I15_NSA,"Index, 2015=100 (NSA)"
+I15_PER,"Index, 2015=100 (based on persons)"
+I15_Q,"Quarterly index, 2015=100"
+I16,"Index, 2016=100"
+I18,"Index, 2018=100"
+I20,"Index, 2020=100"
+I2010,"Index, 2010=100"
+I2015,"Index, 2015=100"
+I2021,"Index, 2021=100"
+I21,"Index, 2021=100"
+I21_NSA,"Index, 2021=100 (NSA)"
+I21_SCA,"Index, 2021=100 (SCA)"
+I25,"Index, 2025=100"
+I90,"Index, 1990=100"
+I91,"Index, 1991=100"
+I95,"Index, 1995=100"
+I96,"Index, 1996=100"
+I99,"Index, 1999=100"
+INX,Index
+INX_A_AVG,Annual average index
+INX_Q,Quarterly index
+IVOL-NSA,Volume index (2021=100) - not seasonally adjusted
+IVOL-SA,Volume index (2021=100) - seasonally and working day adjusted
+IVU-NSA,Unit value index (2021=100) - not seasonally adjusted
+I_EU,"Index, EU=100"
+I_LY,"Index, latest year = 100"
+I_MEAN,Income index (compared to national mean)
+I_MED,Income index (compared to national median)
+I_N_1,"Index, n-1 = 100"
+KCAL,Kilocalorie
+KG,Kilogram
+KGOE,Kilogram of oil equivalent (KGOE)
+KGOE_HAB,Kilograms of oil equivalent (KGOE) per capita
+KGOE_M2,Kilograms of oil equivalent (KGOE) per square meter
+KGOE_TEUR,Kilograms of oil equivalent (KGOE) per thousand euro
+KGOE_TEUR_PPS,Kilograms of oil equivalent (KGOE) per thousand euro in purchasing power standards (PPS)
+KG_EUR_CLV10,"Kilograms per euro, chain linked volumes (2010)"
+KG_EUR_CLV20,"Kilograms per euro, chain linked volumes (2020)"
+KG_EUR_CP,"Kilograms per euro, current prices"
+KG_HA,Kilograms per hectare
+KG_HAB,Kilograms per capita
+KG_HD,Kilograms per head
+KG_L,Kilograms per liter
+KG_T,Kilograms per tonne
+KG_TEUR_CLV10,"Kilograms per thousand euro, chain linked volumes (2010)"
+KJ,Kilojoule
+KJ_M3,Kilojoule per cubic metre
+KJ_M3_GCV,Kilojoule per cubic metre (gross calorific value - GCV)
+KJ_M3_NCV,Kilojoule per cubic metre (net calorific value - NCV)
+KM,Kilometre
+KM2,Square kilometre
+KM2_HAB,Square kilometres per capita
+KM_THAB,Kilometres per thousand inhabitants
+KM_TKM2,Kilometres per thousand square kilometres
+KP_I10,"Constant prices, index 2010=100"
+KTCO2E,Thousand tonnes of CO2 equivalent
+KTOE,Thousand tonnes of oil equivalent
+KW,Kilowatt
+KWH,Kilowatt-hour
+KWH_M2,Kilowatt-hour per square meter
+L,Litre
+LSU,Livestock unit (LSU)
+M,Metre
+M2,Square metre
+M2_HAB,Square metres per capita
+M2_THAB,Square metres per 1000 inhabitants
+M3,Cubic metre
+M3_HA,Cubic metres per hectare
+M3_HAB,Cubic metres per inhabitant
+MACH,Machine
+MCG_M3,Micrograms per cubic metre
+MEUR_AWU,Million euro per annual working unit (AWU)
+MEUR_CLV10,"Million euro, chain-linked volumes, reference year 2010 (at 2010 exchange rates)"
+MEUR_CLV15,"Million-euro, chain-linked volumes, reference year 2015"
+MEUR_HAB,Million euro per inhabitant
+MEUR_KP,Million euro at constant prices
+MEUR_KP00,Million euro (at constant 2000 prices)
+MEUR_KP10,Million euro (at constant 2010 prices)
+MEUR_KP15,Million euro (at constant 2015 prices)
+MEUR_KP21,Million euro (at constant 2021 prices)
+MEUR_KP_PRE,Million euro (at prices of the previous year)
+MEUR_NSA,Million euro (NSA)
+MG_L,Milligrams per litre
+MIO,Million
+MIO-EUR-NSA,Trade value - million of euro - not seasonally adjusted
+MIO-EUR-SA,Trade value - million of euro - seasonally and working day adjusted
+MIO_EMP,Millions of persons employed
+MIO_EUR,Million euro
+MIO_EUR_NSA,Million euro (NSA)
+MIO_EUR_SCA,Million euro (SCA)
+MIO_GTKM,Million gross tonne-kilometres
+MIO_HR,Million hours
+MIO_M2,Million square metres
+MIO_M3,Million cubic metres
+MIO_M3D,Million cubic metres per day
+MIO_NAC,Million units of national currency
+MIO_NAT,Million units of national currency (former currencies of the euro area countries)
+MIO_PER,Million persons
+MIO_PKM,Millions of passenger-kilometres
+MIO_PPS,Million purchasing power standards (PPS)
+MIO_PPS_EU27_2020,"Million purchasing power standards (PPS, EU27 from 2020)"
+MIO_PPS_KP00,Million purchasing power standards (PPS) at 2000 prices
+MIO_PPS_KP05,Million purchasing power standards (PPS) at 2005 prices
+MIO_SAL,Millions of employees
+MIO_SKM,Million seat-kilometre
+MIO_T,Million tonnes
+MIO_TKM,Million tonne-kilometre (TKM)
+MIO_VKM,Million vehicle-kilometres (VKM)
+MJ,Megajoule
+MJ_HAB,Megajoule per capita
+MJ_M2,Megajoule per square meter
+MJ_T_GCV,Megajoule per tonne (gross calorific value - GCV)
+MJ_T_NCV,Megajoule per tonne (net calorific value - NCV)
+MN,Minute
+MNAC_KP10,Million units of national currency at constant 2010 prices
+MNAC_KP15,Million units of national currency at constant 2015 prices
+MOVE,Movement
+MPPS_KM2,Million purchasing power standards (PPS) per square kilometre
+MTCO2E,Million tonnes of CO2 equivalent
+MTH,Month
+MTOE,Million tonnes of oil equivalent
+MV12R,Moving 12-months average rate of change
+MW,Megawatt
+MWH,Megawatt-hour
+M_KM2,Metres per square kilometre
+NAC,National currency
+NAC_AE,National currency per adult equivalent
+NAC_HA,National currency per hectare
+NAC_HAB,National currency per inhabitant
+NAC_HAB_KP08,National currency per inhabitant (at constant 2008 prices)
+NAC_HAB_KP10,National currency per inhabitant (at constant 2010 prices)
+NAC_HH,National currency per household
+NAC_HL,National currency per 100 litre
+NAC_T,National currency per tonne
+NAC_THS_KWH,National currency per 1000 kWh
+NAT,National currency (former currencies of the euro area countries)
+NMOL_L,Nanomoles per litre
+NR,Number
+NR_ENT,Number of enterprises
+NR_HAB,Number per inhabitant
+NR_HHAB,Number per hundred inhabitants
+NR_HTHAB,Number per hundred thousand persons
+O2_TD,Tonnes of O2 per day
+OZ,Ounce
+PAS,Passenger
+PB,Planetary Boundary
+PC,Percentage
+PCE,Piece
+PCH_10Y,Percentage change (t/t-10)
+PCH_1Y,Percentage change (t/t-1)
+PCH_3Y,Percentage change (t/t-3)
+PCH_5Y,Percentage change (t/t-5)
+PCH_5Y_CPI15_NAC,"Price index - percentage change (t/t-5), based on 2015=100 and national currency"
+PCH_LV_M_16-19,Percentage change of the current month compared to the lowest value for the corresponding month in the period 2016-2019
+PCH_M1,Percentage change m/m-1
+PCH_M12,Percentage change m/m-12
+PCH_M12_CA,Percentage change m/m-12 (CA)
+PCH_M12_NSA,Percentage change m/m-12 (NSA)
+PCH_M1_NSA,Percentage change m/m-1 (NSA)
+PCH_M1_SA,Percentage change m/m-1 (SA)
+PCH_M1_SCA,Percentage change m/m-1 (SCA)
+PCH_M24,Percentage change m/m-24
+PCH_MV12,Percentage change - 12-months average
+PCH_OECD_5Y,Percentage of OECD total - 5-year change
+PCH_OECD_EU_1Y,Percentage of OECD and non-OECD EU countries total - 1-year change
+PCH_OECD_EU_3Y,Percentage of OECD and non-OECD EU countries total - 3-year change
+PCH_OECD_EU_5Y,Percentage of the total of OECD countries and EU Member States not in OECD - 5-year change
+PCH_PRE,Percentage change on previous period
+PCH_PRE_EUR,"Percentage change on previous period, euro"
+PCH_PRE_FTE,Percentage change on previous period (based on full-time equivalents)
+PCH_PRE_HAB,Percentage change on previous period (based on inhabitants)
+PCH_PRE_HAB_KP,Percentage change on previous period (based on inhabitants) (at constant prices)
+PCH_PRE_HW,Percentage change on previous period (based on hours worked)
+PCH_PRE_I00,"Percentage change on previous period, based on index 2000=100"
+PCH_PRE_I05,"Percentage change on previous period, based on index 2005=100"
+PCH_PRE_JOB,Percentage change on previous period (based on jobs)
+PCH_PRE_NAC_CP,"Percentage change on previous period, national currency, current prices"
+PCH_PRE_PER,Percentage change on previous period (based on persons)
+PCH_PRE_PERS_SCA,"Percentage change on previous period (based on persons, SCA)"
+PCH_Q1_NSA,Percentage change q/q-1 (NSA)
+PCH_Q1_SCA,Percentage change q/q-1 (SCA)
+PCH_Q4_CA,Percentage change q/q-4 (CA)
+PCH_Q4_NSA,Percentage change q/q-4 (NSA)
+PCH_Q4_SCA,Percentage change q/q-4 (SCA)
+PCH_RV,"Percentage change, real values"
+PCH_SAME_PERS_NSA,"Percentage change compared to same period in previous year (based on persons, NSA)"
+PCH_SM,Percentage change compared to same period in previous year
+PCH_SM_19,Percentage change compared to same month in 2019
+PCH_SM_2Y,Percentage change compared to same period two years ago
+PCH_SM_EUR,"Percentage change compared to same period in previous year, euro"
+PCH_SM_FTE,Percentage change compared to same period in previous year (based on full-time equivalents)
+PCH_SM_HW,Percentage change compared to same period in previous year (based on hours worked)
+PCH_SM_I00,"Percentage change compared to same period in previous year, based on index 2000=100"
+PCH_SM_I05,"Percentage change compared to same period in previous year, based on index 2005=100"
+PCH_SM_I10,"Percentage change compared to same period in previous year, based on index 2010=100"
+PCH_SM_I15,"Percentage change compared to same period in previous year, based on index 2015=100"
+PCH_SM_I20,"Percentage change compared to same period in previous year, based on index 2020=100"
+PCH_SM_JOB,Percentage change compared to same period in previous year (based on jobs)
+PCH_SM_PER,Percentage change compared to same period in previous year (based on persons)
+PCH_SM_PER_NSA,"Percentage change compared to same period in previous year (based on persons, NSA)"
+PCH_SM_PER_SCA,"Percentage change compared to same period in previous year (based on persons, SCA)"
+PCH_WRL_1Y,Percentage of world total - 1-year change
+PCH_WRL_3Y,Percentage of world total - 3 year change
+PCH_WRL_5Y,Percentage of world total - 5-year change
+PC_ACT,Percentage of population in the labour force
+PC_ACT_FTE,Percentage of population in the labour force - numerator in full-time equivalent (FTE)
+PC_ACT_HC,Percentage of population in the labour force - numerator in head count (HC)
+PC_ALLOC,Percentage of allocation
+PC_AREA,Percentage of area
+PC_AWSVAL,Percentage of web sales
+PC_BEN,Percentage of total benefits
+PC_CHE,Percentual share of total current health expenditure (CHE)
+PC_DI,Percentage of disposable income
+PC_DT,Distance to target in percentage
+PC_EA_MEUR,Percentage of euro area total (based on million euro)
+PC_ELF,Percentage of extended labour force
+PC_EMP,Percentage of total employment
+PC_EMP_CUSE,Percentage of persons employed using a computer
+PC_EMP_CUSE2,Percentage of persons employed working in enterprises which use computers
+PC_EMP_FTE,Percentage of total employment - numerator in full-time equivalent (FTE)
+PC_EMP_HC,Percentage of total employment - numerator in head count (HC)
+PC_EMP_IACC,Percentage of persons employed working in an enterprise with internet access
+PC_EMP_PMD,Percentage of persons employed working in enterprises which provide mobile devices
+PC_EMP_PMD1,Percentage of persons employed working in enterprises which provide mobile devices (as of 2016)
+PC_EMP_PREEMP,Percentage of persons employed and previously employed
+PC_EMP_PREEMP_M12,Percentage of persons employed and previously employed within 12 months
+PC_ENT,Percentage of enterprises
+PC_ENT_ADE,Percentage of enterprises using ADE
+PC_ENT_ADS,Percentage of enterprises using internet ads
+PC_ENT_AEBUY,Percentage of enterprises sending e-commerce orders over the last calendar year
+PC_ENT_AESELL,Percentage of enterprises receiving e-commerce orders over the last calendar year
+PC_ENT_AI_EC,Percentage of the enterprises which ever considered to use any of the AI technologies
+PC_ENT_AI_PDI,Percentage of the enterprises which process data on individuals using AI technologies
+PC_ENT_AI_TANY,Percentage of the enterprises using at least one AI technologies
+PC_ENT_AI_TX,Percentage of the enterprises using no AI technologies
+PC_ENT_AWSELL,Percentage of enterprises with web sales
+PC_ENT_AWSELLX,Percentage of enterprises without web sales
+PC_ENT_AWSEU,Percentage of enterprises with web sales to other EU countries
+PC_ENT_BD,Percentage of enterprises analysing big data
+PC_ENT_BDA,Percentage of enterprises analysing big data internally or externally
+PC_ENT_CC,Percentage of enterprises using paid CC services
+PC_ENT_CUSE,Percentage of the enterprises which use a computer
+PC_ENT_CVD_IEM,Percentage of the enterprises which increased the percentage of persons employed having remote access to their e-mail system
+PC_ENT_CVD_IRA,Percentage of the enterprises which increased the percentage of persons employed having remote access their ICT systems other than e-mail
+PC_ENT_CVD_IRM,Percentage of the enterprises which increased the number of their remote meetings
+PC_ENT_DAOWN,Percentage of enterprises which performed Data Analytics by the enterprise's own employees
+PC_ENT_FIXBB,Percentage of enterprises using a fixed broadband connection
+PC_ENT_IACC,Percentage of the enterprises with internet access
+PC_ENT_INV3SBG,Percentage of enterprises sending invoices B2BG
+PC_ENT_IOT,Percentage of enterprises using Internet of Things
+PC_ENT_IOT1,Percentage of enterprises using Internet of Things (as of 2021)
+PC_ENT_ITSPRCR2,Percentage of enterprises which recruited / tried to recruit personnel for jobs requiring ICT specialist skills (reduced comparability with 2007)
+PC_ENT_IUSE,Percentage of enterprises where persons employed have access to the internet
+PC_ENT_P3D,Percentage of enterprises with 3D printing
+PC_ENT_PMD,Percentage of enterprises providing to persons employed portable devices that allow a mobile connection to the internet
+PC_ENT_PMD1,Percentage of enterprises providing to persons employed portable devices that allow a mobile connection to the internet (as of 2016)
+PC_ENT_RA,Percentage of enterprises with persons employed having remote access
+PC_ENT_RBT,Percentage of enterprises using industrial or service robots
+PC_ENT_RBTS,Percentage of enterprises using service robots
+PC_ENT_RFID,Percentage of the enterprises using RFID
+PC_ENT_RFID1,Percentage of enterprises using RFID (as of 2014)
+PC_ENT_RM,Percentage of enterprises conducting remote meetings
+PC_ENT_SECPOL,Percentage of enterprises with an ICT security policy
+PC_ENT_SECPOL1,Percentage of enterprises with an ICT security policy (as of 2015)
+PC_ENT_SECPOL2,"Percentage of enterprises with  document(s) on measures, practices or procedures on ICT security (as of 2019)"
+PC_ENT_SM,Percentage of enterprises using social media
+PC_ENT_WEB,Percentage of the enterprises having a website
+PC_ETURN,Percentage of turnover from e-commerce sales
+PC_EU27_2007,Percentage of EU27 (2007-2013) total
+PC_EU27_2020,Percentage of EU27 (from 2020) total
+PC_EU27_2020_EUR_HAB,Percentage of EU27 (from 2020) total (based on euro per inhabitant)
+PC_EU27_2020_HAB_MEUR_CP,"Percentage of EU27 (from 2020) total per capita (based on million euro, EU27 from 2020), current prices"
+PC_EU27_2020_HAB_MPPS_CP,"Percentage of EU27 (from 2020) total per capita (based on million purchasing power standards, EU27 from 2020), current prices"
+PC_EU27_2020_MEUR,Percentage of EU27 (from 2020) total (based on million euro)
+PC_EU27_2020_MEUR_CP,"Percentage of EU27 (from 2020) total (based on million euro), current prices"
+PC_EU27_2020_MPPS,Percentage of EU27 (from 2020) total (based on million purchasing power standards)
+PC_EU27_2020_MPPS_CP,"Percentage of EU27 (from 2020) total (based on million purchasing power standards), current prices"
+PC_EU27_2020_PPS_EMP,Percentage of EU27 (from 2020) total (based on purchasing power standards per employed person)
+PC_EU27_2020_PPS_HAB,Percentage of EU27 (from 2020) total (based on purchasing power standards per inhabitant)
+PC_EU28,Percentage of EU28 (2013-2020) total
+PC_EXP,Percentage of total expenditure
+PC_EXT_EU,Percentage of Extra EU
+PC_FAT,Fat content (% of product weight)
+PC_FSTU,Percentage of total foreign tertiary students
+PC_FTE,Percentage based on full-time equivalents (FTE)
+PC_FUNC,Percentage of total function
+PC_FUSE,Percentage of total final use
+PC_GADI,Percentage of gross adjusted disposable income
+PC_GBA,Percentage of total GBARD
+PC_GDP,Percentage of gross domestic product (GDP)
+PC_GDP_3Y,Percentage of GDP - three-year average
+PC_GDP_NSA,"Percentage of gross domestic product (GDP), (NSA)"
+PC_GDP_SCA,"Percentage of gross domestic product (GDP), (SCA)"
+PC_GERD,Percentage of gross domestic expenditure on R&D (GERD)
+PC_GEXP,Percentage of government expenditure
+PC_GNI,Percentage of gross national income (GNI)
+PC_GRSEXP,Percentage of total gross exports
+PC_GRSEXP_EU,Percentage of EU gross exports
+PC_GRSIMP,Percentage of total gross imports
+PC_GVA,Percentage of gross value added (GVA)
+PC_HC,Percentage based on head count (HC)
+PC_HH,Percentage of households
+PC_HH_BROADX,Percentage of households without broadband access
+PC_HH_IACC,Percentage of households with internet access at home
+PC_HH_IACCX,Percentage of households without internet access at home
+PC_IGRTX,Percentage of individuals who have used internet but not for sending filled forms to public authorities
+PC_IGRTX_NAPX,Percentage of individuals who have used internet but not for sending filled forms to public authorities although they had to
+PC_INAC,Percentage of population outside the labour force
+PC_INAC_WWRK,Percentage of population outside the labour force and wanting to work
+PC_IND,Percentage of individuals
+PC_IND_BFFOR,Percentage of individuals who purchased online from sellers from other countries (EU or non-EU)
+PC_IND_BGT3_IU3,Percentage of individuals who used internet and did not purchase online in the last 3 months
+PC_IND_BLT12,"Percentage of individuals who ordered goods or services, over the internet, for private use, in the last year"
+PC_IND_BMT12X,"Percentage of individuals who ordered goods or services, over the internet, for private use, more than a year ago or who never did"
+PC_IND_BUY3,Percentage of individuals who purchased online in the last 3 months
+PC_IND_C3,Percentage of individuals who used a computer within the last 3 months
+PC_IND_CC_CCS,Percentage of individuals who used internet and cloud services for file saving or sharing
+PC_IND_CEVR,"Percentage of individuals who used a computer, ever"
+PC_IND_CIANY,Percentage of individuals who have done at least one of the listed computer or internet activities
+PC_IND_HM,Percentage of individuals who encountered messages online that were considered to be hostile or degrading towards groups of people or individuals in the last 3 months
+PC_IND_IEID,Percentage of individuals who have used their electronic identification to access online services for private purpose in the last 12 months
+PC_IND_IEIDX,Percentage of individuals who have not used their electronic identification to access online services for private purpose in the last 12 months
+PC_IND_ILT12,Percentage of individuals who used internet within the last year
+PC_IND_ILT12_SSF,Percentage of employees and self-employed who used internet within the last year
+PC_IND_IOT_BDKX,Percentage of individuals who have not used any internet-connected device or systems although they knew about them
+PC_IND_IOT_DX,Percentage of individuals who have not used any internet-connected devices or systems
+PC_IND_IOT_DX2,Percentage of individuals who have not used any of the mentioned internet-connected devices or systems in the last 3 months
+PC_IND_IOT_USE,Percentage of individuals who have used any of the mentioned internet-connected devices or systems in the last 3 months (until 2022)
+PC_IND_IOT_USE2,Percentage of individuals who have used any of the mentioned internet-connected devices or systems in the last 3 months
+PC_IND_IU3,Percentage of individuals who used internet in the last 3 months
+PC_IND_IU3X,Percentage of individuals who have not used the internet within the last 3 months or have never used it
+PC_IND_IUACDL,Percentage of individuals who have tried to delete their account of a free app or service in the last 3 months
+PC_IND_IUACRG,Percentage of individuals who have opened an account with a free app or service
+PC_IND_IUAI,Percentage of individuals who have used any generative AI tools in the last 3 months
+PC_IND_IUAIX,Percentage of individuals who have not used any generative AI tools in the last 3 months
+PC_IND_IUEVR,"Percentage of individuals who used internet, ever"
+PC_IND_IUGOV12,Percentage of e-government users
+PC_IND_IUG_TV,Percentage of individuals who used the internet on a smart TV (directly connected to the internet)
+PC_IND_IUHD,Percentage of individuals who used a handheld device to access internet
+PC_IND_IUMC,Percentage of individuals who have used a portable computer to access internet
+PC_IND_IUOANY,"Percentage of individuals who have used internet, in the last 3 months, for any of the online learning activities"
+PC_IND_IUPS,Percentage of individuals who had any difficulties when using the internet
+PC_IND_MDW,"Percentage of individuals who, at work, use any type of computers, portable devices or computerised equipment or machinery"
+PC_IND_MPP,Percentage of individuals who use a smartphone for private purposes
+PC_IND_SECOITPP,"Percentage of individuals who have experienced online identity theft, phishing or pharming"
+PC_IND_WH,Percentage of individuals working from home
+PC_IND_WM,Percentage of individuals working at an external site or on the move
+PC_ITG,Percentage of total international trade in goods
+PC_ITS,Percentage of total international trade in services
+PC_LE,Percentage of stocks (closing balance sheet)
+PC_LSU,Percentage of total livestock units
+PC_LW95,Percentage of total population - lower boundary of the 95% confidence interval
+PC_OECD,Percentage of OECD total
+PC_OECD_EU,Percentage of the total of OECD countries and EU Member States not in OECD
+PC_ORG,Percentage of organic product
+PC_PER_ACC,Percentage of persons reporting an accident
+PC_PER_HPB,Percentage of persons reporting a health problem
+PC_PEXP,Percentage of total public expenditure
+PC_PNT,Percentage point
+PC_POP,Percentage of total population
+PC_POP_NPT,Percentage of population not participating in tourism
+PC_PRO,Protein content (% of product weight)
+PC_REC,Percentage of total receipts
+PC_RIMG,Percentage of total recent immigrants
+PC_RWA,Percentage of risk-weighted assets
+PC_S,Standardised percentage
+PC_SAL,Percentage of employees
+PC_SAL_TEMP,Percentage of employees with a temporary job
+PC_SIZE,Percentage of total size class
+PC_STU,Percentage of total tertiary students
+PC_TG_ICT,Percentage of total ICT goods trade
+PC_TOT,Percentage of total
+PC_TOT_FTE,Percentage of total (based on full-time equivalents)
+PC_TOT_HAB,Percentage of total (based on inhabitants)
+PC_TOT_HW,Percentage of total (based on hours worked)
+PC_TOT_JOB,Percentage of total (based on jobs)
+PC_TOT_PER,Percentage of total (based on persons)
+PC_TSCO,Percentage of total revenues from taxes and social contributions (including imputed social contributions)
+PC_TSCO_X_ISCO,Percentage of total revenues from taxes and social contributions (excluding imputed social contributions)
+PC_TS_ICT,Percentage of total ICT services trade
+PC_TURN,Percentage of turnover
+PC_UAA,Percentage of total utilised agricultural area
+PC_UNE,Percentage of unemployment
+PC_UP95,Percentage of total population - upper boundary of the 95% confidence interval
+PC_WMN,Percentage of women
+PC_WRL,Percentage of world total
+PC_Y,Percentage in the year
+PC_Y20-29,Percentage of total population aged 20-29
+PC_Y25-29,Percentage of total population aged 25-29
+PC_Y_LT60,Percentage of total population aged less than 60
+PC_Y_LT65,Percentage of total population aged less than 65
+PD05_EUR,"Price index (implicit deflator), 2005=100, euro"
+PD05_NAC,"Price index (implicit deflator), 2005=100, national currency"
+PD10_EUR,"Price index (implicit deflator), 2010=100, euro"
+PD10_NAC,"Price index (implicit deflator), 2010=100, national currency"
+PD15_EUR,"Price index (implicit deflator), 2015=100, euro"
+PD15_NAC,"Price index (implicit deflator), 2015=100, national currency"
+PD20_EUR,"Price index (implicit deflator), 2020=100, euro"
+PD20_NAC,"Price index (implicit deflator), 2020=100, national currency"
+PD_PCH_PRE_EUR,"Price index (implicit deflator), percentage change on previous period, euro"
+PD_PCH_PRE_NAC,"Price index (implicit deflator), percentage change on previous period, national currency"
+PD_PCH_SM_EUR,"Price index (implicit deflator), percentage change compared to same period in previous year, euro"
+PD_PCH_SM_NAC,"Price index (implicit deflator), percentage change compared to same period in previous year, national currency"
+PER,Person
+PERS,Persons
+PER_KM2,Persons per square kilometre
+PH,pH value
+PKM,Passenger-kilometres
+PLC,Place
+PM,Per mille
+PPCH_3Y,Percentage point change (t-(t-3))
+PPCH_PRE,"Percentage point change on previous period, contribution to GDP growth"
+PPCH_SM,"Percentage point change compared to same period in previous year, contribution to GDP growth"
+PPCS_HAB,Purchasing power standard based on final consumption per inhabitant
+PPCS_HAB_EU,Purchasing power consumption standards per inhabitant in percentage of the EU average
+PPP_EUR,Purchasing power parities (PPP) in euro
+PPS,Purchasing power standard (PPS)
+PPS_AE,Purchasing power standard (PPS) per adult equivalent
+PPS_BGDP,Purchasing power standard (PPS) per billion GDP
+PPS_EU27_2020,"Purchasing power standard (PPS, EU27 from 2020)"
+PPS_EU27_2020_HAB,"Purchasing power standard (PPS, EU27 from 2020), per inhabitant"
+PPS_HAB,Purchasing power standard (PPS) per inhabitant
+PPS_HAB_EU,Purchasing power standard (PPS) per inhabitant in percentage of the EU average
+PPS_HAB_EU27_2020,"Purchasing power standard (PPS, EU27 from 2020), per inhabitant in percentage of the EU27 (from 2020) average"
+PPS_HAB_KP00,Purchasing power standard (PPS) per inhabitant at constant 2000 prices
+PPS_HAB_KP05,Purchasing power standard (PPS) per inhabitant at constant 2005 prices
+PPS_HH,Purchasing power standard (PPS) per household
+PPS_KG,Purchasing power standard (PPS) per kilogram
+PPS_KGOE,Purchasing power standard (PPS) per kilogram of oil equivalent
+PPS_M3,Purchasing power standard (PPS) per cubic metre
+PTIR,Price-to-income ratio
+PTIR_I15,"Price-to-income ratio, index 2015=100"
+PTIR_LT_AVG,Price-to-income ratio relative to long-term average
+PTP_RT,Participation rate (%)
+PTP_TIME,Participation time (hh:mm)
+PYP_MEUR,"Previous year prices, million euro"
+PYP_MNAC,"Previous year prices, million units of national currency"
+PYP_MUSD,"Previous year prices, million US dollars"
+PYR_MEUR,"Previous year replacement costs, million euro"
+PYR_MNAC,"Previous year replacement costs, million units of national currency"
+P_AE,Per adult equivalent
+P_BERD,Per billion euro of business enterprise expenditure on R&D (BERD)
+P_GERD,Per billion euro of gross domestic expenditure on R&D (GERD)
+P_HAB,Per inhabitant
+P_HAB_KP08,Per inhabitant (at constant 2008 prices)
+P_HAB_KP10,Per inhabitant (at constant 2010 prices)
+P_HH,Per household
+P_HHAB,Per hundred inhabitants
+P_HTHAB,Per hundred thousand inhabitants
+P_HTMN,Per hundred thousand men
+P_HTWMN,Per hundred thousand women
+P_KM2,Per square kilometre
+P_MACT,Per million of population in the labour force
+P_MHAB,Per million inhabitants
+P_PER,Per person
+P_SAL_H,"Per employee in full-time equivalents, per hour"
+P_SAL_M,"Per employee in full-time equivalents, per month"
+P_SAL_Y,"Per employee in full-time equivalents, per year"
+P_THAB,Per thousand inhabitants
+P_TLBRTH,Per thousand live birth
+RAT,Ratio
+RCH_A,Annual rate of change
+RCH_A_AVG,Annual average rate of change
+RCH_M,Monthly rate of change
+RCH_MV12MAVR,Moving 12 months average rate of change
+RCH_Q,Quarterly rate of change
+REL1,"Relative value, relating to all enterprises"
+REL10,"Relative value, relating to innovating enterprises with not even started projects"
+REL11,"Relative value, relating to enterprises in the corresponding level of export intensity"
+REL12,"Relative value, relating to enterprises in the corresponding type of firm"
+REL2,"Relative value, relating to innovating enterprises"
+REL3,"Relative value, relating to product innovators"
+REL4,"Relative value, relating to process innovators"
+REL5,"Relative value, relating to service innovators"
+REL6,"Relative value, relating to total innovation expenditure"
+REL7,"Relative value, relating to innovating enterprises with innovation cooperation"
+REL8,"Relative value, relating to innovating enterprises with seriously delayed projects"
+REL9,"Relative value, relating to innovating enterprises with abolished projects"
+RK,Rank
+RT,Rate
+RT1,Growth rate on previous period (t/t-1)
+RT1-ABS-SA,Trade value - growth rate (m/m-1) - seasonally and working day adjusted
+RT1-IVOL-SA,Volume index (2015=100) - growth rate (m/m-1) - seasonally and working day adjusted
+RT1-IVU-NSA,Unit value index (2015=100) - growth rate (m/m-1) - not seasonally adjusted
+RT1-SCA,Percentage change (t/t-1) - seasonally and calendar adjusted data
+RT12,Growth rate (t/t-12)
+RT12-ABS-NSA,Trade value - growth rate (m/m-12) - not seasonally adjusted
+RT12-CA,"Percentage change (t/t-12) - calendar adjusted data, not seasonally adjusted data"
+RT12-IVOL-NSA,Volume index (2015=100) - growth rate (m/m-12) - not seasonally adjusted
+RT12-IVU-NSA,Unit value index (2015=100) - growth rate (m/m-12) - not seasonally adjusted
+RT12-NSA,Percentage change (t/t-12) - not seasonally adjusted data
+RT4,Growth rate on the same quarter in previous year
+RT4-NSA,Percentage change (t/t-4) - not seasonally adjusted data
+RTG,Rating (0-10)
+RT_INC,Incidence rate
+RT_M_DIF,Monthly rate differences between HICP and HICP at constant taxes
+RT_PRE,Growth rate on previous period (t/t-1)
+RT_PRE_EUR,Growth rate on previous period (t/t-1) for values in euro
+RT_PRE_GT,Growth rate on previous period (t/t-1) for gross tonnage of vessels
+RT_PRE_NAC,Growth rate on previous period (t/t-1) for values in national currency
+RT_PRE_NR,Growth rate on previous period (t/t-1) for number of vessels
+RT_R4Q,Rolling 4-quarter growth rate
+RT_SINC,Standardised incidence rate
+RT_SMQ,Growth rate on the same quarter in previous year
+RT_T2008,Rate (2008 target)
+RT_TGT2025,Rate (2025 target and onwards)
+RT_UNE,Unemployment rate
+SC,Score
+SDI,Shannon diversity index
+SEAT,Seats and berths
+SEI,Shannon evenness index
+SGM_ESU,Standard gross margin (SGM) in economic size unit (ESU)
+SPTIR,Standardised price-to-income ratio
+SUM_4Q,Sum of the last 4 quarters
+T,Tonne
+TCO2E,Tonnes of CO2 equivalent
+TCO2E_HAB,Tonnes of CO2 equivalent per capita
+TD,Tonnes per day
+TEU,Twenty-foot equivalent unit (TEU)
+THM,Tonnes of heavy metal
+THS,Thousand
+THS_AWU,Thousand annual working units (AWU)
+THS_BTO,Thousand basic transport operations
+THS_CD08,"Cumulative difference from 2008, in thousands"
+THS_EUR,Thousand euro
+THS_FTE,Thousand full-time equivalents (FTE)
+THS_GT,Gross tonnage (GT) in thousand
+THS_HA,Thousand hectares
+THS_HD,Thousand heads (animals)
+THS_HH,Thousand households
+THS_HL,Thousand hectolitres
+THS_HR,Thousand hours
+THS_HW,Thousand hours worked
+THS_JOB,Thousand jobs
+THS_JRNY,Thousand journeys
+THS_KW,Thousand kilowatts
+THS_L,Thousand litres
+THS_M2,Thousand square metres
+THS_M3,Thousand cubic metres
+THS_MN,Thousand minutes
+THS_NAC,Thousand units of national currency
+THS_PAS,Thousand passengers
+THS_PASC,Thousand cruise passengers starting and ending a cruise
+THS_PASE,Thousand cruise passengers on excursion
+THS_PASF,Thousand passengers (excluding cruise passengers)
+THS_PER,Thousand persons
+THS_SEAT,Thousand seats
+THS_T,Thousand tonnes
+THS_TD,Thousand tonnes per day
+THS_TEU,Thousand twenty-foot equivalent unit (TEU)
+THS_TEUKM,Thousand TEU-kilometres
+THS_TEU_4Q,Sum of the last 4 quarters (in TEUs)
+THS_TKM,Thousand tonne-kilometre (TKM)
+THS_TRKM,Thousand train-kilometres
+THS_TY,Thousand tonnes per year
+THS_T_4Q,Sum of the last 4 quarters (in thousand tonnes)
+THS_VESKM,Thousand vessel-kilometres
+THS_VKM,Thousand vehicle-kilometres (VKM)
+TIME_SP,Time spent (hh:mm)
+TJ,Terajoule
+TJ_GCV,Terajoule (gross calorific value - GCV)
+TJ_HAB,Terajoule per capita
+TJ_NCV,Terajoule (net calorific value - NCV)
+TJ_TM3_NCV,Terajoule per thousand cubic metres (net calorific value - NCV)
+TKM,Tonne-kilometre (TKM)
+TLW,Tonnes live weight
+TOE,Tonnes of oil equivalent (TOE)
+TOE_HAB,Tonnes of oil equivalent (TOE) per capita
+TOE_MEUR,Tonnes of oil equivalent (TOE) per million euro
+TOTAL,Total
+TPW,Tonnes product weight
+TSWU,Tonnes of separative work units
+TVAL_MEUR,Trade value in million euro
+TVAL_SA,Trade value in million euro (SA)
+T_HA,Tonnes per hectare
+T_HAB,Tonnes per capita
+T_KM2,Tonnes per square kilometre
+VES_MOV,Vessel movements
+VKM,Vehicle-kilometre (VKM)
+YR,Year

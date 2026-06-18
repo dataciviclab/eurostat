@@ -5,7 +5,6 @@ SELECT
     r.* EXCLUDE (value, flag),
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
-    u.label_it AS unit_label_it,
     g.label_en AS geo_label_en,
     g.nuts_level,
     g.parent_code AS nuts_parent_code,
@@ -17,12 +16,6 @@ SELECT
         WHEN 'T' THEN 'Total'
         ELSE r.sex
     END AS sex_label_en,
-    CASE r.sex
-        WHEN 'M' THEN 'Maschi'
-        WHEN 'F' THEN 'Femmine'
-        WHEN 'T' THEN 'Totale'
-        ELSE r.sex
-    END AS sex_label_it,
     r.value,
     r.flag,
     fl.description_en AS flag_desc_en

@@ -3,7 +3,6 @@ SELECT
     r.* EXCLUDE (value, flag),
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
-    u.label_it AS unit_label_it,
     CASE r.wstatus
         WHEN 'TOTAL' THEN 'Total employment'
         WHEN 'EMP' THEN 'Employed'
