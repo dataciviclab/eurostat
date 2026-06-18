@@ -20,7 +20,7 @@ from lab_connectors.duckdb import gcs_connect
 from rich.console import Console
 from rich.table import Table
 
-from ._registry import DATASETS
+from ._registry import get_parquet_url, list_datasets
 
 app = typer.Typer(help="Explore Eurostat regional data from the command line")
 console = Console()
@@ -79,7 +79,7 @@ class DatasetInfo:
 @contextmanager
 def _connect(slug: str) -> Iterator[Any]:
     """Connect to a dataset's parquet on GCS with a `data` view."""
-    path = DATASETS[slug]
+    path = get_parquet_url(slug)
     with gcs_connect(path) as con:
         con.execute(f"CREATE VIEW data AS SELECT * FROM read_parquet('{path}')")
         try:
@@ -394,16 +394,17 @@ def auto_facts(slug: str) -> bool:
     slug = slug.replace("-", "_")
 
     # Resolve short alias → full slug
-    _ALIASES = {}
-    for full_slug in DATASETS:
+    all_slugs = list_datasets()
+    alias_map = {}
+    for full_slug in all_slugs:
         short = full_slug.replace("eurostat_", "").replace("_nuts3", "")
-        _ALIASES[short] = full_slug
-        _ALIASES[full_slug] = full_slug
-    slug = _ALIASES.get(slug, slug)
+        alias_map[short] = full_slug
+        alias_map[full_slug] = full_slug
+    slug = alias_map.get(slug, slug)
 
-    if slug not in DATASETS:
+    if slug not in all_slugs:
         console.print(f"[red]Unknown dataset:[/] {slug}")
-        console.print(f"Available: {', '.join(sorted(_ALIASES.values()))}")
+        console.print(f"Available: {', '.join(sorted(alias_map.values()))}")
         return False
 
     info = describe(slug)
@@ -453,7 +454,7 @@ def facts(
         return
 
     console.print("[bold yellow]📊 Eurostat Regional Data — Facts[/]\n")
-    for slug in sorted(DATASETS):
+    for slug in sorted(list_datasets()):
         auto_facts(slug)
 
 

@@ -58,3 +58,9 @@ jobs:
             toolkit inspect paths --config "$cfg" --year 2024 > /dev/null 2>&1
           done
           echo "✅ All configs valid"
+
+      - name: Validate registry is up-to-date
+        run: |
+          python registry/generate.py
+          git diff --exit-code registry/datasets.json
+          echo "✅ registry/datasets.json is up to date"

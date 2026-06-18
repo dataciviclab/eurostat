@@ -9,66 +9,19 @@ limit capping (max 500 rows), no multi-statement.
 
 from __future__ import annotations
 
+import json
 import re
+from pathlib import Path
 from typing import Any
 
 from lab_connectors.duckdb import gcs_connect
 from lab_connectors.mcp.cache import TtlCache
 
-# ── Registry ─────────────────────────────────────────────────────────────────
+# ── Registry (from canonical datasets.json) ───────────────────────────────────
 
-GCS_BASE = "https://storage.googleapis.com/dataciviclab-clean/eurostat"
+_REGISTRY_PATH = Path(__file__).resolve().parent.parent / "registry" / "datasets.json"
 
-# Currently all data is under year=2024 directory.
-# Each parquet contains all available years (2000-2024).
-_CURRENT_YEAR = "2024"
-
-DATASETS: dict[str, dict[str, Any]] = {
-    "eurostat_gdp_nuts3": {
-        "dataflow": "NAMA_10R_3GDP",
-        "theme": "Economy / GDP per capita",
-        "nuts_level": 3,
-        "dimensions": ["freq", "unit", "geo"],
-        "parquet_url": (
-            f"{GCS_BASE}/eurostat_gdp_nuts3/{_CURRENT_YEAR}"
-            f"/eurostat_gdp_nuts3_{_CURRENT_YEAR}_clean.parquet"
-        ),
-        "description": "GDP at current market prices by NUTS 3 region",
-    },
-    "eurostat_gva_nuts3": {
-        "dataflow": "NAMA_10R_3GVA",
-        "theme": "Economy / Gross Value Added",
-        "nuts_level": 3,
-        "dimensions": ["freq", "nace_r2", "unit", "geo"],
-        "parquet_url": (
-            f"{GCS_BASE}/eurostat_gva_nuts3/{_CURRENT_YEAR}"
-            f"/eurostat_gva_nuts3_{_CURRENT_YEAR}_clean.parquet"
-        ),
-        "description": "Gross Value Added by NUTS 3 region and NACE sector",
-    },
-    "eurostat_crime_nuts3": {
-        "dataflow": "CRIM_GEN",
-        "theme": "Crime / Recorded offences",
-        "nuts_level": 3,
-        "dimensions": ["freq", "iccs", "unit", "geo"],
-        "parquet_url": (
-            f"{GCS_BASE}/eurostat_crime_nuts3/{_CURRENT_YEAR}"
-            f"/eurostat_crime_nuts3_{_CURRENT_YEAR}_clean.parquet"
-        ),
-        "description": "Recorded crimes by NUTS 3 region and ICCS category",
-    },
-    "eurostat_pop_nuts3": {
-        "dataflow": "DEMO_R_D2JAN",
-        "theme": "Demography / Population",
-        "nuts_level": 3,
-        "dimensions": ["freq", "unit", "sex", "age", "geo"],
-        "parquet_url": (
-            f"{GCS_BASE}/eurostat_pop_nuts3/{_CURRENT_YEAR}"
-            f"/eurostat_pop_nuts3_{_CURRENT_YEAR}_clean.parquet"
-        ),
-        "description": "Population on 1 January by NUTS 3 region, sex and age",
-    },
-}
+DATASETS: dict[str, dict[str, Any]] = json.loads(_REGISTRY_PATH.read_text()).get("datasets", {})
 
 VALID_SLUGS: set[str] = set(DATASETS.keys())
 
