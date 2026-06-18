@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import re
 import urllib.request
-from datetime import date
 from typing import Any
 
 from lab_connectors.duckdb import gcs_connect
