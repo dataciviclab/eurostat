@@ -30,7 +30,7 @@ jobs:
           pip install git+https://github.com/dataciviclab/lab-connectors.git
 
       - name: Lint with ruff
-        run: ruff check connectors/ tests/ eurostat-mcp/ eurostat-mcp/
+        run: ruff check connectors/ tests/ eurostat-mcp/
 
       - name: Test connectors
         run: python -m pytest tests/ -v --tb=short

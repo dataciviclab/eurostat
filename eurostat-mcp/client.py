@@ -3,11 +3,13 @@
 Reads parquet from GCS via lab_connectors.duckdb.gcs_connect.
 Results are cached with TtlCache (TTL 120s).
 
-Input validation on slugs, limits, and SQL to prevent injection.
+Input validation: slug allowlist, SQL guard (no read_*, filesystem, DDL),
+limit capping (max 500 rows), no multi-statement.
 """
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from lab_connectors.duckdb import gcs_connect
@@ -16,7 +18,10 @@ from lab_connectors.mcp.cache import TtlCache
 # ── Registry ─────────────────────────────────────────────────────────────────
 
 GCS_BASE = "https://storage.googleapis.com/dataciviclab-clean/eurostat"
-GCS_MART = "https://storage.googleapis.com/dataciviclab-mart/eurostat"
+
+# Currently all data is under year=2024 directory.
+# Each parquet contains all available years (2000-2024).
+_CURRENT_YEAR = "2024"
 
 DATASETS: dict[str, dict[str, Any]] = {
     "eurostat_gdp_nuts3": {
@@ -24,8 +29,10 @@ DATASETS: dict[str, dict[str, Any]] = {
         "theme": "Economy / GDP per capita",
         "nuts_level": 3,
         "dimensions": ["freq", "unit", "geo"],
-        "clean_path": f"{GCS_BASE}/eurostat_gdp_nuts3/*/*.parquet",
-        "mart_path": f"{GCS_MART}/eurostat_gdp_nuts3/*/mart_gdp_nuts3.parquet",
+        "parquet_url": (
+            f"{GCS_BASE}/eurostat_gdp_nuts3/{_CURRENT_YEAR}"
+            f"/eurostat_gdp_nuts3_{_CURRENT_YEAR}_clean.parquet"
+        ),
         "description": "GDP at current market prices by NUTS 3 region",
     },
     "eurostat_gva_nuts3": {
@@ -33,8 +40,10 @@ DATASETS: dict[str, dict[str, Any]] = {
         "theme": "Economy / Gross Value Added",
         "nuts_level": 3,
         "dimensions": ["freq", "nace_r2", "unit", "geo"],
-        "clean_path": f"{GCS_BASE}/eurostat_gva_nuts3/*/*.parquet",
-        "mart_path": f"{GCS_MART}/eurostat_gva_nuts3/*/mart_gva_nuts3.parquet",
+        "parquet_url": (
+            f"{GCS_BASE}/eurostat_gva_nuts3/{_CURRENT_YEAR}"
+            f"/eurostat_gva_nuts3_{_CURRENT_YEAR}_clean.parquet"
+        ),
         "description": "Gross Value Added by NUTS 3 region and NACE sector",
     },
     "eurostat_crime_nuts3": {
@@ -42,8 +51,10 @@ DATASETS: dict[str, dict[str, Any]] = {
         "theme": "Crime / Recorded offences",
         "nuts_level": 3,
         "dimensions": ["freq", "iccs", "unit", "geo"],
-        "clean_path": f"{GCS_BASE}/eurostat_crime_nuts3/*/*.parquet",
-        "mart_path": f"{GCS_MART}/eurostat_crime_nuts3/*/mart_crime_nuts3.parquet",
+        "parquet_url": (
+            f"{GCS_BASE}/eurostat_crime_nuts3/{_CURRENT_YEAR}"
+            f"/eurostat_crime_nuts3_{_CURRENT_YEAR}_clean.parquet"
+        ),
         "description": "Recorded crimes by NUTS 3 region and ICCS category",
     },
     "eurostat_pop_nuts3": {
@@ -51,13 +62,32 @@ DATASETS: dict[str, dict[str, Any]] = {
         "theme": "Demography / Population",
         "nuts_level": 3,
         "dimensions": ["freq", "unit", "sex", "age", "geo"],
-        "clean_path": f"{GCS_BASE}/eurostat_pop_nuts3/*/*.parquet",
-        "mart_path": f"{GCS_MART}/eurostat_pop_nuts3/*/mart_pop_nuts3.parquet",
+        "parquet_url": (
+            f"{GCS_BASE}/eurostat_pop_nuts3/{_CURRENT_YEAR}"
+            f"/eurostat_pop_nuts3_{_CURRENT_YEAR}_clean.parquet"
+        ),
         "description": "Population on 1 January by NUTS 3 region, sex and age",
     },
 }
 
 VALID_SLUGS: set[str] = set(DATASETS.keys())
+
+# ── SQL guard — blocked keywords (case-insensitive match) ────────────────────
+
+_BLOCKED_KEYWORDS = re.compile(
+    r"\b(read_csv|read_csv_auto|read_parquet|read_json|read_text|"
+    r"copy|import|export|"
+    r"create|drop|alter|insert|update|delete|"
+    r"attach|detach|call|load|install)\b",
+    re.IGNORECASE,
+)
+
+_FILESYSTEM_PATTERNS = re.compile(
+    r"['\"]/(etc|tmp|var|home|dev|proc|usr|bin|sbin|boot|root|opt|run)/|"
+    r"['\"][a-zA-Z]:\\|"
+    r"file://",
+    re.IGNORECASE,
+)
 
 # ── Codelists (embedded, no GCS dependency) ──────────────────────────────────
 
@@ -85,27 +115,14 @@ CODELISTS: dict[str, dict[str, str]] = {
 }
 
 NUTS_ITALY: dict[str, str] = {
-    "ITC1": "Piemonte",
-    "ITC2": "Valle d'Aosta",
-    "ITC3": "Liguria",
+    "ITC1": "Piemonte", "ITC2": "Valle d'Aosta", "ITC3": "Liguria",
     "ITC4": "Lombardia",
-    "ITH1": "Bolzano",
-    "ITH2": "Trento",
-    "ITH3": "Veneto",
-    "ITH4": "Friuli-Venezia Giulia",
-    "ITH5": "Emilia-Romagna",
-    "ITI1": "Toscana",
-    "ITI2": "Umbria",
-    "ITI3": "Marche",
-    "ITI4": "Lazio",
-    "ITF1": "Abruzzo",
-    "ITF2": "Molise",
-    "ITF3": "Campania",
-    "ITF4": "Puglia",
-    "ITF5": "Basilicata",
-    "ITF6": "Calabria",
-    "ITG1": "Sicilia",
-    "ITG2": "Sardegna",
+    "ITH1": "Bolzano", "ITH2": "Trento", "ITH3": "Veneto",
+    "ITH4": "Friuli-Venezia Giulia", "ITH5": "Emilia-Romagna",
+    "ITI1": "Toscana", "ITI2": "Umbria", "ITI3": "Marche", "ITI4": "Lazio",
+    "ITF1": "Abruzzo", "ITF2": "Molise", "ITF3": "Campania",
+    "ITF4": "Puglia", "ITF5": "Basilicata", "ITF6": "Calabria",
+    "ITG1": "Sicilia", "ITG2": "Sardegna",
 }
 
 _cache = TtlCache(ttl_seconds=120)
@@ -129,6 +146,21 @@ def _validate_limit(limit: int) -> int:
     if limit > 500:
         limit = 500
     return limit
+
+
+def _validate_sql_safe(sql: str) -> None:
+    """Reject SQL containing dangerous functions or filesystem paths."""
+    if not sql.strip().upper().startswith("SELECT"):
+        raise ValueError("Only SELECT queries are allowed")
+    if ";" in sql:
+        raise ValueError("Multi-statement queries are not allowed")
+    if _BLOCKED_KEYWORDS.search(sql):
+        raise ValueError(
+            "SQL contains blocked keywords (read_*, DDL, DML, filesystem I/O). "
+            "Only simple SELECT queries referencing 'data' are allowed."
+        )
+    if _FILESYSTEM_PATTERNS.search(sql):
+        raise ValueError("SQL contains filesystem path references")
 
 
 # ── Query execution ──────────────────────────────────────────────────────────
@@ -175,35 +207,38 @@ def query(
 ) -> list[dict[str, Any]]:
     """Run a SQL query on a specific dataset.
 
-    The SQL should be a SELECT statement. The parquet file is aliased
-    as 'data' — reference it in FROM data or FROM read_parquet('...').
+    The SQL must be a SELECT referencing 'data' as the source table.
+    The parquet file is injected as 'data' automatically.
 
     Examples:
-      SELECT year, geo, value FROM data WHERE geo LIKE 'IT%' LIMIT 10
-      SELECT geo, AVG(value) FROM data WHERE unit='EUR_HAB' GROUP BY geo
-      SELECT COUNT(*) AS total_rows FROM data
+      SELECT year, geo, value FROM data WHERE geo LIKE 'IT%' ORDER BY value DESC
+      SELECT geo, AVG(value) AS avg_gdp FROM data WHERE unit='EUR_HAB' GROUP BY geo
+      SELECT COUNT(*) AS total FROM data
 
-    Warning: SQL is not fully sanitized beyond basic guards.
-    This tool is designed for trusted users only.
+    Forbidden: read_* functions, filesystem paths, DDL/DML, multi-statement.
     """
     slug = _validate_slug(slug)
+    _validate_sql_safe(sql)
+
+    path = DATASETS[slug]["parquet_url"]
     limit = _validate_limit(limit)
-    path = DATASETS[slug]["clean_path"]
 
-    # Guards
-    sql_stripped = sql.strip()
-    if not sql_stripped.upper().startswith("SELECT"):
-        raise ValueError("Only SELECT queries are allowed")
-    if ";" in sql_stripped:
-        raise ValueError("Multi-statement queries are not supported")
+    # Replace FROM data (case-insensitive) with parquet read, first occurence only
+    from_data = re.compile(r"\bfrom\s+data\b", re.IGNORECASE)
+    if not from_data.search(sql):
+        raise ValueError(
+            "SQL must reference 'FROM data'. "
+            "Example: SELECT year, value FROM data WHERE geo LIKE 'IT%'"
+        )
 
-    # Inject parquet path: replace FROM data with the actual read
-    full_sql = sql_stripped.replace(
-        "FROM data",
-        f"FROM read_parquet('{path}') AS data",
-        1,
+    resolved_sql = from_data.sub(
+        f"FROM read_parquet('{path}') AS data", sql, count=1
     )
-    full_sql = f"{full_sql.rstrip(';')} LIMIT {limit}"
+
+    # Remove user's LIMIT if present — we apply our own
+    resolved_sql = re.sub(r"\s+LIMIT\s+\d+(\s*;?\s*)$", "", resolved_sql, count=1)
+
+    full_sql = f"SELECT * FROM ({resolved_sql}) AS _q LIMIT {limit}"
 
     columns, rows = _query(full_sql, path)
     return [dict(zip(columns, row)) for row in rows]
