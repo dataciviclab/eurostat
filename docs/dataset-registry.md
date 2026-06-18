@@ -8,6 +8,7 @@
 | `eurostat-gva-nuts3` | `NAMA_10R_3GVA` | Economy / Gross Value Added by NACE | 4 (freq, nace_r2, unit, geo) | 1,339,200 | ✅ |
 | `eurostat-crime-nuts3` | `CRIM_GEN` | Crime / Recorded offences by ICCS | 4 (freq, iccs, unit, geo) | 4,035 | ✅ |
 | `eurostat-pop-nuts3` | `DEMO_R_D2JAN` | Demography / Population on 1 Jan | 5 (freq, unit, sex, age, geo) | 300,348 | ✅ |
+| `eurostat-emp-nuts3` | `NAMA_10R_3EMPERS` | Economy / Employment by NACE | 5 (freq, unit, wstatus, nace_r2, geo) | 1,541,975 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
@@ -20,7 +21,6 @@ All published datasets:
 
 | Dataflow | Theme | NUTS | Priority |
 |---|---|---|---|
-| `NAMA_10R_3EMPERS` | Labour / Employment by NACE | NUTS3 | high |
 | `LFST_R_LFE2EMPRT` | Labour / Employment rates by sex & age | NUTS3 | high |
 | `TOUR_OCC_ARN2` | Tourism / Arrivals by NUTS | NUTS3 | medium |
 | `BD_SIZE_R3` | Business demography | NUTS3 | medium |
