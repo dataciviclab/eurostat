@@ -82,7 +82,7 @@ Standard codelist enrichment. Customize if the dataflow has extra dimensions:
 
 ```sql
 SELECT
-    r.* EXCLUDE (valore, flag),
+    r.* EXCLUDE (value, flag),
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
     u.label_it AS unit_label_it,
@@ -92,7 +92,7 @@ SELECT
     gp.label_en AS nuts_parent_label_en,
     -- Add dimension labels here if your DSD has extra columns
     -- e.g. r.sex, r.age, r.nace_r2, r.iccs, r.wstatus
-    r.valore,
+    r.value,
     r.flag,
     fl.description_en AS flag_desc_en
 FROM raw_input r
@@ -112,17 +112,17 @@ Standard Italy-filtered view:
 
 ```sql
 SELECT
-    anno,
+    year,
     geo,
     geo_label_en,
     nuts_level,
     -- your indicators
-    valore,
+    value,
     flag
 FROM clean_input
 WHERE geo LIKE 'IT%'
-  AND valore IS NOT NULL
-ORDER BY anno DESC, geo
+  AND value IS NOT NULL
+ORDER BY year DESC, geo
 ```
 
 ## Guidelines

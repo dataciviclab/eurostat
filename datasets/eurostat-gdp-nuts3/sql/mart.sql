@@ -3,7 +3,7 @@
 -- Il mart filtra per comodità e aggiunge logica di business.
 
 SELECT
-    anno,
+    year,
     geo,
     geo_label_en,
     nuts_level,
@@ -11,7 +11,8 @@ SELECT
     nuts_parent_label_en,
     unit,
     unit_label_en,
-    valore,
+    unit_label_it,
+    value,
     flag,
     flag_desc_en,
     -- PIL pro-capite vs totale (decodifica unità)
@@ -23,5 +24,5 @@ SELECT
 FROM clean_input
 WHERE geo LIKE 'IT%'
   AND unit IN ('EUR_HAB', 'MIO_EUR')
-  AND valore IS NOT NULL
-ORDER BY anno DESC, geo, unit
+  AND value IS NOT NULL
+ORDER BY year DESC, geo, unit

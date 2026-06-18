@@ -1,13 +1,14 @@
--- clean.sql: arricchimento CRIM_GEN — dimensione extra iccs
+-- clean.sql: CRIM_GEN — dimensione extra iccs
 SELECT
-    r.* EXCLUDE (valore, flag),
+    r.* EXCLUDE (value, flag),
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
+    u.label_it AS unit_label_it,
     g.label_en AS geo_label_en,
     g.nuts_level,
     g.parent_code AS nuts_parent_code,
     gp.label_en AS nuts_parent_label_en,
-    r.valore,
+    r.value,
     r.flag,
     fl.description_en AS flag_desc_en
 FROM raw_input r

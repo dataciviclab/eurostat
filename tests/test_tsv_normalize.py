@@ -88,7 +88,7 @@ class TestParseValue:
 
 
 # ── normalize_stream ─────────────────────────────────────────────────────────
-# contract: TSV → CSV unpivoted con colonne [dim1..dimN, anno, valore, flag]
+# contract: TSV → CSV unpivoted con colonne [dim1..dimN, year, value, flag]
 
 class TestNormalizeStream:
     """normalize_stream(input_stream, output=None, filter_geo=None) -> str"""
@@ -106,7 +106,7 @@ class TestNormalizeStream:
         csv_content = normalize_stream(self._tsv_stream(tsv))
         rows = [r.split(",") for r in csv_content.strip().split("\n")]
         header = rows[0]
-        assert header == ["freq", "unit", "geo", "anno", "valore", "flag"]
+        assert header == ["freq", "unit", "geo", "year", "value", "flag"]
         assert len(rows) == 5  # header + 4 data rows
         # IT 2020
         it_2020 = [r for r in rows[1:] if r[2] == "IT" and r[3] == "2020"]
@@ -128,7 +128,7 @@ class TestNormalizeStream:
         rows = csv_content.strip().split("\n")
         it_2020 = [r for r in rows[1:] if "IT,2020" in r]
         assert len(it_2020) == 1
-        # valore should be empty
+        # value should be empty
         assert it_2020[0].endswith(",,") or ",," in it_2020[0]
 
     def test_flags_preserved(self):
@@ -181,11 +181,11 @@ class TestNormalizeStream:
         assert "freq" in header
         assert "unit" in header
         assert "geo" in header
-        assert "anno" in header
-        assert "valore" in header
+        assert "year" in header
+        assert "value" in header
         assert "flag" in header
-        # Ogni riga dato deve avere anno numerico
+        # Ogni riga dato deve avere year numerico
         for row in rows[1:]:
             cols = row.split(",")
-            anno = cols[header.index("anno")]
-            assert anno.isdigit(), f"Non-numeric year: {anno}"
+            year = cols[header.index("year")]
+            assert year.isdigit(), f"Non-numeric year: {year}"

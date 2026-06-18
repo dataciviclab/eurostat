@@ -15,7 +15,7 @@ raw:
     - name: "eurostat_nama_10r_3gva"
       type: "script"
       args:
-        command: "../../connectors/tsv_normalize.py --flow NAMA_10R_3GVA"
+        command: "../../connectors/tsv_normalize.py --flow NAMA_10R_3GVA --output nama_10r_3gva_normalized.csv"
         output: "nama_10r_3gva_normalized.csv"
         filename: "nama_10r_3gva_normalized.csv"
       primary: true

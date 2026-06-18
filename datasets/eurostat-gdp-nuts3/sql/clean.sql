@@ -1,11 +1,11 @@
 -- clean.sql: arricchimento codelist su CSV già normalizzato da tsv_normalize.py
 --
--- Il CSV in input ha già: freq, unit, geo, anno, valore, flag
--- (o più dimensioni: freq, ..., geo, anno, valore, flag)
+-- Il CSV in input ha già: freq, unit, geo, year, value, flag
+-- (o più dimensioni: freq, ..., geo, year, value, flag)
 -- Qui arricchiamo con label da codelist.
 
 SELECT
-    r.* EXCLUDE (valore, flag),
+    r.* EXCLUDE (value, flag),
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
     u.label_it AS unit_label_it,
@@ -13,7 +13,7 @@ SELECT
     g.nuts_level,
     g.parent_code AS nuts_parent_code,
     gp.label_en AS nuts_parent_label_en,
-    r.valore,
+    r.value,
     r.flag,
     fl.description_en AS flag_desc_en
 FROM raw_input r

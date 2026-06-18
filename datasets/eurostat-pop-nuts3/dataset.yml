@@ -15,7 +15,7 @@ raw:
     - name: "eurostat_demo_r_d2jan"
       type: "script"
       args:
-        command: "../../connectors/tsv_normalize.py --flow DEMO_R_D2JAN"
+        command: "../../connectors/tsv_normalize.py --flow DEMO_R_D2JAN --output demo_r_d2jan_normalized.csv"
         output: "demo_r_d2jan_normalized.csv"
         filename: "demo_r_d2jan_normalized.csv"
       primary: true

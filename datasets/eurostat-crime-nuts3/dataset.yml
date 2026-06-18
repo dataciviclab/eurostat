@@ -15,7 +15,7 @@ raw:
     - name: "eurostat_crim_gen"
       type: "script"
       args:
-        command: "../../connectors/tsv_normalize.py --flow CRIM_GEN"
+        command: "../../connectors/tsv_normalize.py --flow CRIM_GEN --output crim_gen_normalized.csv"
         output: "crim_gen_normalized.csv"
         filename: "crim_gen_normalized.csv"
       primary: true

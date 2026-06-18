@@ -2,7 +2,7 @@
 -- Dimensioni: freq, unit, sex, age, geo (DEMO_R_D2JAN)
 
 SELECT
-    r.* EXCLUDE (valore, flag),
+    r.* EXCLUDE (value, flag),
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
     u.label_it AS unit_label_it,
@@ -23,7 +23,7 @@ SELECT
         WHEN 'T' THEN 'Totale'
         ELSE r.sex
     END AS sex_label_it,
-    r.valore,
+    r.value,
     r.flag,
     fl.description_en AS flag_desc_en
 FROM raw_input r

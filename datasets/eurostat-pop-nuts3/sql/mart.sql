@@ -1,7 +1,7 @@
 -- mart.sql: Popolazione NUTS3 — Italia, totale per sesso ed età
 -- Il clean ha già arricchito le codelist (geo, freq, unit, flag)
 SELECT
-    anno,
+    year,
     geo,
     geo_label_en,
     nuts_level,
@@ -13,7 +13,8 @@ SELECT
     age,
     unit,
     unit_label_en,
-    valore,
+    unit_label_it,
+    value,
     flag,
     flag_desc_en
 FROM clean_input
@@ -21,5 +22,5 @@ WHERE geo LIKE 'IT%'
   AND unit = 'NR'
   AND sex = 'T'
   AND age = 'TOTAL'
-  AND valore IS NOT NULL
-ORDER BY anno DESC, geo
+  AND value IS NOT NULL
+ORDER BY year DESC, geo
