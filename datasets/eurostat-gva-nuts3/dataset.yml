@@ -40,3 +40,14 @@ mart:
 
 validation:
   fail_on_error: true
+
+# ── Registry metadata (for MCP client + CLI auto-discovery)
+# ── (tool.eurostat.registry namespace, toolkit ignora tool.*)
+tool:
+  eurostat:
+    registry:
+      dataflow: "NAMA_10R_3GVA"
+      theme: "Economy / Gross Value Added"
+      nuts_level: 3
+      dimensions: ["freq", "nace_r2", "unit", "geo"]
+      description: "Gross Value Added by NUTS 3 region and NACE sector"

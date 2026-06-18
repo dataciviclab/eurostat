@@ -12,7 +12,10 @@ from __future__ import annotations
 import re
 import urllib.request
 from datetime import date
+from pathlib import Path
 from typing import Any
+
+import yaml
 
 from lab_connectors.duckdb import gcs_connect
 from lab_connectors.mcp.cache import TtlCache
@@ -53,40 +56,32 @@ def _parquet_url(slug: str) -> str:
     return f"{GCS_BASE}/{slug}/{slug}_{year}_clean.parquet"
 
 
-# ── Registry ─────────────────────────────────────────────────────────────────
+# ── Registry (auto-discovered from datasets/*/dataset.yml) ───────────────────
 
-DATASETS: dict[str, dict[str, Any]] = {
-    "eurostat_gdp_nuts3": {
-        "dataflow": "NAMA_10R_3GDP",
-        "theme": "Economy / GDP per capita",
-        "nuts_level": 3,
-        "dimensions": ["freq", "unit", "geo"],
-        "description": "GDP at current market prices by NUTS 3 region",
-    },
-    "eurostat_gva_nuts3": {
-        "dataflow": "NAMA_10R_3GVA",
-        "theme": "Economy / Gross Value Added",
-        "nuts_level": 3,
-        "dimensions": ["freq", "nace_r2", "unit", "geo"],
-        "description": "Gross Value Added by NUTS 3 region and NACE sector",
-    },
-    "eurostat_crime_nuts3": {
-        "dataflow": "CRIM_GEN",
-        "theme": "Crime / Recorded offences",
-        "nuts_level": 3,
-        "dimensions": ["freq", "iccs", "unit", "geo"],
-        "description": "Recorded crimes by NUTS 3 region and ICCS category",
-    },
-    "eurostat_pop_nuts3": {
-        "dataflow": "DEMO_R_D2JAN",
-        "theme": "Demography / Population",
-        "nuts_level": 3,
-        "dimensions": ["freq", "unit", "sex", "age", "geo"],
-        "description": "Population on 1 January by NUTS 3 region, sex and age",
-    },
-}
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+_DATASETS_DIR = _REPO_ROOT / "datasets"
+_GCS_BASE = "https://storage.googleapis.com/dataciviclab-clean/eurostat"
 
-# Each dataset also carries a parquet_url (computed, can be overridden for tests)
+DATASETS: dict[str, dict[str, Any]] = {}
+for _entry in sorted(_DATASETS_DIR.iterdir()):
+    _yml = _entry / "dataset.yml"
+    if not _yml.exists():
+        continue
+    _data = yaml.safe_load(_yml.read_text())
+    _ds = (_data or {}).get("dataset", {}) or {}
+    _reg = (_data or {}).get("tool", {}).get("eurostat", {}).get("registry", {}) or {}
+    _slug = _ds.get("name", "")
+    if not _slug:
+        continue
+    DATASETS[_slug] = {
+        "dataflow": _reg.get("dataflow", ""),
+        "theme": _reg.get("theme", ""),
+        "nuts_level": _reg.get("nuts_level", 3),
+        "dimensions": list(_reg.get("dimensions", [])),
+        "description": _reg.get("description", _slug),
+    }
+
+# Add computed parquet_url to each dataset (can be overridden for tests)
 for _slug in list(DATASETS):
     DATASETS[_slug]["parquet_url"] = _parquet_url(_slug)
 
@@ -135,14 +130,27 @@ CODELISTS: dict[str, dict[str, str]] = {
 }
 
 NUTS_ITALY: dict[str, str] = {
-    "ITC1": "Piemonte", "ITC2": "Valle d'Aosta", "ITC3": "Liguria",
+    "ITC1": "Piemonte",
+    "ITC2": "Valle d'Aosta",
+    "ITC3": "Liguria",
     "ITC4": "Lombardia",
-    "ITH1": "Bolzano", "ITH2": "Trento", "ITH3": "Veneto",
-    "ITH4": "Friuli-Venezia Giulia", "ITH5": "Emilia-Romagna",
-    "ITI1": "Toscana", "ITI2": "Umbria", "ITI3": "Marche", "ITI4": "Lazio",
-    "ITF1": "Abruzzo", "ITF2": "Molise", "ITF3": "Campania",
-    "ITF4": "Puglia", "ITF5": "Basilicata", "ITF6": "Calabria",
-    "ITG1": "Sicilia", "ITG2": "Sardegna",
+    "ITH1": "Bolzano",
+    "ITH2": "Trento",
+    "ITH3": "Veneto",
+    "ITH4": "Friuli-Venezia Giulia",
+    "ITH5": "Emilia-Romagna",
+    "ITI1": "Toscana",
+    "ITI2": "Umbria",
+    "ITI3": "Marche",
+    "ITI4": "Lazio",
+    "ITF1": "Abruzzo",
+    "ITF2": "Molise",
+    "ITF3": "Campania",
+    "ITF4": "Puglia",
+    "ITF5": "Basilicata",
+    "ITF6": "Calabria",
+    "ITG1": "Sicilia",
+    "ITG2": "Sardegna",
 }
 
 _cache = TtlCache(ttl_seconds=120)
@@ -171,9 +179,9 @@ def _validate_limit(limit: int) -> int:
 def _strip_sql_comments(sql: str) -> str:
     """Remove SQL comments (-- and /* */) from the start of a query."""
     # Remove single-line comments (-- ...)
-    sql = re.sub(r'^--.*$', '', sql, flags=re.MULTILINE)
+    sql = re.sub(r"^--.*$", "", sql, flags=re.MULTILINE)
     # Remove block comments (/* ... */)
-    sql = re.sub(r'/\*.*?\*/', '', sql, flags=re.DOTALL)
+    sql = re.sub(r"/\*.*?\*/", "", sql, flags=re.DOTALL)
     return sql.strip()
 
 
@@ -223,14 +231,16 @@ def list_datasets() -> list[dict[str, Any]]:
     """Return the list of available datasets with metadata."""
     result = []
     for slug, meta in sorted(DATASETS.items()):
-        result.append({
-            "slug": slug,
-            "dataflow": meta["dataflow"],
-            "theme": meta["theme"],
-            "nuts_level": meta["nuts_level"],
-            "dimensions": meta["dimensions"],
-            "description": meta["description"],
-        })
+        result.append(
+            {
+                "slug": slug,
+                "dataflow": meta["dataflow"],
+                "theme": meta["theme"],
+                "nuts_level": meta["nuts_level"],
+                "dimensions": meta["dimensions"],
+                "description": meta["description"],
+            }
+        )
     return result
 
 
@@ -265,9 +275,7 @@ def query(
             "Example: SELECT year, value FROM data WHERE geo LIKE 'IT%'"
         )
 
-    resolved_sql = from_data.sub(
-        f"FROM read_parquet('{path}') AS data", sql, count=1
-    )
+    resolved_sql = from_data.sub(f"FROM read_parquet('{path}') AS data", sql, count=1)
 
     # Remove user's LIMIT if present — we apply our own
     resolved_sql = re.sub(r"\s+LIMIT\s+\d+(\s*;?\s*)$", "", resolved_sql, count=1)
@@ -294,8 +302,7 @@ def describe_dataset(slug: str, dimension_limit: int = 20) -> dict[str, Any]:
         # Schema
         schema = con.sql(f"DESCRIBE SELECT * FROM read_parquet('{path}')").fetchall()
         columns_def = [
-            {"name": r[0], "type": r[1], "nullable": r[2] == "YES"}
-            for r in schema
+            {"name": r[0], "type": r[1], "nullable": r[2] == "YES"} for r in schema
         ]
 
         # Row count
@@ -317,16 +324,14 @@ def describe_dataset(slug: str, dimension_limit: int = 20) -> dict[str, Any]:
             label_col = f"{dim}_label_en"
             try:
                 rows = con.sql(
-                    f"SELECT DISTINCT \"{dim}\" AS code, \"{label_col}\" AS label "
+                    f'SELECT DISTINCT "{dim}" AS code, "{label_col}" AS label '
                     f"FROM read_parquet('{path}') "
-                    f"WHERE \"{dim}\" IS NOT NULL ORDER BY 1"
+                    f'WHERE "{dim}" IS NOT NULL ORDER BY 1'
                 ).fetchall()
                 total = len(rows)
                 limit = dimension_limit if dimension_limit > 0 else total
                 truncated = total > limit
-                items = [
-                    {"code": r[0], "label": r[1]} for r in rows[:limit]
-                ]
+                items = [{"code": r[0], "label": r[1]} for r in rows[:limit]]
                 dimensions[dim] = {
                     "values": items,
                     "total_count": total,
@@ -338,7 +343,7 @@ def describe_dataset(slug: str, dimension_limit: int = 20) -> dict[str, Any]:
                 try:
                     rows = con.sql(
                         f"SELECT DISTINCT \"{dim}\" FROM read_parquet('{path}') "
-                        f"WHERE \"{dim}\" IS NOT NULL ORDER BY 1"
+                        f'WHERE "{dim}" IS NOT NULL ORDER BY 1'
                     ).fetchall()
                     total = len(rows)
                     limit = dimension_limit if dimension_limit > 0 else total

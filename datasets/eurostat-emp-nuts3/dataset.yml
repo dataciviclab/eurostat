@@ -1,0 +1,57 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_emp_nuts3"
+  source_id: "eurostat"
+  years: [2026]
+  time_coverage:
+    start_year: 1995
+    end_year: 2024
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_nama_10r_3empers"
+      type: "script"
+      args:
+        command: "../../connectors/tsv_normalize.py --flow NAMA_10R_3EMPERS --output nama_10r_3empers_normalized.csv"
+        output: "nama_10r_3empers_normalized.csv"
+        filename: "nama_10r_3empers_normalized.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  validate:
+    min_rows: 100
+
+mart:
+  tables:
+    - name: "mart_emp_nuts3"
+      sql: "sql/mart.sql"
+  required_tables:
+    - "mart_emp_nuts3"
+  validate:
+    table_rules:
+      mart_emp_nuts3:
+        min_rows: 100
+
+validation:
+  fail_on_error: true
+
+# ── Registry metadata (for MCP client + CLI auto-discovery)
+# ── (tool.eurostat.registry namespace, toolkit ignora tool.*)
+tool:
+  eurostat:
+    registry:
+      dataflow: "NAMA_10R_3EMPERS"
+      theme: "Economy / Employment by NACE"
+      nuts_level: 3
+      dimensions: ["freq", "unit", "wstatus", "nace_r2", "geo"]
+      description: "Employment by NUTS 3 region, NACE sector and working status"
