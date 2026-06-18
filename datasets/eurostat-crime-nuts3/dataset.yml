@@ -1,0 +1,41 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_crime_nuts3"
+  source_id: "eurostat"
+  years: [2024]
+  time_coverage:
+    start_year: 1993
+    end_year: 2007
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_crim_gen"
+      type: "http_file"
+      args:
+        url: "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/CRIM_GEN?format=TSV"
+        filename: "crim_gen.tsv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: "\t"
+    encoding: utf-8
+    header: true
+  validate:
+    min_rows: 100
+
+mart:
+  tables:
+    - name: "mart_crime_nuts3"
+      sql: "sql/mart.sql"
+  required_tables:
+    - "mart_crime_nuts3"
+
+validation:
+  fail_on_error: true
