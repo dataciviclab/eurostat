@@ -129,7 +129,7 @@ eurostat/
 │   ├── eurostat-crime-nuts3/
 │   └── eurostat-pop-nuts3/
 ├── eurostat/            # CLI package (schema-driven facts)
-│   ├── cli.py           # `eurostat facts` command
+│   ├── cli.py           # `eurostat` CLI — schema-driven facts
 │   └── _registry.py     # GCS path registry for datasets
 ├── eurostat-mcp/        # MCP server (3 tools, 34 tests)
 ├── codelists/           # geo, unit, freq, flag lookups
@@ -146,7 +146,8 @@ pip install -e ".[dev,cli]"
 pip install git+https://github.com/dataciviclab/lab-connectors.git
 
 # Run all tests
-pytest tests/ eurostat-mcp/tests/ -v
+pytest tests/ -v
+PYTHONPATH=eurostat-mcp pytest eurostat-mcp/tests/ -v
 
 # Run the CLI
 eurostat
