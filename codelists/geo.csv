@@ -1,24 +1,24 @@
 code,label_en,nuts_level,parent_code
-ACP,"African, Caribbean and Pacific Group of States, signatories of the Partnership Agreement",NUTS1,AC
-ACP_AFR,African ACP states,NUTS3,ACP_AF
-ACP_CRB,Caribbean ACP states,NUTS3,ACP_CR
-ACP_PAC,Pacific ACP states,NUTS3,ACP_PA
+ACP,"African, Caribbean and Pacific Group of States, signatories of the Partnership Agreement",,
+ACP_AFR,African ACP states,,
+ACP_CRB,Caribbean ACP states,,
+ACP_PAC,Pacific ACP states,,
 AD,Andorra,country,
 AE,United Arab Emirates,country,
-AE_CAP,Abu Dhabi,NUTS3,AE_CA
+AE_CAP,Abu Dhabi,,
 AF,Afghanistan,country,
-AFDB,African Development Bank,NUTS2,AFD
-AFR,Africa,NUTS1,AF
-AFR_C,Central Africa,NUTS3,AFR_
-AFR_C_S,Central and South Africa,NUTS3,AFR_C_
-AFR_E,Eastern Africa,NUTS3,AFR_
-AFR_N,Northern Africa,NUTS3,AFR_
-AFR_NSP,"African countries, not specified",NUTS3,AFR_NS
-AFR_N_ASI_NME,"Northern Africa, Near and Middle East Asia",NUTS3,AFR_N_ASI_NM
-AFR_OTH,Other African countries (aggregate changing according to the context),NUTS3,AFR_OT
-AFR_S,Southern Africa,NUTS3,AFR_
-AFR_W,Western Africa,NUTS3,AFR_
-AF_CAP,Kabul,NUTS3,AF_CA
+AFDB,African Development Bank,,
+AFR,Africa,,
+AFR_C,Central Africa,,
+AFR_C_S,Central and South Africa,,
+AFR_E,Eastern Africa,,
+AFR_N,Northern Africa,,
+AFR_NSP,"African countries, not specified",,
+AFR_N_ASI_NME,"Northern Africa, Near and Middle East Asia",,
+AFR_OTH,Other African countries (aggregate changing according to the context),,
+AFR_S,Southern Africa,,
+AFR_W,Western Africa,,
+AF_CAP,Kabul,,
 AG,Antigua and Barbuda,country,
 AI,Anguilla,country,
 AL,Albania,country,
@@ -38,60 +38,60 @@ AL032,Fier,NUTS3,AL03
 AL033,Gjirokastër,NUTS3,AL03
 AL034,Korçë,NUTS3,AL03
 AL035,Vlorë,NUTS3,AL03
-ALA,Partner Countries in Asia and Latin America,NUTS1,AL
+ALA,Partner Countries in Asia and Latin America,,
 ALX,Not regionalised/Unknown level 1,NUTS1,AL
 ALXX,Not regionalised/Unknown level 2,NUTS2,ALX
 ALXXX,Not regionalised/Unknown level 3,NUTS3,ALXX
 ALZ,Extra-Regio level 1,NUTS1,AL
 ALZZ,Extra-Regio level 2,NUTS2,ALZ
 ALZZZ,Extra-Regio level 3,NUTS3,ALZZ
-AL_CAP,Tiranë (Tirana),NUTS3,AL_CA
+AL_CAP,Tiranë (Tirana),,
 AM,Armenia,country,
-AME,America,NUTS1,AM
-AME_C,Central America,NUTS3,AME_
-AME_C_CRB,Central America and Caribbean,NUTS3,AME_C_CR
-AME_C_OTH,Other Central American countries,NUTS3,AME_C_OT
-AME_C_S,Central and South America,NUTS3,AME_C_
-AME_C_S_OTH,Other Central or South American countries,NUTS3,AME_C_S_OT
-AME_LAT,Latin American countries,NUTS3,AME_LA
-AME_N,Northern America,NUTS3,AME_
-AME_N_NSP,"Northern American countries, not specified",NUTS3,AME_N_NS
-AME_N_OCE,Northern America and Oceania,NUTS3,AME_N_OC
-AME_N_OTH,Other Northern American countries,NUTS3,AME_N_OT
-AME_OTH,Other American countries (aggregate changing according to the context),NUTS3,AME_OT
-AME_S,South America,NUTS3,AME_
-AME_S_OTH,Other South American countries,NUTS3,AME_S_OT
-AME_X_N,"Caribbean, Central and South America",NUTS3,AME_X_
-AME_X_N_NSP,"Caribbean, Central and South American countries, not specified",NUTS3,AME_X_N_NS
-AME_X_N_OTH,"Other Caribbean, Central and South American countries",NUTS3,AME_X_N_OT
-AM_CAP,Yerevan,NUTS3,AM_CA
+AME,America,,
+AME_C,Central America,,
+AME_C_CRB,Central America and Caribbean,,
+AME_C_OTH,Other Central American countries,,
+AME_C_S,Central and South America,,
+AME_C_S_OTH,Other Central or South American countries,,
+AME_LAT,Latin American countries,,
+AME_N,Northern America,,
+AME_N_NSP,"Northern American countries, not specified",,
+AME_N_OCE,Northern America and Oceania,,
+AME_N_OTH,Other Northern American countries,,
+AME_OTH,Other American countries (aggregate changing according to the context),,
+AME_S,South America,,
+AME_S_OTH,Other South American countries,,
+AME_X_N,"Caribbean, Central and South America",,
+AME_X_N_NSP,"Caribbean, Central and South American countries, not specified",,
+AME_X_N_OTH,"Other Caribbean, Central and South American countries",,
+AM_CAP,Yerevan,,
 AN,Netherlands Antilles,country,
 AO,Angola,country,
-AO_CAP,Luanda,NUTS3,AO_CA
-APEC,Asia-Pacific Economic Cooperation,NUTS2,APE
+AO_CAP,Luanda,,
+APEC,Asia-Pacific Economic Cooperation,,
 AQ,Antarctica,country,
 AR,Argentina,country,
-AR_CAP,Buenos Aires,NUTS3,AR_CA
+AR_CAP,Buenos Aires,,
 AS,American Samoa,country,
-ASDB,Asian Development Bank,NUTS2,ASD
-ASEAN,Association of Southeast Asian Nations,NUTS3,ASEA
-ASI,Asia,NUTS1,AS
-ASI_C,Central Asia,NUTS3,ASI_
-ASI_E,Eastern Asia,NUTS3,ASI_
-ASI_ESSE,"Eastern, Southern and South-Eastern Asia",NUTS3,ASI_ESS
-ASI_E_OTH,Other Eastern Asian countries,NUTS3,ASI_E_OT
-ASI_G,Gulf Arabian Countries,NUTS3,ASI_
-ASI_NME,Near and Middle East Asia (aggregate changing according to the context),NUTS3,ASI_NM
-ASI_NME_OTH,Other Near and Middle East Asian countries,NUTS3,ASI_NME_OT
-ASI_NSP,"Asian countries, not specified",NUTS3,ASI_NS
-ASI_OCE_OTH,Other Asian and Oceanian countries (aggregate changing according to the context),NUTS3,ASI_OCE_OT
-ASI_OTH,Other Asian countries (aggregate changing according to the context),NUTS3,ASI_OT
-ASI_S,Southern Asia,NUTS3,ASI_
-ASI_SSE,Southern and South-Eastern Asia,NUTS3,ASI_SS
-ASI_S_E,South-Eastern Asia,NUTS3,ASI_S_
-ASI_W,Western Asia,NUTS3,ASI_
-ASI_W_IR,Western Asia including Iran,NUTS3,ASI_W_I
-ASI_W_OTH,Other Western Asian countries,NUTS3,ASI_W_OT
+ASDB,Asian Development Bank,,
+ASEAN,Association of Southeast Asian Nations,,
+ASI,Asia,,
+ASI_C,Central Asia,,
+ASI_E,Eastern Asia,,
+ASI_ESSE,"Eastern, Southern and South-Eastern Asia",,
+ASI_E_OTH,Other Eastern Asian countries,,
+ASI_G,Gulf Arabian Countries,,
+ASI_NME,Near and Middle East Asia (aggregate changing according to the context),,
+ASI_NME_OTH,Other Near and Middle East Asian countries,,
+ASI_NSP,"Asian countries, not specified",,
+ASI_OCE_OTH,Other Asian and Oceanian countries (aggregate changing according to the context),,
+ASI_OTH,Other Asian countries (aggregate changing according to the context),,
+ASI_S,Southern Asia,,
+ASI_SSE,Southern and South-Eastern Asia,,
+ASI_S_E,South-Eastern Asia,,
+ASI_W,Western Asia,,
+ASI_W_IR,Western Asia including Iran,,
+ASI_W_OTH,Other Western Asian countries,,
 AT,Austria,country,
 AT1,Ostösterreich,NUTS1,AT
 AT11,Burgenland,NUTS2,AT1
@@ -108,7 +108,7 @@ AT126,Wiener Umland/Nordteil,NUTS3,AT12
 AT127,Wiener Umland/Südteil,NUTS3,AT12
 AT13,Wien,NUTS2,AT1
 AT130,Wien,NUTS3,AT13
-AT13_OTHBL,Wien and other Bundesländer,NUTS3,AT13_OTHB
+AT13_OTHBL,Wien and other Bundesländer,,
 AT2,Südösterreich,NUTS1,AT
 AT21,Kärnten,NUTS2,AT2
 AT211,Klagenfurt-Villach,NUTS3,AT21
@@ -147,40 +147,42 @@ ATXXX,Not regionalised/Unknown NUTS 3,NUTS3,ATXX
 ATZ,Extra-Regio NUTS 1,NUTS1,AT
 ATZZ,Extra-Regio NUTS 2,NUTS2,ATZ
 ATZZZ,Extra-Regio NUTS 3,NUTS3,ATZZ
-AT_CAP,Wien,NUTS3,AT_CA
+AT_CAP,Wien,,
 AU,Australia,country,
-AU_CAP,Canberra,NUTS3,AU_CA
-AU_ISL,Australian Oceania,NUTS3,AU_IS
-AU_NZ,Australia and New Zealand,NUTS3,AU_N
+AU_CAP,Canberra,,
+AU_ISL,Australian Oceania,,
+AU_NZ,Australia and New Zealand,,
 AW,Aruba,country,
 AZ,Azerbaijan,country,
-AZ_CAP,Baki (Baku),NUTS3,AZ_CA
+AZ_CAP,Baki (Baku),,
 BA,Bosnia and Herzegovina,country,
 BA0,Bosna i Hercegovina,NUTS1,BA
 BA01,Federacija Bosne i Hercegovine,NUTS2,BA0
 BA02,Republika Srpska,NUTS2,BA0
 BA03,Brčko District BiH,NUTS2,BA0
-BAL,Baltic countries,NUTS1,BA
+BAL,Baltic countries,,
 BAZ,Extra-Regio level 1,NUTS1,BA
 BAZZ,Extra-Regio level 2,NUTS2,BAZ
-BA_CAP,Sarajevo,NUTS3,BA_CA
-BA_DEL,Banja Luka,NUTS3,BA_DE
+BA_CAP,Sarajevo,,
+BA_DEL,Banja Luka,,
 BB,Barbados,country,
-BB_CAP,Bridgetown,NUTS3,BB_CA
+BB_CAP,Bridgetown,,
 BD,Bangladesh,country,
-BD_CAP,Dhaka,NUTS3,BD_CA
+BD_CAP,Dhaka,,
 BE,Belgium,country,
 BE1,Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest,NUTS1,BE
 BE10,Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest,NUTS2,BE1
 BE100,Arr. de Bruxelles-Capitale/Arr. Brussel-Hoofdstad,NUTS3,BE10
-BE10_24,Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest and Prov. Vlaams Brabant,NUTS3,BE10_2
-BE1_2,Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest and Vlaams Gewest,NUTS3,BE1_
+BE10_24,Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest and Prov. Vlaams Brabant,,
+BE1_2,Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest and Vlaams Gewest,,
 BE2,Vlaams Gewest,NUTS1,BE
 BE21,Prov. Antwerpen,NUTS2,BE2
 BE211,Arr. Antwerpen,NUTS3,BE21
 BE212,Arr. Mechelen,NUTS3,BE21
 BE213,Arr. Turnhout,NUTS3,BE21
 BE22,Prov. Limburg (BE),NUTS2,BE2
+BE221,Arr. Hasselt (NUTS 2016),,
+BE222,Arr. Maaseik (NUTS 2016),,
 BE223,Arr. Tongeren,NUTS3,BE22
 BE224,Arr. Hasselt,NUTS3,BE22
 BE225,Arr. Maaseik,NUTS3,BE22
@@ -207,7 +209,13 @@ BE3,Région wallonne,NUTS1,BE
 BE31,Prov. Brabant wallon,NUTS2,BE3
 BE310,Arr. Nivelles,NUTS3,BE31
 BE32,Prov. Hainaut,NUTS2,BE3
+BE321,Arr. Ath (NUTS 2016),,
+BE322,Arr. Charleroi (NUTS 2016),,
 BE323,Arr. Mons,NUTS3,BE32
+BE324,Arr. Mouscron (NUTS 2016),,
+BE325,Arr. Soignies (NUTS 2016),,
+BE326,Arr. Thuin (NUTS 2016),,
+BE327,Arr. Tournai (NUTS 2016),,
 BE328,Arr. Tournai-Mouscron,NUTS3,BE32
 BE329,Arr. La Louvière,NUTS3,BE32
 BE32A,Arr. Ath,NUTS3,BE32
@@ -219,7 +227,7 @@ BE331,Arr. Huy,NUTS3,BE33
 BE332,Arr. Liège,NUTS3,BE33
 BE334,Arr. Waremme,NUTS3,BE33
 BE335,Arr. Verviers — communes francophones,NUTS3,BE33
-BE335_336,Arr. Verviers,NUTS3,BE335_33
+BE335_336,Arr. Verviers,,
 BE336,Bezirk Verviers — Deutschsprachige Gemeinschaft,NUTS3,BE33
 BE34,Prov. Luxembourg (BE),NUTS2,BE3
 BE341,Arr. Arlon,NUTS3,BE34
@@ -237,49 +245,49 @@ BEXXX,Not regionalised/Unknown NUTS 3,NUTS3,BEXX
 BEZ,Extra-Regio NUTS 1,NUTS1,BE
 BEZZ,Extra-Regio NUTS 2,NUTS2,BEZ
 BEZZZ,Extra-Regio NUTS 3,NUTS3,BEZZ
-BE_CAP,Bruxelles/Brussel,NUTS3,BE_CA
-BE_FRA,French Community in Belgium including small German-speaking Community,NUTS3,BE_FR
-BE_NAL,"Belgium, not allocated",NUTS3,BE_NA
-BE_VLA,Flemish Community in Belgium,NUTS3,BE_VL
+BE_CAP,Bruxelles/Brussel,,
+BE_FRA,French Community in Belgium including small German-speaking Community,,
+BE_NAL,"Belgium, not allocated",,
+BE_VLA,Flemish Community in Belgium,,
 BF,Burkina Faso,country,
-BF_CAP,Ouagadougou,NUTS3,BF_CA
+BF_CAP,Ouagadougou,,
 BG,Bulgaria,country,
-BG1,Severna Bulgaria (statistical region 2005),NUTS1,BG
-BG11,Severozapaden (statistical region 2005),NUTS2,BG1
-BG111,Vidin (statistical region 2005),NUTS3,BG11
-BG112,Montana (statistical region 2005),NUTS3,BG11
-BG113,Vratsa (statistical region 2005),NUTS3,BG11
-BG12,Severen tsentralen (statistical region 2005),NUTS2,BG1
-BG121,Pleven (statistical region 2005),NUTS3,BG12
-BG122,Lovech (statistical region 2005),NUTS3,BG12
-BG123,Veliko Tarnovo (statistical region 2005),NUTS3,BG12
-BG124,Gabrovo (statistical region 2005),NUTS3,BG12
-BG125,Ruse (statistical region 2005),NUTS3,BG12
-BG13,Severoiztochen (statistical region 2005),NUTS2,BG1
-BG131,Varna (statistical region 2005),NUTS3,BG13
-BG132,Dobrich (statistical region 2005),NUTS3,BG13
-BG133,Shumen (statistical region 2005),NUTS3,BG13
-BG134,Targovishte (statistical region 2005),NUTS3,BG13
-BG135,Razgrad (statistical region 2005),NUTS3,BG13
-BG136,Silistra (statistical region 2005),NUTS3,BG13
-BG2,Yuzhna Bulgaria (statistical region 2005),NUTS1,BG
-BG21,Yugozapaden (statistical region 2005),NUTS2,BG2
-BG211,Sofia (stolitsa) (statistical region 2005),NUTS3,BG21
-BG212,Sofia (statistical region 2005),NUTS3,BG21
-BG213,Blagoevgrad (statistical region 2005),NUTS3,BG21
-BG214,Pernik (statistical region 2005),NUTS3,BG21
-BG215,Kyustendil (statistical region 2005),NUTS3,BG21
-BG22,Yuzhen tsentralen (statistical region 2005),NUTS2,BG2
-BG221,Plovdiv (statistical region 2005),NUTS3,BG22
-BG222,Stara Zagora (statistical region 2005),NUTS3,BG22
-BG223,Haskovo (statistical region 2005),NUTS3,BG22
-BG224,Pazardzhik (statistical region 2005),NUTS3,BG22
-BG225,Smolyan (statistical region 2005),NUTS3,BG22
-BG226,Kardzhali (statistical region 2005),NUTS3,BG22
-BG23,Yugoiztochen (statistical region 2005),NUTS2,BG2
-BG231,Burgas (statistical region 2005),NUTS3,BG23
-BG232,Sliven (statistical region 2005),NUTS3,BG23
-BG233,Yambol (statistical region 2005),NUTS3,BG23
+BG1,Severna Bulgaria (statistical region 2005),,
+BG11,Severozapaden (statistical region 2005),,
+BG111,Vidin (statistical region 2005),,
+BG112,Montana (statistical region 2005),,
+BG113,Vratsa (statistical region 2005),,
+BG12,Severen tsentralen (statistical region 2005),,
+BG121,Pleven (statistical region 2005),,
+BG122,Lovech (statistical region 2005),,
+BG123,Veliko Tarnovo (statistical region 2005),,
+BG124,Gabrovo (statistical region 2005),,
+BG125,Ruse (statistical region 2005),,
+BG13,Severoiztochen (statistical region 2005),,
+BG131,Varna (statistical region 2005),,
+BG132,Dobrich (statistical region 2005),,
+BG133,Shumen (statistical region 2005),,
+BG134,Targovishte (statistical region 2005),,
+BG135,Razgrad (statistical region 2005),,
+BG136,Silistra (statistical region 2005),,
+BG2,Yuzhna Bulgaria (statistical region 2005),,
+BG21,Yugozapaden (statistical region 2005),,
+BG211,Sofia (stolitsa) (statistical region 2005),,
+BG212,Sofia (statistical region 2005),,
+BG213,Blagoevgrad (statistical region 2005),,
+BG214,Pernik (statistical region 2005),,
+BG215,Kyustendil (statistical region 2005),,
+BG22,Yuzhen tsentralen (statistical region 2005),,
+BG221,Plovdiv (statistical region 2005),,
+BG222,Stara Zagora (statistical region 2005),,
+BG223,Haskovo (statistical region 2005),,
+BG224,Pazardzhik (statistical region 2005),,
+BG225,Smolyan (statistical region 2005),,
+BG226,Kardzhali (statistical region 2005),,
+BG23,Yugoiztochen (statistical region 2005),,
+BG231,Burgas (statistical region 2005),,
+BG232,Sliven (statistical region 2005),,
+BG233,Yambol (statistical region 2005),,
 BG3,Severna i Yugoiztochna Bulgaria,NUTS1,BG
 BG31,Severozapaden,NUTS2,BG3
 BG311,Vidin,NUTS3,BG31
@@ -322,63 +330,63 @@ BGXXX,Not regionalised/Unknown NUTS 3,NUTS3,BGXX
 BGZ,Extra-Regio NUTS 1,NUTS1,BG
 BGZZ,Extra-Regio NUTS 2,NUTS2,BGZ
 BGZZZ,Extra-Regio NUTS 3,NUTS3,BGZZ
-BG_CAP,Sofia,NUTS3,BG_CA
+BG_CAP,Sofia,,
 BH,Bahrain,country,
 BI,Burundi,country,
-BIS,Bank for International Settlements,NUTS1,BI
-BI_CAP,Gitega,NUTS3,BI_CA
+BIS,Bank for International Settlements,,
+BI_CAP,Gitega,,
 BJ,Benin,country,
-BJ_DEL,Cotonou (seat of government),NUTS3,BJ_DE
+BJ_DEL,Cotonou (seat of government),,
 BL,Saint Barthélemy,country,
-BLEU,Belgo-Luxembourg Economic Union,NUTS2,BLE
+BLEU,Belgo-Luxembourg Economic Union,,
 BM,Bermuda,country,
 BN,Brunei Darussalam,country,
 BO,Bolivia,country,
-BO_CAP,La Paz,NUTS3,BO_CA
+BO_CAP,La Paz,,
 BQ,"Bonaire, Saint Eustatius and Saba",country,
 BR,Brazil,country,
-BRIC,BRIC countries,NUTS2,BRI
-BRICS,BRICS countries,NUTS3,BRIC
-BR_CAP,Brasilia,NUTS3,BR_CA
+BRIC,BRIC countries,,
+BRICS,BRICS countries,,
+BR_CAP,Brasilia,,
 BS,Bahamas,country,
 BT,Bhutan,country,
 BV,Bouvet Island,country,
 BW,Botswana,country,
-BW_CAP,Gaborone,NUTS3,BW_CA
+BW_CAP,Gaborone,,
 BY,Belarus,country,
-BY_CAP,Minsk,NUTS3,BY_CA
+BY_CAP,Minsk,,
 BZ,Belize,country,
-BZ_DEL,Belize City,NUTS3,BZ_DE
+BZ_DEL,Belize City,,
 CA,Canada,country,
-CARICOM,Caribbean Community,NUTS3,CARICO
-CA_CAP,Ottawa,NUTS3,CA_CA
-CA_US,Canada and United States,NUTS3,CA_U
+CARICOM,Caribbean Community,,
+CA_CAP,Ottawa,,
+CA_US,Canada and United States,,
 CC,Cocos (Keeling) Islands,country,
-CC3_07,Candidate countries in 2007 (3 countries),NUTS3,CC3_0
-CC4_05,Candidate countries in 2005 (4 countries),NUTS3,CC4_0
-CC4_10,Candidate countries in 2010 (4 countries),NUTS3,CC4_1
-CC5_06,Candidate countries in 2006 (5 countries),NUTS3,CC5_0
-CC5_10,Candidate countries in 2010 (5 countries),NUTS3,CC5_1
-CC5_13,Candidate countries in 2013 (5 countries),NUTS3,CC5_1
-CC5_13_FOR_X_IS,Candidate countries in 2013 (5 countries) except reporting country and Iceland,NUTS3,CC5_13_FOR_X_I
-CC5_15,Candidate countries from 2015 (5 countries),NUTS3,CC5_1
-CC5_15_FOR,Candidate countries from 2015 (5 countries) except reporting country,NUTS3,CC5_15_FO
-CC6_12,Candidate countries in 2012 (6 countries),NUTS3,CC6_1
-CC6_14,Candidate countries in 2014 (6 countries),NUTS3,CC6_1
-CC7_22,Candidate countries from 2022 (7 countries),NUTS3,CC7_2
-CC7_22_FOR,Candidate countries from 2022 (7 countries) except reporting country,NUTS3,CC7_22_FO
-CC8_22,Candidate countries from 2022 (8 countries),NUTS3,CC8_2
-CC8_22_FOR,Candidate countries from 2022 (8 countries) except reporting country,NUTS3,CC8_22_FO
-CC9_23,Candidate countries from 2023 (9 countries),NUTS3,CC9_2
-CC9_23_FOR,Candidate countries from 2023 (9 countries) except reporting country,NUTS3,CC9_23_FO
-CC_V,Candidate countries (aggregate changing according to the context),NUTS2,CC_
+CC3_07,Candidate countries in 2007 (3 countries),,
+CC4_05,Candidate countries in 2005 (4 countries),,
+CC4_10,Candidate countries in 2010 (4 countries),,
+CC5_06,Candidate countries in 2006 (5 countries),,
+CC5_10,Candidate countries in 2010 (5 countries),,
+CC5_13,Candidate countries in 2013 (5 countries),,
+CC5_13_FOR_X_IS,Candidate countries in 2013 (5 countries) except reporting country and Iceland,,
+CC5_15,Candidate countries from 2015 (5 countries),,
+CC5_15_FOR,Candidate countries from 2015 (5 countries) except reporting country,,
+CC6_12,Candidate countries in 2012 (6 countries),,
+CC6_14,Candidate countries in 2014 (6 countries),,
+CC7_22,Candidate countries from 2022 (7 countries),,
+CC7_22_FOR,Candidate countries from 2022 (7 countries) except reporting country,,
+CC8_22,Candidate countries from 2022 (8 countries),,
+CC8_22_FOR,Candidate countries from 2022 (8 countries) except reporting country,,
+CC9_23,Candidate countries from 2023 (9 countries),,
+CC9_23_FOR,Candidate countries from 2023 (9 countries) except reporting country,,
+CC_V,Candidate countries (aggregate changing according to the context),,
 CD,Democratic Republic of the Congo,country,
-CD_CAP,Kinshasa,NUTS3,CD_CA
-CEMAC,Central African Economic and Monetary Community,NUTS3,CEMA
+CD_CAP,Kinshasa,,
+CEMAC,Central African Economic and Monetary Community,,
 CF,Central African Republic,country,
-CF_CAP,Bangui,NUTS3,CF_CA
+CF_CAP,Bangui,,
 CG,Congo,country,
-CG_CAP,Brazzaville,NUTS3,CG_CA
+CG_CAP,Brazzaville,,
 CH,Switzerland,country,
 CH0,Schweiz/Suisse/Svizzera,NUTS1,CH
 CH01,Région lémanique,NUTS2,CH0
@@ -414,47 +422,47 @@ CH065,Nidwalden,NUTS3,CH06
 CH066,Zug,NUTS3,CH06
 CH07,Ticino,NUTS2,CH0
 CH070,Ticino,NUTS3,CH07
-CHUNNEL,Channel Tunnel,NUTS3,CHUNNE
+CHUNNEL,Channel Tunnel,,
 CHX,Not regionalised/Unknown level 1,NUTS1,CH
 CHXX,Not regionalised/Unknown level 2,NUTS2,CHX
 CHXXX,Not regionalised/Unknown level 3,NUTS3,CHXX
 CHZ,Extra-Regio level 1,NUTS1,CH
 CHZZ,Extra-Regio level 2,NUTS2,CHZ
 CHZZZ,Extra-Regio level 3,NUTS3,CHZZ
-CH_CAP,Bern (Berne),NUTS3,CH_CA
-CH_DEL,Genève,NUTS3,CH_DE
-CH_LI,Switzerland and Liechtenstein,NUTS3,CH_L
+CH_CAP,Bern (Berne),,
+CH_DEL,Genève,,
+CH_LI,Switzerland and Liechtenstein,,
 CI,Côte d’Ivoire,country,
-CIS,Commonwealth of Independent States (Former Soviet Union except BAL),NUTS1,CI
-CI_DEL,Abidjan (seat of government),NUTS3,CI_DE
+CIS,Commonwealth of Independent States (Former Soviet Union except BAL),,
+CI_DEL,Abidjan (seat of government),,
 CK,Cook Islands,country,
 CL,Chile,country,
-CL_CAP,Santiago,NUTS3,CL_CA
+CL_CAP,Santiago,,
 CM,Cameroon,country,
-CM_CAP,Yaoundé,NUTS3,CM_CA
+CM_CAP,Yaoundé,,
 CN,China,country,
-CN_CAP,Beijing,NUTS3,CN_CA
-CN_X_HK,China except Hong Kong,NUTS3,CN_X_H
+CN_CAP,Beijing,,
+CN_X_HK,China except Hong Kong,country,
 CO,Colombia,country,
-COMESA,Common Market for Eastern and Southern Africa,NUTS3,COMES
-COMM,European Commission,NUTS2,COM
-CONS,Council of the European Union,NUTS2,CON
-CONTROL,Controlled by the reporting country,NUTS3,CONTRO
-COR,European Committee of the Regions (CoR),NUTS1,CO
-COUNCIL,European Council,NUTS3,COUNCI
-CO_CAP,Bogota,NUTS3,CO_CA
+COMESA,Common Market for Eastern and Southern Africa,,
+COMM,European Commission,,
+CONS,Council of the European Union,,
+CONTROL,Controlled by the reporting country,,
+COR,European Committee of the Regions (CoR),,
+COUNCIL,European Council,,
+CO_CAP,Bogota,,
 CP,Clipperton,country,
-CPC1,Candidate and potential candidate countries except Türkiye and Kosovo* (under United Nations Security Council Resolution 1244/99),NUTS2,CPC
+CPC1,Candidate and potential candidate countries except Türkiye and Kosovo* (under United Nations Security Council Resolution 1244/99),,
 CQ,Sark,country,
 CR,Costa Rica,country,
-CRB,Caribbean,NUTS1,CR
-CRB_OTH,Other Caribbean countries,NUTS3,CRB_OT
-CR_CAP,San Jose,NUTS3,CR_CA
+CRB,Caribbean,,
+CRB_OTH,Other Caribbean countries,,
+CR_CAP,San Jose,,
 CU,Cuba,country,
-CURIA,Court of Justice of the European Union,NUTS3,CURI
-CU_CAP,La Habana (Havana),NUTS3,CU_CA
+CURIA,Court of Justice of the European Union,,
+CU_CAP,La Habana (Havana),,
 CV,Cabo Verde,country,
-CV_CAP,Praia,NUTS3,CV_CA
+CV_CAP,Praia,,
 CW,Curaçao,country,
 CX,Christmas Island,country,
 CY,Cyprus,country,
@@ -467,7 +475,7 @@ CYXXX,Not regionalised/Unknown NUTS 3,NUTS3,CYXX
 CYZ,Extra-Regio NUTS 1,NUTS1,CY
 CYZZ,Extra-Regio NUTS 2,NUTS2,CYZ
 CYZZZ,Extra-Regio NUTS 3,NUTS3,CYZZ
-CY_CAP,Lefkosia,NUTS3,CY_CA
+CY_CAP,Lefkosia,,
 CZ,Czechia,country,
 CZ0,Česko,NUTS1,CZ
 CZ01,Praha,NUTS2,CZ0
@@ -485,6 +493,8 @@ CZ051,Liberecký kraj,NUTS3,CZ05
 CZ052,Královéhradecký kraj,NUTS3,CZ05
 CZ053,Pardubický kraj,NUTS3,CZ05
 CZ06,Jihovýchod,NUTS2,CZ0
+CZ061,Vysocina (NUTS 2003),,
+CZ062,Jihomoravský (NUTS 2003),,
 CZ063,Kraj Vysočina,NUTS3,CZ06
 CZ064,Jihomoravský kraj,NUTS3,CZ06
 CZ07,Střední Morava,NUTS2,CZ0
@@ -498,12 +508,12 @@ CZXXX,Not regionalised/Unknown NUTS 3,NUTS3,CZXX
 CZZ,Extra-Regio NUTS 1,NUTS1,CZ
 CZZZ,Extra-Regio NUTS 2,NUTS2,CZZ
 CZZZZ,Extra-Regio NUTS 3,NUTS3,CZZZ
-CZ_CAP,Praha,NUTS3,CZ_CA
-CZ_CEC,Cechy,NUTS3,CZ_CE
-CZ_MOR,Morava,NUTS3,CZ_MO
-CZ_SK,Czechoslovakia,NUTS3,CZ_S
-DAC,Development assistance committee (DAC),NUTS1,DA
-DAE,Dynamic Asian economies (DAEs),NUTS1,DA
+CZ_CAP,Praha,,
+CZ_CEC,Cechy,,
+CZ_MOR,Morava,,
+CZ_SK,Czechoslovakia,,
+DAC,Development assistance committee (DAC),,
+DAE,Dynamic Asian economies (DAEs),,
 DE,Germany,country,
 DE1,Baden-Württemberg,NUTS1,DE
 DE11,Stuttgart,NUTS2,DE1
@@ -554,11 +564,11 @@ DE146,Biberach,NUTS3,DE14
 DE147,Bodenseekreis,NUTS3,DE14
 DE148,Ravensburg,NUTS3,DE14
 DE149,Sigmaringen,NUTS3,DE14
-DE1BA,Baden,NUTS3,DE1B
-DE1WU,Württemberg,NUTS3,DE1W
-DE1_E,Baden-Württemberg East,NUTS3,DE1_
-DE1_N_W,Baden-Württemberg North West,NUTS3,DE1_N_
-DE1_S_W,Baden-Württemberg South West,NUTS3,DE1_S_
+DE1BA,Baden,,
+DE1WU,Württemberg,,
+DE1_E,Baden-Württemberg East,,
+DE1_N_W,Baden-Württemberg North West,,
+DE1_S_W,Baden-Württemberg South West,,
 DE2,Bayern,NUTS1,DE
 DE21,Oberbayern,NUTS2,DE2
 DE211,"Ingolstadt, Kreisfreie Stadt",NUTS3,DE21
@@ -663,14 +673,16 @@ DE27B,Ostallgäu,NUTS3,DE27
 DE27C,Unterallgäu,NUTS3,DE27
 DE27D,Donau-Ries,NUTS3,DE27
 DE27E,Oberallgäu,NUTS3,DE27
-DE2FRA,Franken,NUTS3,DE2FR
-DE2_E,Bayern - East,NUTS3,DE2_
-DE2_N,Bayern - North,NUTS3,DE2_
-DE2_S,Bayern - South,NUTS3,DE2_
+DE2FRA,Franken,,
+DE2_E,Bayern - East,,
+DE2_N,Bayern - North,,
+DE2_S,Bayern - South,,
 DE3,Berlin,NUTS1,DE
 DE30,Berlin,NUTS2,DE3
 DE300,Berlin,NUTS3,DE30
-DE3_5_6,"Berlin, Bremen, Hamburg",NUTS3,DE3_5_
+DE301,"Berlin-West, Stadt (NUTS 1999)",,
+DE302,"Berlin-Ost, Stadt (NUTS 1999)",,
+DE3_5_6,"Berlin, Bremen, Hamburg",,
 DE4,Brandenburg,NUTS1,DE
 DE40,Brandenburg,NUTS2,DE4
 DE401,"Brandenburg an der Havel, Kreisfreie Stadt",NUTS3,DE40
@@ -691,6 +703,26 @@ DE40F,Prignitz,NUTS3,DE40
 DE40G,Spree-Neiße,NUTS3,DE40
 DE40H,Teltow-Fläming,NUTS3,DE40
 DE40I,Uckermark,NUTS3,DE40
+DE41,Brandenburg - Nordost (NUTS 2006),,
+DE411,"Frankfurt (Oder), Kreisfreie Stadt (NUTS 2006)",,
+DE412,Barnim (NUTS 2006),,
+DE413,Märkisch-Oderland (NUTS 2006),,
+DE414,Oberhavel (NUTS 2006),,
+DE415,Oder-Spree (NUTS 2006),,
+DE416,Ostprignitz-Ruppin (NUTS 2006),,
+DE417,Prignitz (NUTS 2006),,
+DE418,Uckermark (NUTS 2006),,
+DE42,Brandenburg - Südwest (NUTS 2006),,
+DE421,"Brandenburg an der Havel, Kreisfreie Stadt (NUTS 2006)",,
+DE422,"Cottbus, Kreisfreie Stadt (NUTS 2006)",,
+DE423,"Potsdam, Kreisfreie Stadt (NUTS 2006)",,
+DE424,Dahme-Spreewald (NUTS 2006),,
+DE425,Elbe-Elster (NUTS 2006),,
+DE426,Havelland (NUTS 2006),,
+DE427,Oberspreewald-Lausitz (NUTS 2006),,
+DE428,Potsdam-Mittelmark (NUTS 2006),,
+DE429,Spree-Neiße (NUTS 2006),,
+DE42A,Teltow-Fläming (NUTS 2006),,
 DE5,Bremen,NUTS1,DE
 DE50,Bremen,NUTS2,DE5
 DE501,"Bremen, Kreisfreie Stadt",NUTS3,DE50
@@ -728,14 +760,30 @@ DE734,"Kassel, Landkreis",NUTS3,DE73
 DE735,Schwalm-Eder-Kreis,NUTS3,DE73
 DE736,Waldeck-Frankenberg,NUTS3,DE73
 DE737,Werra-Meißner-Kreis,NUTS3,DE73
-DE7HBG,Hessische Bergstraße,NUTS3,DE7HB
-DE7RHE,Rheingau,NUTS3,DE7RH
-DE7_N,Hessen - North,NUTS3,DE7_
-DE7_S,Hessen - South,NUTS3,DE7_
+DE7HBG,Hessische Bergstraße,,
+DE7RHE,Rheingau,,
+DE7_N,Hessen - North,,
+DE7_S,Hessen - South,,
 DE8,Mecklenburg-Vorpommern,NUTS1,DE
 DE80,Mecklenburg-Vorpommern,NUTS2,DE8
+DE801,"Greifswald, Kreisfreie Stadt (NUTS 2010)",,
+DE802,"Neubrandenburg, Kreisfreie Stadt (NUTS 2010)",,
 DE803,"Rostock, Kreisfreie Stadt",NUTS3,DE80
 DE804,"Schwerin, Kreisfreie Stadt",NUTS3,DE80
+DE805,"Stralsund, Kreisfreie Stadt (NUTS 2010)",,
+DE806,"Wismar, Kreisfreie Stadt (NUTS 2010)",,
+DE807,Bad Doberan (NUTS 2010),,
+DE808,Demmin (NUTS 2010),,
+DE809,Güstrow (NUTS 2010),,
+DE80A,Ludwigslust (NUTS 2010),,
+DE80B,Mecklenburg-Strelitz (NUTS 2010),,
+DE80C,Müritz (NUTS 2010),,
+DE80D,Nordvorpommern (NUTS 2010),,
+DE80E,Nordwestmecklenburg (NUTS 2010),,
+DE80F,Ostvorpommern (NUTS 2010),,
+DE80G,Parchim (NUTS 2010),,
+DE80H,Rügen (NUTS 2010),,
+DE80I,Uecker-Randow (NUTS 2010),,
 DE80J,Mecklenburgische Seenplatte,NUTS3,DE80
 DE80K,Landkreis Rostock,NUTS3,DE80
 DE80L,Vorpommern-Rügen,NUTS3,DE80
@@ -748,15 +796,19 @@ DE911,"Braunschweig, Kreisfreie Stadt",NUTS3,DE91
 DE912,"Salzgitter, Kreisfreie Stadt",NUTS3,DE91
 DE913,"Wolfsburg, Kreisfreie Stadt",NUTS3,DE91
 DE914,Gifhorn,NUTS3,DE91
+DE915,Göttingen (NUTS 2013),,
 DE916,Goslar,NUTS3,DE91
 DE917,Helmstedt,NUTS3,DE91
 DE918,Northeim,NUTS3,DE91
+DE919,Osterode am Harz (NUTS 2013),,
 DE91A,Peine,NUTS3,DE91
 DE91B,Wolfenbüttel,NUTS3,DE91
 DE91C,Göttingen,NUTS3,DE91
 DE92,Hannover,NUTS2,DE9
+DE921,"Hannover, Kreisfreie Stadt (NUTS 1999)",,
 DE922,Diepholz,NUTS3,DE92
 DE923,Hameln-Pyrmont,NUTS3,DE92
+DE924,"Hannover, Landkreis (NUTS 1999)",,
 DE925,Hildesheim,NUTS3,DE92
 DE926,Holzminden,NUTS3,DE92
 DE927,Nienburg (Weser),NUTS3,DE92
@@ -792,11 +844,11 @@ DE94E,"Osnabrück, Landkreis",NUTS3,DE94
 DE94F,Vechta,NUTS3,DE94
 DE94G,Wesermarsch,NUTS3,DE94
 DE94H,Wittmund,NUTS3,DE94
-DE9_N,Niedersachsen - North,NUTS3,DE9_
-DE9_S_E,Niedersachsen - South East,NUTS3,DE9_S_
-DE9_W,Niedersachsen - West,NUTS3,DE9_
+DE9_N,Niedersachsen - North,,
+DE9_S_E,Niedersachsen - South East,,
+DE9_W,Niedersachsen - West,,
 DEA,Nordrhein-Westfalen,NUTS1,DE
-DEA-C,"Nordrhein-Westfalen, Rheinland-Pfalz and Saarland",NUTS3,DEA-
+DEA-C,"Nordrhein-Westfalen, Rheinland-Pfalz and Saarland",,
 DEA1,Düsseldorf,NUTS2,DEA
 DEA11,"Düsseldorf, Kreisfreie Stadt",NUTS3,DEA1
 DEA12,"Duisburg, Kreisfreie Stadt",NUTS3,DEA1
@@ -814,9 +866,11 @@ DEA1D,Rhein-Kreis Neuss,NUTS3,DEA1
 DEA1E,Viersen,NUTS3,DEA1
 DEA1F,Wesel,NUTS3,DEA1
 DEA2,Köln,NUTS2,DEA
+DEA21,"Aachen, Kreisfreie Stadt (NUTS 2006)",,
 DEA22,"Bonn, Kreisfreie Stadt",NUTS3,DEA2
 DEA23,"Köln, Kreisfreie Stadt",NUTS3,DEA2
 DEA24,"Leverkusen, Kreisfreie Stadt",NUTS3,DEA2
+DEA25,"Aachen, Kreis (NUTS 2006)",,
 DEA26,Düren,NUTS3,DEA2
 DEA27,Rhein-Erft-Kreis,NUTS3,DEA2
 DEA28,Euskirchen,NUTS3,DEA2
@@ -855,10 +909,10 @@ DEA59,Olpe,NUTS3,DEA5
 DEA5A,Siegen-Wittgenstein,NUTS3,DEA5
 DEA5B,Soest,NUTS3,DEA5
 DEA5C,Unna,NUTS3,DEA5
-DEA_E,Nordrhein-Westfalen - East,NUTS3,DEA_
-DEA_N,Nordrhein-Westfalen - North,NUTS3,DEA_
-DEA_RUHR,Ruhrgebiet,NUTS3,DEA_RUH
-DEA_S_W,Nordrhein-Westfalen - South West,NUTS3,DEA_S_
+DEA_E,Nordrhein-Westfalen - East,,
+DEA_N,Nordrhein-Westfalen - North,,
+DEA_RUHR,Ruhrgebiet,,
+DEA_S_W,Nordrhein-Westfalen - South West,,
 DEB,Rheinland-Pfalz,NUTS1,DE
 DEB1,Koblenz,NUTS2,DEB
 DEB11,"Koblenz, Kreisfreie Stadt",NUTS3,DEB1
@@ -866,8 +920,10 @@ DEB12,Ahrweiler,NUTS3,DEB1
 DEB13,Altenkirchen (Westerwald),NUTS3,DEB1
 DEB14,Bad Kreuznach,NUTS3,DEB1
 DEB15,Birkenfeld,NUTS3,DEB1
+DEB16,Cochem-Zell (NUTS 2013),,
 DEB17,Mayen-Koblenz,NUTS3,DEB1
 DEB18,Neuwied,NUTS3,DEB1
+DEB19,Rhein-Hunsrück-Kreis (NUTS 2013),,
 DEB1A,Rhein-Lahn-Kreis,NUTS3,DEB1
 DEB1B,Westerwaldkreis,NUTS3,DEB1
 DEB1C,Cochem-Zell,NUTS3,DEB1
@@ -899,14 +955,14 @@ DEB3H,Südliche Weinstraße,NUTS3,DEB3
 DEB3I,Rhein-Pfalz-Kreis,NUTS3,DEB3
 DEB3J,Mainz-Bingen,NUTS3,DEB3
 DEB3K,Südwestpfalz,NUTS3,DEB3
-DEB_AHR,Ahr,NUTS3,DEB_AH
-DEB_MSR,Mosel-Saar-Ruwer,NUTS3,DEB_MS
-DEB_MTR,Mittelrhein,NUTS3,DEB_MT
-DEB_N,Rheinland-Pfalz - North,NUTS3,DEB_
-DEB_NAH,Nahe,NUTS3,DEB_NA
-DEB_RHE,Rheinhessen,NUTS3,DEB_RH
-DEB_RPF,Rhein-Pfalz,NUTS3,DEB_RP
-DEB_S,Rheinland-Pfalz - South,NUTS3,DEB_
+DEB_AHR,Ahr,,
+DEB_MSR,Mosel-Saar-Ruwer,,
+DEB_MTR,Mittelrhein,,
+DEB_N,Rheinland-Pfalz - North,,
+DEB_NAH,Nahe,,
+DEB_RHE,Rheinhessen,,
+DEB_RPF,Rhein-Pfalz,,
+DEB_S,Rheinland-Pfalz - South,,
 DEC,Saarland,NUTS1,DE
 DEC0,Saarland,NUTS2,DEC
 DEC01,Regionalverband Saarbrücken,NUTS3,DEC0
@@ -916,12 +972,42 @@ DEC04,Saarlouis,NUTS3,DEC0
 DEC05,Saarpfalz-Kreis,NUTS3,DEC0
 DEC06,St. Wendel,NUTS3,DEC0
 DED,Sachsen,NUTS1,DE
+DED1,Chemnitz (NUTS 2006),,
+DED11,"Chemnitz, Kreisfreie Stadt (NUTS 2006)",,
+DED12,"Plauen, Kreisfreie Stadt (NUTS 2006)",,
+DED13,"Zwickau, Kreisfreie Stadt (NUTS 2006)",,
+DED14,Annaberg (NUTS 2006),,
+DED15,Chemnitzer Land (NUTS 2006),,
+DED16,Freiberg (NUTS 2006),,
+DED17,Vogtlandkreis (NUTS 2006),,
+DED18,Mittlerer Erzgebirgskreis (NUTS 2006),,
+DED19,Mittweida (NUTS 2006),,
+DED1A,Stollberg (NUTS 2006),,
+DED1B,Aue-Schwarzenberg (NUTS 2006),,
+DED1C,Zwickauer Land (NUTS 2006),,
 DED2,Dresden,NUTS2,DED
 DED21,"Dresden, Kreisfreie Stadt",NUTS3,DED2
+DED22,"Görlitz, Kreisfreie Stadt (NUTS 2006)",,
+DED23,"Hoyerswerda, Kreisfreie Stadt (NUTS 2006)",,
+DED24,Bautzen (NUTS 2006),,
+DED25,Meißen (NUTS 2006),,
+DED26,Niederschlesischer Oberlausitzkreis (NUTS 2006),,
+DED27,Riesa-Großenhain (NUTS 2006),,
+DED28,Löbau-Zittau (NUTS 2006),,
+DED29,Sächsische Schweiz (NUTS 2006),,
+DED2A,Weißeritzkreis (NUTS 2006),,
+DED2B,Kamenz (NUTS 2006),,
 DED2C,Bautzen,NUTS3,DED2
 DED2D,Görlitz,NUTS3,DED2
 DED2E,Meißen,NUTS3,DED2
 DED2F,Sächsische Schweiz-Osterzgebirge,NUTS3,DED2
+DED3,Leipzig (NUTS 2006),,
+DED31,"Leipzig, Kreisfreie Stadt (NUTS 2006)",,
+DED32,Delitzsch (NUTS 2006),,
+DED33,Döbeln (NUTS 2006),,
+DED34,Leipziger Land (NUTS 2006),,
+DED35,Muldentalkreis (NUTS 2006),,
+DED36,Torgau-Oschatz (NUTS 2006),,
 DED4,Chemnitz,NUTS2,DED
 DED41,"Chemnitz, Kreisfreie Stadt",NUTS3,DED4
 DED42,Erzgebirgskreis,NUTS3,DED4
@@ -948,7 +1034,31 @@ DEE0B,Saalekreis,NUTS3,DEE0
 DEE0C,Salzlandkreis,NUTS3,DEE0
 DEE0D,Stendal,NUTS3,DEE0
 DEE0E,Wittenberg,NUTS3,DEE0
-DEE_SAU,Saale-Unstrut,NUTS3,DEE_SA
+DEE1,Dessau (NUTS 1999),,
+DEE11,"Dessau, Kreisfreie Stadt (NUTS 2003)",,
+DEE12,Anhalt-Zerbst (NUTS 2003),,
+DEE13,Bernburg (NUTS 2003),,
+DEE14,Bitterfeld (NUTS 2003),,
+DEE15,Köthen (NUTS 2003),,
+DEE16,Wittenberg (NUTS 2003),,
+DEE2,Halle (NUTS 2003),,
+DEE22,Burgenlandkreis (NUTS 2003),,
+DEE23,Mansfelder Land (NUTS 2003),,
+DEE24,Merseburg-Querfurt (NUTS 2003),,
+DEE25,Saalkreis (NUTS 2003),,
+DEE26,Sangerhausen (NUTS 2003),,
+DEE27,Weißenfels (NUTS 2003),,
+DEE3,Magdeburg (NUTS 2003),,
+DEE32,Aschersleben-Staßfurt (NUTS 2003),,
+DEE33,Bördekreis (NUTS 2003),,
+DEE34,Halberstadt (NUTS 2003),,
+DEE35,Jerichower Land (NUTS 2003),,
+DEE36,Ohrekreis (NUTS 2003),,
+DEE37,Stendal (NUTS 2003),,
+DEE38,Quedlinburg (NUTS 2003),,
+DEE39,Schönebeck (NUTS 2003),,
+DEE3A,Wernigerode (NUTS 2003),,
+DEE_SAU,Saale-Unstrut,,
 DEF,Schleswig-Holstein,NUTS1,DE
 DEF0,Schleswig-Holstein,NUTS2,DEF
 DEF01,"Flensburg, Kreisfreie Stadt",NUTS3,DEF0
@@ -971,41 +1081,64 @@ DEG0,Thüringen,NUTS2,DEG
 DEG01,"Erfurt, Kreisfreie Stadt",NUTS3,DEG0
 DEG02,"Gera, Kreisfreie Stadt",NUTS3,DEG0
 DEG03,"Jena, Kreisfreie Stadt",NUTS3,DEG0
+DEG04,"Suhl, Kreisfreie Stadt (NUTS 2021)",,
 DEG05,"Weimar, Kreisfreie Stadt",NUTS3,DEG0
 DEG06,Eichsfeld,NUTS3,DEG0
 DEG07,Nordhausen,NUTS3,DEG0
 DEG09,Unstrut-Hainich-Kreis,NUTS3,DEG0
 DEG0A,Kyffhäuserkreis,NUTS3,DEG0
+DEG0B,Schmalkalden-Meiningen (NUTS 2021),,
 DEG0C,Gotha,NUTS3,DEG0
 DEG0D,Sömmerda,NUTS3,DEG0
 DEG0E,Hildburghausen,NUTS3,DEG0
+DEG0F,Ilm-Kreis (NUTS 2021),,
 DEG0G,Weimarer Land,NUTS3,DEG0
+DEG0H,Sonneberg (NUTS 2021),,
+DEG0I,Saalfeld-Rudolstadt (NUTS 2021),,
 DEG0J,Saale-Holzland-Kreis,NUTS3,DEG0
 DEG0K,Saale-Orla-Kreis,NUTS3,DEG0
 DEG0L,Greiz,NUTS3,DEG0
 DEG0M,Altenburger Land,NUTS3,DEG0
+DEG0N,"Eisenach, Kreisfreie Stadt (NUTS 2021)",,
+DEG0P,Wartburgkreis (NUTS 2021),,
 DEG0Q,Schmalkalden-Meiningen,NUTS3,DEG0
 DEG0R,Wartburgkreis,NUTS3,DEG0
 DEG0S,"Suhl, Kreisfreie Stadt",NUTS3,DEG0
 DEG0T,Ilm-Kreis,NUTS3,DEG0
 DEG0U,Saalfeld-Rudolstadt,NUTS3,DEG0
 DEG0V,Sonneberg,NUTS3,DEG0
-DEW,Federal Republic of Germany (former territory of the FRG only),NUTS1,DE
+DEW,Federal Republic of Germany (former territory of the FRG only),,
 DEX,Not regionalised/Unknown NUTS 1,NUTS1,DE
 DEXX,Not regionalised/Unknown NUTS 2,NUTS2,DEX
 DEXXX,Not regionalised/Unknown NUTS 3,NUTS3,DEXX
 DEZ,Extra-Regio NUTS 1,NUTS1,DE
 DEZZ,Extra-Regio NUTS 2,NUTS2,DEZ
 DEZZZ,Extra-Regio NUTS 3,NUTS3,DEZZ
-DE_CAP,Berlin,NUTS3,DE_CA
-DE_DEL1,Karlsruhe,NUTS3,DE_DEL
-DE_DEL2,München,NUTS3,DE_DEL
-DE_DEL3,Bonn,NUTS3,DE_DEL
-DE_TOT,Germany including former GDR,NUTS3,DE_TO
+DE_CAP,Berlin,,
+DE_DEL1,Karlsruhe,,
+DE_DEL2,München,,
+DE_DEL3,Bonn,,
+DE_TOT,Germany including former GDR,,
 DJ,Djibouti,country,
-DJ_CAP,Djibouti,NUTS3,DJ_CA
+DJ_CAP,Djibouti,,
 DK,Denmark,country,
 DK0,Danmark,NUTS1,DK
+DK001,København og Frederiksberg Kommuner (NUTS 1999),,
+DK001-004,"København og Frederiksberg Kommuner, Roskilde amt, Københavns amt, Frederiksborg amt (NUTS 1999)",,
+DK002,Københavns amt (NUTS 1999),,
+DK003,Frederiksborg amt (NUTS 1999),,
+DK004,Roskilde amt (NUTS 1999),,
+DK005,Vestsjællands amt (NUTS 1999),,
+DK006,Storstrøms amt (NUTS 1999),,
+DK007,Bornholms amt (NUTS 1999),,
+DK008,Fyns amt (NUTS 1999),,
+DK009,Sønderjyllands amt (NUTS 1999),,
+DK00A,Ribe amt (NUTS 1999),,
+DK00B,Vejle amt (NUTS 1999),,
+DK00C,Ringkøbing amt (NUTS 1999),,
+DK00D,Århus amt (NUTS 1999),,
+DK00E,Viborg amt (NUTS 1999),,
+DK00F,Nordjyllands amt (NUTS 1999),,
 DK01,Hovedstaden,NUTS2,DK0
 DK011,Byen København,NUTS3,DK01
 DK012,Københavns omegn,NUTS3,DK01
@@ -1028,79 +1161,134 @@ DKXXX,Not regionalised/Unknown NUTS 3,NUTS3,DKXX
 DKZ,Extra-Regio NUTS 1,NUTS1,DK
 DKZZ,Extra-Regio NUTS 2,NUTS2,DKZ
 DKZZZ,Extra-Regio NUTS 3,NUTS3,DKZZ
-DK_CAP,København,NUTS3,DK_CA
+DK_CAP,København,,
 DM,Dominica,country,
 DO,Dominican Republic,country,
-DOM,Domestic country,NUTS1,DO
-DOM_FOR,Domestic and foreign country,NUTS3,DOM_FO
-DO_CAP,Santo Domingo (Dominican Republic),NUTS3,DO_CA
+DOM,Domestic country,,
+DOM_FOR,Domestic and foreign country,,
+DO_CAP,Santo Domingo (Dominican Republic),,
 DZ,Algeria,country,
-DZ_CAP,Al-Jazair (Algiers),NUTS3,DZ_CA
-EA,"Euro area (EA11-1999, EA12-2001, EA13-2007, EA15-2008, EA16-2009, EA17-2011, EA18-2014, EA19-2015, EA20-2023, EA21-2026)",country,
-EA11,Euro area - 11 countries (1999-2000),NUTS2,EA1
-EA12,Euro area - 12 countries (2001-2006),NUTS2,EA1
-EA13,Euro area - 13 countries (2007),NUTS2,EA1
-EA15,Euro area - 15 countries (2008),NUTS2,EA1
-EA16,Euro area - 16 countries (2009-2010),NUTS2,EA1
-EA17,Euro area - 17 countries (2011-2013),NUTS2,EA1
-EA18,Euro area - 18 countries (2014),NUTS2,EA1
-EA19,Euro area - 19 countries  (2015-2022),NUTS2,EA1
-EA20,Euro area – 20 countries (2023-2025),NUTS2,EA2
-EA21,Euro area – 21 countries (from 2026),NUTS2,EA2
-EASA,European Aviation Safety Agency (EASA),NUTS2,EAS
-EBRD,European Bank for Reconstruction and Development,NUTS2,EBR
+DZ_CAP,Al-Jazair (Algiers),,
+EA,"Euro area (EA11-1999, EA12-2001, EA13-2007, EA15-2008, EA16-2009, EA17-2011, EA18-2014, EA19-2015, EA20-2023, EA21-2026)",,
+EA11,Euro area - 11 countries (1999-2000),,
+EA12,Euro area - 12 countries (2001-2006),,
+EA13,Euro area - 13 countries (2007),,
+EA15,Euro area - 15 countries (2008),,
+EA16,Euro area - 16 countries (2009-2010),,
+EA17,Euro area - 17 countries (2011-2013),,
+EA18,Euro area - 18 countries (2014),,
+EA19,Euro area - 19 countries  (2015-2022),,
+EA20,Euro area – 20 countries (2023-2025),,
+EA21,Euro area – 21 countries (from 2026),,
+EASA,European Aviation Safety Agency (EASA),,
+EBRD,European Bank for Reconstruction and Development,,
 EC,Ecuador,country,
-ECA,European Court of Auditors,NUTS1,EC
-ECB,European Central Bank (ECB),NUTS1,EC
-ECCAS,Economic Community of Central African States,NUTS3,ECCA
-ECOWAS,Economic Community of West African States,NUTS3,ECOWA
-ECSC,European Coal and Steel Community,NUTS2,ECS
-EC_CAP,Quito,NUTS3,EC_CA
-EDF,European Development Fund,NUTS1,ED
+ECA,European Court of Auditors,,
+ECB,European Central Bank (ECB),,
+ECCAS,Economic Community of Central African States,,
+ECOWAS,Economic Community of West African States,,
+ECSC,European Coal and Steel Community,,
+EC_CAP,Quito,,
+EDF,European Development Fund,,
 EE,Estonia,country,
 EE0,Eesti,NUTS1,EE
 EE00,Eesti,NUTS2,EE0
 EE001,Põhja-Eesti,NUTS3,EE00
 EE004,Lääne-Eesti,NUTS3,EE00
+EE006,Kesk-Eesti (NUTS 2016),,
+EE007,Kirde-Eesti (NUTS 2016),,
 EE008,Lõuna-Eesti,NUTS3,EE00
 EE009,Kesk-Eesti,NUTS3,EE00
 EE00A,Kirde-Eesti,NUTS3,EE00
-EEA,"European Economic Area (EEA18-1995, EEA28-2004, EEA30-2007, EEA31-2013, EEA30-2020)",NUTS1,EE
-EEA18,"European Economic Area (EU15 - 1995-2004 and IS, LI, NO)",NUTS3,EEA1
-EEA18_OTH,"Other European Economic Area (EU15 - 1995-2004 and IS, LI, NO)",NUTS3,EEA18_OT
-EEA28,"European Economic Area (EU25 - 2004-2006 and IS, LI, NO)",NUTS3,EEA2
-EEA30_2007,"European Economic Area (EU27 - 2007-2013 and IS, LI, NO)",NUTS3,EEA30_200
-EEA30_2020,"European Economic Area (EU27 from 2020 and IS, LI, NO)",NUTS3,EEA30_202
-EEA31,"European Economic Area (EU28 - 2013-2020 and IS, LI, NO)",NUTS3,EEA3
-EEA_NEU,EEA-countries except the EU-countries,NUTS3,EEA_NE
-EEA_X_LI,European Economic Area except Liechtenstein,NUTS3,EEA_X_L
-EESC,European Economic and Social Committee (EESC),NUTS2,EES
+EEA,"European Economic Area (EEA18-1995, EEA28-2004, EEA30-2007, EEA31-2013, EEA30-2020)",,
+EEA18,"European Economic Area (EU15 - 1995-2004 and IS, LI, NO)",,
+EEA18_OTH,"Other European Economic Area (EU15 - 1995-2004 and IS, LI, NO)",,
+EEA28,"European Economic Area (EU25 - 2004-2006 and IS, LI, NO)",,
+EEA30_2007,"European Economic Area (EU27 - 2007-2013 and IS, LI, NO)",,
+EEA30_2020,"European Economic Area (EU27 from 2020 and IS, LI, NO)",,
+EEA31,"European Economic Area (EU28 - 2013-2020 and IS, LI, NO)",,
+EEA_NEU,EEA-countries except the EU-countries,,
+EEA_X_LI,European Economic Area except Liechtenstein,,
+EESC,European Economic and Social Committee (EESC),,
 EEX,Not regionalised/Unknown NUTS 1,NUTS1,EE
 EEXX,Not regionalised/Unknown NUTS 2,NUTS2,EEX
 EEXXX,Not regionalised/Unknown NUTS 3,NUTS3,EEXX
 EEZ,Extra-Regio NUTS 1,NUTS1,EE
 EEZZ,Extra-Regio NUTS 2,NUTS2,EEZ
 EEZZZ,Extra-Regio NUTS 3,NUTS3,EEZZ
-EE_CAP,Tallinn,NUTS3,EE_CA
-EFSF,European Financial Stability Facility,NUTS2,EFS
-EFTA,European Free Trade Association,NUTS2,EFT
-EFTA_FOR,European Free Trade Association except reporting country,NUTS3,EFTA_FO
-EFTA_OTH,Other European Free Trade Association countries,NUTS3,EFTA_OT
-EFTA_X_LI,European Free Trade Association except Liechtenstein,NUTS3,EFTA_X_L
+EE_CAP,Tallinn,,
+EFSF,European Financial Stability Facility,,
+EFTA,European Free Trade Association,,
+EFTA_FOR,European Free Trade Association except reporting country,,
+EFTA_OTH,Other European Free Trade Association countries,,
+EFTA_X_LI,European Free Trade Association except Liechtenstein,,
 EG,Egypt,country,
-EG_CAP,Al-Qahirah (Cairo),NUTS3,EG_CA
+EG_CAP,Al-Qahirah (Cairo),,
 EH,Western Sahara,country,
-EHEA,European Higher Education Area (Bologna Process),NUTS2,EHE
-EIB,European Investment Bank (EIB),NUTS1,EI
-EIF,European Investment Fund,NUTS1,EI
+EHEA,European Higher Education Area (Bologna Process),,
+EIB,European Investment Bank (EIB),,
+EIF,European Investment Fund,,
 EL,Greece,country,
-EL2ATT,"Kentriki Ellada, Attiki",NUTS3,EL2AT
-EL2EV,"Kentriki Ellada, Evvoia",NUTS3,EL2E
+EL1,Voreia Ellada (NUTS 2010),,
+EL11,"Anatoliki Makedonia, Thraki (NUTS 2010)",,
+EL111,Evros (NUTS 2010),,
+EL112,Xanthi (NUTS 2010),,
+EL113,Rodopi (NUTS 2010),,
+EL114,Drama (NUTS 2010),,
+EL115,Kavala (NUTS 2010),,
+EL12,Kentriki Makedonia (NUTS 2010),,
+EL121,Imathia (NUTS 2010),,
+EL122,Thessaloniki (NUTS 2010),,
+EL123,Kilkis (NUTS 2010),,
+EL124,Pella (NUTS 2010),,
+EL125,Pieria (NUTS 2010),,
+EL126,Serres (NUTS 2010),,
+EL127,Chalkidiki (NUTS 2010),,
+EL13,Dytiki Makedonia (NUTS 2010),,
+EL131,Grevena (NUTS 2010),,
+EL132,Kastoria (NUTS 2010),,
+EL133,Kozani (NUTS 2010),,
+EL134,Florina (NUTS 2010),,
+EL14,Thessalia (NUTS 2010),,
+EL141,Karditsa (NUTS 2010),,
+EL142,Larisa (NUTS 2010),,
+EL143,Magnisia (NUTS 2010),,
+EL144,Trikala (NUTS 2010),,
+EL2,Kentriki Ellada (NUTS 2010),,
+EL21,Ipeiros (NUTS 2010),,
+EL211,Arta (NUTS 2010),,
+EL212,Thesprotia (NUTS 2010),,
+EL213,Ioannina (NUTS 2010),,
+EL214,Preveza (NUTS 2010),,
+EL22,Ionia Nisia (NUTS 2010),,
+EL221,Zakynthos (NUTS 2010),,
+EL222,Kerkyra (NUTS 2010),,
+EL223,Kefallinia (NUTS 2010),,
+EL224,Lefkada (NUTS 2010),,
+EL23,Dytiki Ellada (NUTS 2010),,
+EL231,Aitoloakarnania (NUTS 2010),,
+EL232,Achaia (NUTS 2010),,
+EL233,Ileia (NUTS 2010),,
+EL24,Sterea Ellada (NUTS 2010),,
+EL241,Voiotia (NUTS 2010),,
+EL242,Evvoia (NUTS 2010),,
+EL243,Evrytania (NUTS 2010),,
+EL244,Fthiotida (NUTS 2010),,
+EL245,Fokida (NUTS 2010),,
+EL25,Peloponnisos (NUTS 2010),,
+EL251,Argolida (NUTS 2010),,
+EL252,Arkadia (NUTS 2010),,
+EL253,Korinthia (NUTS 2010),,
+EL254,Lakonia (NUTS 2010),,
+EL255,Messinia (NUTS 2010),,
+EL2ATT,"Kentriki Ellada, Attiki",,
+EL2EV,"Kentriki Ellada, Evvoia",,
 EL3,Attiki,NUTS1,EL
 EL30,Attiki,NUTS2,EL3
-EL300A,Attiki -East,NUTS3,EL300
-EL300B,Pireas,NUTS3,EL300
-EL300C,Attiki - West,NUTS3,EL300
+EL300,Attiki (NUTS 2010),,
+EL300A,Attiki -East,,
+EL300B,Pireas,,
+EL300C,Attiki - West,,
 EL301,Voreios Tomeas Athinon,NUTS3,EL30
 EL302,Dytikos Tomeas Athinon,NUTS3,EL30
 EL303,Kentrikos Tomeas Athinon,NUTS3,EL30
@@ -1113,7 +1301,7 @@ EL41,Voreio Aigaio,NUTS2,EL4
 EL411,"Lesvos, Limnos",NUTS3,EL41
 EL412,"Ikaria, Samos",NUTS3,EL41
 EL413,Chios,NUTS3,EL41
-EL41_42,Nisia Aigaiou,NUTS3,EL41_4
+EL41_42,Nisia Aigaiou,,
 EL42,Notio Aigaio,NUTS2,EL4
 EL421,"Kalymnos, Karpathos – Iroiki Nisos Kasos, Kos, Rodos",NUTS3,EL42
 EL422,"Andros, Thira, Kea, Milos, Mykonos, Naxos, Paros, Syros, Tinos",NUTS3,EL42
@@ -1178,14 +1366,14 @@ ELXXX,Not regionalised/Unknown NUTS 3,NUTS3,ELXX
 ELZ,Extra-Regio NUTS 1,NUTS1,EL
 ELZZ,Extra-Regio NUTS 2,NUTS2,ELZ
 ELZZZ,Extra-Regio NUTS 3,NUTS3,ELZZ
-EL_CAP,Athina,NUTS3,EL_CA
-EL_MAK,Makedonia,NUTS3,EL_MA
-EL_NAL,"Greece, not allocated",NUTS3,EL_NA
-EL_TRA,Thraki,NUTS3,EL_TR
-EMCF,European Monetary Cooperation Fund,NUTS2,EMC
-EMI,European Monetary Institute,NUTS1,EM
+EL_CAP,Athina,,
+EL_MAK,Makedonia,,
+EL_NAL,"Greece, not allocated",,
+EL_TRA,Thraki,,
+EMCF,European Monetary Cooperation Fund,,
+EMI,European Monetary Institute,,
 ER,Eritrea,country,
-ER_CAP,Asmaraa,NUTS3,ER_CA
+ER_CAP,Asmaraa,,
 ES,Spain,country,
 ES1,Noroeste,NUTS1,ES
 ES11,Galicia,NUTS2,ES1
@@ -1201,7 +1389,7 @@ ES2,Noreste,NUTS1,ES
 ES21,País Vasco,NUTS2,ES2
 ES211,Araba/Álava,NUTS3,ES21
 ES212,Gipuzkoa,NUTS3,ES21
-ES212_213,"Gipuzkoa, Bizkaia",NUTS3,ES212_21
+ES212_213,"Gipuzkoa, Bizkaia",,
 ES213,Bizkaia,NUTS3,ES21
 ES22,Comunidad Foral de Navarra,NUTS2,ES2
 ES220,Navarra,NUTS3,ES22
@@ -1209,7 +1397,7 @@ ES23,La Rioja,NUTS2,ES2
 ES230,La Rioja,NUTS3,ES23
 ES24,Aragón,NUTS2,ES2
 ES241,Huesca,NUTS3,ES24
-ES241_242,"Huesca, Teruel",NUTS3,ES241_24
+ES241_242,"Huesca, Teruel",,
 ES242,Teruel,NUTS3,ES24
 ES243,Zaragoza,NUTS3,ES24
 ES3,Comunidad de Madrid,NUTS1,ES
@@ -1218,7 +1406,7 @@ ES300,Madrid,NUTS3,ES30
 ES4,Centro (ES),NUTS1,ES
 ES41,Castilla y León,NUTS2,ES4
 ES411,Ávila,NUTS3,ES41
-ES411_414-417,"Ávila, Palencia, Salamanca, Segovia, Soria",NUTS3,ES411_414-41
+ES411_414-417,"Ávila, Palencia, Salamanca, Segovia, Soria",,
 ES412,Burgos,NUTS3,ES41
 ES413,León,NUTS3,ES41
 ES414,Palencia,NUTS3,ES41
@@ -1240,7 +1428,7 @@ ES5,Este,NUTS1,ES
 ES51,Cataluña,NUTS2,ES5
 ES511,Barcelona,NUTS3,ES51
 ES512,Girona,NUTS3,ES51
-ES512_513,"Girona, Lleida",NUTS3,ES512_51
+ES512_513,"Girona, Lleida",,
 ES513,Lleida,NUTS3,ES51
 ES514,Tarragona,NUTS3,ES51
 ES52,Comunitat Valenciana,NUTS2,ES5
@@ -1248,23 +1436,24 @@ ES521,Alicante/Alacant,NUTS3,ES52
 ES522,Castellón/Castelló,NUTS3,ES52
 ES523,Valencia/València,NUTS3,ES52
 ES53,Illes Balears,NUTS2,ES5
+ES530,Illes Balears (NUTS 1999),,
 ES531,Eivissa y Formentera,NUTS3,ES53
 ES532,Mallorca,NUTS3,ES53
 ES533,Menorca,NUTS3,ES53
 ES6,Sur,NUTS1,ES
 ES61,Andalucía,NUTS2,ES6
 ES611,Almería,NUTS3,ES61
-ES611_614_616_618,"Almería, Granada, Jaén, Sevilla",NUTS3,ES611_614_616_61
+ES611_614_616_618,"Almería, Granada, Jaén, Sevilla",,
 ES612,Cádiz,NUTS3,ES61
-ES612_630,"Cádiz, Ceuta",NUTS3,ES612_63
+ES612_630,"Cádiz, Ceuta",,
 ES613,Córdoba,NUTS3,ES61
 ES614,Granada,NUTS3,ES61
 ES615,Huelva,NUTS3,ES61
 ES616,Jaén,NUTS3,ES61
 ES617,Málaga,NUTS3,ES61
-ES617_640,"Málaga, Melilla",NUTS3,ES617_64
+ES617_640,"Málaga, Melilla",,
 ES618,Sevilla,NUTS3,ES61
-ES61_63_64,"Andalucía, Ceuta, Melilla",NUTS3,ES61_63_6
+ES61_63_64,"Andalucía, Ceuta, Melilla",,
 ES62,Región de Murcia,NUTS2,ES6
 ES620,Murcia,NUTS3,ES62
 ES63,Ciudad de Ceuta,NUTS2,ES6
@@ -1273,6 +1462,8 @@ ES64,Ciudad de Melilla,NUTS2,ES6
 ES640,Melilla,NUTS3,ES64
 ES7,Canarias,NUTS1,ES
 ES70,Canarias,NUTS2,ES7
+ES701,Las Palmas (NUTS 1999),,
+ES702,Santa Cruz De Tenerife (NUTS 1999),,
 ES703,El Hierro,NUTS3,ES70
 ES704,Fuerteventura,NUTS3,ES70
 ES705,Gran Canaria,NUTS3,ES70
@@ -1280,137 +1471,175 @@ ES706,La Gomera,NUTS3,ES70
 ES707,La Palma,NUTS3,ES70
 ES708,Lanzarote,NUTS3,ES70
 ES709,Tenerife,NUTS3,ES70
-ESA,European Space Agency,NUTS1,ES
-ESC_UCI,Equally-shared control of UCI (Ultimate controlling institutional unit of a foreign affiliate) of more than one Member State,NUTS3,ESC_UC
-ESM,European Stability Mechanism,NUTS1,ES
-ESTAT,Eurostat,NUTS3,ESTA
+ESA,European Space Agency,,
+ESC_UCI,Equally-shared control of UCI (Ultimate controlling institutional unit of a foreign affiliate) of more than one Member State,,
+ESM,European Stability Mechanism,,
+ESTAT,Eurostat,,
 ESX,Not regionalised/Unknown NUTS 1,NUTS1,ES
 ESXX,Not regionalised/Unknown NUTS 2,NUTS2,ESX
 ESXXX,Not regionalised/Unknown NUTS 3,NUTS3,ESXX
 ESZ,Extra-Regio NUTS 1,NUTS1,ES
 ESZZ,Extra-Regio NUTS 2,NUTS2,ESZ
 ESZZZ,Extra-Regio NUTS 3,NUTS3,ESZZ
-ES_CAP,Madrid,NUTS3,ES_CA
-ES_NAL,"Spain, not allocated",NUTS3,ES_NA
+ES_CAP,Madrid,,
+ES_NAL,"Spain, not allocated",,
 ET,Ethiopia,country,
-ET_CAP,Addis-Ababa,NUTS3,ET_CA
-EU,"European Union (EU6-1958, EU9-1973, EU10-1981, EU12-1986, EU15-1995, EU25-2004, EU27-2007, EU28-2013, EU27-2020)",country,
-EU10,European Community - 10 countries (1981-1985),NUTS2,EU1
-EU12,European Community - 12 countries (1986-1994),NUTS2,EU1
-EU12_FOR,EU12 countries (1986-1994) except reporting country,NUTS3,EU12_FO
-EU15,European Union - 15 countries (1995-2004),NUTS2,EU1
-EU15_FOR,EU15 countries (1995-2004) except reporting country,NUTS3,EU15_FO
-EU15_NO,European Union - 15 countries (1995-2004) and Norway,NUTS3,EU15_N
-EU15_OTH,Other EU15 countries (1995-2004),NUTS3,EU15_OT
-EU25,European Union - 25 countries (2004-2006),NUTS2,EU2
-EU25_FOR,EU25 countries (2004-2006) except reporting country,NUTS3,EU25_FO
-EU25_OTH,Other EU25 countries (2004-2006),NUTS3,EU25_OT
-EU27_2007,European Union - 27 countries (2007-2013),NUTS3,EU27_200
-EU27_2007_FOR,EU27 countries (2007-2013) except reporting country,NUTS3,EU27_2007_FO
-EU27_2020,European Union - 27 countries (from 2020),NUTS3,EU27_202
-EU27_2020_EFTA,European Union - 27 countries (from 2020) and European Free Trade Association (EFTA) countries,NUTS3,EU27_2020_EFT
-EU27_2020_EFTA_FOR,EU27 countries (from 2020) or EFTA countries except reporting country,NUTS3,EU27_2020_EFTA_FO
-EU27_2020_FOR,EU27 countries (from 2020) except reporting country,NUTS3,EU27_2020_FO
-EU27_2020_IS_K,European Union - 27 countries (from 2020) and Iceland under the Kyoto Protocol,NUTS3,EU27_2020_IS_
-EU27_2020_NEA19,EU27 countries (from 2020) not in EA19 (2015-2022) - 8 countries,NUTS3,EU27_2020_NEA1
-EU27_2020_NEA20,EU27 countries (from 2020) not in EA20 (2023-2025) - 7 countries,NUTS3,EU27_2020_NEA2
-EU27_2020_NEA20_X_DK_SE,"EU27 countries (from 2020) not in EA20 (2023-2025), except Denmark and Sweden",NUTS3,EU27_2020_NEA20_X_DK_S
-EU27_2020_NEA21,EU27 countries (from 2020) not in EA21 (from 2026) - 6 countries,NUTS3,EU27_2020_NEA2
-EU27_2020_NEA21_X_DK_SE,"EU27 countries (from 2020) not in EA21 (from 2026), except Denmark and Sweden",NUTS3,EU27_2020_NEA21_X_DK_S
-EU27_2020_NEU27_2020,EU27 countries (from 2020) and non-EU27 countries (from 2020),NUTS3,EU27_2020_NEU27_202
-EU27_2020_X_DK,European Union - 27 countries (from 2020) except Denmark,NUTS3,EU27_2020_X_D
-EU28,European Union - 28 countries (2013-2020),NUTS2,EU2
-EU28_EFTA,European Union - 28 countries (2013-2020) and European Free Trade Association (EFTA) countries,NUTS3,EU28_EFT
-EU28_EFTA_FOR,EU28 countries (2013-2020) or EFTA countries except reporting country,NUTS3,EU28_EFTA_FO
-EU28_FOR,EU28 countries (2013-2020) except reporting country,NUTS3,EU28_FO
-EU28_IS_K,European Union - 28 countries (2013-2020) and Iceland under the Kyoto Protocol,NUTS3,EU28_IS_
-EU28_NEU28,EU28 countries (2013-2020) and non-EU28 countries (2013-2020),NUTS3,EU28_NEU2
-EU6,European Community  - 6 founder countries (1958-1972),NUTS1,EU
-EU9,European Community - 9 countries (1973-1980),NUTS1,EU
-EUB_MNR,Other small EU institutions financed via the EU Budget,NUTS3,EUB_MN
-EUB_OTH,Other EU institutions financed via the EU Budget,NUTS3,EUB_OT
-EUI,Institutions and bodies of the European Union,NUTS1,EU
-EUI_X_EAI,EU institutions except the institutions of the euro area (aggregate changing according to the context),NUTS3,EUI_X_EA
-EUR,Europe,NUTS1,EU
-EURATOM,European Atomic Energy Community,NUTS3,EURATO
-EURMED,Mediterranean countries in the Euro-Mediterranean Partnership,NUTS3,EURME
-EUROTH,European countries not EU nor EFTA (aggregate changing according to the context),NUTS3,EUROT
-EUR_C_E,Central and Eastern Europe,NUTS3,EUR_C_
-EUR_C_E_OTH,Other Central and Eastern European countries,NUTS3,EUR_C_E_OT
-EUR_NEU,European non-EU countries (aggregate changing according to the context),NUTS3,EUR_NE
-EUR_NEU15,European non-EU15 countries (1995--2004),NUTS3,EUR_NEU1
-EUR_NEU25,European non-EU25 countries (2004-2006),NUTS3,EUR_NEU2
-EUR_NEU27_2007,European non-EU27 countries (2007-2013),NUTS3,EUR_NEU27_200
-EUR_NEU27_2020,European non-EU27 countries (from 2020),NUTS3,EUR_NEU27_202
-EUR_NEU27_2020_NEFTA,European non-EU27 countries (from 2020) and European non-EFTA countries,NUTS3,EUR_NEU27_2020_NEFT
-EUR_NEU28,European non-EU28 countries (2013-2020),NUTS3,EUR_NEU2
-EUR_NEU28_NEFTA,European non-EU28 countries (up to 2019) and European non-EFTA countries,NUTS3,EUR_NEU28_NEFT
-EUR_NSP,"European countries, not specified",NUTS3,EUR_NS
-EUR_OTH,Other European countries (aggregate changing according to the context),NUTS3,EUR_OT
-EU_BDG,All EU institutions financed via the EU Budget,NUTS3,EU_BD
-EU_FOR,EU-countries except reporting country,NUTS3,EU_FO
-EU_NEU,EU countries and non-EU countries (aggregate changing according to the context),NUTS3,EU_NE
-EU_OTH,Other EU countries,NUTS3,EU_OT
-EU_V,European Union (aggregate changing according to the context),NUTS2,EU_
-EU_V_NO,European Union (aggregate changing according to the context) and Norway,NUTS3,EU_V_N
-EXT,"Countries other than EU, EFTA and Candidate countries",NUTS1,EX
-EXT_EA,Extra-euro area,NUTS3,EXT_E
-EXT_EA11,Extra-euro area - 11 countries (1999-2000),NUTS3,EXT_EA1
-EXT_EA12,Extra-euro area - 12 countries (2001-2006),NUTS3,EXT_EA1
-EXT_EA13,Extra-euro area - 13 countries (2007),NUTS3,EXT_EA1
-EXT_EA15,Extra-euro area - 15 countries (2008)),NUTS3,EXT_EA1
-EXT_EA16,Extra-euro area - 16 countries (2009-2010),NUTS3,EXT_EA1
-EXT_EA17,Extra-euro area - 17 countries (2011-2013),NUTS3,EXT_EA1
-EXT_EA18,Extra-euro area - 18 countries (2014),NUTS3,EXT_EA1
-EXT_EA19,Extra-euro area - 19 countries (2015-2022),NUTS3,EXT_EA1
-EXT_EA20,Extra-euro area - 20 countries (2023-2025),NUTS3,EXT_EA2
-EXT_EA21,Extra-euro area - 21 countries (from 2026),NUTS3,EXT_EA2
-EXT_EA_NAL,"Extra-euro area, not allocated",NUTS3,EXT_EA_NA
-EXT_EU,Extra-EU,NUTS3,EXT_E
-EXT_EU12,Extra-EU12 (1986-1994),NUTS3,EXT_EU1
-EXT_EU15,Extra-EU15 (1995-2004),NUTS3,EXT_EU1
-EXT_EU25,Extra-EU25 (2004-2006),NUTS3,EXT_EU2
-EXT_EU25_NAL,"Extra-EU25 (2004-2006), not allocated",NUTS3,EXT_EU25_NA
-EXT_EU27_2007,Extra-EU27 (2007-2013),NUTS3,EXT_EU27_200
-EXT_EU27_2007_NAL,"Extra-EU27 (2007-2013), not allocated",NUTS3,EXT_EU27_2007_NA
-EXT_EU27_2020,Extra-EU27 (from 2020),NUTS3,EXT_EU27_202
-EXT_EU28,Extra-EU28 (2013-2020),NUTS3,EXT_EU2
-EXT_EU_NAL,"Extra-EU, not allocated",NUTS3,EXT_EU_NA
-EXT_FOR_HDI,"Countries other than EU, EFTA and Candidate countries with Human Development Index (HDI) ranking",NUTS3,EXT_FOR_HD
-EXT_FOR_HDI_H,"Countries other than EU, EFTA and Candidate countries with high Human Development Index (HDI)",NUTS3,EXT_FOR_HDI_
-EXT_FOR_HDI_L,"Countries other than EU, EFTA and Candidate countries with low Human Development Index (HDI)",NUTS3,EXT_FOR_HDI_
-EXT_FOR_HDI_M,"Countries other than EU, EFTA and Candidate countries with medium Human Development Index (HDI)",NUTS3,EXT_FOR_HDI_
-EXT_FOR_HDI_VH,"Countries other than EU, EFTA and Candidate countries with very high Human Development Index (HDI)",NUTS3,EXT_FOR_HDI_V
-EX_DD,German Democratic Republic,NUTS3,EX_D
-EX_SU,Soviet Union,NUTS3,EX_S
-EX_SU_ASI,Asian Republics of the former Soviet Union,NUTS3,EX_SU_AS
-EX_SU_EUR,European Republics of the former Soviet Union,NUTS3,EX_SU_EU
-EX_SU_OTH,Other countries of former Soviet Union (before 1991),NUTS3,EX_SU_OT
-EX_YD,Former South Yemen (before 1990),NUTS3,EX_Y
-EX_YE,Former North Yemen (before 1990),NUTS3,EX_Y
-EX_YU,Yugoslavia,NUTS3,EX_Y
-EX_YU_OTH,Other countries of former Yugoslavia (before 1992),NUTS3,EX_YU_OT
-FAO,Food and Agricultural Organization (FAO),NUTS1,FA
-FEMIP,Facility for Euro-Mediterranean Investment and Partnership,NUTS3,FEMI
+ET_CAP,Addis-Ababa,,
+EU,"European Union (EU6-1958, EU9-1973, EU10-1981, EU12-1986, EU15-1995, EU25-2004, EU27-2007, EU28-2013, EU27-2020)",,
+EU10,European Community - 10 countries (1981-1985),,
+EU12,European Community - 12 countries (1986-1994),,
+EU12_FOR,EU12 countries (1986-1994) except reporting country,,
+EU15,European Union - 15 countries (1995-2004),,
+EU15_FOR,EU15 countries (1995-2004) except reporting country,,
+EU15_NO,European Union - 15 countries (1995-2004) and Norway,,
+EU15_OTH,Other EU15 countries (1995-2004),,
+EU25,European Union - 25 countries (2004-2006),,
+EU25_FOR,EU25 countries (2004-2006) except reporting country,,
+EU25_OTH,Other EU25 countries (2004-2006),,
+EU27_2007,European Union - 27 countries (2007-2013),,
+EU27_2007_FOR,EU27 countries (2007-2013) except reporting country,,
+EU27_2020,European Union - 27 countries (from 2020),,
+EU27_2020_EFTA,European Union - 27 countries (from 2020) and European Free Trade Association (EFTA) countries,,
+EU27_2020_EFTA_FOR,EU27 countries (from 2020) or EFTA countries except reporting country,,
+EU27_2020_FOR,EU27 countries (from 2020) except reporting country,,
+EU27_2020_IS_K,European Union - 27 countries (from 2020) and Iceland under the Kyoto Protocol,,
+EU27_2020_NEA19,EU27 countries (from 2020) not in EA19 (2015-2022) - 8 countries,,
+EU27_2020_NEA20,EU27 countries (from 2020) not in EA20 (2023-2025) - 7 countries,,
+EU27_2020_NEA20_X_DK_SE,"EU27 countries (from 2020) not in EA20 (2023-2025), except Denmark and Sweden",,
+EU27_2020_NEA21,EU27 countries (from 2020) not in EA21 (from 2026) - 6 countries,,
+EU27_2020_NEA21_X_DK_SE,"EU27 countries (from 2020) not in EA21 (from 2026), except Denmark and Sweden",,
+EU27_2020_NEU27_2020,EU27 countries (from 2020) and non-EU27 countries (from 2020),,
+EU27_2020_X_DK,European Union - 27 countries (from 2020) except Denmark,,
+EU28,European Union - 28 countries (2013-2020),,
+EU28_EFTA,European Union - 28 countries (2013-2020) and European Free Trade Association (EFTA) countries,,
+EU28_EFTA_FOR,EU28 countries (2013-2020) or EFTA countries except reporting country,,
+EU28_FOR,EU28 countries (2013-2020) except reporting country,,
+EU28_IS_K,European Union - 28 countries (2013-2020) and Iceland under the Kyoto Protocol,,
+EU28_NEU28,EU28 countries (2013-2020) and non-EU28 countries (2013-2020),,
+EU6,European Community  - 6 founder countries (1958-1972),,
+EU9,European Community - 9 countries (1973-1980),,
+EUB_MNR,Other small EU institutions financed via the EU Budget,,
+EUB_OTH,Other EU institutions financed via the EU Budget,,
+EUI,Institutions and bodies of the European Union,,
+EUI_X_EAI,EU institutions except the institutions of the euro area (aggregate changing according to the context),,
+EUR,Europe,,
+EURATOM,European Atomic Energy Community,,
+EURMED,Mediterranean countries in the Euro-Mediterranean Partnership,,
+EUROTH,European countries not EU nor EFTA (aggregate changing according to the context),,
+EUR_C_E,Central and Eastern Europe,,
+EUR_C_E_OTH,Other Central and Eastern European countries,,
+EUR_NEU,European non-EU countries (aggregate changing according to the context),,
+EUR_NEU15,European non-EU15 countries (1995--2004),,
+EUR_NEU25,European non-EU25 countries (2004-2006),,
+EUR_NEU27_2007,European non-EU27 countries (2007-2013),,
+EUR_NEU27_2020,European non-EU27 countries (from 2020),,
+EUR_NEU27_2020_NEFTA,European non-EU27 countries (from 2020) and European non-EFTA countries,,
+EUR_NEU28,European non-EU28 countries (2013-2020),,
+EUR_NEU28_NEFTA,European non-EU28 countries (up to 2019) and European non-EFTA countries,,
+EUR_NSP,"European countries, not specified",,
+EUR_OTH,Other European countries (aggregate changing according to the context),,
+EU_BDG,All EU institutions financed via the EU Budget,,
+EU_FOR,EU-countries except reporting country,,
+EU_NEU,EU countries and non-EU countries (aggregate changing according to the context),,
+EU_OTH,Other EU countries,,
+EU_V,European Union (aggregate changing according to the context),,
+EU_V_NO,European Union (aggregate changing according to the context) and Norway,,
+EXT,"Countries other than EU, EFTA and Candidate countries",,
+EXT_EA,Extra-euro area,,
+EXT_EA11,Extra-euro area - 11 countries (1999-2000),,
+EXT_EA12,Extra-euro area - 12 countries (2001-2006),,
+EXT_EA13,Extra-euro area - 13 countries (2007),,
+EXT_EA15,Extra-euro area - 15 countries (2008)),,
+EXT_EA16,Extra-euro area - 16 countries (2009-2010),,
+EXT_EA17,Extra-euro area - 17 countries (2011-2013),,
+EXT_EA18,Extra-euro area - 18 countries (2014),,
+EXT_EA19,Extra-euro area - 19 countries (2015-2022),,
+EXT_EA20,Extra-euro area - 20 countries (2023-2025),,
+EXT_EA21,Extra-euro area - 21 countries (from 2026),,
+EXT_EA_NAL,"Extra-euro area, not allocated",,
+EXT_EU,Extra-EU,,
+EXT_EU12,Extra-EU12 (1986-1994),,
+EXT_EU15,Extra-EU15 (1995-2004),,
+EXT_EU25,Extra-EU25 (2004-2006),,
+EXT_EU25_NAL,"Extra-EU25 (2004-2006), not allocated",,
+EXT_EU27_2007,Extra-EU27 (2007-2013),,
+EXT_EU27_2007_NAL,"Extra-EU27 (2007-2013), not allocated",,
+EXT_EU27_2020,Extra-EU27 (from 2020),,
+EXT_EU28,Extra-EU28 (2013-2020),,
+EXT_EU_NAL,"Extra-EU, not allocated",,
+EXT_FOR_HDI,"Countries other than EU, EFTA and Candidate countries with Human Development Index (HDI) ranking",,
+EXT_FOR_HDI_H,"Countries other than EU, EFTA and Candidate countries with high Human Development Index (HDI)",,
+EXT_FOR_HDI_L,"Countries other than EU, EFTA and Candidate countries with low Human Development Index (HDI)",,
+EXT_FOR_HDI_M,"Countries other than EU, EFTA and Candidate countries with medium Human Development Index (HDI)",,
+EXT_FOR_HDI_VH,"Countries other than EU, EFTA and Candidate countries with very high Human Development Index (HDI)",,
+EX_DD,German Democratic Republic,,
+EX_SU,Soviet Union,,
+EX_SU_ASI,Asian Republics of the former Soviet Union,,
+EX_SU_EUR,European Republics of the former Soviet Union,,
+EX_SU_OTH,Other countries of former Soviet Union (before 1991),,
+EX_YD,Former South Yemen (before 1990),country,
+EX_YE,Former North Yemen (before 1990),country,
+EX_YU,Yugoslavia,,
+EX_YU_OTH,Other countries of former Yugoslavia (before 1992),,
+FAO,Food and Agricultural Organization (FAO),,
+FEMIP,Facility for Euro-Mediterranean Investment and Partnership,,
 FI,Finland,country,
 FI1,Manner-Suomi,NUTS1,FI
+FI11,Uusimaa (NUTS 1995),,
+FI11_12_2,"Uusimaa, Etelä-Suomi, Åland (NUTS 1995)",,
+FI12,Etelä-Suomi (NUTS 1995),,
+FI13,Itä-Suomi (NUTS 2006),,
+FI131,Etelä-Savo (NUTS 2006),,
+FI132,Pohjois-Savo (NUTS 2006),,
+FI133,Pohjois-Karjala (NUTS 2006),,
+FI134,Kainuu (NUTS 2006),,
+FI14,Väli-Suomi (NUTS 1995),,
+FI15,Pohjois-Suomi (NUTS 1995),,
+FI16,Uusimaa (suuralue)(NUTS 1995),,
+FI18,Etelä-Suomi (NUTS 2006),,
+FI181,Uusimaa (NUTS 2006),,
+FI181_182,"Uusimaa, Itä-Uusimaa (NUTS 2006)",,
+FI182,Itä-Uusimaa (NUTS 2006),,
+FI183,Varsinais-Suomi (NUTS 2006),,
+FI184,Kanta-Häme (NUTS 2006),,
+FI185,Päijät-Häme (NUTS 2006),,
+FI186,Kymenlaakso (NUTS 2006),,
+FI187,Etelä-Karjala (NUTS 2006),,
+FI18_20,"Etelä-Suomi, Åland (NUTS 2006)",,
 FI19,Länsi-Suomi,NUTS2,FI1
+FI191,Satakunta (NUTS 2003),,
+FI192,Pirkanmaa (NUTS 2003),,
+FI193,Keski-Suomi (NUTS 2021),,
+FI194,Etelä-Pohjanmaa (NUTS 2021),,
+FI195,Pohjanmaa (NUTS 2021),,
 FI196,Satakunta,NUTS3,FI19
+FI197,Pirkanmaa (NUTS 2021),,
 FI198,Keski-Suomi,NUTS3,FI19
 FI199,Etelä-Pohjanmaa,NUTS3,FI19
 FI19A,Pohjanmaa,NUTS3,FI19
 FI19B,Pirkanmaa,NUTS3,FI19
-FI19_20,"Länsi-Suomi, Åland",NUTS3,FI19_2
+FI19_20,"Länsi-Suomi, Åland",,
+FI1A,Pohjois-Suomi (NUTS 2006),,
+FI1A1,Keski-Pohjanmaa (NUTS 2006),,
+FI1A2,Pohjois-Pohjanmaa (NUTS 2006),,
+FI1A3,Lappi (NUTS 2006),,
 FI1B,Helsinki-Uusimaa,NUTS2,FI1
 FI1B1,Helsinki-Uusimaa,NUTS3,FI1B
 FI1C,Etelä-Suomi,NUTS2,FI1
 FI1C1,Varsinais-Suomi,NUTS3,FI1C
 FI1C2,Kanta-Häme,NUTS3,FI1C
+FI1C3,Päijät-Häme (NUTS 2021),,
+FI1C4,Kymenlaakso (NUTS 2021),,
 FI1C5,Etelä-Karjala,NUTS3,FI1C
 FI1C6,Päijät-Häme,NUTS3,FI1C
 FI1C7,Kymenlaakso,NUTS3,FI1C
 FI1D,Pohjois- ja Itä-Suomi,NUTS2,FI1
+FI1D1,Etelä-Savo (NUTS 2021),,
+FI1D2,Pohjois-Savo (NUTS 2021),,
+FI1D3,Pohjois-Karjala (NUTS 2021),,
+FI1D4,Kainuu (NUTS 2013),,
 FI1D5,Keski-Pohjanmaa,NUTS3,FI1D
+FI1D6,Pohjois-Pohjanmaa (NUTS 2013),,
 FI1D7,Lappi,NUTS3,FI1D
 FI1D8,Kainuu,NUTS3,FI1D
 FI1D9,Pohjois-Pohjanmaa,NUTS3,FI1D
@@ -1426,16 +1655,16 @@ FIXXX,Not regionalised/Unknown NUTS 3,NUTS3,FIXX
 FIZ,Extra-Regio NUTS 1,NUTS1,FI
 FIZZ,Extra-Regio NUTS 2,NUTS2,FIZ
 FIZZZ,Extra-Regio NUTS 3,NUTS3,FIZZ
-FI_CAP,Helsinki,NUTS3,FI_CA
-FI_NAL,"Finland, not allocated",NUTS3,FI_NA
+FI_CAP,Helsinki,,
+FI_NAL,"Finland, not allocated",,
 FJ,Fiji,country,
-FJ_CAP,Suva,NUTS3,FJ_CA
+FJ_CAP,Suva,,
 FK,Falkland Islands,country,
 FM,Federated States of Micronesia,country,
-FM_CAP,Palikir,NUTS3,FM_CA
+FM_CAP,Palikir,,
 FO,Faroes,country,
-FOR,Foreign country,NUTS1,FO
-FOR_STLS,Foreign country and stateless,NUTS3,FOR_STL
+FOR,Foreign country,,
+FOR_STLS,Foreign country and stateless,,
 FR,France,country,
 FR1,Ile de France,NUTS1,FR
 FR10,Ile de France,NUTS2,FR1
@@ -1447,6 +1676,149 @@ FR105,Hauts-de-Seine,NUTS3,FR10
 FR106,Seine-Saint-Denis,NUTS3,FR10
 FR107,Val-de-Marne,NUTS3,FR10
 FR108,Val-d'Oise,NUTS3,FR10
+FR2,Bassin Parisien (NUTS 2013),,
+FR21,Champagne-Ardenne (NUTS 2013),,
+FR211,Ardennes (NUTS 2013),,
+FR212,Aube (NUTS 2013),,
+FR213,Marne (NUTS 2013),,
+FR214,Haute-Marne (NUTS 2013),,
+FR22,Picardie (NUTS 2013),,
+FR221,Aisne (NUTS 2013),,
+FR222,Oise (NUTS 2013),,
+FR223,Somme (NUTS 2013),,
+FR23,Haute-Normandie (NUTS 2013),,
+FR231,Eure (NUTS 2013),,
+FR232,Seine-Maritime (NUTS 2013),,
+FR24,Centre (FR) (NUTS 2013),,
+FR241,Cher (NUTS 2013),,
+FR242,Eure-et-Loir (NUTS 2013),,
+FR243,Indre (NUTS 2013),,
+FR244,Indre-et-Loire (NUTS 2013),,
+FR245,Loir-et-Cher (NUTS 2013),,
+FR246,Loiret (NUTS 2013),,
+FR25,Basse-Normandie (NUTS 2013),,
+FR251,Calvados (NUTS 2013),,
+FR252,Manche (NUTS 2013),,
+FR253,Orne (NUTS 2013),,
+FR26,Bourgogne (NUTS 2013),,
+FR261,Côte-d'Or (NUTS 2013),,
+FR262,Nièvre (NUTS 2013),,
+FR263,Saône-et-Loire (NUTS 2013),,
+FR264,Yonne (NUTS 2013),,
+FR3,Nord-Pas-de-Calais (NUTS 2013),,
+FR30,Nord-Pas-de-Calais (NUTS 2013),,
+FR301,Nord (FR) (NUTS 2013),,
+FR302,Pas-de-Calais (NUTS 2013),,
+FR4,Est (FR) (NUTS 2013),,
+FR41,Lorraine (NUTS 2013),,
+FR411,Meurthe-et-Moselle (NUTS 2013),,
+FR412,Meuse (NUTS 2013),,
+FR413,Moselle (NUTS 2013),,
+FR414,Vosges (NUTS 2013),,
+FR42,Alsace (NUTS 2013),,
+FR421,Bas-Rhin (NUTS 2013),,
+FR422,Haut-Rhin (NUTS 2013),,
+FR43,Franche-Comté (NUTS 2013),,
+FR431,Doubs (NUTS 2013),,
+FR432,Jura (NUTS 2013),,
+FR433,Haute-Saône (NUTS 2013),,
+FR434,Territoire de Belfort (NUTS 2013),,
+FR5,Ouest (FR) (NUTS 2013),,
+FR51,Pays de la Loire (NUTS 2013),,
+FR511,Loire-Atlantique (NUTS 2013),,
+FR512,Maine-et-Loire (NUTS 2013),,
+FR513,Mayenne (NUTS 2013),,
+FR514,Sarthe (NUTS 2013),,
+FR515,Vendée (NUTS 2013),,
+FR51_X_513,Pays-de-la-Loire except Mayenne (NUTS 2013),,
+FR52,Bretagne (NUTS 2013),,
+FR521,Côtes-d'Armor (NUTS 2013),,
+FR522,Finistère (NUTS 2013),,
+FR523,Ille-et-Vilaine (NUTS 2013),,
+FR524,Morbihan (NUTS 2013),,
+FR53,Poitou-Charentes (NUTS 2013),,
+FR531,Charente (NUTS 2013),,
+FR532,Charente-Maritime (NUTS 2013),,
+FR533,Deux-Sèvres (NUTS 2013),,
+FR533_534,"Deux-Sèvres, Vienne (NUTS 2013)",,
+FR534,Vienne (NUTS 2013),,
+FR6,Sud-Ouest (FR) (NUTS 2013),,
+FR61,Aquitaine (NUTS 2013),,
+FR611,Dordogne (NUTS 2013),,
+FR612,Gironde (NUTS 2013),,
+FR613,Landes (NUTS 2013),,
+FR614,Lot-et-Garonne (NUTS 2013),,
+FR615,Pyrénées-Atlantiques (NUTS 2013),,
+FR61_X_612,Aquitaine except Gironde (NUTS 2013),,
+FR62,Midi-Pyrénées (NUTS 2013),,
+FR621,Ariège (NUTS 2013),,
+FR622,Aveyron (NUTS 2013),,
+FR623,Haute-Garonne (NUTS 2013),,
+FR624,Gers (NUTS 2013),,
+FR625,Lot (NUTS 2013),,
+FR626,Hautes-Pyrénées (NUTS 2013),,
+FR627,Tarn (NUTS 2013),,
+FR628,Tarn-et-Garonne (NUTS 2013),,
+FR62_X_624,Midi-Pyrénées except Gers (NUTS 2013),,
+FR63,Limousin (NUTS 2013),,
+FR631,Corrèze (NUTS 2013),,
+FR631_633,"Corrèze, Haute-Vienne (NUTS 2013)",,
+FR632,Creuse (NUTS 2013),,
+FR633,Haute-Vienne (NUTS 2013),,
+FR7,Centre-Est (FR) (NUTS 2013),,
+FR71,Rhône-Alpes (NUTS 2013),,
+FR711,Ain (NUTS 2013),,
+FR712,Ardèche (NUTS 2013),,
+FR713,Drôme (NUTS 2013),,
+FR714,Isère (NUTS 2013),,
+FR715,Loire (NUTS 2013),,
+FR716,Rhône (NUTS 2013),,
+FR717,Savoie (NUTS 2013),,
+FR718,Haute-Savoie (NUTS 2013),,
+FR71_X_712,Rhône-Alpes except Ardèche (NUTS 2013),,
+FR72,Auvergne (NUTS 2013),,
+FR721,Allier (NUTS 2013),,
+FR722,Cantal (NUTS 2013),,
+FR723,Haute-Loire (NUTS 2013),,
+FR724,Puy-de-Dôme (NUTS 2013),,
+FR8,Méditerranée (NUTS 2013),,
+FR81,Languedoc-Roussillon (NUTS 2013),,
+FR811,Aude (NUTS 2013),,
+FR812,Gard (NUTS 2013),,
+FR813,Hérault (NUTS 2013),,
+FR814,Lozère (NUTS 2013),,
+FR815,Pyrénées-Orientales (NUTS 2013),,
+FR82,Provence-Alpes-Côte d'Azur (NUTS 2013),,
+FR821,Alpes-de-Haute-Provence (NUTS 2013),,
+FR821-823,"Alpes-de-Haute-Provence, Hautes-Alpes, Alpes-Maritimes (NUTS 2013)",,
+FR822,Hautes-Alpes (NUTS 2013),,
+FR823,Alpes-Maritimes (NUTS 2013),,
+FR824,Bouches-du-Rhône (NUTS 2013),,
+FR825,Var (NUTS 2013),,
+FR826,Vaucluse (NUTS 2013),,
+FR83,Corse (NUTS 2013),,
+FR831,Corse-du-Sud (NUTS 2013),,
+FR832,Haute-Corse (NUTS 2013),,
+FR9,Départements d'outre-mer (NUTS 2010),,
+FR91,Guadeloupe (NUTS 2010),,
+FR910,Guadeloupe (NUTS 2010),,
+FR92,Martinique (NUTS 2010),,
+FR920,Martinique (NUTS 2010),,
+FR93,Guyane (NUTS 2010),,
+FR930,Guyane (NUTS 2010),,
+FR94,Réunion (NUTS 2010),,
+FR940,Réunion (NUTS 2010),,
+FRA,Départements d'outre-mer (NUTS 2013),,
+FRA1,Guadeloupe (NUTS 2013),,
+FRA10,Guadeloupe (NUTS 2013),,
+FRA2,Martinique (NUTS 2013),,
+FRA20,Martinique (NUTS 2013),,
+FRA3,Guyane (NUTS 2013),,
+FRA30,Guyane (NUTS 2013),,
+FRA4,La Réunion (NUTS 2013),,
+FRA40,La Réunion (NUTS 2013),,
+FRA5,Mayotte (NUTS 2013),,
+FRA50,Mayotte (NUTS 2013),,
 FRB,Centre — Val de Loire,NUTS1,FR
 FRB0,Centre — Val de Loire,NUTS2,FRB
 FRB01,Cher,NUTS3,FRB0
@@ -1585,54 +1957,54 @@ FRY50,Mayotte,NUTS3,FRY5
 FRZ,Extra-Regio NUTS 1,NUTS1,FR
 FRZZ,Extra-Regio NUTS 2,NUTS2,FRZ
 FRZZZ,Extra-Regio NUTS 3,NUTS3,FRZZ
-FR_CAP,Paris,NUTS3,FR_CA
-FR_NAL,"France, not allocated",NUTS3,FR_NA
+FR_CAP,Paris,,
+FR_NAL,"France, not allocated",,
 FX,Metropolitan France,country,
-FZ,Franc Zone,country,
-G20,Group of Twenty,NUTS1,G2
-G20_X_EU27_2020,Group of Twenty except the EU27 countries (from 2020),NUTS3,G20_X_EU27_202
+FZ,Franc Zone,,
+G20,Group of Twenty,,
+G20_X_EU27_2020,Group of Twenty except the EU27 countries (from 2020),,
 GA,Gabon,country,
-GA_CAP,Libreville,NUTS3,GA_CA
+GA_CAP,Libreville,,
 GD,Grenada,country,
 GE,Georgia,country,
-GE_CAP,Tbilisi,NUTS3,GE_CA
+GE_CAP,Tbilisi,,
 GG,Guernsey,country,
-GG_JE,Channel Islands (Guernsey and Jersey),NUTS3,GG_J
+GG_JE,Channel Islands (Guernsey and Jersey),,
 GH,Ghana,country,
-GH_CAP,Accra,NUTS3,GH_CA
+GH_CAP,Accra,,
 GI,Gibraltar,country,
 GL,Greenland,country,
-GL_CAP,Nuuk,NUTS3,GL_CA
+GL_CAP,Nuuk,,
 GM,"Gambia, The",country,
-GM_CAP,Banjul,NUTS3,GM_CA
+GM_CAP,Banjul,,
 GN,Guinea,country,
-GN_CAP,Conakry,NUTS3,GN_CA
-GOV_NAT,National government,NUTS3,GOV_NA
+GN_CAP,Conakry,,
+GOV_NAT,National government,,
 GQ,Equatorial Guinea,country,
-GQ_CAP,Malabo,NUTS3,GQ_CA
+GQ_CAP,Malabo,,
 GS,South Georgia and the South Sandwich Islands,country,
 GT,Guatemala,country,
-GT_CAP,Ciudad de Guatemala,NUTS3,GT_CA
+GT_CAP,Ciudad de Guatemala,,
 GU,Guam,country,
 GW,Guinea-Bissau,country,
-GW_CAP,Bissau,NUTS3,GW_CA
+GW_CAP,Bissau,,
 GY,Guyana,country,
-GY_CAP,Georgetown,NUTS3,GY_CA
-HDC_EXT,"Highly developed countries (other than EU, EFTA and Candidate countries)",NUTS3,HDC_EX
+GY_CAP,Georgetown,,
+HDC_EXT,"Highly developed countries (other than EU, EFTA and Candidate countries)",,
 HK,Hong Kong,country,
-HK_CAP,Hong Kong,NUTS3,HK_CA
+HK_CAP,Hong Kong,,
 HM,Heard Island and McDonald Islands,country,
 HN,Honduras,country,
-HN_CAP,Tegucigalpa,NUTS3,HN_CA
+HN_CAP,Tegucigalpa,,
 HR,Croatia,country,
 HR0,Hrvatska,NUTS1,HR
-HR01,Sjeverozapadna Hrvatska (former statistical region),NUTS2,HR0
-HR011,Grad Zagreb (former statistical region),NUTS3,HR01
-HR012,Zagrebacka zupanija (former statistical region),NUTS3,HR01
-HR013,Krapinsko-zagorska zupanija (former statistical region),NUTS3,HR01
-HR014,Varazdinska zupanija (former statistical region),NUTS3,HR01
-HR015,Koprivnicko-krizevacka zupanija (former statistical region),NUTS3,HR01
-HR016,Medimurska zupanija (former statistical region),NUTS3,HR01
+HR01,Sjeverozapadna Hrvatska (former statistical region),,
+HR011,Grad Zagreb (former statistical region),,
+HR012,Zagrebacka zupanija (former statistical region),,
+HR013,Krapinsko-zagorska zupanija (former statistical region),,
+HR014,Varazdinska zupanija (former statistical region),,
+HR015,Koprivnicko-krizevacka zupanija (former statistical region),,
+HR016,Medimurska zupanija (former statistical region),,
 HR02,Panonska Hrvatska,NUTS2,HR0
 HR021,Bjelovarsko-bilogorska županija,NUTS3,HR02
 HR022,Virovitičko-podravska županija,NUTS3,HR02
@@ -1650,6 +2022,21 @@ HR034,Šibensko-kninska županija,NUTS3,HR03
 HR035,Splitsko-dalmatinska županija,NUTS3,HR03
 HR036,Istarska županija,NUTS3,HR03
 HR037,Dubrovačko-neretvanska županija,NUTS3,HR03
+HR04,Kontinentalna Hrvatska (NUTS 2016),,
+HR041,Grad Zagreb (NUTS 2016),,
+HR042,Zagrebacka zupanija (NUTS 2016),,
+HR043,Krapinsko-zagorska zupanija (NUTS 2016),,
+HR044,Varazdinska zupanija (NUTS 2016),,
+HR045,Koprivnicko-krizevacka zupanija (NUTS 2016),,
+HR046,Medimurska zupanija (NUTS 2016),,
+HR047,Bjelovarsko-bilogorska zupanija (NUTS 2016),,
+HR048,Viroviticko-podravska zupanija (NUTS 2016),,
+HR049,Pozesko-slavonska zupanija (NUTS 2016),,
+HR04A,Brodsko-posavska zupanija (NUTS 2016),,
+HR04B,Osjecko-baranjska zupanija (NUTS 2016),,
+HR04C,Vukovarsko-srijemska zupanija (NUTS 2016),,
+HR04D,Karlovacka zupanija (NUTS 2016),,
+HR04E,Sisacko-moslavacka zupanija (NUTS 2016),,
 HR05,Grad Zagreb,NUTS2,HR0
 HR050,Grad Zagreb,NUTS3,HR05
 HR06,Sjeverna Hrvatska,NUTS2,HR0
@@ -1664,11 +2051,14 @@ HRXXX,Not regionalised/Unknown NUTS 3,NUTS3,HRXX
 HRZ,Extra-Regio NUTS 1,NUTS1,HR
 HRZZ,Extra-Regio NUTS 2,NUTS2,HRZ
 HRZZZ,Extra-Regio NUTS 3,NUTS3,HRZZ
-HR_CAP,Zagreb,NUTS3,HR_CA
+HR_CAP,Zagreb,,
 HT,Haiti,country,
-HT_CAP,Port-au-Prince,NUTS3,HT_CA
+HT_CAP,Port-au-Prince,,
 HU,Hungary,country,
 HU1,Közép-Magyarország,NUTS1,HU
+HU10,Közép-Magyarország (NUTS 2013),,
+HU101,Budapest (NUTS 2013),,
+HU102,Pest (NUTS 2013),,
 HU11,Budapest,NUTS2,HU1
 HU110,Budapest,NUTS3,HU11
 HU12,Pest,NUTS2,HU1
@@ -1705,44 +2095,54 @@ HUXXX,Not regionalised/Unknown NUTS 3,NUTS3,HUXX
 HUZ,Extra-Regio NUTS 1,NUTS1,HU
 HUZZ,Extra-Regio NUTS 2,NUTS2,HUZ
 HUZZZ,Extra-Regio NUTS 3,NUTS3,HUZZ
-HU_ALF,Alföld,NUTS3,HU_AL
-HU_CAP,Budapest,NUTS3,HU_CA
-HU_ESDU,Észak-Dunántúl,NUTS3,HU_ESD
-IAEA,International Atomic Energy Agency (IAEA),NUTS2,IAE
-IBRD,International Bank for Reconstruction and Development,NUTS2,IBR
+HU_ALF,Alföld,,
+HU_CAP,Budapest,,
+HU_ESDU,Észak-Dunántúl,,
+IAEA,International Atomic Energy Agency (IAEA),,
+IBRD,International Bank for Reconstruction and Development,,
 ID,Indonesia,country,
-IDA,International Development Association,NUTS1,ID
-IDB,Inter-American Development Bank,NUTS1,ID
-ID_CAP,Jakarta,NUTS3,ID_CA
-ID_DEL,Banda Aceh,NUTS3,ID_DE
+IDA,International Development Association,,
+IDB,Inter-American Development Bank,,
+ID_CAP,Jakarta,,
+ID_DEL,Banda Aceh,,
 IE,Ireland,country,
 IE0,Ireland,NUTS1,IE
-IE01101,Cavan,NUTS3,IE0110
-IE01102,Donegal,NUTS3,IE0110
-IE01103,Leitrim,NUTS3,IE0110
-IE01104,Louth,NUTS3,IE0110
-IE01105,Monaghan,NUTS3,IE0110
-IE01106,Sligo,NUTS3,IE0110
-IE01201,Laois,NUTS3,IE0120
-IE01202,Longford,NUTS3,IE0120
-IE01203,Offaly,NUTS3,IE0120
-IE01204,Westmeath,NUTS3,IE0120
-IE01301_01302,Galway,NUTS3,IE01301_0130
-IE01303,Mayo,NUTS3,IE0130
-IE01304,Roscommon,NUTS3,IE0130
-IE02201,Kildare,NUTS3,IE0220
-IE02202,Meath,NUTS3,IE0220
-IE02203,Wicklow,NUTS3,IE0220
-IE02301,Clare,NUTS3,IE0230
-IE02302_02303,Limerick,NUTS3,IE02302_0230
-IE02304,Tipperary North Riding,NUTS3,IE0230
-IE02401,Carlow,NUTS3,IE0240
-IE02402,Kilkenny,NUTS3,IE0240
-IE02403,Tipperary South Riding,NUTS3,IE0240
-IE02404_02405,Waterford,NUTS3,IE02404_0240
-IE02406,Wexford,NUTS3,IE0240
-IE02501_02502,Cork,NUTS3,IE02501_0250
-IE02503,Kerry,NUTS3,IE0250
+IE01,"Border, Midland and Western (NUTS 2013)",,
+IE011,Border (NUTS 2013),,
+IE01101,Cavan,,
+IE01102,Donegal,,
+IE01103,Leitrim,,
+IE01104,Louth,,
+IE01105,Monaghan,,
+IE01106,Sligo,,
+IE012,Midland (NUTS 2013),,
+IE01201,Laois,,
+IE01202,Longford,,
+IE01203,Offaly,,
+IE01204,Westmeath,,
+IE013,West (NUTS 2013),,
+IE01301_01302,Galway,,
+IE01303,Mayo,,
+IE01304,Roscommon,,
+IE02,Southern and Eastern (NUTS 2013),,
+IE021,Dublin (NUTS 2013),,
+IE022,Mid-East (NUTS 2013),,
+IE02201,Kildare,,
+IE02202,Meath,,
+IE02203,Wicklow,,
+IE023,Mid-West (NUTS 2013),,
+IE02301,Clare,,
+IE02302_02303,Limerick,,
+IE02304,Tipperary North Riding,,
+IE024,South-East (NUTS 2013),,
+IE02401,Carlow,,
+IE02402,Kilkenny,,
+IE02403,Tipperary South Riding,,
+IE02404_02405,Waterford,,
+IE02406,Wexford,,
+IE025,South-West (NUTS 2013),,
+IE02501_02502,Cork,,
+IE02503,Kerry,,
 IE04,Northern and Western,NUTS2,IE0
 IE041,Border,NUTS3,IE04
 IE042,West,NUTS3,IE04
@@ -1760,36 +2160,36 @@ IEXXX,Not regionalised/Unknown NUTS 3,NUTS3,IEXX
 IEZ,Extra-Regio NUTS 1,NUTS1,IE
 IEZZ,Extra-Regio NUTS 2,NUTS2,IEZ
 IEZZZ,Extra-Regio NUTS 3,NUTS3,IEZZ
-IE_CAP,Dublin,NUTS3,IE_CA
-IF,Investment Facility,country,
-IFAD,International Fund for Agricultural Development (IFAD),NUTS2,IFA
-IFC,International Finance Corporation (IFC),NUTS1,IF
+IE_CAP,Dublin,,
+IF,Investment Facility,,
+IFAD,International Fund for Agricultural Development (IFAD),,
+IFC,International Finance Corporation (IFC),,
 IL,Israel,country,
-ILO,International Labour Organization (ILO),NUTS1,IL
-IL_DEL,Tel Aviv,NUTS3,IL_DE
+ILO,International Labour Organization (ILO),,
+IL_DEL,Tel Aviv,,
 IM,Isle of Man,country,
-IMF,International Monetary Fund,NUTS1,IM
+IMF,International Monetary Fund,,
 IN,India,country,
-INR,In the same region,NUTS1,IN
-INST_NAT,National institutions,NUTS3,INST_NA
-INT_EA,Intra-euro area,NUTS3,INT_E
-INT_EA_NAL,"Intra-euro area, not allocated",NUTS3,INT_EA_NA
-INT_EU,Intra-EU,NUTS3,INT_E
-INT_EU15,Intra-EU15 (1995-2004),NUTS3,INT_EU1
-INT_EU15_NAL,"Intra-EU15 (1995-2004), not allocated",NUTS3,INT_EU15_NA
-INT_EU25,Intra-EU25 (2004-2006),NUTS3,INT_EU2
-INT_EU27_2007,Intra-EU27 (2007-2013),NUTS3,INT_EU27_200
-INT_EU27_2020,Intra-EU27 (from 2020),NUTS3,INT_EU27_202
-INT_EU28,Intra-EU28 (2013-2020),NUTS3,INT_EU2
-INT_EU_NAL,"Intra-EU, not allocated",NUTS3,INT_EU_NA
-INT_NMS10,Intra-New Member States - 10 countries (2004-2006),NUTS3,INT_NMS1
-INT_NMS12,Intra-New Member States - 12 countries (2007-2013),NUTS3,INT_NMS1
-IN_CAP,New Delhi,NUTS3,IN_CA
+INR,In the same region,,
+INST_NAT,National institutions,,
+INT_EA,Intra-euro area,,
+INT_EA_NAL,"Intra-euro area, not allocated",,
+INT_EU,Intra-EU,,
+INT_EU15,Intra-EU15 (1995-2004),,
+INT_EU15_NAL,"Intra-EU15 (1995-2004), not allocated",,
+INT_EU25,Intra-EU25 (2004-2006),,
+INT_EU27_2007,Intra-EU27 (2007-2013),,
+INT_EU27_2020,Intra-EU27 (from 2020),,
+INT_EU28,Intra-EU28 (2013-2020),,
+INT_EU_NAL,"Intra-EU, not allocated",,
+INT_NMS10,Intra-New Member States - 10 countries (2004-2006),,
+INT_NMS12,Intra-New Member States - 12 countries (2007-2013),,
+IN_CAP,New Delhi,,
 IO,British Indian Ocean Territory,country,
 IQ,Iraq,country,
-IQ_CAP,Baghdad,NUTS3,IQ_CA
+IQ_CAP,Baghdad,,
 IR,Iran,country,
-IR_CAP,Tehran,NUTS3,IR_CA
+IR_CAP,Tehran,,
 IS,Iceland,country,
 IS0,Ísland,NUTS1,IS
 IS00,Ísland,NUTS2,IS0
@@ -1801,7 +2201,7 @@ ISXXX,Not regionalised/Unknown level 3,NUTS3,ISXX
 ISZ,Extra-Regio level 1,NUTS1,IS
 ISZZ,Extra-Regio level 2,NUTS2,ISZ
 ISZZZ,Extra-Regio level 3,NUTS3,ISZZ
-IS_CAP,Reykjavik,NUTS3,IS_CA
+IS_CAP,Reykjavik,,
 IT,Italy,country,
 ITC,Nord-Ovest,NUTS1,IT
 ITC1,Piemonte,NUTS2,ITC
@@ -1825,6 +2225,7 @@ ITC41,Varese,NUTS3,ITC4
 ITC42,Como,NUTS3,ITC4
 ITC43,Lecco,NUTS3,ITC4
 ITC44,Sondrio,NUTS3,ITC4
+ITC45,Milano (NUTS 2006),,
 ITC46,Bergamo,NUTS3,ITC4
 ITC47,Brescia,NUTS3,ITC4
 ITC48,Pavia,NUTS3,ITC4
@@ -1833,6 +2234,61 @@ ITC4A,Cremona,NUTS3,ITC4
 ITC4B,Mantova,NUTS3,ITC4
 ITC4C,Milano,NUTS3,ITC4
 ITC4D,Monza e della Brianza,NUTS3,ITC4
+ITD,Nord-Est (NUTS 2006),,
+ITD1,Provincia Autonoma Bolzano/Bozen (NUTS 2006),,
+ITD10,Bolzano-Bozen (NUTS 2006),,
+ITD1_D2,"Province Autonome Bolzano/Bozen, Trento (NUTS 2006)",,
+ITD2,Provincia Autonoma Trento (NUTS 2006),,
+ITD20,Trento (NUTS 2006),,
+ITD3,Veneto (NUTS 2006),,
+ITD31,Verona (NUTS 2006),,
+ITD32,Vicenza (NUTS 2006),,
+ITD33,Belluno (NUTS 2006),,
+ITD34,Treviso (NUTS 2006),,
+ITD35,Venezia (NUTS 2006),,
+ITD36,Padova (NUTS 2006),,
+ITD37,Rovigo (NUTS 2006),,
+ITD4,Friuli-Venezia Giulia (NUTS 2006),,
+ITD41,Pordenone (NUTS 2006),,
+ITD42,Udine (NUTS 2006),,
+ITD43,Gorizia (NUTS 2006),,
+ITD44,Trieste (NUTS 2006),,
+ITD5,Emilia-Romagna (NUTS 2006),,
+ITD51,Piacenza (NUTS 2006),,
+ITD52,Parma (NUTS 2006),,
+ITD53,Reggio nell'Emilia (NUTS 2006),,
+ITD54,Modena (NUTS 2006),,
+ITD55,Bologna (NUTS 2006),,
+ITD56,Ferrara (NUTS 2006),,
+ITD57,Ravenna (NUTS 2006),,
+ITD58,Forlì-Cesena (NUTS 2006),,
+ITD59,Rimini (NUTS 2006),,
+ITE,Centro (I) (NUTS 2006),,
+ITE1,Toscana (NUTS 2006),,
+ITE11,Massa-Carrara (NUTS 2006),,
+ITE12,Lucca (NUTS 2006),,
+ITE13,Pistoia (NUTS 2006),,
+ITE14,Firenze (NUTS 2006),,
+ITE15,Prato (NUTS 2006),,
+ITE16,Livorno (NUTS 2006),,
+ITE17,Pisa (NUTS 2006),,
+ITE18,Arezzo (NUTS 2006),,
+ITE19,Siena (NUTS 2006),,
+ITE1A,Grosseto (NUTS 2006),,
+ITE2,Umbria (NUTS 2006),,
+ITE21,Perugia (NUTS 2006),,
+ITE22,Terni (NUTS 2006),,
+ITE3,Marche (NUTS 2006),,
+ITE31,Pesaro e Urbino (NUTS 2006),,
+ITE32,Ancona (NUTS 2006),,
+ITE33,Macerata (NUTS 2006),,
+ITE34,Ascoli Piceno (NUTS 2006),,
+ITE4,Lazio (NUTS 2006),,
+ITE41,Viterbo (NUTS 2006),,
+ITE42,Rieti (NUTS 2006),,
+ITE43,Roma (NUTS 2006),,
+ITE44,Latina (NUTS 2006),,
+ITE45,Frosinone (NUTS 2006),,
 ITF,Sud,NUTS1,IT
 ITF1,Abruzzo,NUTS2,ITF
 ITF11,L’Aquila,NUTS3,ITF1
@@ -1849,6 +2305,8 @@ ITF33,Napoli,NUTS3,ITF3
 ITF34,Avellino,NUTS3,ITF3
 ITF35,Salerno,NUTS3,ITF3
 ITF4,Puglia,NUTS2,ITF
+ITF41,Foggia (NUTS 2006),,
+ITF42,Bari (NUTS 2006),,
 ITF43,Taranto,NUTS3,ITF4
 ITF44,Brindisi,NUTS3,ITF4
 ITF45,Lecce,NUTS3,ITF4
@@ -1876,6 +2334,18 @@ ITG17,Catania,NUTS3,ITG1
 ITG18,Ragusa,NUTS3,ITG1
 ITG19,Siracusa,NUTS3,ITG1
 ITG2,Sardegna,NUTS2,ITG
+ITG21,Sassari (NUTS 2003),,
+ITG22,Nuoro (NUTS 2003),,
+ITG23,Oristano (NUTS 2003),,
+ITG24,Cagliari (NUTS 2003),,
+ITG25,Sassari (NUTS 2016),,
+ITG26,Nuoro (NUTS 2016),,
+ITG27,Cagliari (NUTS 2016),,
+ITG28,Oristano (NUTS 2016),,
+ITG29,Olbia-Tempio (NUTS 2016),,
+ITG2A,Ogliastra (NUTS 2016),,
+ITG2B,Medio Campidano (NUTS 2016),,
+ITG2C,Carbonia-Iglesias (NUTS 2016),,
 ITG2D,Sassari,NUTS3,ITG2
 ITG2E,Nuoro,NUTS3,ITG2
 ITG2F,Cagliari,NUTS3,ITG2
@@ -1936,43 +2406,49 @@ ITI42,Rieti,NUTS3,ITI4
 ITI43,Roma,NUTS3,ITI4
 ITI44,Latina,NUTS3,ITI4
 ITI45,Frosinone,NUTS3,ITI4
+ITX,Not regionalised/Unknown NUTS 1,NUTS1,IT
+ITXX,Not regionalised/Unknown NUTS 2,NUTS2,ITX
+ITXXX,Not regionalised/Unknown NUTS 3,NUTS3,ITXX
 ITZ,Extra-Regio NUTS 1,NUTS1,IT
 ITZZ,Extra-Regio NUTS 2,NUTS2,ITZ
 ITZZZ,Extra-Regio NUTS 3,NUTS3,ITZZ
+IT_CAP,Roma,,
+IT_DEL,Varese,,
+IT_NAL,"Italy, not allocated",,
 JE,Jersey,country,
 JM,Jamaica,country,
-JM_CAP,Kingston,NUTS3,JM_CA
+JM_CAP,Kingston,,
 JO,Jordan,country,
-JO_CAP,Amman,NUTS3,JO_CA
+JO_CAP,Amman,,
 JP,Japan,country,
-JP_CAP,Tokyo,NUTS3,JP_CA
-JP_DEL,Naka,NUTS3,JP_DE
+JP_CAP,Tokyo,,
+JP_DEL,Naka,,
 KE,Kenya,country,
-KE_CAP,Nairobi,NUTS3,KE_CA
+KE_CAP,Nairobi,,
 KG,Kyrgyzstan,country,
-KG_CAP,Bishkek,NUTS3,KG_CA
+KG_CAP,Bishkek,,
 KH,Cambodia,country,
-KH_CAP,Phnom Penh,NUTS3,KH_CA
+KH_CAP,Phnom Penh,,
 KI,Kiribati,country,
 KM,Comoros,country,
-KM_CAP,Moroni,NUTS3,KM_CA
+KM_CAP,Moroni,,
 KN,Saint Kitts and Nevis,country,
 KP,North Korea,country,
 KR,South Korea,country,
-KR_CAP,Seoul,NUTS3,KR_CA
+KR_CAP,Seoul,,
 KW,Kuwait,country,
-KW_CAP,Kuwait City,NUTS3,KW_CA
+KW_CAP,Kuwait City,,
 KY,Cayman Islands,country,
 KZ,Kazakhstan,country,
-KZ_CAP,Astana,NUTS3,KZ_CA
-KZ_DEL,Almaty,NUTS3,KZ_DE
+KZ_CAP,Astana,,
+KZ_DEL,Almaty,,
 LA,Laos,country,
-LA_CAP,Vientiane,NUTS3,LA_CA
+LA_CAP,Vientiane,,
 LB,Lebanon,country,
-LB_CAP,Bayrut,NUTS3,LB_CA
+LB_CAP,Bayrut,,
 LC,Saint Lucia,country,
-LDC,Least developed countries,NUTS1,LD
-LDC_EXT,"Less developed countries (other than EU, EFTA and Candidate countries)",NUTS3,LDC_EX
+LDC,Least developed countries,,
+LDC_EXT,"Less developed countries (other than EU, EFTA and Candidate countries)",,
 LI,Liechtenstein,country,
 LI0,Liechtenstein,NUTS1,LI
 LI00,Liechtenstein,NUTS2,LI0
@@ -1983,16 +2459,27 @@ LIXXX,Not regionalised/Unknown level 3,NUTS3,LIXX
 LIZ,Extra-Regio level 1,NUTS1,LI
 LIZZ,Extra-Regio level 2,NUTS2,LIZ
 LIZZZ,Extra-Regio level 3,NUTS3,LIZZ
-LI_CAP,Vaduz,NUTS3,LI_CA
+LI_CAP,Vaduz,,
 LK,Sri Lanka,country,
-LK_DEL,Colombo,NUTS3,LK_DE
-LMIC,Lower middle income countries,NUTS2,LMI
+LK_DEL,Colombo,,
+LMIC,Lower middle income countries,,
 LR,Liberia,country,
-LR_CAP,Monrovia,NUTS3,LR_CA
+LR_CAP,Monrovia,,
 LS,Lesotho,country,
-LS_CAP,Maseru,NUTS3,LS_CA
+LS_CAP,Maseru,,
 LT,Lithuania,country,
 LT0,Lietuva,NUTS1,LT
+LT00,Lietuva (NUTS 2013),,
+LT001,Alytaus apskritis (NUTS 2013),,
+LT002,Kauno apskritis (NUTS 2013),,
+LT003,Klaipedos apskritis (NUTS 2013),,
+LT004,Marijampoles apskritis (NUTS 2013),,
+LT005,Panevezio apskritis (NUTS 2013),,
+LT006,Siauliu apskritis (NUTS 2013),,
+LT007,Taurages apskritis (NUTS 2013),,
+LT008,Telsiu apskritis (NUTS 2013),,
+LT009,Utenos apskritis (NUTS 2013),,
+LT00A,Vilniaus apskritis (NUTS 2013),,
 LT01,Sostinės regionas,NUTS2,LT0
 LT011,Vilniaus apskritis,NUTS3,LT01
 LT02,Vidurio ir vakarų Lietuvos regionas,NUTS2,LT0
@@ -2011,7 +2498,7 @@ LTXXX,Not regionalised/Unknown NUTS 3,NUTS3,LTXX
 LTZ,Extra-Regio NUTS 1,NUTS1,LT
 LTZZ,Extra-Regio NUTS 2,NUTS2,LTZ
 LTZZZ,Extra-Regio NUTS 3,NUTS3,LTZZ
-LT_CAP,Vilnius,NUTS3,LT_CA
+LT_CAP,Vilnius,,
 LU,Luxembourg,country,
 LU0,Luxembourg,NUTS1,LU
 LU00,Luxembourg,NUTS2,LU0
@@ -2022,14 +2509,18 @@ LUXXX,Not regionalised/Unknown NUTS 3,NUTS3,LUXX
 LUZ,Extra-Regio NUTS 1,NUTS1,LU
 LUZZ,Extra-Regio NUTS 2,NUTS2,LUZ
 LUZZZ,Extra-Regio NUTS 3,NUTS3,LUZZ
-LU_CAP,Luxembourg,NUTS3,LU_CA
+LU_CAP,Luxembourg,,
 LV,Latvia,country,
 LV0,Latvija,NUTS1,LV
 LV00,Latvija,NUTS2,LV0
-LV001,Riga (statistical region 2001),NUTS3,LV00
-LV002,Vidzeme (statistical region 2001),NUTS3,LV00
-LV004,Zemgale (statistical region 2001),NUTS3,LV00
+LV001,Riga (statistical region 2001),,
+LV002,Vidzeme (statistical region 2001),,
+LV003,Kurzeme (NUTS 2021),,
+LV004,Zemgale (statistical region 2001),,
 LV005,Latgale,NUTS3,LV00
+LV006,Rīga (NUTS 2021),,
+LV007,Pieriga (NUTS 2021),,
+LV008,Vidzeme (NUTS 2021),,
 LV009,Zemgale,NUTS3,LV00
 LV00A,Rīga,NUTS3,LV00
 LV00B,Kurzeme,NUTS3,LV00
@@ -2040,41 +2531,41 @@ LVXXX,Not regionalised/Unknown NUTS 3,NUTS3,LVXX
 LVZ,Extra-Regio NUTS 1,NUTS1,LV
 LVZZ,Extra-Regio NUTS 2,NUTS2,LVZ
 LVZZZ,Extra-Regio NUTS 3,NUTS3,LVZZ
-LV_CAP,Riga,NUTS3,LV_CA
+LV_CAP,Riga,,
 LY,Libya,country,
-LY_CAP,Tarabulus (Tripoli),NUTS3,LY_CA
+LY_CAP,Tarabulus (Tripoli),,
 MA,Morocco,country,
-MACR,Mashrek,NUTS2,MAC
-MADCT,More advanced developing countries and territories,NUTS3,MADC
-MAGR,Maghreb,NUTS2,MAG
-MA_CAP,Rabat,NUTS3,MA_CA
+MACR,Mashrek,,
+MADCT,More advanced developing countries and territories,,
+MAGR,Maghreb,,
+MA_CAP,Rabat,,
 MC,Monaco,country,
 MD,Moldova,country,
-MDC_EXT,"Medium developed countries (other than EU, EFTA and Candidate countries)",NUTS3,MDC_EX
-MD_CAP,Chisinau,NUTS3,MD_CA
+MDC_EXT,"Medium developed countries (other than EU, EFTA and Candidate countries)",,
+MD_CAP,Chisinau,,
 ME,Montenegro,country,
 ME0,Crna Gora,NUTS1,ME
 ME00,Crna Gora,NUTS2,ME0
 ME000,Crna Gora,NUTS3,ME00
-MED,Mediterranean Basin Countries,NUTS1,ME
-MED_X_HR,Mediterranean Basin Countries except Croatia,NUTS3,MED_X_H
-MEL,Melanesia,NUTS1,ME
-MERCOSUR,"Southern Common Market Southern Common Market (MERCOSUR5_1991, MERCOSUR4_2016)",NUTS3,MERCOSU
-MERCOSUR4_2016,Southern Common Market – 4 countries (from 2016),NUTS3,MERCOSUR4_201
-MERCOSUR5_1991,Southern Common Market – 5 countries (1991-2016),NUTS3,MERCOSUR5_199
+MED,Mediterranean Basin Countries,,
+MED_X_HR,Mediterranean Basin Countries except Croatia,,
+MEL,Melanesia,,
+MERCOSUR,"Southern Common Market Southern Common Market (MERCOSUR5_1991, MERCOSUR4_2016)",,
+MERCOSUR4_2016,Southern Common Market – 4 countries (from 2016),,
+MERCOSUR5_1991,Southern Common Market – 5 countries (1991-2016),,
 MEX,Not regionalised/Unknown level 1,NUTS1,ME
 MEXX,Not regionalised/Unknown level 2,NUTS2,MEX
 MEXXX,Not regionalised/Unknown level 3,NUTS3,MEXX
 MEZ,Extra-Regio level 1,NUTS1,ME
 MEZZ,Extra-Regio level 2,NUTS2,MEZ
 MEZZZ,Extra-Regio level 3,NUTS3,MEZZ
-ME_CAP,Podgorica,NUTS3,ME_CA
+ME_CAP,Podgorica,,
 MF,Saint Martin,country,
 MG,Madagascar,country,
-MG_CAP,Antananarivo,NUTS3,MG_CA
+MG_CAP,Antananarivo,,
 MH,Marshall Islands,country,
-MIC,Micronesia,NUTS1,MI
-MIGA,Multilateral Investment Guarantee Agency (MIGA),NUTS2,MIG
+MIC,Micronesia,,
+MIGA,Multilateral Investment Guarantee Agency (MIGA),,
 MK,North Macedonia,country,
 MK0,Severna Makedonija,NUTS1,MK
 MK00,Severna Makedonija,NUTS2,MK0
@@ -2092,19 +2583,19 @@ MKXXX,Not regionalised/Unknown level 3,NUTS3,MKXX
 MKZ,Extra-Regio level 1,NUTS1,MK
 MKZZ,Extra-Regio level 2,NUTS2,MKZ
 MKZZZ,Extra-Regio level 3,NUTS3,MKZZ
-MK_CAP,Skopje,NUTS3,MK_CA
+MK_CAP,Skopje,,
 ML,Mali,country,
-ML_CAP,Bamako,NUTS3,ML_CA
+ML_CAP,Bamako,,
 MM,Myanmar/Burma,country,
-MM_DEL,Yangon,NUTS3,MM_DE
+MM_DEL,Yangon,,
 MN,Mongolia,country,
-MN_CAP,Ulaanbaatar,NUTS3,MN_CA
+MN_CAP,Ulaanbaatar,,
 MO,Macao,country,
 MP,Northern Mariana Islands,country,
 MR,Mauritania,country,
-MR_CAP,Nouakchott,NUTS3,MR_CA
+MR_CAP,Nouakchott,,
 MS,Montserrat,country,
-MSHO,Member State of head office,NUTS2,MSH
+MSHO,Member State of head office,,
 MT,Malta,country,
 MT0,Malta,NUTS1,MT
 MT00,Malta,NUTS2,MT0
@@ -2116,64 +2607,71 @@ MTXXX,Not regionalised/Unknown NUTS 3,NUTS3,MTXX
 MTZ,Extra-Regio NUTS 1,NUTS1,MT
 MTZZ,Extra-Regio NUTS 2,NUTS2,MTZ
 MTZZZ,Extra-Regio NUTS 3,NUTS3,MTZZ
-MT_CAP,Valletta,NUTS3,MT_CA
+MT_CAP,Valletta,,
 MU,Mauritius,country,
-MU_CAP,Port-Louis,NUTS3,MU_CA
+MU_CAP,Port-Louis,,
 MV,Maldives,country,
 MW,Malawi,country,
-MW_CAP,Lilongwe,NUTS3,MW_CA
+MW_CAP,Lilongwe,,
 MX,Mexico,country,
-MX_CAP,Mexico,NUTS3,MX_CA
+MX_CAP,Mexico,,
 MY,Malaysia,country,
-MY_CAP,Kuala Lumpur,NUTS3,MY_CA
+MY_CAP,Kuala Lumpur,,
 MZ,Mozambique,country,
-MZ_CAP,Maputo,NUTS3,MZ_CA
+MZ_CAP,Maputo,,
 NA,Namibia,country,
-NAFTA,North American Free Trade Agreement,NUTS3,NAFT
-NAL,Not allocated,NUTS1,NA
-NAP,Not applicable,NUTS1,NA
-NAT,Reporting country,NUTS1,NA
-NA_CAP,Windhoek,NUTS3,NA_CA
+NAFTA,North American Free Trade Agreement,,
+NAL,Not allocated,,
+NAP,Not applicable,,
+NAT,Reporting country,,
+NA_CAP,Windhoek,,
 NC,New Caledonia,country,
-NCL,Not classifiable according to current borders,NUTS1,NC
-NCL_OTH,Other entity not classifiable,NUTS3,NCL_OT
-NC_CAP,Noumea,NUTS3,NC_CA
+NCL,Not classifiable according to current borders,,
+NCL_OTH,Other entity not classifiable,,
+NC_CAP,Noumea,,
 NE,Niger,country,
-NEASA,Non-EASA member countries,NUTS3,NEAS
-NEU,Non-EU countries (aggregate changing according to the context),NUTS1,NE
-NEU15_FOR,Non-EU15 countries (1995-2004) nor reporting country,NUTS3,NEU15_FO
-NEU27_2007_FOR,Non-EU27 countries (2007-2013) nor reporting country,NUTS3,NEU27_2007_FO
-NEU27_2007_FOR_STLS,Non-EU27 countries (2007-2013) nor reporting country and stateless,NUTS3,NEU27_2007_FOR_STL
-NEU27_2020,Non-EU27 countries (from 2020),NUTS3,NEU27_202
-NEU27_2020_FOR,Non-EU27 countries (from 2020) nor reporting country,NUTS3,NEU27_2020_FO
-NEU27_2020_NEFTA,Non-EU27 countries (from 2020) nor EFTA countries,NUTS3,NEU27_2020_NEFT
-NEU28,Non-EU28 countries (2013-2020),NUTS3,NEU2
-NEU28_FOR,Non-EU28 countries (2013-2020) nor reporting country,NUTS3,NEU28_FO
-NEU28_NEFTA,Non-EU28 countries (2013-2020) nor EFTA countries,NUTS3,NEU28_NEFT
-NEU_FOR,Non-EU countries nor reporting country (aggregate changing according to the context),NUTS3,NEU_FO
-NEU_HDI_H,Non-EU countries with high Human Development Index (HDI),NUTS3,NEU_HDI_
-NEU_HDI_L,Non-EU countries with low Human Development Index (HDI),NUTS3,NEU_HDI_
-NEU_HDI_M,Non-EU countries with medium Human Development Index (HDI),NUTS3,NEU_HDI_
-NEU_HDI_VH,Non-EU countries with very high Human Development Index (HDI),NUTS3,NEU_HDI_V
-NEU_NHDI,Non-EU countries with no Human Development Index (HDI) ranking,NUTS3,NEU_NHD
-NE_CAP,Niamey,NUTS3,NE_CA
+NEASA,Non-EASA member countries,,
+NEU,Non-EU countries (aggregate changing according to the context),,
+NEU15_FOR,Non-EU15 countries (1995-2004) nor reporting country,,
+NEU27_2007_FOR,Non-EU27 countries (2007-2013) nor reporting country,,
+NEU27_2007_FOR_STLS,Non-EU27 countries (2007-2013) nor reporting country and stateless,,
+NEU27_2020,Non-EU27 countries (from 2020),,
+NEU27_2020_FOR,Non-EU27 countries (from 2020) nor reporting country,,
+NEU27_2020_NEFTA,Non-EU27 countries (from 2020) nor EFTA countries,,
+NEU28,Non-EU28 countries (2013-2020),,
+NEU28_FOR,Non-EU28 countries (2013-2020) nor reporting country,,
+NEU28_NEFTA,Non-EU28 countries (2013-2020) nor EFTA countries,,
+NEU_FOR,Non-EU countries nor reporting country (aggregate changing according to the context),,
+NEU_HDI_H,Non-EU countries with high Human Development Index (HDI),,
+NEU_HDI_L,Non-EU countries with low Human Development Index (HDI),,
+NEU_HDI_M,Non-EU countries with medium Human Development Index (HDI),,
+NEU_HDI_VH,Non-EU countries with very high Human Development Index (HDI),,
+NEU_NHDI,Non-EU countries with no Human Development Index (HDI) ranking,,
+NE_CAP,Niamey,,
 NF,Norfolk Island,country,
 NG,Nigeria,country,
-NG_CAP,Abuja,NUTS3,NG_CA
-NG_DEL,Lagos,NUTS3,NG_DE
+NG_CAP,Abuja,,
+NG_DEL,Lagos,,
 NI,Nicaragua,country,
-NIB,Nordic Investment Bank,NUTS1,NI
-NIC_S1,Core Newly Industrializing Countries,NUTS3,NIC_S
-NIC_S2A,Asian NICs of the second wave of industrialization,NUTS3,NIC_S2
-NIC_S2LA,Latin American NICs of the second wave of industrialization,NUTS3,NIC_S2L
-NI_CAP,Managua,NUTS3,NI_CA
+NIB,Nordic Investment Bank,,
+NIC_S1,Core Newly Industrializing Countries,,
+NIC_S2A,Asian NICs of the second wave of industrialization,,
+NIC_S2LA,Latin American NICs of the second wave of industrialization,,
+NI_CAP,Managua,,
 NL,Netherlands,country,
 NL1,Noord-Nederland,NUTS1,NL
 NL11,Groningen,NUTS2,NL1
+NL111,Oost-Groningen (NUTS 2021),,
 NL112,Delfzijl en omgeving,NUTS3,NL11
+NL113,Overig Groningen (NUTS 2021),,
 NL114,Oost-Groningen,NUTS3,NL11
 NL115,Overig Groningen,NUTS3,NL11
 NL12,Friesland (NL),NUTS2,NL1
+NL121,Noord-Friesland (NUTS 2013),,
+NL122,Zuidwest-Friesland (NUTS 2013),,
+NL123,Zuidoost-Friesland (NUTS 2013),,
+NL124,Noord-Friesland (NUTS 2021),,
+NL125,Zuidwest-Friesland (NUTS 2021),,
 NL126,Zuidoost-Friesland,NUTS3,NL12
 NL127,Noord-Friesland,NUTS3,NL12
 NL128,Zuidwest-Friesland,NUTS3,NL12
@@ -2188,20 +2686,41 @@ NL212,Zuidwest-Overijssel,NUTS3,NL21
 NL213,Twente,NUTS3,NL21
 NL22,Gelderland,NUTS2,NL2
 NL221,Veluwe,NUTS3,NL22
+NL222,Achterhoek (NUTS 2003),,
+NL223,Arnhem/Nijmegen (NUTS 2003),,
 NL224,Zuidwest-Gelderland,NUTS3,NL22
 NL225,Achterhoek,NUTS3,NL22
 NL226,Arnhem/Nijmegen,NUTS3,NL22
 NL23,Flevoland,NUTS2,NL2
 NL230,Flevoland,NUTS3,NL23
 NL3,West-Nederland,NUTS1,NL
+NL31,Utrecht (NUTS 2021),,
+NL310,Utrecht (NUTS 2021),,
 NL32,Noord-Holland,NUTS2,NL3
 NL321,Kop van Noord-Holland,NUTS3,NL32
+NL322,Alkmaar en omgeving (NUTS 2013),,
 NL323,IJmond,NUTS3,NL32
+NL324,Agglomeratie Haarlem (NUTS 2021),,
 NL325,Zaanstreek,NUTS3,NL32
+NL326,Groot-Amsterdam (NUTS 2013),,
 NL327,Het Gooi en Vechtstreek,NUTS3,NL32
 NL328,Alkmaar en omgeving,NUTS3,NL32
+NL329,Groot-Amsterdam (NUTS 2021),,
 NL32A,Agglomeratie Haarlem,NUTS3,NL32
 NL32B,Groot-Amsterdam,NUTS3,NL32
+NL33,Zuid-Holland (NUTS 2021),,
+NL331,Agglomeratie Leiden en Bollenstreek (NUTS 2006),,
+NL332,Agglomeratie 's-Gravenhage (NUTS 2021),,
+NL333,Delft en Westland (NUTS 2021),,
+NL334,Oost-Zuid-Holland (NUTS 2006),,
+NL335,Groot-Rijnmond (NUTS 2006),,
+NL336,Zuidoost-Zuid-Holland (NUTS 2006),,
+NL337,Agglomeratie Leiden en Bollenstreek (NUTS 2021),,
+NL338,Oost-Zuid-Holland (NUTS 2013),,
+NL339,Groot-Rijnmond (NUTS 2013),,
+NL33A,Zuidoost-Zuid-Holland (NUTS 2021),,
+NL33B,Oost-Zuid-Holland (NUTS 2021),,
+NL33C,Groot-Rijnmond (NUTS 2021),,
 NL34,Zeeland,NUTS2,NL3
 NL341,Zeeuwsch-Vlaanderen,NUTS3,NL34
 NL342,Overig Zeeland,NUTS3,NL34
@@ -2217,6 +2736,8 @@ NL366,Groot-Rijnmond,NUTS3,NL36
 NL4,Zuid-Nederland,NUTS1,NL
 NL41,Noord-Brabant,NUTS2,NL4
 NL411,West-Noord-Brabant,NUTS3,NL41
+NL412,Midden-Noord-Brabant (NUTS 2021),,
+NL413,Noordoost-Noord-Brabant (NUTS 2021),,
 NL414,Zuidoost-Noord-Brabant,NUTS3,NL41
 NL415,Midden-Noord-Brabant,NUTS3,NL41
 NL416,Noordoost-Noord-Brabant,NUTS3,NL41
@@ -2230,58 +2751,58 @@ NLXXX,Not regionalised/Unknown NUTS 3,NUTS3,NLXX
 NLZ,Extra-Regio NUTS 1,NUTS1,NL
 NLZZ,Extra-Regio NUTS 2,NUTS2,NLZ
 NLZZZ,Extra-Regio NUTS 3,NUTS3,NLZZ
-NL_CAP,Amsterdam,NUTS3,NL_CA
-NL_DEL,Den Haag,NUTS3,NL_DE
-NL_NAL,"Netherlands, not allocated",NUTS3,NL_NA
-NL_NZKG,Noordzeekanaalgebied,NUTS3,NL_NZK
-NL_RMD,Rijnmond,NUTS3,NL_RM
-NL_S_W,Zuidwest,NUTS3,NL_S_
-NMS10,New Member States - 10 countries (2004-2006),NUTS3,NMS1
-NMS12,New Member States - 12 countries (2007-2013),NUTS3,NMS1
-NMS13,New Member States - 13 countries (from 2013),NUTS3,NMS1
-NMS_NEA19,New Member States not in EA19 (from 2015) - 6 countries,NUTS3,NMS_NEA1
-NMS_NEA20,New Member States not in EA20 (from 2023) - 5 countries,NUTS3,NMS_NEA2
+NL_CAP,Amsterdam,,
+NL_DEL,Den Haag,,
+NL_NAL,"Netherlands, not allocated",,
+NL_NZKG,Noordzeekanaalgebied,,
+NL_RMD,Rijnmond,,
+NL_S_W,Zuidwest,,
+NMS10,New Member States - 10 countries (2004-2006),,
+NMS12,New Member States - 12 countries (2007-2013),,
+NMS13,New Member States - 13 countries (from 2013),,
+NMS_NEA19,New Member States not in EA19 (from 2015) - 6 countries,,
+NMS_NEA20,New Member States not in EA20 (from 2023) - 5 countries,,
 NO,Norway,country,
 NO0,Norge,NUTS1,NO
-NO01,Oslo og Akershus (statistical region 2016),NUTS2,NO0
-NO011,Oslo (statistical region 2016),NUTS3,NO01
-NO012,Akershus (statistical region 2016),NUTS3,NO01
-NO01_02_031-033,"Østlandet (Oslo og Akershus, Hedmark og Oppland, Østfold, Buskerud, Vestfold) (statistical region 2016)",NUTS3,NO01_02_031-03
+NO01,Oslo og Akershus (statistical region 2016),,
+NO011,Oslo (statistical region 2016),,
+NO012,Akershus (statistical region 2016),,
+NO01_02_031-033,"Østlandet (Oslo og Akershus, Hedmark og Oppland, Østfold, Buskerud, Vestfold) (statistical region 2016)",,
 NO02,Innlandet,NUTS2,NO0
 NO020,Innlandet,NUTS3,NO02
-NO021,Hedmark (statistical region 2016),NUTS3,NO02
-NO022,Oppland (statistical region 2016),NUTS3,NO02
-NO03,Sør-Østlandet (statistical region 2016),NUTS2,NO0
-NO031,Østfold (statistical region 2016),NUTS3,NO03
-NO032,Buskerud (statistical region 2016),NUTS3,NO03
-NO033,Vestfold (statistical region 2016),NUTS3,NO03
-NO034,Telemark (statistical region 2016),NUTS3,NO03
-NO034_041_042,"Telemark, Aust-Agder, Vest-Agder (statistical region 2016)",NUTS3,NO034_041_04
-NO04,Agder og Rogaland (statistical region 2016),NUTS2,NO0
-NO041,Aust-Agder (statistical region 2016),NUTS3,NO04
-NO042,Vest-Agder (statistical region 2016),NUTS3,NO04
-NO043,Rogaland (statistical region 2016),NUTS3,NO04
-NO05,Vestlandet (statistical region 2016),NUTS2,NO0
-NO051,Hordaland (statistical region 2016),NUTS3,NO05
-NO052,Sogn og Fjordane (statistical region 2016),NUTS3,NO05
-NO053,Møre og Romsdal (statistical region 2016),NUTS3,NO05
+NO021,Hedmark (statistical region 2016),,
+NO022,Oppland (statistical region 2016),,
+NO03,Sør-Østlandet (statistical region 2016),,
+NO031,Østfold (statistical region 2016),,
+NO032,Buskerud (statistical region 2016),,
+NO033,Vestfold (statistical region 2016),,
+NO034,Telemark (statistical region 2016),,
+NO034_041_042,"Telemark, Aust-Agder, Vest-Agder (statistical region 2016)",,
+NO04,Agder og Rogaland (statistical region 2016),,
+NO041,Aust-Agder (statistical region 2016),,
+NO042,Vest-Agder (statistical region 2016),,
+NO043,Rogaland (statistical region 2016),,
+NO05,Vestlandet (statistical region 2016),,
+NO051,Hordaland (statistical region 2016),,
+NO052,Sogn og Fjordane (statistical region 2016),,
+NO053,Møre og Romsdal (statistical region 2016),,
 NO06,Trøndelag,NUTS2,NO0
 NO060,Trøndelag/Trööndelage,NUTS3,NO06
-NO061,Sør-Trøndelag (statistical region 2016),NUTS3,NO06
-NO062,Nord-Trøndelag (statistical region 2016),NUTS3,NO06
+NO061,Sør-Trøndelag (statistical region 2016),,
+NO062,Nord-Trøndelag (statistical region 2016),,
 NO07,Nord-Norge,NUTS2,NO0
 NO071,Nordland/Nordlánnda,NUTS3,NO07
 NO072,Troms/Romsa/Tromssa,NUTS3,NO07
 NO073,Finnmark/Finnmárku/Finmarkku,NUTS3,NO07
-NO074,Troms og Finnmark/Romsa ja Finnmárku/Tromssa ja Finmarkku (statistical region 2021),NUTS3,NO07
+NO074,Troms og Finnmark/Romsa ja Finnmárku/Tromssa ja Finmarkku (statistical region 2021),,
 NO08,Oslo og Viken,NUTS2,NO0
 NO081,Oslo,NUTS3,NO08
-NO082,Viken (statistical region 2021),NUTS3,NO08
+NO082,Viken (statistical region 2021),,
 NO083,Østfold,NUTS3,NO08
 NO084,Akershus,NUTS3,NO08
 NO085,Buskerud,NUTS3,NO08
 NO09,Agder og Sør-Østlandet,NUTS2,NO0
-NO091,Vestfold og Telemark (statistical region 2021),NUTS3,NO09
+NO091,Vestfold og Telemark (statistical region 2021),,
 NO092,Agder,NUTS3,NO09
 NO093,Vestfold,NUTS3,NO09
 NO094,Telemark,NUTS3,NO09
@@ -2292,79 +2813,105 @@ NO0A3,Møre og Romsdal,NUTS3,NO0A
 NO0B,Svalbard og Jan Mayen,NUTS2,NO0
 NO0B1,Jan Mayen,NUTS3,NO0B
 NO0B2,Svalbard,NUTS3,NO0B
-NOECD,Non-OECD countries,NUTS3,NOEC
+NOECD,Non-OECD countries,,
 NOX,Not regionalised/Unknown level 1,NUTS1,NO
 NOXX,Not regionalised/Unknown level 2,NUTS2,NOX
 NOXXX,Not regionalised/Unknown level 3,NUTS3,NOXX
 NOZ,Extra-Regio level 1,NUTS1,NO
 NOZZ,Extra-Regio level 2,NUTS2,NOZ
 NOZZZ,Extra-Regio level 3,NUTS3,NOZZ
-NO_CAP,Oslo,NUTS3,NO_CA
+NO_CAP,Oslo,,
 NP,Nepal,country,
-NP_CAP,Kathmandu,NUTS3,NP_CA
+NP_CAP,Kathmandu,,
 NR,Nauru,country,
-NRP,No response,NUTS1,NR
-NSP,Not specified,NUTS1,NS
+NRP,No response,,
+NSP,Not specified,,
 NU,Niue,country,
 NZ,New Zealand,country,
-NZ_CAP,Wellington,NUTS3,NZ_CA
-NZ_ISL,New Zealand Oceania,NUTS3,NZ_IS
-OCE,Oceania,NUTS1,OC
-OCE_NSP,"Oceanian countries, not specified",NUTS3,OCE_NS
-OCE_OTH,Other Oceanian countries (aggregate changing according to the context),NUTS3,OCE_OT
-OCE_PLR,Oceania and southern polar regions,NUTS3,OCE_PL
-ODA,Official Development Assistance (ODA) recipients from Development Assistance Committee (DAC),NUTS1,OD
-OECD,Organisation for Economic Co-operation and Development (OECD),NUTS2,OEC
-OECD34,Organisation for Economic Co-operation and Development (OECD - 34 countries),NUTS3,OECD3
-OECD_NEU,OECD non-EU countries,NUTS3,OECD_NE
-OFFSHO,Offshore financial centers,NUTS3,OFFSH
-OLIC,Other low income countries,NUTS2,OLI
+NZ_CAP,Wellington,,
+NZ_ISL,New Zealand Oceania,,
+OCE,Oceania,,
+OCE_NSP,"Oceanian countries, not specified",,
+OCE_OTH,Other Oceanian countries (aggregate changing according to the context),,
+OCE_PLR,Oceania and southern polar regions,,
+ODA,Official Development Assistance (ODA) recipients from Development Assistance Committee (DAC),,
+OECD,Organisation for Economic Co-operation and Development (OECD),,
+OECD34,Organisation for Economic Co-operation and Development (OECD - 34 countries),,
+OECD_NEU,OECD non-EU countries,,
+OFFSHO,Offshore financial centers,,
+OLIC,Other low income countries,,
 OM,Oman,country,
-OMX,Nordic and Baltic marketplace,NUTS1,OM
-OPEC,Organization of Petroleum Exporting Countries (OPEC),NUTS2,OPE
-OPEC12,Organization of Petroleum Exporting Countries (OPEC - 12 countries),NUTS3,OPEC1
-ORG_INTL,International Organizations,NUTS3,ORG_INT
-ORG_NEUR,Non European International Organizations,NUTS3,ORG_NEU
-ORG_OTH,Other International Organizations,NUTS3,ORG_OT
-OTH,Others,NUTS1,OT
-OUT,Outbound,NUTS1,OU
-OUTR,In another region,NUTS2,OUT
-OUT_C,Outside any country,NUTS3,OUT_
+OMX,Nordic and Baltic marketplace,,
+OPEC,Organization of Petroleum Exporting Countries (OPEC),,
+OPEC12,Organization of Petroleum Exporting Countries (OPEC - 12 countries),,
+ORG_INTL,International Organizations,,
+ORG_NEUR,Non European International Organizations,,
+ORG_OTH,Other International Organizations,,
+OTH,Others,,
+OUT,Outbound,,
+OUTR,In another region,,
+OUT_C,Outside any country,,
 PA,Panama,country,
-PALOP,Portuguese-speaking African Countries,NUTS3,PALO
-PARL,European Parliament,NUTS2,PAR
-PARL_NAT,National parliament,NUTS3,PARL_NA
-PA_CAP,Panama,NUTS3,PA_CA
+PALOP,Portuguese-speaking African Countries,,
+PARL,European Parliament,,
+PARL_NAT,National parliament,,
+PA_CAP,Panama,,
 PE,Peru,country,
-PE_CAP,Lima,NUTS3,PE_CA
+PE_CAP,Lima,,
 PF,French Polynesia,country,
 PG,Papua New Guinea,country,
-PG_CAP,Port Moresby,NUTS3,PG_CA
+PG_CAP,Port Moresby,,
 PH,Philippines,country,
-PH_CAP,Manila,NUTS3,PH_CA
+PH_CAP,Manila,,
 PK,Pakistan,country,
-PK_CAP,Islamabad,NUTS3,PK_CA
+PK_CAP,Islamabad,,
 PL,Poland,country,
-PL01,Dolnoslaskie (statistical region 2001),NUTS2,PL0
-PL02,Kujawsko-Pomorskie (statistical region 2001),NUTS2,PL0
-PL03,Lubelskie (statistical region 2001),NUTS2,PL0
-PL04,Lubuskie (statistical region 2001),NUTS2,PL0
-PL05,Lódzkie (statistical region 2001),NUTS2,PL0
-PL06,Malopolskie (statistical region 2001),NUTS2,PL0
-PL07,Mazowieckie (statistical region 2001),NUTS2,PL0
-PL08,Opolskie (statistical region 2001),NUTS2,PL0
-PL09,Podkarpackie (statistical region 2001),NUTS2,PL0
-PL0A,Podlaskie (statistical region 2001),NUTS2,PL0
-PL0B,Pomorskie (statistical region 2001),NUTS2,PL0
-PL0C,Slaskie (statistical region 2001),NUTS2,PL0
-PL0D,Swietokrzyskie (statistical region 2001),NUTS2,PL0
-PL0E,Warminsko-Mazurskie (statistical region 2001),NUTS2,PL0
-PL0F,Wielkopolskie (statistical region 2001),NUTS2,PL0
-PL0G,Zachodniopomorskie (statistical region 2001),NUTS2,PL0
+PL01,Dolnoslaskie (statistical region 2001),,
+PL02,Kujawsko-Pomorskie (statistical region 2001),,
+PL03,Lubelskie (statistical region 2001),,
+PL04,Lubuskie (statistical region 2001),,
+PL05,Lódzkie (statistical region 2001),,
+PL06,Malopolskie (statistical region 2001),,
+PL07,Mazowieckie (statistical region 2001),,
+PL08,Opolskie (statistical region 2001),,
+PL09,Podkarpackie (statistical region 2001),,
+PL0A,Podlaskie (statistical region 2001),,
+PL0B,Pomorskie (statistical region 2001),,
+PL0C,Slaskie (statistical region 2001),,
+PL0D,Swietokrzyskie (statistical region 2001),,
+PL0E,Warminsko-Mazurskie (statistical region 2001),,
+PL0F,Wielkopolskie (statistical region 2001),,
+PL0G,Zachodniopomorskie (statistical region 2001),,
+PL1,Region Centralny (NUTS 2013),,
+PL11,Lódzkie (NUTS 2013),,
+PL111,Lódzki (NUTS 2003),,
+PL112,Piotrkowsko-skierniewicki (NUTS 2003),,
+PL113,Miasto Lódz (NUTS 2013),,
+PL114,Lódzki (NUTS 2013),,
+PL115,Piotrkowski (NUTS 2013),,
+PL116,Sieradzki (NUTS 2013),,
+PL117,Skierniewicki (NUTS 2013),,
+PL12,Mazowieckie (NUTS 2013),,
+PL121,Ciechanowsko-plocki (NUTS 2010),,
+PL122,Ostrolecko-siedlecki (NUTS 2010),,
+PL124,Radomski (NUTS 2003),,
+PL126,Warszawski (NUTS 2003),,
+PL127,Miasto Warszawa (NUTS 2013),,
+PL128,Radomski (NUTS 2013),,
+PL129,Warszawski wschodni (NUTS 2013),,
+PL12A,Warszawski zachodni (NUTS 2013),,
+PL12B,Ciechanowski (NUTS 2013),,
+PL12C,Plocki (NUTS 2013),,
+PL12D,Ostrolecki (NUTS 2013),,
+PL12E,Siedlecki (NUTS 2013),,
 PL2,Makroregion południowy,NUTS1,PL
 PL21,Małopolskie,NUTS2,PL2
+PL211,Krakowsko-tarnowski (NUTS 2003),,
+PL212,Nowosadecki (NUTS 2003),,
 PL213,Miasto Kraków,NUTS3,PL21
 PL214,Krakowski,NUTS3,PL21
+PL215,Nowosadecki (NUTS 2010),,
+PL216,Oswiecimski (NUTS 2010),,
 PL217,Tarnowski,NUTS3,PL21
 PL218,Nowosądecki,NUTS3,PL21
 PL219,Nowotarski,NUTS3,PL21
@@ -2372,22 +2919,53 @@ PL21A,Oświęcimski,NUTS3,PL21
 PL22,Śląskie,NUTS2,PL2
 PL224,Częstochowski,NUTS3,PL22
 PL225,Bielski,NUTS3,PL22
+PL226,Centralny slaski (NUTS 2003),,
 PL227,Rybnicki,NUTS3,PL22
 PL228,Bytomski,NUTS3,PL22
 PL229,Gliwicki,NUTS3,PL22
 PL22A,Katowicki,NUTS3,PL22
 PL22B,Sosnowiecki,NUTS3,PL22
 PL22C,Tyski,NUTS3,PL22
+PL3,Region Wschodni (NUTS 2013),,
+PL31,Lubelskie (NUTS 2013),,
+PL311,Bialski (NUTS 2013),,
+PL312,Chelmsko-zamojski (NUTS 2013),,
+PL313,Lubelski (NUTS 2003),,
+PL314,Lubelski (NUTS 2013),,
+PL315,Pulawski (NUTS 2013),,
+PL32,Podkarpackie (NUTS 2013),,
+PL321,Rzeszowsko-tarnobrzeski (NUTS 2003),,
+PL322,Krosniensko-przemyski (NUTS 2003),,
+PL323,Krosnienski (NUTS 2013),,
+PL324,Przemyski (NUTS 2013),,
+PL325,Rzeszowski (NUTS 2013),,
+PL326,Tarnobrzeski (NUTS 2013),,
+PL33,Swietokrzyskie (NUTS 2013),,
+PL330,Swietokrzyski (NUTS 2003),,
+PL331,Kielecki (NUTS 2013),,
+PL332,Sandomiersko-jedrzejowski (NUTS 2013),,
+PL34,Podlaskie (NUTS 2013),,
+PL341,Bialostocko-suwalski (NUTS 2003),,
+PL342,Lomzynski (NUTS 2003),,
+PL343,Bialostocki (NUTS 2013),,
+PL344,Lomzynski (NUTS 2013),,
+PL345,Suwalski (NUTS 2013),,
 PL4,Makroregion północno-zachodni,NUTS1,PL
 PL41,Wielkopolskie,NUTS2,PL4
 PL411,Pilski,NUTS3,PL41
+PL412,Poznanski (NUTS 2003),,
+PL413,Kaliski (NUTS 2003),,
 PL414,Koniński,NUTS3,PL41
 PL415,Miasto Poznań,NUTS3,PL41
 PL416,Kaliski,NUTS3,PL41
 PL417,Leszczyński,NUTS3,PL41
 PL418,Poznański,NUTS3,PL41
 PL42,Zachodniopomorskie,NUTS2,PL4
+PL421,Szczecinski (NUTS 2003),,
+PL422,Koszalinski (NUTS 2010),,
+PL423,Stargardzki (NUTS 2010),,
 PL424,Miasto Szczecin,NUTS3,PL42
+PL425,Szczecinski (NUTS 2010),,
 PL426,Koszaliński,NUTS3,PL42
 PL427,Szczecinecko-pyrzycki,NUTS3,PL42
 PL428,Szczeciński,NUTS3,PL42
@@ -2396,17 +2974,27 @@ PL431,Gorzowski,NUTS3,PL43
 PL432,Zielonogórski,NUTS3,PL43
 PL5,Makroregion południowo-zachodni,NUTS1,PL
 PL51,Dolnośląskie,NUTS2,PL5
+PL511,Jeleniogórsko-walbrzyski (NUTS 2003),,
+PL512,Legnicki (NUTS 2003),,
+PL513,Wroclawski (NUTS 2003),,
 PL514,Miasto Wrocław,NUTS3,PL51
 PL515,Jeleniogórski,NUTS3,PL51
 PL516,Legnicko-głogowski,NUTS3,PL51
 PL517,Wałbrzyski,NUTS3,PL51
 PL518,Wrocławski,NUTS3,PL51
 PL52,Opolskie,NUTS2,PL5
+PL520,Opolski (NUTS 2003),,
+PL521,Nyski (NUTS 2010),,
+PL522,Opolski (NUTS 2010),,
 PL523,Nyski,NUTS3,PL52
 PL524,Opolski,NUTS3,PL52
 PL6,Makroregion północny,NUTS1,PL
 PL61,Kujawsko-pomorskie,NUTS2,PL6
+PL611,Bydgoski (NUTS 2003),,
+PL612,Torunsko-wloclawski (NUTS 2003),,
 PL613,Bydgosko-toruński,NUTS3,PL61
+PL614,Grudziadzki (NUTS 2010),,
+PL615,Wloclawski (NUTS 2010),,
 PL616,Grudziądzki,NUTS3,PL61
 PL617,Inowrocławski,NUTS3,PL61
 PL618,Świecki,NUTS3,PL61
@@ -2416,8 +3004,11 @@ PL621,Elbląski,NUTS3,PL62
 PL622,Olsztyński,NUTS3,PL62
 PL623,Ełcki,NUTS3,PL62
 PL63,Pomorskie,NUTS2,PL6
+PL631,Slupski (NUTS 2010),,
+PL632,Gdanski (NUTS 2003),,
 PL633,Trójmiejski,NUTS3,PL63
 PL634,Gdański,NUTS3,PL63
+PL635,Starogardzki (NUTS 2010),,
 PL636,Słupski,NUTS3,PL63
 PL637,Chojnicki,NUTS3,PL63
 PL638,Starogardzki,NUTS3,PL63
@@ -2458,37 +3049,78 @@ PL923,Płocki,NUTS3,PL92
 PL924,Ostrołęcki,NUTS3,PL92
 PL925,Siedlecki,NUTS3,PL92
 PL926,Żyrardowski,NUTS3,PL92
-PLR,Southern polar regions,NUTS1,PL
+PLR,Southern polar regions,,
 PLX,Not regionalised/Unknown NUTS 1,NUTS1,PL
 PLXX,Not regionalised/Unknown NUTS 2,NUTS2,PLX
 PLXXX,Not regionalised/Unknown NUTS 3,NUTS3,PLXX
 PLZ,Extra-Regio NUTS 1,NUTS1,PL
 PLZZ,Extra-Regio NUTS 2,NUTS2,PLZ
 PLZZZ,Extra-Regio NUTS 3,NUTS3,PLZZ
-PL_CAP,Warszawa,NUTS3,PL_CA
+PL_CAP,Warszawa,,
 PM,Saint Pierre and Miquelon,country,
 PN,Pitcairn Islands,country,
-POL,Polynesia,NUTS1,PO
+POL,Polynesia,,
 PR,Puerto Rico,country,
 PS,Palestine*,country,
-PS_CAP,Jerusalem-East (West Bank/Gaza Strip),NUTS3,PS_CA
+PS_CAP,Jerusalem-East (West Bank/Gaza Strip),,
 PT,Portugal,country,
 PT1,Continente,NUTS1,PT
 PT11,Norte,NUTS2,PT1
 PT111,Alto Minho,NUTS3,PT11
 PT112,Cávado,NUTS3,PT11
+PT113,Ave (NUTS 2010),,
+PT114,Grande Porto (NUTS 2010),,
+PT115,Tâmega (NUTS 2010),,
+PT116,Entre Douro e Vouga (NUTS 2010),,
+PT117,Douro (NUTS 2010),,
+PT118,Alto Trás-os-Montes (NUTS 2010),,
 PT119,Ave,NUTS3,PT11
 PT11A,Área Metropolitana do Porto,NUTS3,PT11
 PT11B,Alto Tâmega e Barroso,NUTS3,PT11
 PT11C,Tâmega e Sousa,NUTS3,PT11
 PT11D,Douro,NUTS3,PT11
 PT11E,Terras de Trás-os-Montes,NUTS3,PT11
-PT11EDM,Entre Douro e Minho,NUTS3,PT11ED
-PT12BI,Beira Interior,NUTS3,PT12B
-PT12BL,Beira Litoral,NUTS3,PT12B
-PT13RO,Ribatejo e Oeste,NUTS3,PT13R
+PT11EDM,Entre Douro e Minho,,
+PT12,Centro (PT) (NUTS 1995),,
+PT12BI,Beira Interior,,
+PT12BL,Beira Litoral,,
+PT13,Lisboa e Vale do Tejo (NUTS 1995),,
+PT13RO,Ribatejo e Oeste,,
+PT14,Alentejo (NUTS 1995),,
 PT15,Algarve,NUTS2,PT1
 PT150,Algarve,NUTS3,PT15
+PT16,Centro (PT) (NUTS 2021),,
+PT161,Baixo Vouga (NUTS 2010),,
+PT162,Baixo Mondego (NUTS 2010),,
+PT163,Pinhal Litoral (NUTS 2010),,
+PT164,Pinhal Interior Norte (NUTS 2010),,
+PT165,Dão-Lafões (NUTS 2010),,
+PT166,Pinhal Interior Sul (NUTS 2010),,
+PT167,Serra da Estrela (NUTS 2010),,
+PT168,Beira Interior Norte (NUTS 2010),,
+PT169,Beira Interior Sul (NUTS 2010),,
+PT16A,Cova da Beira (NUTS 2010),,
+PT16B,Oeste (NUTS 2021),,
+PT16C,Médio Tejo (NUTS 2010),,
+PT16D,Região de Aveiro (NUTS 2021),,
+PT16E,Região de Coimbra (NUTS 2021),,
+PT16F,Região de Leiria (NUTS 2021),,
+PT16G,Viseu Dão Lafões (NUTS 2021),,
+PT16H,Beira Baixa (NUTS 2021),,
+PT16I,Médio Tejo (NUTS 2021),,
+PT16J,Beiras e Serra da Estrela (NUTS 2021),,
+PT17,Área Metropolitana de Lisboa (NUTS 2021),,
+PT170,Área Metropolitana de Lisboa (NUTS 2021),,
+PT171,Grande Lisboa (NUTS 2010),,
+PT172,Península de Setúbal (NUTS 2010),,
+PT18,Alentejo (NUTS 2021),,
+PT181,Alentejo Litoral (NUTS 2021),,
+PT182,Alto Alentejo (NUTS 2010),,
+PT183,Alentejo Central (NUTS 2010),,
+PT184,Baixo Alentejo (NUTS 2021),,
+PT185,Lezíria do Tejo (NUTS 2021),,
+PT186,Alto Alentejo (NUTS 2021),,
+PT187,Alentejo Central (NUTS 2021),,
 PT19,Centro (PT),NUTS2,PT1
 PT191,Região de Aveiro,NUTS3,PT19
 PT192,Região de Coimbra,NUTS3,PT19
@@ -2521,65 +3153,65 @@ PTXXX,Not regionalised/Unknown NUTS 3,NUTS3,PTXX
 PTZ,Extra-Regio NUTS 1,NUTS1,PT
 PTZZ,Extra-Regio NUTS 2,NUTS2,PTZ
 PTZZZ,Extra-Regio NUTS 3,NUTS3,PTZZ
-PT_CAP,Lisboa,NUTS3,PT_CA
+PT_CAP,Lisboa,,
 PW,Palau,country,
 PY,Paraguay,country,
-PY_CAP,Asunción,NUTS3,PY_CA
+PY_CAP,Asunción,,
 QA,Qatar,country,
-QA_CAP,Doha,NUTS3,QA_CA
-RNC,Recognised non-citizens,NUTS1,RN
+QA_CAP,Doha,,
+RNC,Recognised non-citizens,,
 RO,Romania,country,
-RO0,Romania (statistical region 2002),NUTS1,RO
-RO01,Nord-Est (statistical region 2002),NUTS2,RO0
-RO011,Bacau (statistical region 2002),NUTS3,RO01
-RO012,Botosani (statistical region 2002),NUTS3,RO01
-RO013,Iasi (statistical region 2002),NUTS3,RO01
-RO014,Neamt (statistical region 2002),NUTS3,RO01
-RO015,Suceava (statistical region 2002),NUTS3,RO01
-RO016,Vaslui (statistical region 2002),NUTS3,RO01
-RO02,Sud-Est (statistical region 2002),NUTS2,RO0
-RO021,Braila (statistical region 2002),NUTS3,RO02
-RO022,Buzau (statistical region 2002),NUTS3,RO02
-RO023,Constanta (statistical region 2002),NUTS3,RO02
-RO024,Galati (statistical region 2002),NUTS3,RO02
-RO025,Tulcea (statistical region 2002),NUTS3,RO02
-RO026,Vrancea (statistical region 2002),NUTS3,RO02
-RO03,Sud (statistical region 2002),NUTS2,RO0
-RO031,Arges (statistical region 2002),NUTS3,RO03
-RO032,Calarasi (statistical region 2002),NUTS3,RO03
-RO033,Dâmbovita (statistical region 2002),NUTS3,RO03
-RO034,Giurgiu (statistical region 2002),NUTS3,RO03
-RO035,Ialomita (statistical region 2002),NUTS3,RO03
-RO036,Prahova (statistical region 2002),NUTS3,RO03
-RO037,Teleorman (statistical region 2002),NUTS3,RO03
-RO04,Sud-Vest (statistical region 2002),NUTS2,RO0
-RO041,Dolj (statistical region 2002),NUTS3,RO04
-RO042,Gorj (statistical region 2002),NUTS3,RO04
-RO043,Mehedinti (statistical region 2002),NUTS3,RO04
-RO044,Olt (statistical region 2002),NUTS3,RO04
-RO045,Vâlcea (statistical region 2002),NUTS3,RO04
-RO05,Vest (statistical region 2002),NUTS2,RO0
-RO051,Arad (statistical region 2002),NUTS3,RO05
-RO052,Caras-Severin (statistical region 2002),NUTS3,RO05
-RO053,Hunedoara (statistical region 2002),NUTS3,RO05
-RO054,Timis (statistical region 2002),NUTS3,RO05
-RO06,Nord-Vest (statistical region 2002),NUTS2,RO0
-RO061,Bihor (statistical region 2002),NUTS3,RO06
-RO062,Bistrita-Nasaud (statistical region 2002),NUTS3,RO06
-RO063,Cluj (statistical region 2002),NUTS3,RO06
-RO064,Maramures (statistical region 2002),NUTS3,RO06
-RO065,Satu Mare (statistical region 2002),NUTS3,RO06
-RO066,Salaj (statistical region 2002),NUTS3,RO06
-RO07,Centru (statistical region 2002),NUTS2,RO0
-RO071,Alba (statistical region 2002),NUTS3,RO07
-RO072,Brasov (statistical region 2002),NUTS3,RO07
-RO073,Covasna (statistical region 2002),NUTS3,RO07
-RO074,Harghita (statistical region 2002),NUTS3,RO07
-RO075,Mures (statistical region 2002),NUTS3,RO07
-RO076,Sibiu (statistical region 2002),NUTS3,RO07
-RO08,Bucuresti (statistical region 2002),NUTS2,RO0
-RO081,Bucuresti (capital) (statistical region 2002),NUTS3,RO08
-RO082,Ilfov (statistical region 2002),NUTS3,RO08
+RO0,Romania (statistical region 2002),,
+RO01,Nord-Est (statistical region 2002),,
+RO011,Bacau (statistical region 2002),,
+RO012,Botosani (statistical region 2002),,
+RO013,Iasi (statistical region 2002),,
+RO014,Neamt (statistical region 2002),,
+RO015,Suceava (statistical region 2002),,
+RO016,Vaslui (statistical region 2002),,
+RO02,Sud-Est (statistical region 2002),,
+RO021,Braila (statistical region 2002),,
+RO022,Buzau (statistical region 2002),,
+RO023,Constanta (statistical region 2002),,
+RO024,Galati (statistical region 2002),,
+RO025,Tulcea (statistical region 2002),,
+RO026,Vrancea (statistical region 2002),,
+RO03,Sud (statistical region 2002),,
+RO031,Arges (statistical region 2002),,
+RO032,Calarasi (statistical region 2002),,
+RO033,Dâmbovita (statistical region 2002),,
+RO034,Giurgiu (statistical region 2002),,
+RO035,Ialomita (statistical region 2002),,
+RO036,Prahova (statistical region 2002),,
+RO037,Teleorman (statistical region 2002),,
+RO04,Sud-Vest (statistical region 2002),,
+RO041,Dolj (statistical region 2002),,
+RO042,Gorj (statistical region 2002),,
+RO043,Mehedinti (statistical region 2002),,
+RO044,Olt (statistical region 2002),,
+RO045,Vâlcea (statistical region 2002),,
+RO05,Vest (statistical region 2002),,
+RO051,Arad (statistical region 2002),,
+RO052,Caras-Severin (statistical region 2002),,
+RO053,Hunedoara (statistical region 2002),,
+RO054,Timis (statistical region 2002),,
+RO06,Nord-Vest (statistical region 2002),,
+RO061,Bihor (statistical region 2002),,
+RO062,Bistrita-Nasaud (statistical region 2002),,
+RO063,Cluj (statistical region 2002),,
+RO064,Maramures (statistical region 2002),,
+RO065,Satu Mare (statistical region 2002),,
+RO066,Salaj (statistical region 2002),,
+RO07,Centru (statistical region 2002),,
+RO071,Alba (statistical region 2002),,
+RO072,Brasov (statistical region 2002),,
+RO073,Covasna (statistical region 2002),,
+RO074,Harghita (statistical region 2002),,
+RO075,Mures (statistical region 2002),,
+RO076,Sibiu (statistical region 2002),,
+RO08,Bucuresti (statistical region 2002),,
+RO081,Bucuresti (capital) (statistical region 2002),,
+RO082,Ilfov (statistical region 2002),,
 RO1,Macroregiunea Unu,NUTS1,RO
 RO11,Nord-Vest,NUTS2,RO1
 RO111,Bihor,NUTS3,RO11
@@ -2640,7 +3272,7 @@ ROXXX,Not regionalised/Unknown NUTS 3,NUTS3,ROXX
 ROZ,Extra-Regio NUTS 1,NUTS1,RO
 ROZZ,Extra-Regio NUTS 2,NUTS2,ROZ
 ROZZZ,Extra-Regio NUTS 3,NUTS3,ROZZ
-RO_CAP,Bucuresti,NUTS3,RO_CA
+RO_CAP,Bucuresti,,
 RS,Serbia,country,
 RS1,Srbija - sever,NUTS1,RS
 RS11,Beogradski region,NUTS2,RS1
@@ -2679,21 +3311,25 @@ RSXXX,Not regionalised/Unknown level 3,NUTS3,RSXX
 RSZ,Extra-Regio level 1,NUTS1,RS
 RSZZ,Extra-Regio level 2,NUTS2,RSZ
 RSZZZ,Extra-Regio level 3,NUTS3,RSZZ
-RS_CAP,Beograd (Belgrade),NUTS3,RS_CA
-RS_ME,Serbia and Montenegro,NUTS3,RS_M
+RS_CAP,Beograd (Belgrade),,
+RS_ME,Serbia and Montenegro,,
 RU,Russia,country,
-RU_CAP,Moskva (Moscow),NUTS3,RU_CA
+RU_CAP,Moskva (Moscow),,
 RW,Rwanda,country,
-RW_CAP,Kigali,NUTS3,RW_CA
+RW_CAP,Kigali,,
 SA,Saudi Arabia,country,
-SADC,Southern African Development Community,NUTS2,SAD
-SA_CAP,Ar-Riyad (Riyadh),NUTS3,SA_CA
+SADC,Southern African Development Community,,
+SA_CAP,Ar-Riyad (Riyadh),,
 SB,Solomon Islands,country,
-SB_CAP,Honiara,NUTS3,SB_CA
+SB_CAP,Honiara,,
 SC,Seychelles,country,
 SD,Sudan,country,
-SD_CAP,Al-Khartum (Khartoum),NUTS3,SD_CA
+SD_CAP,Al-Khartum (Khartoum),,
 SE,Sweden,country,
+SE021,Uppsala län (NUTS 2003),,
+SE025,Västmanlands län (NUTS 2003),,
+SE03,Småland med öarna (NUTS 1995),,
+SE05,Västsverige (NUTS 1995),,
 SE1,Östra Sverige,NUTS1,SE
 SE11,Stockholm,NUTS2,SE1
 SE110,Stockholms län,NUTS3,SE11
@@ -2732,12 +3368,26 @@ SEXXX,Not regionalised/Unknown NUTS 3,NUTS3,SEXX
 SEZ,Extra-Regio NUTS 1,NUTS1,SE
 SEZZ,Extra-Regio NUTS 2,NUTS2,SEZ
 SEZZZ,Extra-Regio NUTS 3,NUTS3,SEZZ
-SE_CAP,Stockholm,NUTS3,SE_CA
+SE_CAP,Stockholm,,
 SG,Singapore,country,
-SG_CAP,Singapore,NUTS3,SG_CA
+SG_CAP,Singapore,,
 SH,"Saint Helena, Ascension and Tristan da Cunha",country,
 SI,Slovenia,country,
 SI0,Slovenija,NUTS1,SI
+SI01,Vzhodna Slovenija (NUTS 2010),,
+SI011,Pomurska (NUTS 2010),,
+SI012,Podravska (NUTS 2010),,
+SI013,Koroska (NUTS 2010),,
+SI014,Savinjska (NUTS 2010),,
+SI015,Zasavska (NUTS 2010),,
+SI016,Spodnjeposavska (NUTS 2010),,
+SI017,Jugovzhodna Slovenija (NUTS 2010),,
+SI018,Notranjsko-kraska (NUTS 2010),,
+SI02,Zahodna Slovenija (NUTS 2010),,
+SI021,Osrednjeslovenska (NUTS 2010),,
+SI022,Gorenjska (NUTS 2010),,
+SI023,Goriska (NUTS 2010),,
+SI024,Obalno-kraska (NUTS 2010),,
 SI03,Vzhodna Slovenija,NUTS2,SI0
 SI031,Pomurska,NUTS3,SI03
 SI032,Podravska,NUTS3,SI03
@@ -2758,17 +3408,17 @@ SIXXX,Not regionalised/Unknown NUTS 3,NUTS3,SIXX
 SIZ,Extra-Regio NUTS 1,NUTS1,SI
 SIZZ,Extra-Regio NUTS 2,NUTS2,SIZ
 SIZZZ,Extra-Regio NUTS 3,NUTS3,SIZZ
-SI_CAP,Ljubljana,NUTS3,SI_CA
-SI_OUTW,Outside wine-growing districts,NUTS3,SI_OUT
-SI_POD1,Podravje - Stajerska Slovenija,NUTS3,SI_POD
-SI_POD2,Podravje - Prekmurje,NUTS3,SI_POD
-SI_POS1,Posavje - Dolenjska,NUTS3,SI_POS
-SI_POS2,Posavje - Bela krajina,NUTS3,SI_POS
-SI_POS3,Posavje - Bizeljsko Sremic,NUTS3,SI_POS
-SI_PRI1,Primorje - Kras,NUTS3,SI_PRI
-SI_PRI2,Primorje - Slovenska Istra,NUTS3,SI_PRI
-SI_PRI3,Primorje - Vipavska dolina (Vipava),NUTS3,SI_PRI
-SI_PRI4,Primorje - Goriska brda (Brda),NUTS3,SI_PRI
+SI_CAP,Ljubljana,,
+SI_OUTW,Outside wine-growing districts,,
+SI_POD1,Podravje - Stajerska Slovenija,,
+SI_POD2,Podravje - Prekmurje,,
+SI_POS1,Posavje - Dolenjska,,
+SI_POS2,Posavje - Bela krajina,,
+SI_POS3,Posavje - Bizeljsko Sremic,,
+SI_PRI1,Primorje - Kras,,
+SI_PRI2,Primorje - Slovenska Istra,,
+SI_PRI3,Primorje - Vipavska dolina (Vipava),,
+SI_PRI4,Primorje - Goriska brda (Brda),,
 SJ,Svalbard and Jan Mayen,country,
 SK,Slovakia,country,
 SK0,Slovensko,NUTS1,SK
@@ -2790,63 +3440,63 @@ SKXXX,Not regionalised/Unknown NUTS 3,NUTS3,SKXX
 SKZ,Extra-Regio NUTS 1,NUTS1,SK
 SKZZ,Extra-Regio NUTS 2,NUTS2,SKZ
 SKZZZ,Extra-Regio NUTS 3,NUTS3,SKZZ
-SK_CAP,Bratislava,NUTS3,SK_CA
-SK_JUZ,Juznoslovenská,NUTS3,SK_JU
-SK_MAL,Malokarpatská,NUTS3,SK_MA
-SK_NIT,Nitrianska,NUTS3,SK_NI
-SK_STR,Stredoslovenská,NUTS3,SK_ST
-SK_TOK,Tokajská,NUTS3,SK_TO
-SK_VYC,Východoslovenská,NUTS3,SK_VY
+SK_CAP,Bratislava,,
+SK_JUZ,Juznoslovenská,,
+SK_MAL,Malokarpatská,,
+SK_NIT,Nitrianska,,
+SK_STR,Stredoslovenská,,
+SK_TOK,Tokajská,,
+SK_VYC,Východoslovenská,,
 SL,Sierra Leone,country,
-SL_CAP,Freetown,NUTS3,SL_CA
+SL_CAP,Freetown,,
 SM,San Marino,country,
 SN,Senegal,country,
-SNTL_EFTA,Supranational organizations based in EFTA countries,NUTS3,SNTL_EFT
-SNTL_EU27_2020,Supranational organizations based in EU27 (from 2020),NUTS3,SNTL_EU27_202
-SNTL_OTH_EU27_2020,Other supranational organizations based in EU27 (from 2020),NUTS3,SNTL_OTH_EU27_202
-SNTL_UK,Supranational organizations based in the United Kingdom,NUTS3,SNTL_U
-SN_CAP,Dakar,NUTS3,SN_CA
+SNTL_EFTA,Supranational organizations based in EFTA countries,,
+SNTL_EU27_2020,Supranational organizations based in EU27 (from 2020),,
+SNTL_OTH_EU27_2020,Other supranational organizations based in EU27 (from 2020),,
+SNTL_UK,Supranational organizations based in the United Kingdom,,
+SN_CAP,Dakar,,
 SO,Somalia,country,
-SO_CAP,Muqdisho (Mogadishu),NUTS3,SO_CA
+SO_CAP,Muqdisho (Mogadishu),,
 SR,Suriname,country,
-SRB,Single Resolution Board (SRB),NUTS1,SR
-SR_CAP,Paramaribo,NUTS3,SR_CA
+SRB,Single Resolution Board (SRB),,
+SR_CAP,Paramaribo,,
 SS,South Sudan,country,
-SS_CAP,Juba,NUTS3,SS_CA
+SS_CAP,Juba,,
 ST,São Tomé and Príncipe,country,
-STLS,Stateless,NUTS2,STL
-ST_CAP,São Tomé,NUTS3,ST_CA
+STLS,Stateless,,
+ST_CAP,São Tomé,,
 SV,El Salvador,country,
-SV_CAP,San Salvador,NUTS3,SV_CA
+SV_CAP,San Salvador,,
 SX,Sint Maarten,country,
 SY,Syria,country,
-SY_CAP,Dimashq (Damascus),NUTS3,SY_CA
+SY_CAP,Dimashq (Damascus),,
 SZ,Eswatini,country,
-SZ_CAP,Mbabane,NUTS3,SZ_CA
+SZ_CAP,Mbabane,,
 TC,Turks and Caicos Islands,country,
 TD,Chad,country,
-TD_CAP,N'Djamena,NUTS3,TD_CA
+TD_CAP,N'Djamena,,
 TF,French Southern and Antarctic Lands,country,
 TG,Togo,country,
-TG_CAP,Lomé,NUTS3,TG_CA
+TG_CAP,Lomé,,
 TH,Thailand,country,
-THRD,Third country,NUTS2,THR
-THRD_CTZ,Third country - country of citizenship,NUTS3,THRD_CT
-THRD_OTH,Other third country,NUTS3,THRD_OT
-THRD_UNK,Unknown third country,NUTS3,THRD_UN
-TH_CAP,Bangkok,NUTS3,TH_CA
+THRD,Third country,,
+THRD_CTZ,Third country - country of citizenship,,
+THRD_OTH,Other third country,,
+THRD_UNK,Unknown third country,,
+TH_CAP,Bangkok,,
 TJ,Tajikistan,country,
-TJ_CAP,Doushanbe,NUTS3,TJ_CA
+TJ_CAP,Doushanbe,,
 TK,Tokelau,country,
 TL,Timor-Leste,country,
-TL_CAP,Dili,NUTS3,TL_CA
+TL_CAP,Dili,,
 TM,Turkmenistan,country,
-TM_CAP,Ashgabat,NUTS3,TM_CA
+TM_CAP,Ashgabat,,
 TN,Tunisia,country,
-TN_CAP,Tunis,NUTS3,TN_CA
+TN_CAP,Tunis,,
 TO,Tonga,country,
-TOTAL,Total,NUTS3,TOTA
-TO_CAP,Nuku'alofa,NUTS3,TO_CA
+TOTAL,Total,,
+TO_CAP,Nuku'alofa,,
 TR,Türkiye,country,
 TR1,İstanbul,NUTS1,TR
 TR10,İstanbul,NUTS2,TR1
@@ -2967,21 +3617,21 @@ TRC31,Mardin,NUTS3,TRC3
 TRC32,Batman,NUTS3,TRC3
 TRC33,Şırnak,NUTS3,TRC3
 TRC34,Siirt,NUTS3,TRC3
-TRS,Transit country,NUTS1,TR
+TRS,Transit country,,
 TRX,Not regionalised/Unknown level 1,NUTS1,TR
 TRXX,Not regionalised/Unknown level 2,NUTS2,TRX
 TRXXX,Not regionalised/Unknown level 3,NUTS3,TRXX
 TRZ,Extra-Regio level 1,NUTS1,TR
 TRZZ,Extra-Regio level 2,NUTS2,TRZ
 TRZZZ,Extra-Regio level 3,NUTS3,TRZZ
-TR_CAP,Ankara,NUTS3,TR_CA
+TR_CAP,Ankara,,
 TT,Trinidad and Tobago,country,
-TT_CAP,Port of Spain,NUTS3,TT_CA
+TT_CAP,Port of Spain,,
 TV,Tuvalu,country,
 TW,Taiwan,country,
-TW_CAP,Taipei,NUTS3,TW_CA
+TW_CAP,Taipei,,
 TZ,Tanzania,country,
-TZ_CAP,Dodoma,NUTS3,TZ_CA
+TZ_CAP,Dodoma,,
 UA,Ukraine,country,
 UA1,Macroregion_01,NUTS1,UA
 UA11,Poltavska Oblast,NUTS2,UA1
@@ -3093,7 +3743,7 @@ UA52,Ternopilska Oblast,NUTS2,UA5
 UA521,Kremenetskyi Raion,NUTS3,UA52
 UA522,Ternopilskyi Raion,NUTS3,UA52
 UA523,Chortkivskyi Raion,NUTS3,UA52
-UA53,Khmelnytska Oblast,NUTS2,UA5
+UA53,Khmelnytska Oblast,NUTS3,UA5
 UA531,Kamianets-Podilskyi Raion,NUTS3,UA53
 UA532,Khmelnytskyi Raion,NUTS3,UA53
 UA533,Shepetivskyi Raion,NUTS3,UA53
@@ -3162,61 +3812,459 @@ UAXXX,Not regionalised/Unknown level 3,NUTS3,UAXX
 UAZ,Extra-Regio level 1,NUTS1,UA
 UAZZ,Extra-Regio level 2,NUTS2,UAZ
 UAZZZ,Extra-Regio level 3,NUTS3,UAZZ
-UA_CAP,Kyiv,NUTS3,UA_CA
-UEMOA,West African Economic and Monetary Union,NUTS3,UEMO
+UA_CAP,Kyiv,,
+UEMOA,West African Economic and Monetary Union,,
 UG,Uganda,country,
-UG_CAP,Kampala,NUTS3,UG_CA
+UG_CAP,Kampala,,
 UK,United Kingdom,country,
-UKC-L,England and Wales,NUTS3,UKC-
-UKC-M,Great Britain,NUTS3,UKC-
-UKX,Not regionalised/Unknown NUTS 1,NUTS1,UK
-UKXX,Not regionalised/Unknown NUTS 2,NUTS2,UKX
-UKXXX,Not regionalised/Unknown NUTS 3,NUTS3,UKXX
-UK_CAP,London,NUTS3,UK_CA
-UK_DEL,Culham,NUTS3,UK_DE
-UK_NAL,"United Kingdom, not allocated",NUTS3,UK_NA
-UK_OCT,British overseas countries and territories,NUTS3,UK_OC
+UK1,North (NUTS 1995),,
+UK11,"Cleveland, Durham (NUTS 1995)",,
+UK111,Cleveland (NUTS 1995),,
+UK112,Durham (NUTS 1995),,
+UK12,Cumbria (NUTS 1995),,
+UK13,"Northumberland,Tyne and Wear (NUTS 1995)",,
+UK131,Northumberland (NUTS 1995),,
+UK132,Tyne and Wear (NUTS 1995),,
+UK2,Yorkshire and Humberside (NUTS 1995),,
+UK21,Humberside (NUTS 1995),,
+UK22,North Yorkshire (NUTS 1995),,
+UK23,South Yorkshire (NUTS 1995),,
+UK24,West Yorkshire (NUTS 1995),,
+UK3,East Midlands (NUTS 1995),,
+UK31,"Derbyshire, Nottinghamshire (NUTS 1995)",,
+UK311,Derbyshire (NUTS 1995),,
+UK312,Nottinghamshire (NUTS 1995),,
+UK32,"Leicestershire, Northamptonshire (NUTS 1995)",,
+UK321,Leicestershire (NUTS 1995),,
+UK322,Northamptonshire (NUTS 1995),,
+UK33,Lincolnshire (NUTS 1995),,
+UK4,East Anglia (NUTS 1995),,
+UK401,Cambridgeshire (NUTS 1995),,
+UK402,Norfolk (NUTS 1995),,
+UK403,Suffolk (NUTS 1995),,
+UK5,South East (UK) (NUTS 1995),,
+UK51,"Bedfordshire, Hertfordshire (NUTS 1995)",,
+UK511,Bedfordshire (NUTS 1995),,
+UK512,Hertfordshire (NUTS 1995),,
+UK52,"Berkshire, Buckinghamshire, Oxfordshire (NUTS 1995)",,
+UK521,Berkshire (NUTS 1995),,
+UK522,Buckinghamshire (NUTS 1995),,
+UK523,Oxfordshire (NUTS 1995),,
+UK53,"Surrey, East-West Sussex (NUTS 1995)",,
+UK531,East Sussex (NUTS 1995),,
+UK532,Surrey (NUTS 1995),,
+UK533,West Sussex (NUTS 1995),,
+UK54,Essex (NUTS 1995),,
+UK55,Greater London (NUTS 1995),,
+UK56,"Hampshire, Isle of Wight (NUTS 1995)",,
+UK561,Hampshire (NUTS 1995),,
+UK562,Isle of Wight (NUTS 1995),,
+UK57,Kent (NUTS 1995),,
+UK6,South West (UK) (NUTS 1995),,
+UK61,"Avon, Gloucestershire, Wiltshire (NUTS 1995)",,
+UK611,Avon (NUTS 1995),,
+UK612,Gloucestershire (NUTS 1995),,
+UK613,Wiltshire (NUTS 1995),,
+UK62,"Cornwall, Devon (NUTS 1995)",,
+UK621,Cornwall (NUTS 1995),,
+UK622,Devon (NUTS 1995),,
+UK63,"Dorset, Somerset (NUTS 1995)",,
+UK631,Dorset (NUTS 1995),,
+UK632,Somerset (NUTS 1995),,
+UK7,West Midlands (NUTS 1995),,
+UK71,"Hereford and Worcester, Warwickshire (NUTS 1995)",,
+UK711,Hereford and Worcester (NUTS 1995),,
+UK712,Warwickshire (NUTS 1995),,
+UK72,"Shropshire, Staffordshire (NUTS 1995)",,
+UK721,Shropshire (NUTS 1995),,
+UK722,Staffordshire (NUTS 1995),,
+UK73,West Midlands (County) (NUTS 1995),,
+UK8,North West (UK) (NUTS 1995),,
+UK81,Cheshire (NUTS 1995),,
+UK82,Greater Manchester (NUTS 1995),,
+UK83,Lancashire (NUTS 1995),,
+UK84,Merseyside (NUTS 1995),,
+UK9,Wales (NUTS 1995),,
+UK91,"Clwyd, Dyfed, Gwynedd, Powys (NUTS 1995)",,
+UK911,Clwyd (NUTS 1995),,
+UK912,Dyfed (NUTS 1995),,
+UK913,Gwynedd (NUTS 1995),,
+UK914,Powys (NUTS 1995),,
+UK92,"Gwent, Mid-South-West Glamorgan (NUTS 1995)",,
+UK921,Gwent (NUTS 1995),,
+UK922,Mid Glamorgan (NUTS 1995),,
+UK923,South Glamorgan (NUTS 1995),,
+UK924,West Glamorgan (NUTS 1995),,
+UKA,Scotland (NUTS 1995),,
+UKA1,Borders-Central-Fife-Lothian-Tayside (NUTS 1995),,
+UKA11,Borders (NUTS 1995),,
+UKA12,Central (NUTS 1995),,
+UKA13,Fife (NUTS 1995),,
+UKA14,Lothian (NUTS 1995),,
+UKA15,Tayside (NUTS 1995),,
+UKA2,"Dumfries and Galloway, Strathclyde (NUTS 1995)",,
+UKA21,Dumfries and Galloway (NUTS 1995),,
+UKA22,Strathclyde (NUTS 1995),,
+UKA3,"Highlands, Islands (NUTS 1995)",,
+UKA31,Highlands (NUTS 1995),,
+UKA32,Islands (NUTS 1995),,
+UKA4,Grampian (NUTS 1995),,
+UKB,Northern Ireland (UK)(NUTS 1995),,
+UKC,North East (UK) (NUTS 2021),,
+UKC-L,England and Wales,,
+UKC-M,Great Britain,,
+UKC1,Tees Valley and Durham (NUTS 2021),,
+UKC11,Hartlepool and Stockton-on-Tees (NUTS 2021),,
+UKC12,South Teesside (NUTS 2021),,
+UKC13,Darlington (NUTS 2021),,
+UKC14,Durham CC (NUTS 2021),,
+UKC2,Northumberland and Tyne and Wear (NUTS 2021),,
+UKC21,Northumberland (NUTS 2021),,
+UKC22,Tyneside (NUTS 2021),,
+UKC23,Sunderland (NUTS 2021),,
+UKD,North West (UK) (NUTS 2021),,
+UKD1,Cumbria (NUTS 2021),,
+UKD11,West Cumbria (NUTS 2021),,
+UKD12,East Cumbria (NUTS 2021),,
+UKD2,Cheshire (NUTS 2006),,
+UKD21,Halton and Warrington (NUTS 2006),,
+UKD22,Cheshire CC (NUTS 2006),,
+UKD3,Greater Manchester (NUTS 2021),,
+UKD3-D5,"Greater Manchester, Lancashire, Merseyside (NUTS 2006)",,
+UKD31,Greater Manchester South (NUTS 2010),,
+UKD32,Greater Manchester North (NUTS 2010),,
+UKD33,Manchester (NUTS 2021),,
+UKD34,Greater Manchester South West (NUTS 2021),,
+UKD35,Greater Manchester South East (NUTS 2021),,
+UKD36,Greater Manchester North West (NUTS 2021),,
+UKD37,Greater Manchester North East (NUTS 2021),,
+UKD4,Lancashire (NUTS 2021),,
+UKD41,Blackburn with Darwen (NUTS 2021),,
+UKD42,Blackpool (NUTS 2021),,
+UKD43,Lancashire CC (NUTS 2010),,
+UKD44,Lancaster & Wyre (NUTS 2021),,
+UKD45,Mid Lancashire (NUTS 2021),,
+UKD46,East Lancashire (NUTS 2021),,
+UKD47,Chorley & West Lancashire (NUTS 2021),,
+UKD5,Merseyside (NUTS 2006),,
+UKD51,East Merseyside (NUTS 2006),,
+UKD52,Liverpool (NUTS 2006),,
+UKD53,Sefton (NUTS 2006),,
+UKD54,Wirral (NUTS 2006),,
+UKD6,Cheshire (NUTS 2021),,
+UKD61,Warrington (NUTS 2021),,
+UKD62,Cheshire East (NUTS 2021),,
+UKD63,Cheshire West and Chester (NUTS 2021),,
+UKD7,Merseyside (NUTS 2021),,
+UKD71,East Merseyside (NUTS 2021),,
+UKD72,Liverpool (NUTS 2021),,
+UKD73,Sefton (NUTS 2021),,
+UKD74,Wirral (NUTS 2021),,
+UKE,Yorkshire and The Humber (NUTS 2021),,
+UKE1,East Yorkshire and Northern Lincolnshire (NUTS 2021),,
+UKE11,"Kingston upon Hull, City of (NUTS 2021)",,
+UKE12,East Riding of Yorkshire (NUTS 2021),,
+UKE13,North and North East Lincolnshire (NUTS 2021),,
+UKE2,North Yorkshire (NUTS 2021),,
+UKE21,York (NUTS 2021),,
+UKE22,North Yorkshire CC (NUTS 2021),,
+UKE3,South Yorkshire (NUTS 2021),,
+UKE31,"Barnsley, Doncaster and Rotherham (NUTS 2021)",,
+UKE32,Sheffield (NUTS 2021),,
+UKE3_E4,South and West Yorkshire (NUTS 2021),,
+UKE4,West Yorkshire (NUTS 2021),,
+UKE41,Bradford (NUTS 2021),,
+UKE42,Leeds (NUTS 2021),,
+UKE43,"Calderdale, Kirklees and Wakefield (NUTS 2006)",,
+UKE44,Calderdale and Kirklees (NUTS 2021),,
+UKE45,Wakefield (NUTS 2021),,
+UKF,East Midlands (UK) (NUTS 2021),,
+UKF1,Derbyshire and Nottinghamshire (NUTS 2021),,
+UKF11,Derby (NUTS 2021),,
+UKF12,East Derbyshire (NUTS 2021),,
+UKF13,South and West Derbyshire (NUTS 2021),,
+UKF14,Nottingham (NUTS 2021),,
+UKF15,North Nottinghamshire (NUTS 2021),,
+UKF16,South Nottinghamshire (NUTS 2021),,
+UKF2,"Leicestershire, Rutland and Northamptonshire (NUTS 2021)",,
+UKF21,Leicester (NUTS 2021),,
+UKF22,Leicestershire CC and Rutland (NUTS 2021),,
+UKF23,Northamptonshire (NUTS 2006),,
+UKF24,West Northamptonshire (NUTS 2021),,
+UKF25,North Northamptonshire (NUTS 2021),,
+UKF3,Lincolnshire (NUTS 2021),,
+UKF30,Lincolnshire (NUTS 2021),,
+UKG,West Midlands (UK) (NUTS 2021),,
+UKG1,"Herefordshire, Worcestershire and Warwickshire (NUTS 2021)",,
+UKG11,"Herefordshire, County of (NUTS 2021)",,
+UKG12,Worcestershire (NUTS 2021),,
+UKG13,Warwickshire (NUTS 2021),,
+UKG1_G3,"Herefordshire, Worcestershire and Warwickshire, West Midlands (NUTS 2021)",,
+UKG2,Shropshire and Staffordshire (NUTS 2021),,
+UKG21,Telford and Wrekin (NUTS 2021),,
+UKG22,Shropshire CC (NUTS 2021),,
+UKG23,Stoke-on-Trent (NUTS 2021),,
+UKG24,Staffordshire CC (NUTS 2021),,
+UKG3,West Midlands (NUTS 2021),,
+UKG31,Birmingham (NUTS 2021),,
+UKG32,Solihull (NUTS 2021),,
+UKG33,Coventry (NUTS 2021),,
+UKG34,Dudley and Sandwell (NUTS 2006),,
+UKG35,Walsall and Wolverhampton (NUTS 2006),,
+UKG36,Dudley (NUTS 2021),,
+UKG37,Sandwell (NUTS 2021),,
+UKG38,Walsall (NUTS 2021),,
+UKG39,Wolverhampton (NUTS 2021),,
+UKH,East of England (NUTS 2021),,
+UKH1,East Anglia (NUTS 2021),,
+UKH11,Peterborough (NUTS 2021),,
+UKH12,Cambridgeshire CC (NUTS 2021),,
+UKH13,Norfolk (NUTS 2010),,
+UKH14,Suffolk (NUTS 2021),,
+UKH15,Norwich & East Norfolk (NUTS 2021),,
+UKH16,North & West Norfolk (NUTS 2021),,
+UKH17,Breckland & South Norfolk (NUTS 2021),,
+UKH2,Bedfordshire and Hertfordshire (NUTS 2021),,
+UKH21,Luton (NUTS 2021),,
+UKH22,Bedfordshire CC (NUTS 2006),,
+UKH23,Hertfordshire (NUTS 2021),,
+UKH24,Bedford (NUTS 2021),,
+UKH25,Central Bedfordshire (NUTS 2021),,
+UKH3,Essex (NUTS 2021),,
+UKH31,Southend-on-Sea (NUTS 2021),,
+UKH32,Thurrock (NUTS 2021),,
+UKH33,Essex CC (NUTS 2010),,
+UKH34,Essex Haven Gateway (NUTS 2021),,
+UKH35,West Essex (NUTS 2021),,
+UKH36,Heart of Essex (NUTS 2021),,
+UKH37,Essex Thames Gateway (NUTS 2021),,
+UKI,London (NUTS 2021),,
+UKI1,Inner London (NUTS 2010),,
+UKI11,Inner London - West (NUTS 2010),,
+UKI12,Inner London - East (NUTS 2010),,
+UKI2,Outer London (NUTS 2010),,
+UKI21,Outer London - East and North East (NUTS 2010),,
+UKI22,Outer London - South (NUTS 2010),,
+UKI23,Outer London - West and North West (NUTS 2010),,
+UKI3,Inner London - West (NUTS 2021),,
+UKI31,Camden & City of London (NUTS 2021),,
+UKI32,Westminster (NUTS 2021),,
+UKI33,Kensington and Chelsea & Hammersmith and Fulham (NUTS 2021),,
+UKI34,Wandsworth (NUTS 2021),,
+UKI4,Inner London - East (NUTS 2021),,
+UKI41,Hackney & Newham (NUTS 2021),,
+UKI42,Tower Hamlets (NUTS 2021),,
+UKI43,Haringey & Islington (NUTS 2021),,
+UKI44,Lewisham & Southwark (NUTS 2021),,
+UKI45,Lambeth (NUTS 2021),,
+UKI5,Outer London - East and North East (NUTS 2021),,
+UKI51,Bexley & Greenwich (NUTS 2021),,
+UKI52,Barking & Dagenham and Havering (NUTS 2021),,
+UKI53,Redbridge & Waltham Forest (NUTS 2021),,
+UKI54,Enfield (NUTS 2021),,
+UKI6,Outer London - South (NUTS 2021),,
+UKI61,Bromley (NUTS 2021),,
+UKI62,Croydon (NUTS 2021),,
+UKI63,"Merton, Kingston upon Thames & Sutton (NUTS 2021)",,
+UKI7,Outer London - West and North West (NUTS 2021),,
+UKI71,Barnet (NUTS 2021),,
+UKI72,Brent (NUTS 2021),,
+UKI73,Ealing (NUTS 2021),,
+UKI74,Harrow & Hillingdon (NUTS 2021),,
+UKI75,Hounslow & Richmond upon Thames (NUTS 2021),,
+UKI_J,"London, South East (NUTS 2021)",,
+UKI_J1,"London, Berkshire, Buckinghamshire and Oxfordshire (NUTS 2021)",,
+UKJ,South East (UK) (NUTS 2021),,
+UKJ1,"Berkshire, Buckinghamshire and Oxfordshire (NUTS 2021)",,
+UKJ11,Berkshire (NUTS 2021),,
+UKJ12,Milton Keynes (NUTS 2021),,
+UKJ13,Buckinghamshire CC (NUTS 2021),,
+UKJ14,Oxfordshire (NUTS 2021),,
+UKJ2,"Surrey, East and West Sussex (NUTS 2021)",,
+UKJ21,Brighton and Hove (NUTS 2021),,
+UKJ22,East Sussex CC (NUTS 2021),,
+UKJ23,Surrey (NUTS 2010),,
+UKJ24,West Sussex (NUTS 2010),,
+UKJ25,West Surrey (NUTS 2021),,
+UKJ26,East Surrey (NUTS 2021),,
+UKJ27,West Sussex (South West) (NUTS 2021),,
+UKJ28,West Sussex (North East) (NUTS 2021),,
+UKJ3,Hampshire and Isle of Wight (NUTS 2021),,
+UKJ31,Portsmouth (NUTS 2021),,
+UKJ32,Southampton (NUTS 2021),,
+UKJ33,Hampshire CC (NUTS 2010),,
+UKJ34,Isle of Wight (NUTS 2021),,
+UKJ35,South Hampshire (NUTS 2021),,
+UKJ36,Central Hampshire (NUTS 2021),,
+UKJ37,North Hampshire (NUTS 2021),,
+UKJ4,Kent (NUTS 2021),,
+UKJ41,Medway (NUTS 2021),,
+UKJ42,Kent CC (NUTS 2010),,
+UKJ43,Kent Thames Gateway (NUTS 2021),,
+UKJ44,East Kent (NUTS 2021),,
+UKJ45,Mid Kent (NUTS 2021),,
+UKJ46,West Kent (NUTS 2021),,
+UKK,South West (UK) (NUTS 2021),,
+UKK1,"Gloucestershire, Wiltshire and Bristol/Bath area (NUTS 2021)",,
+UKK11,"Bristol, City of (NUTS 2021)",,
+UKK12,"Bath and North East Somerset, North Somerset and South Gloucestershire (NUTS 2021)",,
+UKK13,Gloucestershire (NUTS 2021),,
+UKK14,Swindon (NUTS 2021),,
+UKK15,Wiltshire CC (NUTS 2021),,
+UKK2,Dorset and Somerset (NUTS 2021),,
+UKK21,Bournemouth and Poole (NUTS 2016),,
+UKK22,Dorset CC (NUTS 2016),,
+UKK23,Somerset (NUTS 2021),,
+UKK24,"Bournemouth, Christchurch and Poole (NUTS 2021)",,
+UKK25,Dorset (NUTS 2021),,
+UKK3,Cornwall and Isles of Scilly (NUTS 2021),,
+UKK30,Cornwall and Isles of Scilly (NUTS 2021),,
+UKK4,Devon (NUTS 2021),,
+UKK41,Plymouth (NUTS 2021),,
+UKK42,Torbay (NUTS 2021),,
+UKK43,Devon CC (NUTS 2021),,
+UKL,Wales (NUTS 2021),,
+UKL1,West Wales and The Valleys (NUTS 2021),,
+UKL11,Isle of Anglesey (NUTS 2021),,
+UKL12,Gwynedd (NUTS 2021),,
+UKL13,Conwy and Denbighshire (NUTS 2021),,
+UKL14,South West Wales (NUTS 2021),,
+UKL15,Central Valleys (NUTS 2021),,
+UKL16,Gwent Valleys (NUTS 2021),,
+UKL17,Bridgend and Neath Port Talbot (NUTS 2021),,
+UKL18,Swansea (NUTS 2021),,
+UKL2,East Wales (NUTS 2021),,
+UKL21,Monmouthshire and Newport (NUTS 2021),,
+UKL22,Cardiff and Vale of Glamorgan (NUTS 2021),,
+UKL23,Flintshire and Wrexham (NUTS 2021),,
+UKL24,Powys (NUTS 2021),,
+UKM,Scotland (NUTS 2021),,
+UKM1,North Eastern Scotland (NUTS 2003),,
+UKM10,"Aberdeen City, Aberdeenshire and North East Moray (NUTS 2003)",,
+UKM2,Eastern Scotland (NUTS 2013),,
+UKM21,Angus and Dundee City (NUTS 2013),,
+UKM22,Clackmannanshire and Fife (NUTS 2013),,
+UKM23,East Lothian and Midlothian (NUTS 2013),,
+UKM24,Scottish Borders (NUTS 2013),,
+UKM25,"Edinburgh, City of (NUTS 2013)",,
+UKM26,Falkirk (NUTS 2013),,
+UKM27,Perth & Kinross and Stirling (NUTS 2013),,
+UKM28,West Lothian (NUTS 2013),,
+UKM3,South Western Scotland (NUTS 2013),,
+UKM31,"East Dunbartonshire, West Dunbartonshire and Helensburgh & Lomond (NUTS 2013)",,
+UKM32,Dumfries & Galloway (NUTS 2013),,
+UKM33,East Ayrshire and North Ayrshire mainland (NUTS 2013),,
+UKM34,Glasgow City (NUTS 2013),,
+UKM35,"Inverclyde, East Renfrewshire and Renfrewshire (NUTS 2013)",,
+UKM36,North Lanarkshire (NUTS 2013),,
+UKM37,South Ayrshire (NUTS 2013),,
+UKM38,South Lanarkshire (NUTS 2013),,
+UKM4,Highlands and Islands (NUTS 2003),,
+UKM42,"Inverness and Nairn, Moray, Badenoch and Strathspey (NUTS 2003)",,
+UKM5,North Eastern Scotland (NUTS 2021),,
+UKM50,Aberdeen City and Aberdeenshire (NUTS 2021),,
+UKM6,Highlands and Islands (NUTS 2021),,
+UKM61,Caithness & Sutherland and Ross & Cromarty (NUTS 2021),,
+UKM62,"Inverness & Nairn and Moray, Badenoch & Strathspey (NUTS 2021)",,
+UKM63,"Lochaber, Skye & Lochalsh, Arran & Cumbrae and Argyll & Bute (NUTS 2021)",,
+UKM64,Eilean Siar (Western Isles) (NUTS 2021),,
+UKM65,Orkney Islands (NUTS 2021),,
+UKM66,Shetland Islands (NUTS 2021),,
+UKM7,Eastern Scotland (NUTS 2021),,
+UKM71,Angus and Dundee City (NUTS 2021),,
+UKM72,Clackmannanshire and Fife (NUTS 2021),,
+UKM73,East Lothian and Midlothian (NUTS 2021),,
+UKM75,"Edinburgh, City of (NUTS 2021)",,
+UKM76,Falkirk (NUTS 2021),,
+UKM77,Perth & Kinross and Stirling (NUTS 2021),,
+UKM78,West Lothian (NUTS 2021),,
+UKM8,West Central Scotland (NUTS 2021),,
+UKM81,"East Dunbartonshire, West Dunbartonshire and Helensburgh & Lomond (NUTS 2021)",,
+UKM82,Glasgow City (NUTS 2021),,
+UKM83,"Inverclyde, East Renfrewshire and Renfrewshire (NUTS 2021)",,
+UKM84,North Lanarkshire (NUTS 2021),,
+UKM9,Southern Scotland (NUTS 2021),,
+UKM91,Scottish Borders (NUTS 2021),,
+UKM92,Dumfries & Galloway (NUTS 2021),,
+UKM93,East Ayrshire and North Ayrshire mainland (NUTS 2021),,
+UKM94,South Ayrshire (NUTS 2021),,
+UKM95,South Lanarkshire (NUTS 2021),,
+UKN,Northern Ireland (UK) (NUTS 2021),,
+UKN0,Northern Ireland (UK) (NUTS 2021),,
+UKN01,Belfast (NUTS 2013),,
+UKN02,Outer Belfast (NUTS 2013),,
+UKN03,East of Northern Ireland (NUTS 2013),,
+UKN04,North of Northern Ireland (NUTS 2013),,
+UKN05,West and South of Northern Ireland (NUTS 2013),,
+UKN06,Belfast (NUTS 2021),,
+UKN07,"Armagh City, Banbridge and Craigavon (NUTS 2021)",,
+UKN08,"Newry, Mourne and Down (NUTS 2021)",,
+UKN09,Ards and North Down (NUTS 2021),,
+UKN0A,Derry City and Strabane (NUTS 2021),,
+UKN0B,Mid Ulster (NUTS 2021),,
+UKN0C,Causeway Coast and Glens (NUTS 2021),,
+UKN0D,Antrim and Newtownabbey (NUTS 2021),,
+UKN0E,Lisburn and Castlereagh (NUTS 2021),,
+UKN0F,Mid and East Antrim (NUTS 2021),,
+UKN0G,Fermanagh and Omagh (NUTS 2021),,
+UKN10,Derry City and Strabane (NUTS 2016),,
+UKN11,Mid Ulster (NUTS 2016),,
+UKN12,Causeway Coast and Glens (NUTS 2016),,
+UKN13,Antrim and Newtownabbey (NUTS 2016),,
+UKN14,Lisburn and Castlereagh (NUTS 2016),,
+UKN15,Mid and East Antrim (NUTS 2016),,
+UKN16,Fermanagh and Omagh (NUTS 2016),,
+UKX,Not regionalised/Unknown NUTS 1,,
+UKXX,Not regionalised/Unknown NUTS 2,,
+UKXXX,Not regionalised/Unknown NUTS 3,,
+UKZ,Extra-Regio NUTS 1 (NUTS 2021),,
+UKZZ,Extra-Regio NUTS 2 (NUTS 2021),,
+UKZZZ,Extra-Regio NUTS 3 (NUTS 2021),,
+UK_CAP,London,,
+UK_DEL,Culham,,
+UK_NAL,"United Kingdom, not allocated",,
+UK_OCT,British overseas countries and territories,,
 UM,United States Minor Outlying Islands,country,
-UMIC,Upper middle income countries,NUTS2,UMI
-UMIC_X_CN,Upper middle income countries except China,NUTS3,UMIC_X_C
-UNESCO,"United Nations Educational, Scientific and Cultural Organization (UNESCO)",NUTS3,UNESC
-UNHCR,"United Nations High Commissioner for Refugees, Office of the (UNHCR)",NUTS3,UNHC
-UNICEF,United Nations Children's Fund (UNICEF),NUTS3,UNICE
-UNK,Unknown,NUTS1,UN
-UNO,United Nations Organization,NUTS1,UN
-UNRWA,United Nations Relief and Works Agency for Palestine* Refugees in the Near East (UNRWA),NUTS3,UNRW
+UMIC,Upper middle income countries,,
+UMIC_X_CN,Upper middle income countries except China,,
+UNESCO,"United Nations Educational, Scientific and Cultural Organization (UNESCO)",,
+UNHCR,"United Nations High Commissioner for Refugees, Office of the (UNHCR)",,
+UNICEF,United Nations Children's Fund (UNICEF),,
+UNK,Unknown,,
+UNO,United Nations Organization,,
+UNRWA,United Nations Relief and Works Agency for Palestine* Refugees in the Near East (UNRWA),,
 US,United States,country,
-USMCA,United States-Mexico-Canada Agreement (USMCA),NUTS3,USMC
-US_CAP,"Washington, D.C.",NUTS3,US_CA
-US_DEL,New York,NUTS3,US_DE
-US_DEL1,New York,NUTS3,US_DEL
-US_DEL2,San Francisco,NUTS3,US_DEL
-US_ISL,American Oceania (US),NUTS3,US_IS
+USMCA,United States-Mexico-Canada Agreement (USMCA),,
+US_CAP,"Washington, D.C.",,
+US_DEL,New York,,
+US_DEL1,New York,,
+US_DEL2,San Francisco,,
+US_ISL,American Oceania (US),,
 UY,Uruguay,country,
-UY_CAP,Montevideo,NUTS3,UY_CA
+UY_CAP,Montevideo,,
 UZ,Uzbekistan,country,
-UZ_CAP,Toshkent,NUTS3,UZ_CA
+UZ_CAP,Toshkent,,
 VA,Holy See,country,
 VC,Saint Vincent and the Grenadines,country,
 VE,Venezuela,country,
-VE_CAP,Caracas,NUTS3,VE_CA
+VE_CAP,Caracas,,
 VG,British Virgin Islands,country,
 VI,US Virgin Islands,country,
 VN,Viet Nam,country,
-VN_CAP,Hanoi,NUTS3,VN_CA
+VN_CAP,Hanoi,,
 VU,Vanuatu,country,
-VU_CAP,Port Vila,NUTS3,VU_CA
-WBC,WBC - Western Balkan Countries (aggregate changing according to the context),NUTS1,WB
+VU_CAP,Port Vila,,
+WBC,WBC - Western Balkan Countries (aggregate changing according to the context),,
 WF,Wallis and Futuna,country,
-WHO,World Health Organization (WHO),NUTS1,WH
-WORLD,All countries of the world,NUTS3,WORL
-WRL_NAL,World - not allocated,NUTS3,WRL_NA
-WRL_REST,Rest of the world,NUTS3,WRL_RES
-WRL_X_EUR,World except Europe,NUTS3,WRL_X_EU
-WRL_X_REP,World total except for the reporting country,NUTS3,WRL_X_RE
+WHO,World Health Organization (WHO),,
+WORLD,All countries of the world,,
+WRL_NAL,World - not allocated,,
+WRL_REST,Rest of the world,,
+WRL_X_EUR,World except Europe,,
+WRL_X_REP,World total except for the reporting country,,
 WS,Samoa,country,
-WS_CAP,Apia,NUTS3,WS_CA
-WTO,World Trade Organization,NUTS1,WT
+WS_CAP,Apia,,
+WTO,World Trade Organization,,
 XK,Kosovo*,country,
 XK0,Kosovë/Kosovo,NUTS1,XK
 XK00,Kosovë/Kosovo,NUTS2,XK0
@@ -3233,13 +4281,13 @@ XKXXX,Not regionalised/Unknown level 3,NUTS3,XKXX
 XKZ,Extra-Regio level 1,NUTS1,XK
 XKZZ,Extra-Regio level 2,NUTS2,XKZ
 XKZZZ,Extra-Regio level 3,NUTS3,XKZZ
-XK_CAP,Prishtinë,NUTS3,XK_CA
+XK_CAP,Prishtinë,,
 YE,Yemen,country,
-YE_CAP,Sanaa,NUTS3,YE_CA
-YT,Mayotte (FR - part of EU as of 01.01.2014),country,
+YE_CAP,Sanaa,,
+YT,Mayotte (FR - part of EU as of 01.01.2014),,
 ZA,South Africa,country,
-ZA_CAP,Pretoria,NUTS3,ZA_CA
+ZA_CAP,Pretoria,,
 ZM,Zambia,country,
-ZM_CAP,Lusaka,NUTS3,ZM_CA
+ZM_CAP,Lusaka,,
 ZW,Zimbabwe,country,
-ZW_CAP,Harare,NUTS3,ZW_CA
+ZW_CAP,Harare,,
