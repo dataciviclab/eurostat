@@ -2,27 +2,21 @@
 -- Dimensioni: freq, unit, sex, age, geo (DEMO_R_D2JAN)
 
 SELECT
-    r.* EXCLUDE (value, flag),
+    r.freq, r.unit, r.sex, r.age, r.geo, r.year,
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
-    u.label_it AS unit_label_it,
     g.label_en AS geo_label_en,
     g.nuts_level,
     g.parent_code AS nuts_parent_code,
     gp.label_en AS nuts_parent_label_en,
-    -- Sex label (small fixed domain)
-    CASE r.sex
+    -- Sex label (small fixed domain). CAST handles DuckDB auto-detecting
+    -- sex as BOOLEAN (F/M/T look like booleans to the sniffer).
+    CASE CAST(r.sex AS VARCHAR)
         WHEN 'M' THEN 'Male'
         WHEN 'F' THEN 'Female'
         WHEN 'T' THEN 'Total'
-        ELSE r.sex
+        ELSE CAST(r.sex AS VARCHAR)
     END AS sex_label_en,
-    CASE r.sex
-        WHEN 'M' THEN 'Maschi'
-        WHEN 'F' THEN 'Femmine'
-        WHEN 'T' THEN 'Totale'
-        ELSE r.sex
-    END AS sex_label_it,
     r.value,
     r.flag,
     fl.description_en AS flag_desc_en

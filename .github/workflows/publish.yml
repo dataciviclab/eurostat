@@ -52,10 +52,10 @@ jobs:
             echo "datasets=$LIST" >> $GITHUB_OUTPUT
           fi
 
-      # ── Fetch latest geo codelist from SDMX ───────────────────────────
-      - name: Update geo codelist
+      # ── Fetch latest codelists from Eurostat SDMX ────────────────────
+      - name: Update codelists
         run: |
-          python scripts/fetch_geo_sdmx.py
+          python scripts/update_codelists.py
 
       # ── Run pipeline ─────────────────────────────────────────────────
       - name: Run datasets

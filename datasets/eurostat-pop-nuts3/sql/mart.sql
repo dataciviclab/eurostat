@@ -9,11 +9,9 @@ SELECT
     nuts_parent_label_en,
     sex,
     sex_label_en,
-    sex_label_it,
     age,
     unit,
     unit_label_en,
-    unit_label_it,
     value,
     flag,
     flag_desc_en

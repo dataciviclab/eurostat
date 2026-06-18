@@ -188,7 +188,9 @@ class TestNormalizeStream:
 
         # Label specifiche devono essere corrette
         assert labels["A"] == "Agriculture, forestry and fishing"
-        assert labels["TOTAL"] == "All NACE activities"
+        assert (
+            labels["TOTAL"] == "Total - all NACE activities"
+        )  # official Eurostat label
 
         # Verifica copertura contro dati reali (se disponibili)
         raw_files = [

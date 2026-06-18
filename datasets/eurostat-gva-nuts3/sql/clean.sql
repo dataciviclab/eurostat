@@ -1,9 +1,8 @@
 -- clean.sql: arricchimento GVA — dimensione extra nace_r2
 SELECT
-    r.* EXCLUDE (value, flag),
+    r.freq, r.nace_r2, r.unit, r.geo, r.year,
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
-    u.label_it AS unit_label_it,
     n.label_en AS nace_label_en,
     g.label_en AS geo_label_en,
     g.nuts_level,

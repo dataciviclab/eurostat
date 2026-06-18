@@ -3,12 +3,12 @@
 Eurostat TSV normalizer — universal, streaming, DSD-agnostic.
 
 Usage:
-    python tsv_normalize.py --flow NAMA_10R_3GDP [--output file.csv]
+    python tsv_normalize.py --flow NAMA_10R_3GDP [--output file.parquet]
 
 Reads TSV from Eurostat SDMX API, detects dimensions automatically
 from the header, unpivots years into rows, parses flags and missing values.
 
-Output: CSV with columns [dim1, dim2, ..., dimN, year, value, flag]
+Output: parquet with columns [dim1, dim2, ..., dimN, year, value, flag]
          EU-wide, no filtering.
 """
 
@@ -33,7 +33,7 @@ def eurostat_url(flow: str) -> str:
 
 def detect_dims(raw_header: str) -> list[str]:
     """Detect dimension names from the first column of the TSV header.
-    
+
     Header format: "dim1,dim2,...,dimN\\TIME_PERIOD\\t2020\\t2021..."
     """
     parts = raw_header.strip().split("\t")
@@ -61,19 +61,24 @@ def normalize_stream(
     input_stream: io.TextIOBase,
     output: Path | None = None,
     filter_geo: str | None = None,
+    fmt: str = "parquet",
 ) -> str:
-    """Normalize TSV from a text stream to unpivoted CSV.
+    """Normalize TSV from a text stream to unpivoted CSV/parquet.
 
     Parses the SDMX-TSV header to detect dimensions, then unpivots
     year columns into rows with columns [dim1..dimN, year, value, flag].
 
+    When fmt='parquet' (default), writes parquet via DuckDB (all_varchar
+    to avoid type sniffing issues). When fmt='csv', writes CSV directly.
+
     Args:
         input_stream: Text stream containing the TSV data.
-        output: Optional path to write CSV file. If None, returns CSV as string.
+        output: Optional path to write output file. If None, returns CSV as string.
         filter_geo: Optional geo prefix filter (e.g. 'IT' for Italy only).
+        fmt: Output format ('parquet' or 'csv').
 
     Returns:
-        CSV content as string.
+        CSV content as string (even for parquet, for backward compat).
     """
     raw_header = input_stream.readline()
     dims = detect_dims(raw_header)
@@ -87,7 +92,9 @@ def normalize_stream(
     # Parse year columns from header
     parts = raw_header.strip().split("\t")
     year_cols = [y.strip() for y in parts[1:] if y.strip()]
-    sys.stderr.write(f"Year columns: {year_cols[0]}..{year_cols[-1]} ({len(year_cols)} years)\n")
+    sys.stderr.write(
+        f"Year columns: {year_cols[0]}..{year_cols[-1]} ({len(year_cols)} years)\n"
+    )
 
     # Output CSV — lineterminator='\n' per evitare \r\n in stdout/pipe
     buf = io.StringIO()
@@ -110,7 +117,9 @@ def normalize_stream(
 
         # Apply geo filter early (skip entire row if geo doesn't match)
         if filter_geo:
-            geo_val = dim_values[geo_dim_index] if geo_dim_index < len(dim_values) else ""
+            geo_val = (
+                dim_values[geo_dim_index] if geo_dim_index < len(dim_values) else ""
+            )
             if not geo_val.startswith(filter_geo):
                 continue
 
@@ -133,8 +142,29 @@ def normalize_stream(
     csv_content = buf.getvalue()
 
     if output:
-        output.write_text(csv_content, encoding="utf-8")
-        sys.stderr.write(f"Written {row_count} rows to {output}\n")
+        if fmt == "parquet":
+            # Write parquet via DuckDB: CSV in memory → COPY to parquet.
+            # all_varchar avoids type sniffing (e.g. sex F/M/T → BOOLEAN).
+            # year and value are explicitly cast so consumers get correct types.
+            import duckdb
+
+            parquet_path = output  # output path already has .parquet extension
+            tmp_csv = output.with_suffix(".csv.tmp")
+            tmp_csv.write_text(csv_content, encoding="utf-8")
+            duckdb.sql(
+                f"COPY ("
+                f"SELECT * EXCLUDE (year, value), "
+                f"CAST(year AS INTEGER) AS year, "
+                f"CAST(NULLIF(value, '') AS DOUBLE) AS value "
+                f"FROM read_csv('{tmp_csv}', "
+                "auto_detect=true, all_varchar=true)"
+                f") TO '{parquet_path}' (FORMAT PARQUET)"
+            )
+            tmp_csv.unlink()
+            sys.stderr.write(f"Written {row_count} rows to {parquet_path}\n")
+        else:
+            output.write_text(csv_content, encoding="utf-8")
+            sys.stderr.write(f"Written {row_count} rows to {output}\n")
     else:
         sys.stdout.write(csv_content)
         sys.stderr.write(f"Written {row_count} rows to stdout\n")
@@ -142,8 +172,13 @@ def normalize_stream(
     return csv_content
 
 
-def normalize(flow: str, output: Path | None = None, filter_geo: str | None = None) -> str:
-    """Download TSV from Eurostat SDMX API, normalize to CSV.
+def normalize(
+    flow: str,
+    output: Path | None = None,
+    filter_geo: str | None = None,
+    fmt: str = "parquet",
+) -> str:
+    """Download TSV from Eurostat SDMX API, normalize to parquet.
 
     Wraps normalize_stream with an HTTP fetch.
     """
@@ -151,17 +186,29 @@ def normalize(flow: str, output: Path | None = None, filter_geo: str | None = No
     sys.stderr.write(f"Fetching {url}...\n")
     response = urllib.request.urlopen(url)
     text_stream = io.TextIOWrapper(response, encoding="utf-8")
-    return normalize_stream(text_stream, output, filter_geo)
+    return normalize_stream(text_stream, output, filter_geo, fmt)
 
 
 def main():
     parser = argparse.ArgumentParser(description="Eurostat TSV normalizer")
-    parser.add_argument("--flow", required=True, help="Eurostat dataflow ID (e.g. NAMA_10R_3GDP)")
-    parser.add_argument("--output", type=Path, default=None, help="Output CSV path (default: stdout)")
-    parser.add_argument("--filter-geo", default=None, help="Filter by geo prefix (e.g. IT, DE, FR)")
+    parser.add_argument(
+        "--flow", required=True, help="Eurostat dataflow ID (e.g. NAMA_10R_3GDP)"
+    )
+    parser.add_argument(
+        "--output", type=Path, default=None, help="Output path (default: stdout)"
+    )
+    parser.add_argument(
+        "--format",
+        choices=["csv", "parquet"],
+        default="parquet",
+        help="Output format (default: parquet)",
+    )
+    parser.add_argument(
+        "--filter-geo", default=None, help="Filter by geo prefix (e.g. IT, DE, FR)"
+    )
     args = parser.parse_args()
-    
-    normalize(args.flow, args.output, filter_geo=args.filter_geo)
+
+    normalize(args.flow, args.output, filter_geo=args.filter_geo, fmt=args.format)
 
 
 if __name__ == "__main__":

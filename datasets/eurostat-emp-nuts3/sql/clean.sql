@@ -1,9 +1,8 @@
 -- clean.sql: arricchimento employment — dimensione extra wstatus e nace_r2
 SELECT
-    r.* EXCLUDE (value, flag),
+    r.freq, r.unit, r.wstatus, r.nace_r2, r.geo, r.year,
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
-    u.label_it AS unit_label_it,
     CASE r.wstatus
         WHEN 'TOTAL' THEN 'Total employment'
         WHEN 'EMP' THEN 'Employed'

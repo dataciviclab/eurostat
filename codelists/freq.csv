@@ -1,5 +1,13 @@
-freq,label_en,label_it
-A,Annual,Annuale
-M,Monthly,Mensile
-Q,Quarterly,Trimestrale
-S,Semestral,Semestrale
+freq,label_en
+A,Annual
+A3,Triannual
+B,Daily - business week
+D,Daily
+H,Hourly
+I,Irregular / A-periodic
+M,Monthly
+NAP,Not applicable
+P,Pluri-annual
+Q,Quarterly
+S,"Half-yearly, semesterly"
+W,Weekly
