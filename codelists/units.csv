@@ -1,5 +1,6 @@
 unit,label_en,label_it
 CP_MEUR,Current prices (million EUR),Prezzi correnti (milioni EUR)
+THS,Thousands (persons),Migliaia (persone)
 EUR_HAB,EUR per inhabitant,EUR per abitante
 EUR_HAB_EU27_2020,% of EU27 average (from 2020),% media EU27 (dal 2020)
 MIO_EUR,Million EUR,Milioni di EUR

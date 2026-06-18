@@ -9,6 +9,7 @@ SELECT
         WHEN 'EMP' THEN 'Employed'
         WHEN 'UNE' THEN 'Unemployed'
         WHEN 'INACT' THEN 'Inactive'
+        WHEN 'SAL' THEN 'Salaried'
         WHEN 'SELF' THEN 'Self-employed'
         WHEN 'EMPL' THEN 'Employees'
         ELSE r.wstatus
