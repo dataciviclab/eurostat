@@ -24,10 +24,12 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install toolkit and lab-connectors
+      - name: Install dependencies
         run: |
           pip install git+https://github.com/dataciviclab/toolkit.git
           pip install git+https://github.com/dataciviclab/lab-connectors.git
+          pip install -e ".[mcp]"
+          chmod +x connectors/*.py
 
       # ── Dataset discovery ────────────────────────────────────────────
       # Discover all dataset configs dynamically: any datasets/*/dataset.yml
