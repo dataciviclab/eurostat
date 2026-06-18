@@ -5,7 +5,7 @@
 -- Qui arricchiamo con label da codelist.
 
 SELECT
-    r.* EXCLUDE (value, flag),
+    r.freq, r.unit, r.geo, r.year,
     f.label_en AS freq_label_en,
     u.label_en AS unit_label_en,
     g.label_en AS geo_label_en,

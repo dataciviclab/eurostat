@@ -15,9 +15,9 @@ raw:
     - name: "eurostat_nama_10r_3empers"
       type: "script"
       args:
-        command: "../../connectors/tsv_normalize.py --flow NAMA_10R_3EMPERS --output nama_10r_3empers_normalized.csv"
-        output: "nama_10r_3empers_normalized.csv"
-        filename: "nama_10r_3empers_normalized.csv"
+        command: "../../connectors/tsv_normalize.py --flow NAMA_10R_3EMPERS --output nama_10r_3empers_normalized.parquet --format parquet"
+        output: "nama_10r_3empers_normalized.parquet"
+        filename: "nama_10r_3empers_normalized.parquet"
       primary: true
 
 clean:
