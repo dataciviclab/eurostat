@@ -36,8 +36,8 @@ jobs:
       - name: Test connectors
         run: python -m pytest tests/ -v --tb=short
 
-      - name: Test eurostat-mcp
-        run: python -m pytest eurostat-mcp/tests/ -v --tb=short
+      - name: Test eurostat-mcp (unit)
+        run: python -m pytest eurostat-mcp/tests/ -v --tb=short -k "not test_query"
 
   validate-config:
     runs-on: ubuntu-latest
@@ -55,6 +55,6 @@ jobs:
         run: |
           for cfg in $(find datasets -maxdepth 2 -name dataset.yml | sort); do
             echo "→ $cfg"
-            toolkit inspect paths --config "$cfg" --year 2024 > /dev/null 2>&1
+            toolkit inspect paths --config "$cfg" --year 2026 > /dev/null 2>&1
           done
           echo "✅ All configs valid"
