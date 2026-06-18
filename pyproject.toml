@@ -17,6 +17,7 @@ include = ["connectors*", "eurostat*"]
 cli = [
     "typer>=0.12",
     "rich>=13.0",
+    "pyyaml>=6.0",
 ]
 dev = [
     "pytest>=8.0",
@@ -26,6 +27,7 @@ dev = [
 mcp = [
     "lab-connectors[mcp]>=0.15.1",
     "duckdb>=1.5.3,<2",
+    "pyyaml>=6.0",
 ]
 
 [project.scripts]
