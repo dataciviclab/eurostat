@@ -26,9 +26,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e ".[dev]"
+          pip install -e ".[dev,mcp]"
           pip install git+https://github.com/dataciviclab/lab-connectors.git
-          pip install duckdb  # needed by eurostat-mcp tests
 
       - name: Lint with ruff
         run: ruff check connectors/ tests/ eurostat-mcp/
