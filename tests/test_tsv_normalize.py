@@ -17,27 +17,29 @@ FIXTURES = Path(__file__).parent / "fixtures"
 # ── detect_dims ──────────────────────────────────────────────────────────────
 # contract: header parsing è il contratto centrale tra connector e formato SDMX-TSV
 
+
 class TestDetectDims:
     """detect_dims(raw_header: str) -> list[str]"""
 
     def test_standard(self):
         """3 dimensioni: freq, unit, geo"""
-        header = 'freq,unit,geo\\TIME_PERIOD\t2000\t2001\t2002'
+        header = "freq,unit,geo\\TIME_PERIOD\t2000\t2001\t2002"
         assert detect_dims(header) == ["freq", "unit", "geo"]
 
     def test_multi_dim(self):
         """5 dimensioni: freq, age, sex, unit, geo (popolazione)"""
-        header = 'freq,age,sex,unit,geo\\TIME_PERIOD\t2020\t2021'
+        header = "freq,age,sex,unit,geo\\TIME_PERIOD\t2020\t2021"
         assert detect_dims(header) == ["freq", "age", "sex", "unit", "geo"]
 
     def test_nace_dim(self):
         """con nace_r2 (GVA)"""
-        header = 'freq,nace_r2,unit,geo\\TIME_PERIOD\t2010\t2011'
+        header = "freq,nace_r2,unit,geo\\TIME_PERIOD\t2010\t2011"
         assert detect_dims(header) == ["freq", "nace_r2", "unit", "geo"]
 
 
 # ── parse_value ──────────────────────────────────────────────────────────────
 # policy: i flag qualità Eurostat vanno preservati, i missing vanno resi come None
+
 
 class TestParseValue:
     """parse_value(raw: str) -> tuple[float | None, str | None]"""
@@ -90,6 +92,7 @@ class TestParseValue:
 # ── normalize_stream ─────────────────────────────────────────────────────────
 # contract: TSV → CSV unpivoted con colonne [dim1..dimN, year, value, flag]
 
+
 class TestNormalizeStream:
     """normalize_stream(input_stream, output=None, filter_geo=None) -> str"""
 
@@ -99,9 +102,9 @@ class TestNormalizeStream:
     def test_inline_data(self):
         """2 righe × 2 anni → 4 righe CSV"""
         tsv = (
-            'freq,unit,geo\\TIME_PERIOD\t2020\t2021\n'
-            'A,EUR_HAB,IT\t35000\t36000\n'
-            'A,EUR_HAB,ITC4\t50400\t51200\n'
+            "freq,unit,geo\\TIME_PERIOD\t2020\t2021\n"
+            "A,EUR_HAB,IT\t35000\t36000\n"
+            "A,EUR_HAB,ITC4\t50400\t51200\n"
         )
         csv_content = normalize_stream(self._tsv_stream(tsv))
         rows = [r.split(",") for r in csv_content.strip().split("\n")]
@@ -119,10 +122,7 @@ class TestNormalizeStream:
 
     def test_missing_values(self):
         """Valori mancanti (':') → cella vuota"""
-        tsv = (
-            'freq,unit,geo\\TIME_PERIOD\t2020\t2021\n'
-            'A,EUR_HAB,IT\t:\t36000\n'
-        )
+        tsv = "freq,unit,geo\\TIME_PERIOD\t2020\t2021\nA,EUR_HAB,IT\t:\t36000\n"
         csv_content = normalize_stream(self._tsv_stream(tsv))
         assert ":," not in csv_content  # no colon in output
         rows = csv_content.strip().split("\n")
@@ -133,10 +133,7 @@ class TestNormalizeStream:
 
     def test_flags_preserved(self):
         """Flag qualità preservati come colonna 'flag'"""
-        tsv = (
-            'freq,unit,geo\\TIME_PERIOD\t2020\n'
-            'A,EUR_HAB,IT\t50400  e\n'
-        )
+        tsv = "freq,unit,geo\\TIME_PERIOD\t2020\nA,EUR_HAB,IT\t50400  e\n"
         csv_content = normalize_stream(self._tsv_stream(tsv))
         rows = csv_content.strip().split("\n")
         data_row = rows[1]
@@ -145,10 +142,10 @@ class TestNormalizeStream:
     def test_geo_filter(self):
         """filter_geo='IT' esclude righe non italiane"""
         tsv = (
-            'freq,unit,geo\\TIME_PERIOD\t2020\n'
-            'A,EUR_HAB,IT\t35000\n'
-            'A,EUR_HAB,FR\t30000\n'
-            'A,EUR_HAB,DE\t38000\n'
+            "freq,unit,geo\\TIME_PERIOD\t2020\n"
+            "A,EUR_HAB,IT\t35000\n"
+            "A,EUR_HAB,FR\t30000\n"
+            "A,EUR_HAB,DE\t38000\n"
         )
         csv_content = normalize_stream(self._tsv_stream(tsv), filter_geo="IT")
         rows = [r for r in csv_content.strip().split("\n") if r]
@@ -159,14 +156,62 @@ class TestNormalizeStream:
     def test_geo_filter_nuts3(self):
         """filter_geo='IT' su 4-dim (con nace_r2)"""
         tsv = (
-            'freq,nace_r2,unit,geo\\TIME_PERIOD\t2020\n'
-            'A,TOTAL,CP_MEUR,ITC4\t50400\n'
-            'A,TOTAL,CP_MEUR,FR10\t30000\n'
+            "freq,nace_r2,unit,geo\\TIME_PERIOD\t2020\n"
+            "A,TOTAL,CP_MEUR,ITC4\t50400\n"
+            "A,TOTAL,CP_MEUR,FR10\t30000\n"
         )
         csv_content = normalize_stream(self._tsv_stream(tsv), filter_geo="IT")
         rows = [r for r in csv_content.strip().split("\n") if r]
         assert len(rows) == 2  # header + solo ITC4
         assert "FR10" not in csv_content
+
+    def test_nace_codelist_complete(self):
+        """nace_r2.csv copre TUTTI i codici NACE presenti nei dati Eurostat.
+
+        Contratto: il codelist deve contenere tutti i codici nace_r2 che
+        compaiono nei dataset reali. Se Eurostat aggiunge nuovi codici,
+        questo test fallisce e qualcuno deve aggiungerli al codelist.
+        """
+        import duckdb
+
+        # Verifica parseabilità del CSV (label con virgole quotate)
+        cl_rows = duckdb.sql(
+            "SELECT code, label_en FROM read_csv('codelists/nace_r2.csv', "
+            "auto_detect=true, delim=',', header=true) ORDER BY code"
+        ).fetchall()
+        assert len(cl_rows) >= 15, f"Solo {len(cl_rows)} codici, servono almeno 15"
+        labels = dict(cl_rows)
+
+        # Tutti i codici devono avere label non NULL
+        for code, label in cl_rows:
+            assert label is not None, f"Label mancante per codice NACE: {code}"
+
+        # Label specifiche devono essere corrette
+        assert labels["A"] == "Agriculture, forestry and fishing"
+        assert labels["TOTAL"] == "All NACE activities"
+
+        # Verifica copertura contro dati reali (se disponibili)
+        raw_files = [
+            "out/data/raw/eurostat_emp_nuts3/2026/nama_10r_3empers_normalized.csv",
+            "out/data/raw/eurostat_gva_nuts3/2024/nama_10r_3gva_normalized.csv",
+        ]
+        all_data_codes: set[str] = set()
+        for f in raw_files:
+            try:
+                codes = duckdb.sql(
+                    f"SELECT DISTINCT nace_r2 FROM read_csv('{f}', "
+                    "auto_detect=true) WHERE nace_r2 IS NOT NULL ORDER BY 1"
+                ).fetchall()
+                all_data_codes.update(r[0] for r in codes)
+            except Exception:
+                pass  # raw file potrebbe non esistere in CI
+
+        if all_data_codes:
+            missing = all_data_codes - set(labels.keys())
+            assert not missing, (
+                f"Codici NACE nei dati senza label nel codelist: "
+                f"{sorted(missing)}. Aggiungili a codelists/nace_r2.csv"
+            )
 
     def test_sample_fixture(self):
         """Test con fixture reale NAMA_10R_3GDP (Albania NUTS3)"""

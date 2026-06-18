@@ -12,6 +12,9 @@ license = "MIT"
 
 [tool.setuptools.packages.find]
 include = ["connectors*"]
+# NOTE: eurostat-mcp/ is NOT a pip-installable package (hyphen in dir name,
+# no __init__.py). It works via PYTHONPATH or directly python server.py.
+# The conftest.py in eurostat-mcp/tests/ ensures tests run without PYTHONPATH.
 
 [project.optional-dependencies]
 dev = [

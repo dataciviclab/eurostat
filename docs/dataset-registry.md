@@ -13,9 +13,7 @@
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
 - Mart filters for **Italy NUTS3** (provinces)
-- Clean parquet available in `out/data/clean/`
-- Mart parquet available in `out/data/mart/`
-- GCS push planned
+- Clean + mart parquet available locally in `out/data/` and on GCS via the [publish workflow](.github/workflows/publish.yml)
 
 ## Planned
 

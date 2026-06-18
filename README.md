@@ -6,7 +6,7 @@
 [![Data on GCS](https://img.shields.io/badge/data-GCS-blue)](https://console.cloud.google.com/storage/browser/dataciviclab-clean/eurostat)
 [![MCP](https://img.shields.io/badge/MCP-ready-purple)](eurostat-mcp/server.py)
 
-**Eurostat datasets, connectors and pipelines** — designed for regional (NUTS2/NUTS3) analysis across Europe.  
+**Eurostat datasets, connectors and pipelines** — designed for regional (NUTS2/NUTS3) analysis across Europe.
 Part of [DataCivicLab](https://github.com/dataciviclab), a civic data laboratory.
 
 ## What this is
@@ -19,26 +19,22 @@ A reproducible pipeline that fetches, normalizes and publishes Eurostat SDMX-TSV
 
 ## Published datasets
 
-| Dataset | Dataflow | Theme | Clean rows | Clean size | GCS |
-|---|---|---|---|---|---|
-| `eurostat-gdp-nuts3` | `NAMA_10R_3GDP` | Regional GDP by NUTS 3 | 308K | 1.1 MB | ✅ |
-| `eurostat-gva-nuts3` | `NAMA_10R_3GVA` | Regional GVA by NUTS 3 (by NACE sector) | 1.3M | 6.5 MB | ✅ |
-| `eurostat-crime-nuts3` | `CRIM_GEN` | Recorded crimes by NUTS 3 | 4K | 20 KB | ✅ |
-| `eurostat-pop-nuts3` | `DEMO_R_D2JAN` | Population on 1 Jan by NUTS 3 (sex × age) | 300K | 1.3 MB | ✅ |
-
-Full details: [docs/dataset-registry.md](docs/dataset-registry.md)
+See [docs/dataset-registry.md](docs/dataset-registry.md) for the full list of published and planned datasets (slug, dataflow, theme, row count, status).
 
 ## Access the data
 
 ### Via MCP (recommended for AI agents)
 
-The repo includes an MCP server that exposes 4 tools:
+The repo includes an MCP server exposing 4 tools:
 
-```
-eurostat_list_datasets   — list available datasets with metadata
-eurostat_query           — run SQL against a dataset (FROM data)
-eurostat_get_codelist    — resolve freq/unit/flag/nuts_italy codes
-```
+| Tool | Description |
+|---|---|
+| `eurostat_list_datasets` | List available datasets with metadata |
+| `eurostat_describe_dataset` | Inspect schema, years, and dimension values |
+| `eurostat_query` | Run SQL against a dataset (`FROM data`) |
+| `eurostat_get_codelist` | Resolve freq/unit/flag/nuts_italy codes |
+
+Source: [eurostat-mcp/server.py](eurostat-mcp/server.py)
 
 Register in your MCP client:
 
@@ -52,18 +48,6 @@ Register in your MCP client:
 }
 ```
 
-Example queries:
-
-| Natural language | MCP call |
-|---|---|---|
-| "What datasets are available?" | `eurostat_list_datasets()` |
-| "What columns does population have?" | `eurostat_describe_dataset(slug="eurostat_pop_nuts3")` |
-| "GDP per capita of Italian provinces in 2024" | `eurostat_query(slug="eurostat_gdp_nuts3", sql="SELECT geo, geo_label_en, value FROM data WHERE geo LIKE 'IT%' AND unit='EUR_HAB' ORDER BY value DESC")` |
-| "Population of Italy in 2024" | `eurostat_query(slug="eurostat_pop_nuts3", sql="SELECT SUM(value) AS population FROM data WHERE geo LIKE 'IT%' AND unit='NR' AND sex='T' AND age='TOTAL'")` |
-| "Crimes in Milan by category" | `eurostat_query(slug="eurostat_crime_nuts3", sql="SELECT iccs, value FROM data WHERE geo='ITC4C' AND unit='NR'")` |
-| "What datasets are available?" | `eurostat_list_datasets()` |
-| "What does code ITC4 mean?" | `eurostat_get_codelist(codelist_id="nuts_italy")` |
-
 ### Direct DuckDB access
 
 All datasets are public on GCS. Query directly with DuckDB:
@@ -71,10 +55,10 @@ All datasets are public on GCS. Query directly with DuckDB:
 ```python
 import duckdb
 
-# GDP per capita of Italian provinces
+# GDP per capita of Italian provinces (latest year)
 duckdb.sql("""
     SELECT geo, value
-    FROM read_parquet('gs://dataciviclab-clean/eurostat/eurostat_gdp_nuts3/eurostat_gdp_nuts3_clean.parquet')
+    FROM read_parquet('gs://dataciviclab-clean/eurostat/eurostat_gdp_nuts3/*_clean.parquet')
     WHERE geo LIKE 'IT%' AND unit = 'EUR_HAB'
     ORDER BY value DESC
 """).show()
@@ -89,25 +73,21 @@ duckdb.sql("""
 """).show()
 ```
 
-GCS paths:
-- **Clean** (all EU, all years): `gs://dataciviclab-clean/eurostat/{slug}/{slug}_clean.parquet`
-- **Mart** (Italy-filtered): `gs://dataciviclab-mart/eurostat/{slug}/`
+GCS buckets (public):
+- **Clean**: `gs://dataciviclab-clean/eurostat/{slug}/` — parquet per year (`*_clean.parquet`)
+- **Mart**: `gs://dataciviclab-mart/eurostat/{slug}/` — Italy-filtered views
 
 ## Structure
 
 ```
 eurostat/
 ├── connectors/          # SDMX-TSV normalizer (universal, DSD-agnostic)
-├── datasets/            # dataset.yml + mart.sql per dataflow
-│   ├── eurostat-gdp-nuts3/
-│   ├── eurostat-gva-nuts3/
-│   ├── eurostat-crime-nuts3/
-│   └── eurostat-pop-nuts3/
-├── eurostat-mcp/        # MCP server (3 tools, 34 tests)
-├── codelists/           # geo, unit, freq, flag lookups
-├── tests/               # pytest suite (connector contract tests)
-├── docs/                # registry, contributing
-└── .github/workflows/   # CI (test + validate + publish to GCS)
+├── datasets/            # dataset.yml + clean.sql + mart.sql per dataflow
+├── eurostat-mcp/        # MCP server (4 tools)
+├── codelists/           # geo, nace_r2, unit, freq, flag lookups
+├── tests/               # pytest suite (connector + fixtures)
+├── docs/                # dataset registry, contributing guide
+└── .github/workflows/   # CI + monthly publish to GCS
 ```
 
 ## Quick start
@@ -134,10 +114,6 @@ The toolkit pipeline then:
 2. Applies `clean.sql` → enriches with codelist labels (geo, unit, freq, flags)
 3. Applies `mart.sql` → filters Italy, adds business logic
 4. **CI publish workflow** → syncs clean + mart parquet to GCS
-
-## Dataset registry
-
-See [docs/dataset-registry.md](docs/dataset-registry.md) for the full list of published and planned datasets.
 
 ## Contributing
 
