@@ -1,0 +1,82 @@
+name: publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      datasets:
+        description: "Datasets to run (comma-separated, or 'all')"
+        default: "all"
+      smoke:
+        description: "Smoke mode (--sample-rows 1000, dry-run without GCS sync)"
+        default: false
+        type: boolean
+  schedule:
+    # First day of each month at 06:00 UTC
+    - cron: '0 6 1 * *'
+
+jobs:
+  eurostat-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install toolkit and lab-connectors
+        run: |
+          pip install git+https://github.com/dataciviclab/toolkit.git
+          pip install git+https://github.com/dataciviclab/lab-connectors.git
+
+      - name: Determine datasets to run
+        id: datasets
+        run: |
+          if [ "${{ inputs.datasets }}" = "all" ] || [ "${{ github.event_name }}" = "schedule" ]; then
+            DATASETS=$(ls -d datasets/eurostat-*-nuts3 | tr '\n' ' ')
+          else
+            DATASETS=""
+            for slug in $(echo "${{ inputs.datasets }}" | tr ',' ' '); do
+              DATASETS="$DATASETS datasets/$slug"
+            done
+          fi
+          echo "datasets=$DATASETS" >> $GITHUB_OUTPUT
+
+      - name: Run all datasets
+        env:
+          TOOLKIT_ALLOW_SCRIPT_SOURCE: 1
+        run: |
+          SMOKE="${{ inputs.smoke && '--sample-rows 1000' || '' }}"
+          for cfg in ${{ steps.datasets.outputs.datasets }}; do
+            echo "=== $cfg ==="
+            toolkit run full --config "$cfg/dataset.yml" --years 2024 $SMOKE
+          done
+
+      - name: Auth GCP and sync to GCS
+        if: ${{ !inputs.smoke }}
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        run: |
+          if [ -z "$GCP_SA_KEY" ]; then
+            echo "GCP_SA_KEY not configured — skipping GCS sync"
+            exit 0
+          fi
+          # Supports both raw JSON and base64-encoded key
+          if echo "$GCP_SA_KEY" | python3 -c "import json,sys; json.load(sys.stdin)" 2>/dev/null; then
+            printf '%s\n' "$GCP_SA_KEY" > /tmp/gcp-key.json
+          else
+            printf '%s\n' "$GCP_SA_KEY" | base64 -d > /tmp/gcp-key.json 2>/dev/null
+          fi
+          gcloud auth activate-service-account --key-file=/tmp/gcp-key.json
+
+      - name: Sync clean to GCS
+        if: ${{ !inputs.smoke }}
+        run: |
+          gsutil -m rsync -r out/data/clean/ gs://dataciviclab-clean/eurostat/
+          echo "✅ Clean synced to gs://dataciviclab-clean/eurostat/"
+
+      - name: Sync mart to GCS
+        if: ${{ !inputs.smoke }}
+        run: |
+          gsutil -m rsync -r out/data/mart/ gs://dataciviclab-mart/eurostat/
+          echo "✅ Mart synced to gs://dataciviclab-mart/eurostat/"
