@@ -12,7 +12,10 @@ from __future__ import annotations
 import re
 import urllib.request
 from datetime import date
+from pathlib import Path
 from typing import Any
+
+import yaml
 
 from lab_connectors.duckdb import gcs_connect
 from lab_connectors.mcp.cache import TtlCache
@@ -53,40 +56,32 @@ def _parquet_url(slug: str) -> str:
     return f"{GCS_BASE}/{slug}/{slug}_{year}_clean.parquet"
 
 
-# ── Registry ─────────────────────────────────────────────────────────────────
+# ── Registry (auto-discovered from datasets/*/dataset.yml) ───────────────────
 
-DATASETS: dict[str, dict[str, Any]] = {
-    "eurostat_gdp_nuts3": {
-        "dataflow": "NAMA_10R_3GDP",
-        "theme": "Economy / GDP per capita",
-        "nuts_level": 3,
-        "dimensions": ["freq", "unit", "geo"],
-        "description": "GDP at current market prices by NUTS 3 region",
-    },
-    "eurostat_gva_nuts3": {
-        "dataflow": "NAMA_10R_3GVA",
-        "theme": "Economy / Gross Value Added",
-        "nuts_level": 3,
-        "dimensions": ["freq", "nace_r2", "unit", "geo"],
-        "description": "Gross Value Added by NUTS 3 region and NACE sector",
-    },
-    "eurostat_crime_nuts3": {
-        "dataflow": "CRIM_GEN",
-        "theme": "Crime / Recorded offences",
-        "nuts_level": 3,
-        "dimensions": ["freq", "iccs", "unit", "geo"],
-        "description": "Recorded crimes by NUTS 3 region and ICCS category",
-    },
-    "eurostat_pop_nuts3": {
-        "dataflow": "DEMO_R_D2JAN",
-        "theme": "Demography / Population",
-        "nuts_level": 3,
-        "dimensions": ["freq", "unit", "sex", "age", "geo"],
-        "description": "Population on 1 January by NUTS 3 region, sex and age",
-    },
-}
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+_DATASETS_DIR = _REPO_ROOT / "datasets"
+_GCS_BASE = "https://storage.googleapis.com/dataciviclab-clean/eurostat"
 
-# Each dataset also carries a parquet_url (computed, can be overridden for tests)
+DATASETS: dict[str, dict[str, Any]] = {}
+for _entry in sorted(_DATASETS_DIR.iterdir()):
+    _yml = _entry / "dataset.yml"
+    if not _yml.exists():
+        continue
+    _data = yaml.safe_load(_yml.read_text())
+    _ds = (_data or {}).get("dataset", {}) or {}
+    _reg = (_data or {}).get("registry", {}) or {}
+    _slug = _ds.get("name", "")
+    if not _slug:
+        continue
+    DATASETS[_slug] = {
+        "dataflow": _reg.get("dataflow", ""),
+        "theme": _reg.get("theme", ""),
+        "nuts_level": _reg.get("nuts_level", 3),
+        "dimensions": list(_reg.get("dimensions", [])),
+        "description": _reg.get("description", _slug),
+    }
+
+# Add computed parquet_url to each dataset (can be overridden for tests)
 for _slug in list(DATASETS):
     DATASETS[_slug]["parquet_url"] = _parquet_url(_slug)
 
