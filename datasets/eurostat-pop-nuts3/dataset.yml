@@ -42,10 +42,13 @@ mart:
 validation:
   fail_on_error: true
 
-# ── Registry metadata (for MCP client + CLI auto-discovery) ──────────────────
-registry:
-  dataflow: "DEMO_R_D2JAN"
-  theme: "Demography / Population"
-  nuts_level: 3
-  dimensions: ["freq", "unit", "sex", "age", "geo"]
-  description: "Population on 1 January by NUTS 3 region, sex and age"
+# ── Registry metadata (for MCP client + CLI auto-discovery)
+# ── (tool.eurostat.registry namespace, toolkit ignora tool.*)
+tool:
+  eurostat:
+    registry:
+      dataflow: "DEMO_R_D2JAN"
+      theme: "Demography / Population"
+      nuts_level: 3
+      dimensions: ["freq", "unit", "sex", "age", "geo"]
+      description: "Population on 1 January by NUTS 3 region, sex and age"
