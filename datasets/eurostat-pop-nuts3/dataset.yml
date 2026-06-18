@@ -13,10 +13,11 @@ raw:
   output_policy: overwrite
   sources:
     - name: "eurostat_demo_r_d2jan"
-      type: "http_file"
+      type: "script"
       args:
-        url: "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/DEMO_R_D2JAN?format=TSV"
-        filename: "demo_r_d2jan.tsv"
+        command: "../../connectors/tsv_normalize.py --flow DEMO_R_D2JAN"
+        output: "demo_r_d2jan_normalized.csv"
+        filename: "demo_r_d2jan_normalized.csv"
       primary: true
 
 clean:
@@ -24,9 +25,10 @@ clean:
   read:
     source: auto
     mode: latest
-    delim: "\t"
+    delim: ","
     encoding: utf-8
     header: true
+    sample_size: -1
   validate:
     min_rows: 100
 

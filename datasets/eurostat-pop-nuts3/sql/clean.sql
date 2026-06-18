@@ -1,4 +1,34 @@
--- clean.sql: popolazione — pulizia minima (no JOIN per risparmiare memoria)
--- L'arricchimento è demandato al mart
-SELECT *
-FROM raw_input
+-- clean.sql: popolazione — arricchimento codelist su CSV normalizzato
+-- Dimensioni: freq, unit, sex, age, geo (DEMO_R_D2JAN)
+
+SELECT
+    r.* EXCLUDE (valore, flag),
+    f.label_en AS freq_label_en,
+    u.label_en AS unit_label_en,
+    u.label_it AS unit_label_it,
+    g.label_en AS geo_label_en,
+    g.nuts_level,
+    g.parent_code AS nuts_parent_code,
+    gp.label_en AS nuts_parent_label_en,
+    -- Sex label (small fixed domain)
+    CASE r.sex
+        WHEN 'M' THEN 'Male'
+        WHEN 'F' THEN 'Female'
+        WHEN 'T' THEN 'Total'
+        ELSE r.sex
+    END AS sex_label_en,
+    CASE r.sex
+        WHEN 'M' THEN 'Maschi'
+        WHEN 'F' THEN 'Femmine'
+        WHEN 'T' THEN 'Totale'
+        ELSE r.sex
+    END AS sex_label_it,
+    r.valore,
+    r.flag,
+    fl.description_en AS flag_desc_en
+FROM raw_input r
+LEFT JOIN read_csv('codelists/freq.csv', auto_detect=true, delim=',', header=true) f ON r.freq = f.freq
+LEFT JOIN read_csv('codelists/units.csv', auto_detect=true, delim=',', header=true) u ON r.unit = u.unit
+LEFT JOIN read_csv('codelists/geo.csv', auto_detect=true, delim=',', header=true) g ON r.geo = g.code
+LEFT JOIN read_csv('codelists/geo.csv', auto_detect=true, delim=',', header=true) gp ON g.parent_code = gp.code
+LEFT JOIN read_csv('codelists/flags.csv', auto_detect=true, delim=',', header=true) fl ON r.flag = fl.flag

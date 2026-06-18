@@ -1,19 +1,22 @@
--- mart.sql: Popolazione NUTS3 — Italia, totale
+-- mart.sql: Popolazione NUTS3 — Italia, totale per sesso ed età
+-- Il clean ha già arricchito le codelist (geo, freq, unit, flag)
 SELECT
     anno,
     geo,
-    g.label_en AS geo_label_en,
-    g.nuts_level,
+    geo_label_en,
+    nuts_level,
+    nuts_parent_code,
+    nuts_parent_label_en,
     sex,
-    CASE sex
-        WHEN 'F' THEN 'Female' WHEN 'M' THEN 'Male' WHEN 'T' THEN 'Total'
-    END AS sex_label_en,
+    sex_label_en,
+    sex_label_it,
     age,
+    unit,
+    unit_label_en,
     valore,
-    flag
+    flag,
+    flag_desc_en
 FROM clean_input
-LEFT JOIN read_csv('codelists/geo.csv', auto_detect=true, delim=',', header=true) g
-    ON geo = g.code
 WHERE geo LIKE 'IT%'
   AND unit = 'NR'
   AND sex = 'T'
