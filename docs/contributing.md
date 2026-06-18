@@ -24,7 +24,7 @@ unpivot automatically — you only need to configure the pipeline and write a ma
 
 6. **Run the pipeline**:
    ```bash
-   TOOLKIT_ALLOW_SCRIPT_SOURCE=1 toolkit run full --config datasets/{slug}/dataset.yml --years 2024
+   TOOLKIT_ALLOW_SCRIPT_SOURCE=1 toolkit run full --config datasets/{slug}/dataset.yml --years $(date +%Y)
    ```
 
 7. **Update** `docs/dataset-registry.md`.
@@ -38,10 +38,10 @@ schema_version: 1
 dataset:
   name: "{slug}"
   source_id: "eurostat"
-  years: [2024]
+  years: [2026]        # usa l'anno corrente
   time_coverage:
-    start_year: 2000
-    end_year: 2024
+    start_year: 2000    # primo anno disponibile nel dataflow
+    end_year: 2026      # ultimo anno disponibile
 
 raw:
   output_policy: overwrite

@@ -32,7 +32,7 @@ Full details: [docs/dataset-registry.md](docs/dataset-registry.md)
 
 ### Via MCP (recommended for AI agents)
 
-The repo includes an MCP server that exposes 3 tools:
+The repo includes an MCP server that exposes 4 tools:
 
 ```
 eurostat_list_datasets   — list available datasets with metadata
@@ -55,7 +55,9 @@ Register in your MCP client:
 Example queries:
 
 | Natural language | MCP call |
-|---|---|
+|---|---|---|
+| "What datasets are available?" | `eurostat_list_datasets()` |
+| "What columns does population have?" | `eurostat_describe_dataset(slug="eurostat_pop_nuts3")` |
 | "GDP per capita of Italian provinces in 2024" | `eurostat_query(slug="eurostat_gdp_nuts3", sql="SELECT geo, geo_label_en, value FROM data WHERE geo LIKE 'IT%' AND unit='EUR_HAB' ORDER BY value DESC")` |
 | "Population of Italy in 2024" | `eurostat_query(slug="eurostat_pop_nuts3", sql="SELECT SUM(value) AS population FROM data WHERE geo LIKE 'IT%' AND unit='NR' AND sex='T' AND age='TOTAL'")` |
 | "Crimes in Milan by category" | `eurostat_query(slug="eurostat_crime_nuts3", sql="SELECT iccs, value FROM data WHERE geo='ITC4C' AND unit='NR'")` |
@@ -113,14 +115,14 @@ eurostat/
 ```bash
 # Requires Python 3.12+
 pip install -e ".[dev]"
-pip install git+https://github.com/dataciviclab/lab-connectors.git
+pip install -e ".[mcp]"
 
 # Run all tests
 pytest tests/ eurostat-mcp/tests/ -v
 
 # Run a dataset pipeline (script source requires env var)
 TOOLKIT_ALLOW_SCRIPT_SOURCE=1 \
-  toolkit run full --config datasets/eurostat-gdp-nuts3/dataset.yml --years 2024
+  toolkit run full --config datasets/eurostat-gdp-nuts3/dataset.yml --years 2026
 ```
 
 ## How it works
