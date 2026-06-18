@@ -1,0 +1,45 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_gva_nuts3"
+  source_id: "eurostat"
+  years: [2024]
+  time_coverage:
+    start_year: 2000
+    end_year: 2024
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_nama_10r_3gva"
+      type: "http_file"
+      args:
+        url: "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/NAMA_10R_3GVA?format=TSV"
+        filename: "nama_10r_3gva.tsv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: "\t"
+    encoding: utf-8
+    header: true
+  validate:
+    min_rows: 100
+
+mart:
+  tables:
+    - name: "mart_gva_nuts3"
+      sql: "sql/mart.sql"
+  required_tables:
+    - "mart_gva_nuts3"
+  validate:
+    table_rules:
+      mart_gva_nuts3:
+        min_rows: 500
+
+validation:
+  fail_on_error: true
