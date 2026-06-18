@@ -36,7 +36,7 @@ jobs:
         run: |
           if [ "${{ inputs.datasets }}" = "all" ] || [ -z "${{ inputs.datasets }}" ]; then
             # Find all dataset configs, extract their directory paths
-            DIRS=$(find datasets -maxdepth 2 -name dataset.yml -exec dirname {} \; | sort)
+            DIRS=$(find datasets -maxdepth 2 -name dataset.yml -exec dirname {} \; | sort | tr '\n' ' ')
             echo "datasets=$DIRS" >> $GITHUB_OUTPUT
           else
             LIST=""
@@ -66,11 +66,18 @@ jobs:
         id: gcs
         if: ${{ !inputs.smoke }}
         env:
-          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY_EUROSTAT }}
         run: |
           if [ -z "$GCP_SA_KEY" ]; then
-            echo "❌ GCP_SA_KEY secret not configured. Publish requires it."
-            echo "Set it in GitHub repo → Settings → Secrets → Actions."
+            echo "❌ GCP_SA_KEY_EUROSTAT secret not configured."
+            echo "Create a dedicated service account:"
+            echo "  1. GCP Console → IAM → Service Accounts → Create"
+            echo "     Name: eurostat-pipeline"
+            echo "     ID: eurostat-pipeline@dataciviclab.iam.gserviceaccount.com"
+            echo "  2. Add Storage Object Admin on:"
+            echo "     - gs://dataciviclab-clean/eurostat/*"
+            echo "     - gs://dataciviclab-mart/eurostat/*"
+            echo "  3. Create JSON key → set as GCP_SA_KEY_EUROSTAT secret"
             echo "ready=false" >> $GITHUB_OUTPUT
             exit 1
           fi
