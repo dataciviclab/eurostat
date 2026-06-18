@@ -11,9 +11,13 @@ requires-python = ">=3.12"
 license = "MIT"
 
 [tool.setuptools.packages.find]
-include = ["connectors*"]
+include = ["connectors*", "eurostat*"]
 
 [project.optional-dependencies]
+cli = [
+    "typer>=0.12",
+    "rich>=13.0",
+]
 dev = [
     "pytest>=8.0",
     "pytest-cov>=5.0",
@@ -23,6 +27,9 @@ mcp = [
     "lab-connectors[mcp]>=0.15.1",
     "duckdb>=1.5.3,<2",
 ]
+
+[project.scripts]
+eurostat = "eurostat.cli:main"
 
 [project.urls]
 Home = "https://github.com/dataciviclab/eurostat"

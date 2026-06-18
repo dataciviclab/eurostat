@@ -91,6 +91,32 @@ GCS paths:
 - **Clean** (all EU, all years): `gs://dataciviclab-clean/eurostat/{slug}/*/*.parquet`
 - **Mart** (Italy-filtered): `gs://dataciviclab-mart/eurostat/{slug}/*/mart_{slug}.parquet`
 
+### Via CLI (schema-driven facts)
+
+```bash
+# Install with CLI dependencies
+pip install -e ".[cli]"
+
+# Show facts for all datasets
+eurostat facts
+
+# Show facts for a specific dataset (short name or full slug)
+eurostat facts gdp
+eurostat facts pop
+eurostat facts crime
+eurostat facts gva
+
+# Each output shows:
+# - Top N regions for the main metric (latest year)
+# - Category breakdown (by sector, crime type, sex, etc.)
+# - Time trend for the representative entity
+```
+
+The CLI auto-discovers the dataset schema from the GCS parquet:
+columns, available units, years, and category dimensions — no hardcoded
+queries. Adding a new dataset to the registry automatically produces
+facts for it.
+
 ## Structure
 
 ```
@@ -101,6 +127,9 @@ eurostat/
 │   ├── eurostat-gva-nuts3/
 │   ├── eurostat-crime-nuts3/
 │   └── eurostat-pop-nuts3/
+├── eurostat/            # CLI package (schema-driven facts)
+│   ├── cli.py           # `eurostat facts` command
+│   └── _registry.py     # GCS path registry for datasets
 ├── eurostat-mcp/        # MCP server (3 tools, 34 tests)
 ├── codelists/           # geo, unit, freq, flag lookups
 ├── tests/               # pytest suite (connector contract tests)
@@ -112,11 +141,14 @@ eurostat/
 
 ```bash
 # Requires Python 3.12+
-pip install -e ".[dev]"
+pip install -e ".[dev,cli]"
 pip install git+https://github.com/dataciviclab/lab-connectors.git
 
 # Run all tests
 pytest tests/ eurostat-mcp/tests/ -v
+
+# Run the CLI
+eurostat facts
 
 # Run a dataset pipeline (script source requires env var)
 TOOLKIT_ALLOW_SCRIPT_SOURCE=1 \
