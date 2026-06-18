@@ -16,7 +16,12 @@ include = ["connectors*"]
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0",
+    "pytest-cov>=5.0",
     "ruff>=0.5",
+]
+mcp = [
+    "lab-connectors[mcp]>=0.15.1",
+    "duckdb>=1.5.3,<2",
 ]
 
 [project.urls]
