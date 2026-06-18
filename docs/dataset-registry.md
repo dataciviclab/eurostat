@@ -2,20 +2,46 @@
 
 ## Published
 
-| Slug | Dataflow | Theme | NUTS | Status |
-|---|---|---|---|---|
-| `eurostat-gdp-nuts3` | `NAMA_10R_3GDP` | Economy / GDP | NUTS3 | bootstrap |
-| `eurostat-gdp-region` | `NAMA_10R_2GDP` | Economy / GDP | NUTS2 | pilota in DI |
+| Slug | Dataflow | Theme | DSD dims | Clean rows | Status |
+|---|---|---|---|---|---|
+| `eurostat-gdp-nuts3` | `NAMA_10R_3GDP` | Economy / GDP per capita | 3 (freq, unit, geo) | 308,950 | ✅ |
+| `eurostat-gva-nuts3` | `NAMA_10R_3GVA` | Economy / Gross Value Added by NACE | 4 (freq, nace_r2, unit, geo) | 1,339,200 | ✅ |
+| `eurostat-crime-nuts3` | `CRIM_GEN` | Crime / Recorded offences by ICCS | 4 (freq, iccs, unit, geo) | 4,035 | ✅ |
+| `eurostat-pop-nuts3` | `DEMO_R_D2JAN` | Demography / Population on 1 Jan | 5 (freq, unit, sex, age, geo) | 300,348 | ✅ |
+
+All published datasets:
+- Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
+- Mart filters for **Italy NUTS3** (provinces)
+- Clean parquet available in `out/data/clean/`
+- Mart parquet available in `out/data/mart/`
+- GCS push planned
 
 ## Planned
 
-| Slug | Dataflow | Theme | NUTS | Priority |
-|---|---|---|---|---|
-| `eurostat-gva-nuts3` | `NAMA_10R_3GVA` | Economy / GVA | NUTS3 | high |
-| `eurostat-population` | `DEMO_R_D2JAN` | Demography | NUTS3 | high |
-| `eurostat-crime` | `CRIM_GEN` | Crime | NUTS3 | high |
-| `eurostat-physicians` | `HLTH_RS_PHYSREG` | Health | NUTS2 | medium |
-| `eurostat-employment` | `NAMA_10R_3EMPERS` | Labour | NUTS3 | high |
-| `eurostat-tourism` | `HSW_PB10` | Tourism | NUTS3 | medium |
-| `eurostat-patents` | `TRNG_NFE9` | Innovation | NUTS3 | medium |
-| `eurostat-farm` | `EF_KVAAREG` | Agriculture | NUTS2 | medium |
+| Dataflow | Theme | NUTS | Priority |
+|---|---|---|---|
+| `NAMA_10R_3EMPERS` | Labour / Employment by NACE | NUTS3 | high |
+| `LFST_R_LFE2EMPRT` | Labour / Employment rates by sex & age | NUTS3 | high |
+| `TOUR_OCC_ARN2` | Tourism / Arrivals by NUTS | NUTS3 | medium |
+| `BD_SIZE_R3` | Business demography | NUTS3 | medium |
+| `TRAN_R_RAIL` | Transport / Rail passengers | NUTS3 | medium |
+| `EDUC_UOE_ENRL_R3` | Education / Enrolment | NUTS3 | medium |
+| `HLTH_RS_PHYSREG` | Health / Physicians | NUTS2 | low |
+
+Total Eurostat catalog: ~8,200 dataflows — 121 at NUTS3 level.
+
+## Dataflow anatomy
+
+Each Eurostat dataflow has a unique DSD (Data Structure Definition) that defines its dimensions. The connector auto-detects them from the TSV header — no configuration needed.
+
+Common dimensions:
+- `freq` — frequency (A=annual, Q=quarterly, M=monthly)
+- `unit` — unit of measure (EUR_HAB, MIO_EUR, NR, CP_MEUR, etc.)
+- `geo` — geographic code (NUTS0/1/2/3)
+- `sex` — sex (M, F, T)
+- `age` — age class
+- `nace_r2` — economic activity (NACE Rev. 2)
+- `iccs` — crime classification
+- `wstatus` — working status
+
+Codelists for all resolved dimensions are in `codelists/`.

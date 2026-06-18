@@ -7,4 +7,5 @@ out/
 *.csv
 *.tsv
 !tests/fixtures/*.tsv
+!codelists/*.csv
 !.gitkeep
