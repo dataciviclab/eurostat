@@ -50,15 +50,21 @@ jobs:
             echo "datasets=$LIST" >> $GITHUB_OUTPUT
           fi
 
+      # ── Fetch latest geo codelist from SDMX ───────────────────────────
+      - name: Update geo codelist
+        run: |
+          python scripts/fetch_geo_sdmx.py
+
       # ── Run pipeline ─────────────────────────────────────────────────
       - name: Run datasets
         env:
           TOOLKIT_ALLOW_SCRIPT_SOURCE: 1
         run: |
+          YEAR=$(date +%Y)
           SMOKE="${{ inputs.smoke && '--sample-rows 1000' || '' }}"
           for dir in ${{ steps.datasets.outputs.datasets }}; do
             echo "=== $dir ==="
-            toolkit run full --config "$dir/dataset.yml" --years 2026 $SMOKE
+            toolkit run full --config "$dir/dataset.yml" --years $YEAR $SMOKE
           done
 
       # ── GCS auth ─────────────────────────────────────────────────────
@@ -70,14 +76,17 @@ jobs:
         run: |
           if [ -z "$GCP_SA_KEY" ]; then
             echo "❌ GCP_SA_KEY_EUROSTAT secret not configured."
-            echo "Create a dedicated service account:"
+            echo "To enable automatic GCS publishing:"
             echo "  1. GCP Console → IAM → Service Accounts → Create"
             echo "     Name: eurostat-pipeline"
             echo "     ID: eurostat-pipeline@dataciviclab.iam.gserviceaccount.com"
             echo "  2. Add Storage Object Admin on:"
             echo "     - gs://dataciviclab-clean/eurostat/*"
             echo "     - gs://dataciviclab-mart/eurostat/*"
-            echo "  3. Create JSON key → set as GCP_SA_KEY_EUROSTAT secret"
+            echo "  3. GCP Console → IAM → Service Accounts → Keys → Add JSON key"
+            echo "  4. GitHub repo → Settings → Secrets → Actions → Add"
+            echo "     Name: GCP_SA_KEY_EUROSTAT"
+            echo "     Value: content of the JSON key file"
             echo "ready=false" >> $GITHUB_OUTPUT
             exit 1
           fi
