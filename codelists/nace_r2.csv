@@ -1,11 +1,16 @@
 code,label_en
 A,"Agriculture, forestry and fishing"
-B-E,Industry (except construction)
+B-E,"Industry (except construction)"
 C,Manufacturing
 F,Construction
-G-I,"Wholesale, retail, transport"
-G-J,"Wholesale, retail, transport, ICT"
-J,ICT
-K-N,Financial and business services
-O-U,"Public admin, education, health"
+G-I,"Wholesale and retail trade, transport, accommodation and food"
+G-J,"Wholesale and retail trade, transport, accommodation, food, ICT"
+J,Information and communication
+K,Financial and insurance activities
+K-N,"Financial, insurance, real estate, professional, administrative services"
+L,Real estate activities
+M_N,"Professional, scientific and technical activities; administrative services"
+O-Q,"Public administration, defence, education, health and social work"
+O-U,"Public administration, defence, education, health, arts and other services"
+R-U,"Arts, entertainment, recreation and other services"
 TOTAL,All NACE activities

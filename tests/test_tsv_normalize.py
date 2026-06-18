@@ -165,23 +165,53 @@ class TestNormalizeStream:
         assert len(rows) == 2  # header + solo ITC4
         assert "FR10" not in csv_content
 
-    def test_nace_codelist_parseable(self):
-        """nace_r2.csv è parsabile da DuckDB (label con virgole quotate)."""
+    def test_nace_codelist_complete(self):
+        """nace_r2.csv copre TUTTI i codici NACE presenti nei dati Eurostat.
+
+        Contratto: il codelist deve contenere tutti i codici nace_r2 che
+        compaiono nei dataset reali. Se Eurostat aggiunge nuovi codici,
+        questo test fallisce e qualcuno deve aggiungerli al codelist.
+        """
         import duckdb
 
-        rows = duckdb.sql(
+        # Verifica parseabilità del CSV (label con virgole quotate)
+        cl_rows = duckdb.sql(
             "SELECT code, label_en FROM read_csv('codelists/nace_r2.csv', "
             "auto_detect=true, delim=',', header=true) ORDER BY code"
         ).fetchall()
-        assert len(rows) == 10
-        codes = [r[0] for r in rows]
-        assert "A" in codes
-        assert "TOTAL" in codes
-        # Label con virgole devono essere lette correttamente
-        labels = dict(rows)
+        assert len(cl_rows) >= 15, f"Solo {len(cl_rows)} codici, servono almeno 15"
+        labels = dict(cl_rows)
+
+        # Tutti i codici devono avere label non NULL
+        for code, label in cl_rows:
+            assert label is not None, f"Label mancante per codice NACE: {code}"
+
+        # Label specifiche devono essere corrette
         assert labels["A"] == "Agriculture, forestry and fishing"
-        assert labels["G-I"] == "Wholesale, retail, transport"
-        assert labels["O-U"] == "Public admin, education, health"
+        assert labels["TOTAL"] == "All NACE activities"
+
+        # Verifica copertura contro dati reali (se disponibili)
+        raw_files = [
+            "out/data/raw/eurostat_emp_nuts3/2026/nama_10r_3empers_normalized.csv",
+            "out/data/raw/eurostat_gva_nuts3/2024/nama_10r_3gva_normalized.csv",
+        ]
+        all_data_codes: set[str] = set()
+        for f in raw_files:
+            try:
+                codes = duckdb.sql(
+                    f"SELECT DISTINCT nace_r2 FROM read_csv('{f}', "
+                    "auto_detect=true) WHERE nace_r2 IS NOT NULL ORDER BY 1"
+                ).fetchall()
+                all_data_codes.update(r[0] for r in codes)
+            except Exception:
+                pass  # raw file potrebbe non esistere in CI
+
+        if all_data_codes:
+            missing = all_data_codes - set(labels.keys())
+            assert not missing, (
+                f"Codici NACE nei dati senza label nel codelist: "
+                f"{sorted(missing)}. Aggiungili a codelists/nace_r2.csv"
+            )
 
     def test_sample_fixture(self):
         """Test con fixture reale NAMA_10R_3GDP (Albania NUTS3)"""
