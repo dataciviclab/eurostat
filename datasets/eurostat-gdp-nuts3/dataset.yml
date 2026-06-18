@@ -45,12 +45,11 @@ mart:
 validation:
   fail_on_error: true
 
-# ── Registry metadata (for MCP client + CLI auto-discovery, toolkit ignora)
-tool:
-  eurostat:
-    registry:
-      dataflow: "NAMA_10R_3GDP"
-      theme: "Economy / GDP per capita"
-      nuts_level: 3
-      dimensions: ["freq", "unit", "geo"]
-      description: "GDP at current market prices by NUTS 3 region"
+
+# Registry metadata for MCP client auto-discovery
+registry:
+  dataflow: "NAMA_10R_3GDP"
+  theme: "Economy / GDP per capita"
+  nuts_level: 3
+  dimensions: ["freq", "unit", "geo"]
+  description: "GDP at current market prices by NUTS 3 region"

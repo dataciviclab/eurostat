@@ -61,7 +61,6 @@ def _parquet_url(slug: str) -> str:
 
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 _DATASETS_DIR = _REPO_ROOT / "datasets"
-_GCS_BASE = "https://storage.googleapis.com/dataciviclab-clean/eurostat"
 
 DATASETS: dict[str, dict[str, Any]] = {}
 for _entry in sorted(_DATASETS_DIR.iterdir()):
@@ -69,11 +68,10 @@ for _entry in sorted(_DATASETS_DIR.iterdir()):
     if not _yml.exists():
         continue
     _data = yaml.safe_load(_yml.read_text())
-    _ds = (_data or {}).get("dataset", {}) or {}
-    _reg = (_data or {}).get("tool", {}).get("eurostat", {}).get("registry", {}) or {}
-    _slug = _ds.get("name", "")
+    _slug = ((_data or {}).get("dataset", {}) or {}).get("name", "")
     if not _slug:
         continue
+    _reg = (_data or {}).get("registry", {}) or {}
     DATASETS[_slug] = {
         "dataflow": _reg.get("dataflow", ""),
         "theme": _reg.get("theme", ""),
