@@ -1,0 +1,13 @@
+[project]
+name = "dataciviclab-eurostat"
+version = "0.1.0"
+description = "Eurostat datasets, connectors and pipelines for DataCivicLab"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+
+[project.urls]
+Home = "https://github.com/dataciviclab/eurostat"
+
+[tool.toolkit.extends]
+source_id = "eurostat"
