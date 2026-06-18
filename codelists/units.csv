@@ -1,11 +1,8 @@
 unit,label_en,label_it
 EUR_HAB,EUR per inhabitant,EUR per abitante
-MIO_EUR,Million EUR,Milioni di EUR
 EUR_HAB_EU27_2020,% of EU27 average (from 2020),% media EU27 (dal 2020)
+MIO_EUR,Million EUR,Milioni di EUR
 MIO_NAC,National currency (million),Valuta nazionale (milioni)
 MIO_PPS_EU27_2020,Million PPS (EU27 from 2020),Milioni di SPA (EU27 dal 2020)
-PPS_HAB_EU27_2020,PPS per inhabitant (EU27 from 2020),SPA per abitante (EU27 dal 2020)
 PPS_EU27_2020_HAB,PPS per inhabitant (EU27 from 2020),SPA per abitante (EU27 dal 2020)
-CP_MEUR,Current prices (million EUR),Prezzi correnti (milioni EUR)
-CP_HAB,Current prices per inhabitant,Prezzi correnti per abitante
-NR,Number,Numero
+PPS_HAB_EU27_2020,PPS per inhabitant (EU27 from 2020),SPA per abitante (EU27 dal 2020)

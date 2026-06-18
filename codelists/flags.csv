@@ -1,6 +1,6 @@
 flag,description_en,description_it
-b,break in time series,interruzione serie
-d,definition differs,definizione diversa
-e,estimated,stimato
-p,provisional,provvisorio
-u,low reliability,bassa affidabilità
+b,Break in time series,Interruzione serie
+d,Definition differs,Definizione diversa
+e,Estimated,Stimato
+p,Provisional,Provvisorio
+u,Low reliability,Bassa affidabilità

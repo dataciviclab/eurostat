@@ -90,15 +90,28 @@ jobs:
           gcloud auth activate-service-account --key-file=/tmp/gcp-key.json
           echo "ready=true" >> $GITHUB_OUTPUT
 
-      # ── Sync to GCS ──────────────────────────────────────────────────
-      - name: Sync clean to GCS
+      # ── Sync to GCS (struttura senza anno, i parquet sono multi-anno) ──
+      - name: Sync to GCS
         if: ${{ !inputs.smoke && steps.gcs.outputs.ready == 'true' }}
         run: |
-          gsutil -m rsync -r out/data/clean/ gs://dataciviclab-clean/eurostat/
-          echo "✅ Clean synced to gs://dataciviclab-clean/eurostat/"
+          # Clean: out/data/clean/{slug}/{year}/{slug}_{year}_clean.parquet
+          #   → gs://dataciviclab-clean/eurostat/{slug}/{slug}_clean.parquet
+          for slug_dir in ${{ steps.datasets.outputs.datasets }}; do
+            slug=$(basename "$slug_dir")
+            year=$(ls "out/data/clean/$slug/" 2>/dev/null | sort -rn | head -1)
+            [ -z "$year" ] && echo "⚠️  No clean output for $slug" && continue
+            src=$(ls "out/data/clean/$slug/$year/"*_clean.parquet 2>/dev/null | head -1)
+            [ -z "$src" ] && echo "⚠️  No clean parquet for $slug" && continue
+            gsutil cp "$src" "gs://dataciviclab-clean/eurostat/$slug/${slug}_clean.parquet"
+            echo "✅ $slug clean → gs://dataciviclab-clean/eurostat/$slug/${slug}_clean.parquet"
+          done
 
-      - name: Sync mart to GCS
-        if: ${{ !inputs.smoke && steps.gcs.outputs.ready == 'true' }}
-        run: |
-          gsutil -m rsync -r out/data/mart/ gs://dataciviclab-mart/eurostat/
-          echo "✅ Mart synced to gs://dataciviclab-mart/eurostat/"
+          # Mart: out/data/mart/{slug}/{year}/*.parquet
+          #   → gs://dataciviclab-mart/eurostat/{slug}/
+          for slug_dir in ${{ steps.datasets.outputs.datasets }}; do
+            slug=$(basename "$slug_dir")
+            year=$(ls "out/data/mart/$slug/" 2>/dev/null | sort -rn | head -1)
+            [ -z "$year" ] && echo "⚠️  No mart output for $slug" && continue
+            gsutil -m cp "out/data/mart/$slug/$year/"*.parquet "gs://dataciviclab-mart/eurostat/$slug/"
+            echo "✅ $slug mart → gs://dataciviclab-mart/eurostat/$slug/"
+          done
