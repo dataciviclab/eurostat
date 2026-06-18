@@ -4,13 +4,12 @@ Auto-discovers dataset schema from GCS parquet files and generates
 facts dynamically: top regions, category breakdowns, time trends.
 
 Usage:
-    eurostat facts              Auto-facts for all datasets
-    eurostat facts gdp          Auto-facts for a specific dataset
+    eurostat                    Auto-facts for all datasets
+    eurostat gdp                Auto-facts for a specific dataset
 """
 
 from __future__ import annotations
 
-import sys
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from typing import Any, Iterator
@@ -464,9 +463,6 @@ def facts(
 
 
 def main() -> None:
-    if len(sys.argv) > 1 and sys.argv[1] in ("--help", "-h"):
-        print(app.get_help())
-        return
     app()
 
 

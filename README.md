@@ -96,15 +96,16 @@ GCS paths:
 ```bash
 # Install with CLI dependencies
 pip install -e ".[cli]"
+pip install git+https://github.com/dataciviclab/lab-connectors.git
 
 # Show facts for all datasets
-eurostat facts
+eurostat
 
-# Show facts for a specific dataset (short name or full slug)
-eurostat facts gdp
-eurostat facts pop
-eurostat facts crime
-eurostat facts gva
+# Show facts for a specific dataset
+eurostat gdp
+eurostat pop
+eurostat crime
+eurostat gva
 
 # Each output shows:
 # - Top N regions for the main metric (latest year)
@@ -148,7 +149,7 @@ pip install git+https://github.com/dataciviclab/lab-connectors.git
 pytest tests/ eurostat-mcp/tests/ -v
 
 # Run the CLI
-eurostat facts
+eurostat
 
 # Run a dataset pipeline (script source requires env var)
 TOOLKIT_ALLOW_SCRIPT_SOURCE=1 \
