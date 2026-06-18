@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import csv
 import re
-import sys
 import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path

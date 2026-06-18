@@ -89,7 +89,7 @@ duckdb.sql("""
 
 GCS paths:
 - **Clean** (all EU, all years): `gs://dataciviclab-clean/eurostat/{slug}/{slug}_clean.parquet`
-- **Mart** (Italy-filtered): `gs://dataciviclab-mart/eurostat/{slug}/{slug}_mart.parquet`
+- **Mart** (Italy-filtered): `gs://dataciviclab-mart/eurostat/{slug}/`
 
 ## Structure
 

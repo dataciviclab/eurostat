@@ -90,6 +90,10 @@ DATASETS: dict[str, dict[str, Any]] = {
     },
 }
 
+# Each dataset also carries a parquet_url (computed, can be overridden for tests)
+for _slug in list(DATASETS):
+    DATASETS[_slug]["parquet_url"] = _parquet_url(_slug)
+
 VALID_SLUGS: set[str] = set(DATASETS.keys())
 
 # ── SQL guard — blocked keywords (case-insensitive match) ────────────────────
@@ -254,7 +258,7 @@ def query(
     slug = _validate_slug(slug)
     _validate_sql_safe(sql)
 
-    path = _parquet_url(slug)
+    path = DATASETS[slug].get("parquet_url") or _parquet_url(slug)
     limit = _validate_limit(limit)
 
     # Replace FROM data (case-insensitive) with parquet read, first occurence only
