@@ -144,16 +144,21 @@ def normalize_stream(
     if output:
         if fmt == "parquet":
             # Write parquet via DuckDB: CSV in memory → COPY to parquet.
-            # all_varchar avoids type sniffing issues (e.g. sex F/M/T → BOOLEAN).
+            # all_varchar avoids type sniffing (e.g. sex F/M/T → BOOLEAN).
+            # year and value are explicitly cast so consumers get correct types.
             import duckdb
 
             parquet_path = output  # output path already has .parquet extension
             tmp_csv = output.with_suffix(".csv.tmp")
             tmp_csv.write_text(csv_content, encoding="utf-8")
             duckdb.sql(
-                f"COPY (SELECT * FROM read_csv('{tmp_csv}', "
-                "auto_detect=true, all_varchar=true)) "
-                f"TO '{parquet_path}' (FORMAT PARQUET)"
+                f"COPY ("
+                f"SELECT * EXCLUDE (year, value), "
+                f"CAST(year AS INTEGER) AS year, "
+                f"CAST(NULLIF(value, '') AS DOUBLE) AS value "
+                f"FROM read_csv('{tmp_csv}', "
+                "auto_detect=true, all_varchar=true)"
+                f") TO '{parquet_path}' (FORMAT PARQUET)"
             )
             tmp_csv.unlink()
             sys.stderr.write(f"Written {row_count} rows to {parquet_path}\n")
