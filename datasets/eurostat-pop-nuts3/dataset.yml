@@ -41,3 +41,11 @@ mart:
 
 validation:
   fail_on_error: true
+
+# ── Registry metadata (consumed by registry/generate.py) ──────────────────────
+registry:
+  dataflow: "DEMO_R_D2JAN"
+  theme: "Demography / Population"
+  nuts_level: 3
+  dimensions: ["freq", "unit", "sex", "age", "geo"]
+  description: "Population on 1 January by NUTS 3 region, sex and age"

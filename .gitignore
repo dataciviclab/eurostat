@@ -9,3 +9,6 @@ out/
 !tests/fixtures/*.tsv
 !codelists/*.csv
 !.gitkeep
+.coverage
+.ruff_cache/
+.pytest_cache/

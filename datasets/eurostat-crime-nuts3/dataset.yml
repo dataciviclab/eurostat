@@ -40,3 +40,11 @@ mart:
 
 validation:
   fail_on_error: true
+
+# ── Registry metadata (consumed by registry/generate.py) ──────────────────────
+registry:
+  dataflow: "CRIM_GEN"
+  theme: "Crime / Recorded offences"
+  nuts_level: 3
+  dimensions: ["freq", "iccs", "unit", "geo"]
+  description: "Recorded crimes by NUTS 3 region and ICCS category"

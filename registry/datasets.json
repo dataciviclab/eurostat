@@ -54,6 +54,5 @@
       "description": "Population on 1 January by NUTS 3 region, sex and age",
       "parquet_url": "https://storage.googleapis.com/dataciviclab-clean/eurostat/eurostat_pop_nuts3/2024/eurostat_pop_nuts3_2024_clean.parquet"
     }
-  },
-  "errors": []
+  }
 }

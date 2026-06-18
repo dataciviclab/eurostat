@@ -61,6 +61,7 @@ jobs:
 
       - name: Validate registry is up-to-date
         run: |
+          pip install pyyaml
           python registry/generate.py
           git diff --exit-code registry/datasets.json
           echo "✅ registry/datasets.json is up to date"
