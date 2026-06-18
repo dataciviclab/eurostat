@@ -36,7 +36,7 @@ jobs:
         run: |
           if [ "${{ inputs.datasets }}" = "all" ] || [ -z "${{ inputs.datasets }}" ]; then
             # Find all dataset configs, extract their directory paths
-            DIRS=$(find datasets -maxdepth 2 -name dataset.yml -exec dirname {} \; | sort)
+            DIRS=$(find datasets -maxdepth 2 -name dataset.yml -exec dirname {} \; | sort | tr '\n' ' ')
             echo "datasets=$DIRS" >> $GITHUB_OUTPUT
           else
             LIST=""
