@@ -1,4 +1,4 @@
-# CI per eurostat repo: test connector + lint
+# CI for eurostat repo: lint, test, validate configs
 
 name: CI
 
@@ -33,3 +33,23 @@ jobs:
 
       - name: Test with pytest
         run: python -m pytest tests/ -v --tb=short
+
+  validate-config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install toolkit
+        run: |
+          pip install git+https://github.com/dataciviclab/toolkit.git
+
+      - name: Validate all dataset configs
+        run: |
+          for cfg in $(find datasets -maxdepth 2 -name dataset.yml | sort); do
+            echo "→ $cfg"
+            toolkit inspect paths --config "$cfg" --year 2024 > /dev/null 2>&1
+          done
+          echo "✅ All configs valid"
