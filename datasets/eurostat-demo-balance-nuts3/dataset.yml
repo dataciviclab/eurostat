@@ -2,7 +2,7 @@ root: "../../out"
 schema_version: 1
 
 dataset:
-  name: "demo_balance_nuts3"
+  name: "eurostat_demo_balance_nuts3"
   source_id: "eurostat"
   years: [2026]
   time_coverage:
@@ -33,10 +33,10 @@ clean:
 
 mart:
   tables:
-    - name: "mart_demo_balance_nuts3"
+    - name: "mart_eurostat_demo_balance_nuts3"
       sql: "sql/mart.sql"
   required_tables:
-    - "mart_demo_balance_nuts3"
+    - "mart_eurostat_demo_balance_nuts3"
 
 validation:
   fail_on_error: true
