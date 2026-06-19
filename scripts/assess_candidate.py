@@ -394,7 +394,10 @@ def _list_candidates(
         )
 
     if not candidates:
-        print("No matching NUTS3 dataflows found.")
+        if json_output:
+            print("[]")
+        else:
+            print("No matching NUTS3 dataflows found.")
         return
 
     candidates.sort(key=lambda x: x["obs"], reverse=True)
