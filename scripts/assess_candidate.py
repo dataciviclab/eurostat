@@ -21,6 +21,7 @@ import argparse
 import json
 import re
 import urllib.request
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -39,11 +40,16 @@ def _fetch_json(url: str) -> dict[str, Any]:
 
 
 def _slugify(flow: str) -> str:
-    """Convert dataflow ID to a dataset slug (underscores for GCS compat)."""
-    base = flow.lower().replace("_", "_")
-    if "nuts3" not in base and "nuts_3" not in base and "nuts2" not in base:
-        base += "_nuts3"
+    """Convert dataflow ID to dataset directory name (hyphens only)."""
+    base = flow.lower().replace("_", "-")
+    if "nuts3" not in base and "nuts2" not in base:
+        base += "-nuts3"
     return base
+
+
+def _ds_name(slug: str) -> str:
+    """Dataset name for dataset.yml (underscores for GCS path compat)."""
+    return slug.replace("-", "_")
 
 
 # ── Probe ─────────────────────────────────────────────────────────────────────
@@ -266,21 +272,27 @@ def _generate_dataset_yml(
     year_cols: list[str],
     label: str,
 ) -> str:
-    """Generate dataset.yml."""
+    """Generate dataset.yml.
+
+    slug = directory name (hyphens), ds_name = underscored (GCS compat).
+    years = current year (repo convention), time_coverage = actual range.
+    """
+    ds_name = _ds_name(slug)
     oldest = year_cols[0] if year_cols else "2000"
-    latest = year_cols[-1] if year_cols else "2026"
+    end_year = year_cols[-1] if year_cols else "2026"
+    curr_year = str(date.today().year)
 
     return (
         f'root: "../../out"\n'
         f"schema_version: 1\n"
         f"\n"
         f"dataset:\n"
-        f'  name: "{slug}"\n'
+        f'  name: "{ds_name}"\n'
         f'  source_id: "eurostat"\n'
-        f"  years: [{latest}]\n"
+        f"  years: [{curr_year}]\n"
         f"  time_coverage:\n"
         f"    start_year: {oldest}\n"
-        f"    end_year: {latest}\n"
+        f"    end_year: {end_year}\n"
         f"\n"
         f"raw:\n"
         f"  output_policy: overwrite\n"
@@ -308,10 +320,10 @@ def _generate_dataset_yml(
         f"\n"
         f"mart:\n"
         f"  tables:\n"
-        f'    - name: "mart_{slug}"\n'
+        f'    - name: "mart_{ds_name}"\n'
         f'      sql: "sql/mart.sql"\n'
         f"  required_tables:\n"
-        f'    - "mart_{slug}"\n'
+        f'    - "mart_{ds_name}"\n'
         f"\n"
         f"validation:\n"
         f"  fail_on_error: true\n"
