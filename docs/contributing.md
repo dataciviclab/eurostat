@@ -50,8 +50,8 @@ raw:
       type: "script"
       args:
         command: "../../connectors/tsv_normalize.py --flow {DATAFLOW_ID}"
-        output: "{dataflow_id}_normalized.csv"
-        filename: "{dataflow_id}_normalized.csv"
+        output: "{dataflow_id}_normalized.parquet"
+        filename: "{dataflow_id}_normalized.parquet"
       primary: true
 
 clean:

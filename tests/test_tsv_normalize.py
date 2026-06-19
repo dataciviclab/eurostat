@@ -194,15 +194,15 @@ class TestNormalizeStream:
 
         # Verifica copertura contro dati reali (se disponibili)
         raw_files = [
-            "out/data/raw/eurostat_emp_nuts3/2026/nama_10r_3empers_normalized.csv",
-            "out/data/raw/eurostat_gva_nuts3/2024/nama_10r_3gva_normalized.csv",
+            "out/data/raw/eurostat_emp_nuts3/2026/nama_10r_3empers_normalized.parquet",
+            "out/data/raw/eurostat_gva_nuts3/2024/nama_10r_3gva_normalized.parquet",
         ]
         all_data_codes: set[str] = set()
         for f in raw_files:
             try:
                 codes = duckdb.sql(
-                    f"SELECT DISTINCT nace_r2 FROM read_csv('{f}', "
-                    "auto_detect=true) WHERE nace_r2 IS NOT NULL ORDER BY 1"
+                    f"SELECT DISTINCT nace_r2 FROM read_parquet('{f}') "
+                    "WHERE nace_r2 IS NOT NULL ORDER BY 1"
                 ).fetchall()
                 all_data_codes.update(r[0] for r in codes)
             except Exception:
