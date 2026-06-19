@@ -5,6 +5,8 @@
 [![Python](https://img.shields.io/badge/python-3.12%2B-blue)](pyproject.toml)
 [![Data on GCS](https://img.shields.io/badge/data-GCS-blue)](https://console.cloud.google.com/storage/browser/dataciviclab-clean/eurostat)
 [![MCP](https://img.shields.io/badge/MCP-ready-purple)](eurostat-mcp/server.py)
+[![Contributors welcome](https://img.shields.io/badge/contributors-welcome-brightgreen)](docs/contributing.md)
+[![Discussions](https://img.shields.io/badge/discussions-join-8B5CF6)](https://github.com/dataciviclab/eurostat/discussions)
 
 **Eurostat datasets, connectors and pipelines** — designed for regional (NUTS2/NUTS3) analysis across Europe.
 Part of [DataCivicLab](https://github.com/dataciviclab), a civic data laboratory.
@@ -120,6 +122,12 @@ The toolkit pipeline then:
 2. Applies `clean.sql` → enriches with codelist labels (geo, unit, freq, flags)
 3. Applies `mart.sql` → filters Italy, adds business logic
 4. **CI publish workflow** → syncs clean + mart parquet to GCS
+
+## Get involved
+
+- **Discuss** — join [GitHub Discussions](https://github.com/dataciviclab/eurostat/discussions) to ask questions, share findings, propose new datasets or methods.
+- **Good first issues** — [browse beginner-friendly tasks](https://github.com/dataciviclab/eurostat/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) to add a new Eurostat dataflow.
+- **DataCivicLab Forum** — larger conversations about civic data in Italy happen on the [main Lab hub](https://github.com/orgs/dataciviclab/discussions).
 
 ## Contributing
 
