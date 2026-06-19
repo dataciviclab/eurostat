@@ -127,13 +127,18 @@ def _probe_metadata(flow: str) -> dict[str, Any]:
 # ── Known codelists ───────────────────────────────────────────────────────────
 # Map from dimension name to codelist file (if one exists)
 
-_KNOWN_CODELISTS: dict[str, str] = {
-    "freq": "freq.csv",
-    "unit": "units.csv",
-    "geo": "geo.csv",
-    "nace_r2": "nace_r2.csv",
-    "iccs": None,  # no codelist yet
+# Auto-discover codelists from the codelists/ directory.
+# Filename stem = dimension name, except for these overrides:
+_CODELIST_FILE_DIM: dict[str, str] = {
+    "units.csv": "unit",
+    "flags.csv": "flag",
 }
+_codelists_dir = REPO_ROOT / "codelists"
+_KNOWN_CODELISTS: dict[str, str] = {}
+if _codelists_dir.exists():
+    for _f in sorted(_codelists_dir.glob("*.csv")):
+        _name = _CODELIST_FILE_DIM.get(_f.name, _f.stem)
+        _KNOWN_CODELISTS[_name] = _f.name
 
 # Dimensions that need special handling (CASE WHEN labels)
 _KNOWN_DIM_LABELS: dict[str, list[tuple[str, str]]] = {
@@ -252,22 +257,38 @@ def _generate_clean_sql(dims: list[str]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def _generate_mart_sql() -> str:
-    """Generate a standard Italy-filtered mart.sql."""
-    return (
-        "-- mart.sql: Italy-filtered view on clean data\n"
-        "SELECT\n"
-        "    year,\n"
-        "    geo,\n"
-        "    geo_label_en,\n"
-        "    nuts_level,\n"
-        "    value,\n"
-        "    flag\n"
-        "FROM clean_input\n"
-        "WHERE geo LIKE 'IT%'\n"
-        "  AND value IS NOT NULL\n"
-        "ORDER BY year DESC, geo\n"
+def _generate_mart_sql(dims: list[str]) -> str:
+    """Generate a Italy NUTS3 mart.sql preserving all dimensions."""
+    lines = [
+        "-- mart.sql: Italy NUTS3 view — all dimensions preserved",
+        "SELECT",
+        "    year,",
+        "    geo,",
+        "    geo_label_en,",
+        "    nuts_level,",
+        "    nuts_parent_code,",
+        "    nuts_parent_label_en,",
+    ]
+    for d in dims:
+        if d not in ("freq", "geo"):
+            lines.append(f"    {d},")
+            if d in _KNOWN_CODELISTS:
+                lines.append(f"    {d}_label_en,")
+    lines.extend(
+        [
+            "    value,",
+            "    flag,",
+            "    flag_desc_en",
+            "FROM clean_input",
+            "WHERE geo LIKE 'IT%'",
+            "  AND value IS NOT NULL",
+        ]
     )
+    if "unit" in dims:
+        lines.insert(-1, "  AND unit = 'NR'")
+    lines.insert(-1, "  AND nuts_level = 'NUTS3'")
+    lines.append("ORDER BY year DESC, geo")
+    return "\n".join(lines) + "\n"
 
 
 def _generate_dataset_yml(
@@ -489,7 +510,7 @@ def main():
         encoding="utf-8",
     )
     (sql_dir / "mart.sql").write_text(
-        _generate_mart_sql(),
+        _generate_mart_sql(dims),
         encoding="utf-8",
     )
 
