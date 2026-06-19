@@ -173,13 +173,17 @@ _JOIN_CFG: dict[str, tuple[str, str, str]] = {
 }
 
 
+_SQL_RESERVED = {"in", "on", "as", "or", "and", "not", "is", "to", "by", "of", "at"}
+
+
 def _alias(dim: str) -> str:
-    """Generate a short unique alias for a dimension JOIN."""
+    """Generate a short SQL-safe alias for a dimension JOIN."""
     cfg = _JOIN_CFG.get(dim)
     if cfg:
         return cfg[0]
-    # Generic: first 2 chars, avoid collision with existing aliases
-    return dim[:2]
+    # Generic: first 2 chars + '_d' suffix to avoid SQL keywords (e.g. 'in' for indic_de)
+    stem = dim[:2]
+    return f"{stem}_d" if stem in _SQL_RESERVED else stem
 
 
 def _join_clause(dim: str, csv_name: str) -> str:
@@ -248,6 +252,13 @@ def _generate_clean_sql(dims: list[str]) -> str:
         if d in _KNOWN_CODELISTS:
             csv_name = _KNOWN_CODELISTS[d]
             lines.append(_join_clause(d, csv_name))
+
+    # Always include flag JOIN (flag_desc_en is always selected)
+    lines.append(
+        "LEFT JOIN read_csv('codelists/flags.csv', "
+        "auto_detect=true, delim=',', header=true) fl "
+        "ON r.flag = fl.flag"
+    )
 
     # Extra geo self-join for parent hierarchy
     if "geo" in dims:
