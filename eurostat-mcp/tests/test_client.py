@@ -1,4 +1,4 @@
-"""Tests for eurostat-mcp client — validation, SQL guards, query contract."""
+"""Tests for eurostat-mcp client — validation, SQL guards, query contract, facts."""
 
 import os
 import tempfile
@@ -12,6 +12,7 @@ from client import (
     _validate_limit,
     _validate_sql_safe,
     describe_dataset,
+    facts,
     get_codelist,
     list_datasets,
     query,
@@ -19,6 +20,7 @@ from client import (
 
 
 # ── _validate_slug ───────────────────────────────────────────────────────────
+
 
 class TestValidateSlug:
     def test_valid_slug(self):
@@ -34,6 +36,7 @@ class TestValidateSlug:
 
 
 # ── _validate_limit ──────────────────────────────────────────────────────────
+
 
 class TestValidateLimit:
     def test_default_valid(self):
@@ -52,6 +55,7 @@ class TestValidateLimit:
 
 
 # ── _validate_sql_safe ───────────────────────────────────────────────────────
+
 
 class TestValidateSqlSafe:
     def test_valid_sql(self):
@@ -104,6 +108,7 @@ class TestValidateSqlSafe:
 
 # ── list_datasets ────────────────────────────────────────────────────────────
 
+
 class TestListDatasets:
     def test_returns_list(self):
         result = list_datasets()
@@ -125,6 +130,7 @@ class TestListDatasets:
 
 
 # ── get_codelist ─────────────────────────────────────────────────────────────
+
 
 class TestGetCodelist:
     def test_freq(self):
@@ -153,6 +159,7 @@ class TestGetCodelist:
 
 
 # ── query (contract, no network) ─────────────────────────────────────────────
+
 
 class TestQueryContract:
     """Test query() SQL rewriting and guards using a local parquet file.
@@ -247,6 +254,7 @@ class TestQueryContract:
 
 # ── describe_dataset (contract, no network) ────────────────────────────────────
 
+
 class TestDescribeDataset:
     """Test describe_dataset() using a local parquet file (no GCS)."""
 
@@ -313,3 +321,94 @@ class TestDescribeDataset:
         assert result["dimensions"]["geo"]["truncated"] is False
         # freq has 1 value
         assert len(result["dimensions"]["freq"]["values"]) == 1
+
+
+# ── facts (contract, no network) ─────────────────────────────────────────────
+
+
+class TestFacts:
+    """Test facts() auto-discovery using a local parquet file (no GCS).
+
+    All tests use dataset='eurostat_gdp_nuts3' to avoid scanning all datasets
+    (which would hit GCS for non-patched URLs).
+    """
+
+    @pytest.fixture(autouse=True)
+    def _setup_parquet(self):
+        """Create a small parquet on disk and patch the test dataset path."""
+        self._tmpdir = tempfile.mkdtemp()
+        self._parquet_path = os.path.join(self._tmpdir, "test.parquet")
+
+        duckdb.sql(
+            """
+            SELECT 'A' AS freq, 'EUR_HAB' AS unit, 'ITC4' AS geo,
+                   'Lombardia' AS geo_label_en, 'Nord-Ovest' AS nuts_parent_label_en,
+                   'NUTS2' AS nuts_level, 2024 AS year, 42000.0 AS value, '' AS flag
+            UNION ALL
+            SELECT 'A', 'EUR_HAB', 'ITH5', 'Emilia-Romagna', 'Nord-Est',
+                   'NUTS2', 2024, 38000.0, ''
+            UNION ALL
+            SELECT 'A', 'EUR_HAB', 'ITF3', 'Campania', 'Sud',
+                   'NUTS2', 2023, 19500.0, ''
+            UNION ALL
+            SELECT 'A', 'EUR_HAB', 'ITF3', 'Campania', 'Sud',
+                   'NUTS2', 2024, 20500.0, ''
+            """
+        ).write_parquet(self._parquet_path)
+
+        self._orig_url = DATASETS["eurostat_gdp_nuts3"]["parquet_url"]
+        DATASETS["eurostat_gdp_nuts3"]["parquet_url"] = self._parquet_path
+        yield
+        DATASETS["eurostat_gdp_nuts3"]["parquet_url"] = self._orig_url
+
+    def test_facts_single_dataset(self):
+        result = facts(dataset="eurostat_gdp_nuts3")
+        assert len(result) == 1
+        assert result[0]["dataset"] == "eurostat_gdp_nuts3"
+
+    def test_facts_has_expected_keys(self):
+        result = facts(dataset="eurostat_gdp_nuts3")
+        entry = result[0]
+        assert "dataset" in entry
+        assert "theme" in entry
+        assert "summary" in entry
+        assert "facts" in entry
+        assert "schema_facts" in entry
+
+    def test_facts_summary_has_rows_years(self):
+        result = facts(dataset="eurostat_gdp_nuts3")
+        s = result[0]["summary"]
+        assert "rows" in s
+        assert "years" in s
+
+    def test_facts_has_schema_facts(self):
+        result = facts(dataset="eurostat_gdp_nuts3")
+        assert len(result[0]["schema_facts"]) >= 1
+        labels = [f["label"] for f in result[0]["schema_facts"]]
+        assert any("Regional" in lab for lab in labels)
+        assert any("Temporal" in lab for lab in labels)
+
+    def test_facts_detail_contains_trend(self):
+        result = facts(dataset="eurostat_gdp_nuts3", detail=True, limit=3)
+        labels = [f["label"] for f in result[0]["facts"]]
+        assert (
+            any("Italy average" in lab for lab in labels)
+            or any("Top" in lab for lab in labels)
+            or any("year" in lab.lower() for lab in labels)
+        )
+
+    def test_facts_detail_contains_rankings(self):
+        result = facts(dataset="eurostat_gdp_nuts3", detail=True, limit=3)
+        labels = [f["label"] for f in result[0]["facts"]]
+        assert any("Top" in lab for lab in labels) or any(
+            "rank" in lab.lower() for lab in labels
+        )
+
+    def test_facts_invalid_slug(self):
+        with pytest.raises(ValueError, match="Unknown dataset slug"):
+            facts(dataset="nonexistent")
+
+    def test_facts_row_count(self):
+        result = facts(dataset="eurostat_gdp_nuts3")
+        rows = result[0]["summary"]["rows"]
+        assert rows == "4"
