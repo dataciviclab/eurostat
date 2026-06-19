@@ -1,0 +1,49 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_tran_sf_roadnu"
+  source_id: "eurostat"
+  years: [2026]
+  time_coverage:
+    start_year: 1999
+    end_year: 2024
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_tran_sf_roadnu"
+      type: "script"
+      args:
+        command: "../../connectors/tsv_normalize.py --flow TRAN_SF_ROADNU --output tran_sf_roadnu_normalized.parquet"
+        output: "tran_sf_roadnu_normalized.parquet"
+        filename: "tran_sf_roadnu_normalized.parquet"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  validate:
+    min_rows: 100
+
+mart:
+  tables:
+    - name: "mart_eurostat_tran_sf_roadnu"
+      sql: "sql/mart.sql"
+  required_tables:
+    - "mart_eurostat_tran_sf_roadnu"
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "TRAN_SF_ROADNU"
+  theme: "Road accidents by NUTS 3 region"
+  nuts_level: 3
+  dimensions: ["freq", "unit", "geo"]
+  description: "Road accidents by NUTS 3 region"
