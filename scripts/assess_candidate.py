@@ -342,20 +342,114 @@ def _generate_dataset_yml(
     )
 
 
+# ── List mode ─────────────────────────────────────────────────────────────────
+
+
+def _list_candidates(
+    filter_keyword: str | None = None, min_obs: int = 0, json_output: bool = False
+):
+    """Fetch the Eurostat catalog and print NUTS3-related dataflows."""
+    catalog = _fetch_json(f"{API_META}?format=json&limit=10000")
+    items = catalog.get("link", {}).get("item", [])
+
+    candidates: list[dict[str, Any]] = []
+    for item in items:
+        ext = item.get("extension", {})
+        flow_id = ext.get("id", "")
+        label = item.get("label", "")
+        annotations = {a.get("type"): a for a in ext.get("annotation", [])}
+
+        # Detect NUTS level from label patterns and ID conventions
+        label_lower = label.lower()
+        id_lower = flow_id.lower()
+        is_nuts3 = any(
+            k in label_lower or k in id_lower for k in ["nuts 3", "nuts3", "_r3", "n3"]
+        )
+        if not is_nuts3:
+            continue
+
+        obs_str = annotations.get("OBS_COUNT", {}).get("title", "0")
+        try:
+            obs = int(obs_str) if obs_str.isdigit() else 0
+        except (ValueError, TypeError):
+            obs = 0
+
+        if obs < min_obs:
+            continue
+        if filter_keyword and filter_keyword.lower() not in label_lower:
+            continue
+
+        candidates.append(
+            {
+                "id": flow_id,
+                "label": label[:120],
+                "obs": obs,
+                "oldest": annotations.get("OBS_PERIOD_OVERALL_OLDEST", {}).get(
+                    "title", "?"
+                ),
+                "latest": annotations.get("OBS_PERIOD_OVERALL_LATEST", {}).get(
+                    "title", "?"
+                ),
+            }
+        )
+
+    if not candidates:
+        print("No matching NUTS3 dataflows found.")
+        return
+
+    candidates.sort(key=lambda x: x["obs"], reverse=True)
+
+    if json_output:
+        print(json.dumps(candidates, indent=2))
+        return
+
+    print(f"\n{'ID':35s} {'Obs':>10s} {'Period':18s}  Label")
+    print("-" * 100)
+    for c in candidates:
+        period = f"{c['oldest']} - {c['latest']}"
+        print(f"{c['id']:35s} {c['obs']:>10,} {period:18s}  {c['label'][:70]}")
+    print(f"\n{len(candidates)} candidates")
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Assess a Eurostat candidate dataflow for the pipeline"
+        description="Eurostat dataset tools: probe a candidate or list available ones"
     )
     parser.add_argument(
-        "--flow", required=True, help="Eurostat dataflow ID (e.g. TOUR_OCC_ARN2)"
+        "--flow", default=None, help="Eurostat dataflow ID (e.g. TOUR_OCC_ARN2)"
     )
     parser.add_argument(
-        "--slug", default=None, help="Output slug (default: auto-derived from flow)"
+        "--slug", default=None, help="Output slug for generated dataset"
+    )
+    parser.add_argument(
+        "--list", action="store_true", help="List all NUTS3 candidates from catalog"
+    )
+    parser.add_argument(
+        "--theme",
+        default=None,
+        help="Filter list by theme keyword (e.g. tourism, transport)",
+    )
+    parser.add_argument(
+        "--min-obs",
+        type=int,
+        default=100000,
+        help="Minimum observations (default: 100K)",
+    )
+    parser.add_argument(
+        "--json-output", action="store_true", help="JSON output (for --list mode)"
     )
     args = parser.parse_args()
+
+    if args.list or not args.flow:
+        _list_candidates(
+            filter_keyword=args.theme,
+            min_obs=args.min_obs,
+            json_output=args.json_output,
+        )
+        return
 
     flow = args.flow.upper()
     slug = args.slug or _slugify(flow)
