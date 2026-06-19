@@ -243,6 +243,7 @@ _SYMBOLS: dict[str, str] = {
     "PER_KM2": "ab./km²",
 }
 _NUTS_RANKING_LEVELS = "('NUTS2', 'NUTS3')"
+_NUTS_TREND_LEVEL = "'NUTS2'"  # single level for consistent year-over-year trends
 
 # Extra dimension defaults: when a dataset has categorical columns beyond
 # the primary filter (unit/indic_de), we add WHERE clauses to avoid
@@ -498,15 +499,15 @@ def _build_trend_facts(
             else ""
         )
 
-        # NUTS level filter for ranking-level trends (avoid country aggregates)
-        nuts_ranking_where = f"AND nuts_level IN {_NUTS_RANKING_LEVELS}"
+        # Trend level: single NUTS level for consistent year-over-year trends
+        nuts_trend_where = f"AND nuts_level = {_NUTS_TREND_LEVEL}"
 
         if "nuts_parent_label_en" in col_names:
-            # Italy average (NUTS2/NUTS3 only, plus extra dim filters)
+            # Italy average (NUTS2 only, consistent level across all years)
             it_sql = f"""
                 SELECT year, ROUND(AVG(value), 0) AS avg_val
                 FROM read_parquet(?::VARCHAR)
-                WHERE geo LIKE 'IT%' AND value IS NOT NULL {nuts_ranking_where} {unit_where} {extra_dim_where}
+                WHERE geo LIKE 'IT%' AND value IS NOT NULL {nuts_trend_where} {unit_where} {extra_dim_where}
                 GROUP BY year ORDER BY year DESC LIMIT {limit}
             """
             it_rows = con.sql(it_sql, params=[path]).fetchall()
@@ -523,11 +524,11 @@ def _build_trend_facts(
                     }
                 )
 
-            # EU average (NUTS2 only, plus extra dim filters)
+            # EU average (NUTS2 only, consistent level across all years)
             eu_sql = f"""
                 SELECT year, ROUND(AVG(value), 0) AS avg_val
                 FROM read_parquet(?::VARCHAR)
-                WHERE nuts_level = 'NUTS2' AND value IS NOT NULL {unit_where} {extra_dim_where}
+                WHERE nuts_level = {_NUTS_TREND_LEVEL} AND value IS NOT NULL {unit_where} {extra_dim_where}
                 GROUP BY year ORDER BY year DESC LIMIT {limit}
             """
             eu_rows = con.sql(eu_sql, params=[path]).fetchall()
@@ -631,8 +632,11 @@ def _collect_detail_facts(
     """Run data queries for rankings and trends (detail mode).
 
     Uses the already-open connection *con* — no additional GCS calls.
+    Returns (facts_list, extra_dim_where, has_analysis) where has_analysis
+    is True only when there are actual ranking or trend facts.
     """
     facts_list: list[dict[str, Any]] = []
+    has_analysis = False
 
     if latest_year:
         facts_list.append(
@@ -657,6 +661,8 @@ def _collect_detail_facts(
             extra_dim_where,
         )
         facts_list.extend(ranking_facts)
+        if ranking_facts:
+            has_analysis = True
 
         if "year" in col_names:
             trend_facts = _build_trend_facts(
@@ -668,8 +674,10 @@ def _collect_detail_facts(
                 extra_dim_where,
             )
             facts_list.extend(trend_facts)
+            if trend_facts:
+                has_analysis = True
 
-    return facts_list, extra_dim_where
+    return facts_list, extra_dim_where, has_analysis
 
 
 def facts(
@@ -766,7 +774,7 @@ def facts(
             # Data queries (detail mode only) — second GCS connection
             if detail and primary_dim_filter and primary_dim_col:
                 with gcs_connect(path) as con:
-                    detail_facts, extra_dim_where = _collect_detail_facts(
+                    detail_facts, extra_dim_where, has_analysis = _collect_detail_facts(
                         con,
                         path,
                         stats.col_names,
@@ -782,6 +790,7 @@ def facts(
                         )
                     if detail_facts:
                         entry["facts"].extend(detail_facts)
+                    if has_analysis:
                         entry["summary"]["has_trend"] = True
 
         except Exception as exc:
