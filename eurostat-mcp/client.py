@@ -243,6 +243,36 @@ _SYMBOLS: dict[str, str] = {
 }
 _NUTS_RANKING_LEVELS = "('NUTS2', 'NUTS3')"
 
+# Extra dimension defaults: when a dataset has categorical columns beyond
+# the primary filter (unit/indic_de), we add WHERE clauses to avoid
+# averaging across unrelated categories (e.g. mixing NACE sectors, sexes).
+_EXTRA_DIM_DEFAULTS: dict[str, str] = {
+    "sex": "'T'",
+    "age": "'TOTAL'",
+    "nace_r2": "'TOTAL'",
+    "wstatus": "'EMP'",
+    "iccs": "'TOTAL'",
+    "indic_de": None,  # handled separately via primary_indicator
+}
+
+
+def _build_extra_dim_where(col_names: set[str], primary_dim_col: str | None) -> str:
+    """Build AND ... clauses to filter extra dimensions to their default values.
+
+    Skips the column used as primary filter (unit/indic_de) and any column
+    not present in the dataset schema.
+    Returns empty string when no extra dims need filtering.
+    """
+    parts: list[str] = []
+    for dim_col, default_val in _EXTRA_DIM_DEFAULTS.items():
+        if dim_col == primary_dim_col:
+            continue  # already filtered by primary_dim_filter
+        if default_val is None:
+            continue  # handled separately
+        if dim_col in col_names:
+            parts.append(f"{dim_col} = {default_val}")
+    return (" AND " + " AND ".join(parts)) if parts else ""
+
 
 def _format_value(val: float, unit: str | None = None) -> str:
     """Format a numeric value with appropriate symbol based on unit."""
@@ -412,6 +442,7 @@ def _build_trend_facts(
     unit_filter: str | None,
     unit_col: str | None,
     limit: int,
+    extra_dim_where: str = "",
 ) -> list[dict[str, Any]]:
     """Build facts showing year-over-year trend."""
     facts_list: list[dict[str, Any]] = []
@@ -434,11 +465,11 @@ def _build_trend_facts(
         nuts_ranking_where = f"AND nuts_level IN {_NUTS_RANKING_LEVELS}"
 
         if "nuts_parent_label_en" in col_names:
-            # Italy average (NUTS2/NUTS3 only)
+            # Italy average (NUTS2/NUTS3 only, plus extra dim filters)
             it_sql = f"""
                 SELECT year, ROUND(AVG(value), 0) AS avg_val
                 FROM read_parquet(?::VARCHAR)
-                WHERE geo LIKE 'IT%' AND value IS NOT NULL {nuts_ranking_where} {unit_where}
+                WHERE geo LIKE 'IT%' AND value IS NOT NULL {nuts_ranking_where} {unit_where} {extra_dim_where}
                 GROUP BY year ORDER BY year DESC LIMIT {limit}
             """
             it_rows = con.sql(it_sql, params=[path]).fetchall()
@@ -455,11 +486,11 @@ def _build_trend_facts(
                     }
                 )
 
-            # EU average (NUTS2 only — already filtered)
+            # EU average (NUTS2 only, plus extra dim filters)
             eu_sql = f"""
                 SELECT year, ROUND(AVG(value), 0) AS avg_val
                 FROM read_parquet(?::VARCHAR)
-                WHERE nuts_level = 'NUTS2' AND value IS NOT NULL {unit_where}
+                WHERE nuts_level = 'NUTS2' AND value IS NOT NULL {unit_where} {extra_dim_where}
                 GROUP BY year ORDER BY year DESC LIMIT {limit}
             """
             eu_rows = con.sql(eu_sql, params=[path]).fetchall()
@@ -486,10 +517,12 @@ def _build_ranking_facts(
     unit_col: str | None,
     limit: int,
     year: int | None = None,
+    extra_dim_where: str = "",
 ) -> list[dict[str, Any]]:
     """Build facts ranking regions by value (top and bottom).
 
     Filters to NUTS2/NUTS3 level only (avoids mixing countries with regions).
+    Applies extra_dim_where to avoid duplicating regions across categories.
     """
     facts_list: list[dict[str, Any]] = []
     try:
@@ -507,7 +540,7 @@ def _build_ranking_facts(
             SELECT geo_label_en, ROUND(value, 0) AS val
             FROM read_parquet(?::VARCHAR)
             WHERE value IS NOT NULL AND geo_label_en IS NOT NULL
-              {nuts_ranking_where} {unit_where} {year_where}
+              {nuts_ranking_where} {unit_where} {extra_dim_where} {year_where}
             ORDER BY value DESC LIMIT {limit}
         """
         top_rows = con.sql(top_sql, params=[path]).fetchall()
@@ -527,7 +560,7 @@ def _build_ranking_facts(
             SELECT geo_label_en, ROUND(value, 0) AS val
             FROM read_parquet(?::VARCHAR)
             WHERE value IS NOT NULL AND geo_label_en IS NOT NULL
-              {nuts_ranking_where} {unit_where} {year_where}
+              {nuts_ranking_where} {unit_where} {extra_dim_where} {year_where}
             ORDER BY value ASC LIMIT {limit}
         """
         bottom_rows = con.sql(bottom_sql, params=[path]).fetchall()
@@ -731,6 +764,13 @@ def facts(
                         }
                     )
 
+                # Build extra dimension filters (sex='T', nace_r2='TOTAL', etc.)
+                extra_dim_where = _build_extra_dim_where(col_names, primary_dim_col)
+                if extra_dim_where:
+                    entry["summary"]["extra_dim_filters"] = extra_dim_where.strip(
+                        " AND "
+                    )
+
                 if "geo" in col_names:
                     with gcs_connect(path) as con:
                         ranking_year = latest_year or year_max
@@ -741,12 +781,18 @@ def facts(
                             primary_dim_col,
                             limit,
                             ranking_year,
+                            extra_dim_where,
                         )
                         entry["facts"].extend(ranking_facts)
 
                         if "year" in col_names:
                             trend_facts = _build_trend_facts(
-                                con, path, primary_dim_filter, primary_dim_col, limit
+                                con,
+                                path,
+                                primary_dim_filter,
+                                primary_dim_col,
+                                limit,
+                                extra_dim_where,
                             )
                             if trend_facts:
                                 entry["facts"].extend(trend_facts)

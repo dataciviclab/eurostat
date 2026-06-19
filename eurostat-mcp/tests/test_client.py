@@ -412,3 +412,83 @@ class TestFacts:
         result = facts(dataset="eurostat_gdp_nuts3")
         rows = result[0]["summary"]["rows"]
         assert rows == "4"
+
+
+# ── facts: multi-dimensional datasets (extra dim filters) ──────────────────
+
+
+class TestFactsMultiDim:
+    """Test facts() with extra dimensions (nace_r2, sex, age, wstatus).
+
+    Uses a local parquet that simulates a multi-dimensional dataset like
+    GVA or EMP to verify that _build_extra_dim_where filters correctly.
+    """
+
+    @pytest.fixture(autouse=True)
+    def _setup_parquet(self):
+        """Create a small multi-dim parquet and patch a dataset."""
+        self._tmpdir = tempfile.mkdtemp()
+        self._parquet_path = os.path.join(self._tmpdir, "test.parquet")
+
+        duckdb.sql(
+            """
+            -- GVA-like: multiple nace_r2 values per region
+            SELECT 'A' AS freq, 'CP_MEUR' AS unit,
+                   'ITC4' AS geo, 'Lombardia' AS geo_label_en,
+                   'Nord-Ovest' AS nuts_parent_label_en,
+                   'NUTS2' AS nuts_level,
+                   2024 AS year,
+                   'TOTAL' AS nace_r2, 451114.0 AS value, '' AS flag
+            UNION ALL
+            SELECT 'A', 'CP_MEUR', 'ITC4', 'Lombardia', 'Nord-Ovest',
+                   'NUTS2', 2024,
+                   'C', 95000.0, ''  -- Manufacturing (should NOT appear in ranking)
+            UNION ALL
+            SELECT 'A', 'CP_MEUR', 'ITH5', 'Emilia-Romagna', 'Nord-Est',
+                   'NUTS2', 2024,
+                   'TOTAL', 177320.0, ''
+            UNION ALL
+            SELECT 'A', 'CP_MEUR', 'ITF3', 'Campania', 'Sud',
+                   'NUTS2', 2024,
+                   'TOTAL', 122904.0, ''
+            """
+        ).write_parquet(self._parquet_path)
+
+        self._orig_url = DATASETS["eurostat_gva_nuts3"]["parquet_url"]
+        DATASETS["eurostat_gva_nuts3"]["parquet_url"] = self._parquet_path
+        yield
+        DATASETS["eurostat_gva_nuts3"]["parquet_url"] = self._orig_url
+
+    def test_facts_shows_extra_dim_filters(self):
+        """Detail mode on a multi-dim dataset should report extra_dim_filters."""
+        result = facts(dataset="eurostat_gva_nuts3", detail=True, limit=3)
+        s = result[0].get("summary", {})
+        assert "extra_dim_filters" in s, f"missing filters in {s}"
+        assert "nace_r2" in s["extra_dim_filters"]
+
+    def test_facts_ranking_no_duplicates(self):
+        """Ranking should not contain the same region twice (nace_r2 filtered)."""
+        result = facts(dataset="eurostat_gva_nuts3", detail=True, limit=5)
+        rankings = [
+            f
+            for f in result[0]["facts"]
+            if "Top" in f["label"] or "Bottom" in f["label"]
+        ]
+        if rankings:
+            for r in rankings:
+                # Count distinct region names in the value
+                regions = [
+                    part.split(":")[0].strip() for part in r["value"].split(", ")
+                ]
+                assert len(regions) == len(set(regions)), (
+                    f"Duplicate regions in ranking: {regions}"
+                )
+
+    def test_facts_ranking_correct_values(self):
+        """Ranking should use TOTAL nace_r2 values only."""
+        result = facts(dataset="eurostat_gva_nuts3", detail=True, limit=3)
+        for f in result[0]["facts"]:
+            if "Top" in f["label"]:
+                # Lombardia should be first (451,114), Milan manufacturing excluded
+                assert "Lombardia" in f["value"]
+                assert "€ 451,114" in f["value"] or "€451,114" in f["value"]
