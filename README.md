@@ -85,6 +85,9 @@ eurostat/
 ├── datasets/            # dataset.yml + clean.sql + mart.sql per dataflow
 ├── eurostat-mcp/        # MCP server (4 tools)
 ├── codelists/           # geo, nace_r2, unit, freq, flag lookups
+├── scripts/
+│   ├── update_codelists.py   # fetches all codelists from Eurostat API
+│   └── assess_candidate.py   # probes a new dataflow and generates skeleton
 ├── tests/               # pytest suite (connector + fixtures)
 ├── docs/                # dataset registry, contributing guide
 └── .github/workflows/   # CI + monthly publish to GCS
@@ -103,14 +106,17 @@ pytest tests/ eurostat-mcp/tests/ -v
 # Run a dataset pipeline (script source requires env var)
 TOOLKIT_ALLOW_SCRIPT_SOURCE=1 \
   toolkit run full --config datasets/eurostat-gdp-nuts3/dataset.yml --years 2026
+
+# Add a new dataset (probe, generate skeleton, then run pipeline)
+python scripts/assess_candidate.py --flow LFST_R_LFE2EMPRT
 ```
 
 ## How it works
 
-The connector (`tsv_normalize.py`) downloads SDMX-TSV from the Eurostat API, auto-detects dimensions from the header, and unpivots year columns into analytical rows. Output is a CSV with columns `[dim1..dimN, year, value, flag]`.
+The connector (`tsv_normalize.py`) downloads SDMX-TSV from the Eurostat API, detects dimensions from the header, and writes unpivoted **parquet** files with columns `[dim1..dimN, year, value, flag]`.
 
 The toolkit pipeline then:
-1. Runs the connector (`type: script`) → raw CSV
+1. Runs the connector (`type: script`) → raw parquet
 2. Applies `clean.sql` → enriches with codelist labels (geo, unit, freq, flags)
 3. Applies `mart.sql` → filters Italy, adds business logic
 4. **CI publish workflow** → syncs clean + mart parquet to GCS

@@ -109,7 +109,7 @@ or NACE sector labels (`eurostat-gva-nuts3` and `eurostat-emp-nuts3`).
 
 > **Adding a new dimension codelist**: if your dataflow has a DSD dimension not yet
 > in `codelists/` (e.g. `sex`, `age`, `iccs`), create a new CSV with columns `code,label_en`
-> (and optional `label_it`). Use `LEFT JOIN` in `clean.sql` as shown above. Avoid
+> (columns: `code,label_en`). Use `LEFT JOIN` in `clean.sql` as shown above. Avoid
 > `CASE WHEN` chains — they duplicate logic across datasets.
 
 ### mart.sql template
@@ -135,7 +135,7 @@ ORDER BY year DESC, geo
 
 - **clean.sql** — always the same pattern: codelist enrichment. Add dimension-specific labels
   as `LEFT JOIN` on `codelists/{dim}.csv`. If no CSV exists for the dimension, create one
-  (columns: `code,label_en[,label_it]`). Prefer JOINs over `CASE WHEN` chains — they
+  (columns: `code,label_en`). Prefer JOINs over `CASE WHEN` chains — they
   avoid logic duplication when the same dimension appears in multiple datasets.
 - **mart.sql** — business logic only: filter, derive, rename. No codelist JOINs (already in clean).
 - **`sample_size: -1`** — add to `dataset.yml` `clean.read` if DuckDB mis-detects a column type
