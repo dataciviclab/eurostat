@@ -18,5 +18,6 @@ SELECT
 FROM clean_input
 WHERE geo LIKE 'IT%'
   AND unit IN ('NR')
+  AND nuts_level = 'NUTS3'
   AND value IS NOT NULL
 ORDER BY year DESC, geo, c_resid, nace_r2
