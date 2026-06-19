@@ -20,14 +20,18 @@ All published datasets:
 
 ## Planned
 
+Want to add one? Check the [good first issues](https://github.com/dataciviclab/eurostat/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) for datasets with ready-to-use templates.
+
 | Dataflow | Theme | NUTS | Priority |
 |---|---|---|---|
-| `LFST_R_LFE2EMPRT` | Labour / Employment rates by sex & age | NUTS3 | high |
-| `TOUR_OCC_NIN2` | Tourism / Nights spent by NUTS3 | NUTS3 | published ✅ |
-| `BD_SIZE_R3` | Business demography | NUTS3 | medium |
+| `LFST_R_LFE2EMPRT` | Labour / Employment rates by sex & age | NUTS2 | high |
+| `BD_SIZE_R3` | Business demography by size class | NUTS3 | medium |
 | `TRAN_R_RAIL` | Transport / Rail passengers | NUTS3 | medium |
 | `EDUC_UOE_ENRL_R3` | Education / Enrolment | NUTS3 | medium |
 | `HLTH_RS_PHYSREG` | Health / Physicians | NUTS2 | low |
+| `DEMO_R_MAGEC3` | Deaths by age group and sex | NUTS3 | medium |
+| `PAT_EP_RIPC` | Patent applications to the EPO | NUTS3 | medium |
+| `NRG_CHDDR2_M` | Heating and cooling degree days | NUTS3 | high |
 
 Total Eurostat catalog: ~8,200 dataflows — 121 at NUTS3 level.
 
