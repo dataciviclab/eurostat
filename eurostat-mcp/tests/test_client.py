@@ -414,6 +414,39 @@ class TestFacts:
         assert rows == "4"
 
 
+# ── facts: limit validation ────────────────────────────────────────────────
+
+
+class TestFactsLimit:
+    """Test facts() limit validation — should clamp like _validate_limit."""
+
+    @pytest.fixture(autouse=True)
+    def _setup_parquet(self):
+        self._tmpdir = tempfile.mkdtemp()
+        self._parquet_path = os.path.join(self._tmpdir, "test.parquet")
+        duckdb.sql("SELECT 1 AS x").write_parquet(self._parquet_path)
+        self._orig = DATASETS["eurostat_gdp_nuts3"]["parquet_url"]
+        DATASETS["eurostat_gdp_nuts3"]["parquet_url"] = self._parquet_path
+        yield
+        DATASETS["eurostat_gdp_nuts3"]["parquet_url"] = self._orig
+
+    def test_limit_negative_clamped(self):
+        result = facts(dataset="eurostat_gdp_nuts3", limit=-1)
+        assert len(result) == 1  # non crasha
+
+    def test_limit_zero_clamped(self):
+        result = facts(dataset="eurostat_gdp_nuts3", limit=0)
+        assert len(result) == 1
+
+    def test_limit_over_max_clamped(self):
+        result = facts(dataset="eurostat_gdp_nuts3", limit=1000)
+        assert len(result) == 1
+
+    def test_limit_default_works(self):
+        result = facts(dataset="eurostat_gdp_nuts3")
+        assert len(result) == 1
+
+
 # ── facts: multi-dimensional datasets (extra dim filters) ──────────────────
 
 

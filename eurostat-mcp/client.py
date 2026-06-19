@@ -695,6 +695,7 @@ def facts(
         detail: If True, runs actual data queries for trends and rankings.
         limit: Max items per fact list (top/bottom regions, years, etc.).
     """
+    limit = _validate_limit(limit)
     slugs = [dataset] if dataset else sorted(DATASETS.keys())
     _validate_slug(slugs[0]) if dataset else None
 
