@@ -159,30 +159,57 @@ _KNOWN_DIM_LABELS: dict[str, list[tuple[str, str]]] = {
 }
 
 
-# ── Template generators ───────────────────────────────────────────────────────
+# ── clean.sql generation ────────────────────────────────────────────────────
+
+# Per-dimension join config for clean.sql.
+# Key: dimension name → (alias, key_column, label_column)
+# None = fallback to generic (alias = dim[:2], key = 'code', label = 'label_en')
+_JOIN_CFG: dict[str, tuple[str, str, str]] = {
+    "freq": ("f", "freq", "label_en"),
+    "unit": ("u", "unit", "label_en"),
+    "nace_r2": ("n", "code", "label_en"),
+    "geo": ("g", "code", "label_en"),
+    "flag": ("fl", "flag", "description_en"),
+}
 
 
-def _dim_comment(dim: str) -> str:
-    """Generate a clean.sql dimension-enrichment template."""
-    if dim in _KNOWN_CODELISTS:
-        cl = _KNOWN_CODELISTS[dim]
-        if cl:
-            return (
-                f"    -- LEFT JOIN read_csv('codelists/{cl}', "
-                "auto_detect=true, delim=',', header=true) d "
-                f"ON r.{dim} = d.code"
-            )
-    elif dim in _KNOWN_DIM_LABELS:
-        lines = [f"    -- {dim}: enrich with label_en"]
-        for val, label in _KNOWN_DIM_LABELS[dim]:
-            lines.append(f"    -- WHEN {val} THEN {label}")
-        lines.append(f"    -- END AS {dim}_label_en,")
-        return "\n".join(lines) + "\n"
-    return f"    -- DIMENSION {dim}: add codelist or CASE WHEN for label_en"
+def _alias(dim: str) -> str:
+    """Generate a short unique alias for a dimension JOIN."""
+    cfg = _JOIN_CFG.get(dim)
+    if cfg:
+        return cfg[0]
+    # Generic: first 2 chars, avoid collision with existing aliases
+    return dim[:2]
+
+
+def _join_clause(dim: str, csv_name: str) -> str:
+    """Generate a LEFT JOIN clause for a dimension codelist."""
+    cfg = _JOIN_CFG.get(dim)
+    if cfg:
+        alias, key_col, _ = cfg
+    else:
+        alias = _alias(dim)
+        key_col = "code"
+    return (
+        f"LEFT JOIN read_csv('codelists/{csv_name}', "
+        f"auto_detect=true, delim=',', header=true) {alias} "
+        f"ON r.{dim} = {alias}.{key_col}"
+    )
+
+
+def _label_expr(dim: str) -> str | None:
+    """Return 'alias.label_col AS dim_label_en' or None if no label."""
+    cfg = _JOIN_CFG.get(dim)
+    if cfg:
+        alias, _, label_col = cfg
+        return f"{alias}.{label_col} AS {dim}_label_en"
+    # Generic: codelist has 'code,label_en' columns
+    alias = _alias(dim)
+    return f"{alias}.label_en AS {dim}_label_en"
 
 
 def _generate_clean_sql(dims: list[str]) -> str:
-    """Generate clean.sql with proper JOINs and comments."""
+    """Generate clean.sql with proper JOINs and label columns."""
     cols = [f"    r.{d}" for d in dims]
 
     lines = [
@@ -191,24 +218,20 @@ def _generate_clean_sql(dims: list[str]) -> str:
     ]
     lines.extend(c + "," for c in cols)
     lines.append("    CAST(r.year AS INTEGER) AS year,")
-    lines.append("    f.label_en AS freq_label_en,")
-    lines.append("    u.label_en AS unit_label_en,")
 
-    # Known codelist labels to include in SELECT
-    if "nace_r2" in dims:
-        lines.append("    n.label_en AS nace_label_en,")
+    # Label columns for every dim that has a known codelist
+    for d in dims:
+        if d in _KNOWN_CODELISTS:
+            expr = _label_expr(d)
+            if expr:
+                lines.append(f"    {expr},")
+        elif d in _KNOWN_DIM_LABELS:
+            lines.append(f"    -- {d}: enrich via CASE WHEN — add {d}_label_en")
+            for val, label in _KNOWN_DIM_LABELS[d]:
+                lines.append(f"    --   WHEN {val} THEN {label}")
 
-    # Add enrichment hints for extra dimensions
-    extra_dims = [d for d in dims if d not in ("freq", "unit", "nace_r2", "geo")]
-    for d in extra_dims:
-        hint = _dim_comment(d)
-        if "\n" in hint:
-            lines.append(hint.rstrip(","))
-        else:
-            lines.append(hint + ",")
-
+    # Extra geo columns
     if "geo" in dims:
-        lines.append("    g.label_en AS geo_label_en,")
         lines.append("    g.nuts_level,")
         lines.append("    g.parent_code AS nuts_parent_code,")
         lines.append("    gp.label_en AS nuts_parent_label_en,")
@@ -220,39 +243,19 @@ def _generate_clean_sql(dims: list[str]) -> str:
     # FROM
     lines.append("FROM raw_input r")
 
-    # JOINs
-    lines.append(
-        "LEFT JOIN read_csv('codelists/freq.csv', "
-        "auto_detect=true, delim=',', header=true) f "
-        "ON r.freq = f.freq"
-    )
-    lines.append(
-        "LEFT JOIN read_csv('codelists/units.csv', "
-        "auto_detect=true, delim=',', header=true) u "
-        "ON r.unit = u.unit"
-    )
-    if "nace_r2" in dims:
-        lines.append(
-            "LEFT JOIN read_csv('codelists/nace_r2.csv', "
-            "auto_detect=true, delim=',', header=true) n "
-            "ON r.nace_r2 = n.code"
-        )
+    # JOINs for every dim that has a known codelist
+    for d in dims:
+        if d in _KNOWN_CODELISTS:
+            csv_name = _KNOWN_CODELISTS[d]
+            lines.append(_join_clause(d, csv_name))
+
+    # Extra geo self-join for parent hierarchy
     if "geo" in dims:
-        lines.append(
-            "LEFT JOIN read_csv('codelists/geo.csv', "
-            "auto_detect=true, delim=',', header=true) g "
-            "ON r.geo = g.code"
-        )
         lines.append(
             "LEFT JOIN read_csv('codelists/geo.csv', "
             "auto_detect=true, delim=',', header=true) gp "
             "ON g.parent_code = gp.code"
         )
-    lines.append(
-        "LEFT JOIN read_csv('codelists/flags.csv', "
-        "auto_detect=true, delim=',', header=true) fl "
-        "ON r.flag = fl.flag"
-    )
 
     return "\n".join(lines) + "\n"
 
