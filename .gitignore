@@ -9,3 +9,9 @@ out/
 !tests/fixtures/*.tsv
 !codelists/*.csv
 !.gitkeep
+
+# Local workspace
+_local/
+
+# Coverage
+.coverage

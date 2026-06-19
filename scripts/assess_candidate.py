@@ -40,8 +40,13 @@ def _fetch_json(url: str) -> dict[str, Any]:
 
 
 def _slugify(flow: str) -> str:
-    """Convert dataflow ID to dataset directory name (hyphens only)."""
+    """Convert dataflow ID to dataset directory name (hyphens only).
+
+    Convention: all dataset directories start with ``eurostat-``.
+    """
     base = flow.lower().replace("_", "-")
+    if not base.startswith("eurostat-"):
+        base = "eurostat-" + base
     if "nuts3" not in base and "nuts2" not in base:
         base += "-nuts3"
     return base
