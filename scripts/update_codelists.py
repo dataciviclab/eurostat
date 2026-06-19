@@ -163,6 +163,15 @@ def update_indic_de() -> int:
     return len(rows)
 
 
+def update_c_resid() -> int:
+    """Fetch C_RESID codelist and write c_resid.csv."""
+    labels = _fetch_codelist("C_RESID")
+    rows = [(code, labels[code]) for code in sorted(labels)]
+    _write_csv("c_resid.csv", ["code", "label_en"], rows)
+    print(f"  ✅ c_resid.csv: {len(rows)} entries")
+    return len(rows)
+
+
 def update_flags() -> int:
     """Fetch OBS_FLAG codelist and write flags.csv."""
     labels = _fetch_codelist("OBS_FLAG")
@@ -183,8 +192,9 @@ def main():
     total += update_freq()
     total += update_units()
     total += update_indic_de()
+    total += update_c_resid()
     total += update_flags()
-    print(f"✔ Done: {total} total entries across 5 codelists")
+    print(f"✔ Done: {total} total entries across 6 codelists")
 
 
 if __name__ == "__main__":
