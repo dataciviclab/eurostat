@@ -1,5 +1,11 @@
 # Contributing
 
+## Before you start
+
+- **Not sure where to begin?** Browse [good first issues](https://github.com/dataciviclab/eurostat/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) — beginner-friendly datasets with step-by-step instructions.
+- **Have a question or idea?** Open a [GitHub Discussion](https://github.com/dataciviclab/eurostat/discussions) — the community and maintainers will help.
+- **Want to discuss with the broader Lab community?** Join the [DataCivicLab Forum](https://github.com/orgs/dataciviclab/discussions).
+
 ## Adding a new dataset
 
 Each Eurostat dataflow maps to one dataset directory. The connector handles TSV parsing and
