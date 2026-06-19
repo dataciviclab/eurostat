@@ -13,6 +13,7 @@ import csv
 import logging
 import re
 import urllib.request
+from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -256,6 +257,122 @@ _EXTRA_DIM_DEFAULTS: dict[str, str] = {
 }
 
 
+@dataclass
+class _ParquetStats:
+    """Summary stats read from a parquet in a single GCS connection."""
+
+    columns: list[dict[str, str]]
+    col_names: set[str]
+    row_count: int | None
+    year_min: int | None
+    year_max: int | None
+    units: list[str]
+    indicators: list[str]
+
+
+def _get_parquet_stats(path: str) -> _ParquetStats | None:
+    """Read schema + summary stats from a parquet (single connection).
+
+    Consolidates DESCRIBE, COUNT, MIN/MAX year, DISTINCT unit/indic_de
+    into one GCS call instead of 5 separate connections.
+    """
+    try:
+        with gcs_connect(path) as con:
+            # Schema
+            schema = con.sql(
+                "DESCRIBE SELECT * FROM read_parquet(?::VARCHAR)",
+                params=[path],
+            ).fetchall()
+            columns = [{"name": r[0], "type": r[1]} for r in schema]
+            col_names = {c["name"] for c in columns}
+
+            # Row count
+            row = con.sql(
+                "SELECT COUNT(*) FROM read_parquet(?::VARCHAR)",
+                params=[path],
+            ).fetchone()
+            row_count = int(row[0]) if row else None
+
+            # Year range
+            year_min, year_max = None, None
+            if "year" in col_names:
+                r = con.sql(
+                    "SELECT MIN(year), MAX(year) FROM read_parquet(?::VARCHAR)",
+                    params=[path],
+                ).fetchone()
+                if r and r[0] is not None:
+                    year_min, year_max = int(r[0]), int(r[1])
+
+            # Available units
+            units: list[str] = []
+            if "unit" in col_names:
+                rows = con.sql(
+                    "SELECT DISTINCT unit FROM read_parquet(?::VARCHAR) "
+                    "WHERE unit IS NOT NULL ORDER BY 1 LIMIT 10",
+                    params=[path],
+                ).fetchall()
+                units = [r[0] for r in rows]
+
+            # Available indicators (demographic balance)
+            indicators: list[str] = []
+            if "indic_de" in col_names:
+                rows = con.sql(
+                    "SELECT DISTINCT indic_de FROM read_parquet(?::VARCHAR) "
+                    "WHERE indic_de IS NOT NULL ORDER BY 1 LIMIT 15",
+                    params=[path],
+                ).fetchall()
+                indicators = [r[0] for r in rows]
+
+            return _ParquetStats(
+                columns=columns,
+                col_names=col_names,
+                row_count=row_count,
+                year_min=year_min,
+                year_max=year_max,
+                units=units,
+                indicators=indicators,
+            )
+    except Exception as exc:
+        logger.warning("parquet stats query failed: %s", exc)
+        return None
+
+
+def _pick_primary_unit(stats: _ParquetStats) -> str | None:
+    """Pick the best unit for facts from available units.
+
+    Prefers per-capita measures (EUR_HAB, PPS_*) over aggregates (MIO_EUR, NR).
+    Returns None if no unit column exists.
+    """
+    if not stats.units:
+        return None
+    preferences = [
+        "EUR_HAB",
+        "PPS_EU27_2020_HAB",
+        "PPS_HAB_EU27_2020",
+        "PER_KM2",
+        "CP_MEUR",
+        "PYP_MEUR",
+        "MIO_EUR",
+        "THS",
+        "NR",
+    ]
+    for pref in preferences:
+        if pref in stats.units:
+            return pref
+    return stats.units[0]
+
+
+def _pick_primary_indicator(stats: _ParquetStats) -> str | None:
+    """Pick the headline indicator for demographic datasets."""
+    if not stats.indicators:
+        return None
+    preferences = ["NATGROWRT", "GROWRT", "CNMIGRATRT", "JAN", "GROW"]
+    for pref in preferences:
+        if pref in stats.indicators:
+            return pref
+    return stats.indicators[0]
+
+
 def _build_extra_dim_where(col_names: set[str], primary_dim_col: str | None) -> str:
     """Build AND ... clauses to filter extra dimensions to their default values.
 
@@ -292,89 +409,9 @@ _FACT_CATEGORY_DIMS: dict[str, str] = {
 }
 
 
-def _detect_primary_unit(slug: str) -> str | None:
-    """Detect the 'primary' unit for a dataset with multiple units.
-
-    Heuristic: pick the first unit that is NOT the raw count (NR, THS, MIO_EUR)
-    and prefer per-capita or derived measures (EUR_HAB, PPS_*, CP_MEUR, PER_KM2).
-    Returns the unit code, or None if the dataset has no unit column.
-    """
-    meta = DATASETS.get(slug, {})
-    if "unit" not in meta.get("dimensions", []):
-        return None
-    path = meta.get("parquet_url")
-    if not path:
-        return None
-    try:
-        with gcs_connect(path) as con:
-            rows = con.sql(
-                "SELECT DISTINCT unit FROM read_parquet(?::VARCHAR) "
-                "WHERE unit IS NOT NULL ORDER BY 1",
-                params=[path],
-            ).fetchall()
-            codes = [r[0] for r in rows]
-            # Preference order
-            preferences = [
-                "EUR_HAB",
-                "PPS_EU27_2020_HAB",
-                "PPS_HAB_EU27_2020",
-                "PER_KM2",
-                "CP_MEUR",
-                "PYP_MEUR",
-                "MIO_EUR",
-                "THS",
-                "NR",
-            ]
-            for pref in preferences:
-                if pref in codes:
-                    return pref
-            return codes[0] if codes else None
-    except Exception:
-        return None
-
-
-def _pick_primary_indicator(slug: str) -> str | None:
-    """For datasets with an indic_de (demographic indicator) dimension,
-    pick the most 'headline' indicator (GROWRT, NATGROWRT, JAN, etc.)."""
-    meta = DATASETS.get(slug, {})
-    if "indic_de" not in meta.get("dimensions", []):
-        return None
-    path = meta.get("parquet_url")
-    if not path:
-        return None
-    try:
-        with gcs_connect(path) as con:
-            rows = con.sql(
-                "SELECT DISTINCT indic_de FROM read_parquet(?::VARCHAR) "
-                "WHERE indic_de IS NOT NULL ORDER BY 1",
-                params=[path],
-            ).fetchall()
-            codes = [r[0] for r in rows]
-            preferences = ["NATGROWRT", "GROWRT", "CNMIGRATRT", "JAN", "GROW"]
-            for pref in preferences:
-                if pref in codes:
-                    return pref
-            return codes[0] if codes else None
-    except Exception:
-        return None
-
-
-def _detect_columns(path: str) -> list[dict[str, str]]:
-    """Return the list of column definitions for a parquet file."""
-    with gcs_connect(path) as con:
-        schema = con.sql(
-            "DESCRIBE SELECT * FROM read_parquet(?::VARCHAR)",
-            params=[path],
-        ).fetchall()
-        return [{"name": r[0], "type": r[1]} for r in schema]
-
-
-def _schema_facts(
-    cols: list[dict[str, str]], meta: dict[str, Any]
-) -> list[dict[str, Any]]:
+def _schema_facts(col_names: set[str], meta: dict[str, Any]) -> list[dict[str, Any]]:
     """Generate facts from schema inspection only (no data queries)."""
     facts_list: list[dict[str, Any]] = []
-    col_names = {c["name"] for c in cols}
 
     facts_list.append(
         {
@@ -581,45 +618,58 @@ def _build_ranking_facts(
     return facts_list
 
 
-def _get_latest_year(path: str) -> int | None:
-    """Get the latest available year for a dataset."""
-    try:
-        with gcs_connect(path) as con:
-            row = con.sql(
-                "SELECT MAX(year) FROM read_parquet(?::VARCHAR)",
-                params=[path],
-            ).fetchone()
-            return int(row[0]) if row and row[0] is not None else None
-    except Exception:
-        return None
+def _collect_detail_facts(
+    con: Any,
+    path: str,
+    col_names: set[str],
+    primary_dim_filter: str | None,
+    primary_dim_col: str | None,
+    limit: int,
+    latest_year: int | None,
+    year_max: int | None,
+) -> list[dict[str, Any]]:
+    """Run data queries for rankings and trends (detail mode).
 
+    Uses the already-open connection *con* — no additional GCS calls.
+    """
+    facts_list: list[dict[str, Any]] = []
 
-def _get_year_range(path: str) -> tuple[int | None, int | None]:
-    """Get min/max year for a dataset."""
-    try:
-        with gcs_connect(path) as con:
-            row = con.sql(
-                "SELECT MIN(year), MAX(year) FROM read_parquet(?::VARCHAR)",
-                params=[path],
-            ).fetchone()
-            if row and row[0] is not None:
-                return (int(row[0]), int(row[1]))
-            return (None, None)
-    except Exception:
-        return (None, None)
+    if latest_year:
+        facts_list.append(
+            {
+                "label": "Latest year",
+                "value": str(latest_year),
+            }
+        )
 
+    # Build extra dimension filters (sex='T', nace_r2='TOTAL', etc.)
+    extra_dim_where = _build_extra_dim_where(col_names, primary_dim_col)
 
-def _get_row_count(path: str) -> int | None:
-    """Get total row count for a dataset."""
-    try:
-        with gcs_connect(path) as con:
-            row = con.sql(
-                "SELECT COUNT(*) FROM read_parquet(?::VARCHAR)",
-                params=[path],
-            ).fetchone()
-            return int(row[0]) if row else None
-    except Exception:
-        return None
+    if "geo" in col_names:
+        ranking_year = latest_year or year_max
+        ranking_facts = _build_ranking_facts(
+            con,
+            path,
+            primary_dim_filter,
+            primary_dim_col,
+            limit,
+            ranking_year,
+            extra_dim_where,
+        )
+        facts_list.extend(ranking_facts)
+
+        if "year" in col_names:
+            trend_facts = _build_trend_facts(
+                con,
+                path,
+                primary_dim_filter,
+                primary_dim_col,
+                limit,
+                extra_dim_where,
+            )
+            facts_list.extend(trend_facts)
+
+    return facts_list, extra_dim_where
 
 
 def facts(
@@ -629,19 +679,13 @@ def facts(
 ) -> list[dict[str, Any]]:
     """Generate facts from datasets by inspecting schemas and running queries.
 
+    Consolidates parquet stats into a single GCS connection per dataset,
+    then opens a second connection only when detail=True for ranking/trend queries.
+
     Args:
         dataset: Optional slug to filter a single dataset.
         detail: If True, runs actual data queries for trends and rankings.
         limit: Max items per fact list (top/bottom regions, years, etc.).
-
-    Returns:
-        A list of per-dataset fact objects, each containing:
-        - dataset: slug
-        - theme: dataset theme
-        - description: dataset description
-        - dimensions: list of dimension column names
-        - summary: dict with years, rows, units
-        - facts: list of {label, value, ...} dicts
     """
     slugs = [dataset] if dataset else sorted(DATASETS.keys())
     _validate_slug(slugs[0]) if dataset else None
@@ -665,138 +709,80 @@ def facts(
             "facts": [],
         }
 
-        # Schema facts (always, no data query)
         try:
-            cols = _detect_columns(path)
-            col_names = {c["name"] for c in cols}
-            entry["columns"] = cols
-            entry["schema_facts"] = _schema_facts(cols, meta)
+            # Single GCS call for all parquet stats
+            stats = _get_parquet_stats(path)
+            if stats is None:
+                continue
+
+            entry["columns"] = stats.columns
+            entry["schema_facts"] = _schema_facts(stats.col_names, meta)
 
             # Summary
-            row_count = _get_row_count(path)
-            year_min, year_max = _get_year_range(path)
-            year_str = f"{year_min}–{year_max}" if year_min else "unknown"
-            row_str = f"{row_count:,}" if row_count else "unknown"
+            year_str = (
+                f"{stats.year_min}–{stats.year_max}" if stats.year_min else "unknown"
+            )
+            row_str = f"{stats.row_count:,}" if stats.row_count else "unknown"
             entry["summary"] = {
                 "rows": row_str,
                 "years": year_str,
                 "dimensions": meta.get("dimensions", []),
             }
-            entry["facts"].append(
-                {
-                    "label": "Total rows",
-                    "value": row_str,
-                }
-            )
-            entry["facts"].append(
-                {
-                    "label": "Years covered",
-                    "value": year_str,
-                }
-            )
+            if stats.units:
+                entry["summary"]["units"] = stats.units
+            if stats.indicators:
+                entry["summary"]["indicators"] = stats.indicators
 
-            # Detect primary unit/indicator for data queries
-            unit_col = "unit" if "unit" in meta.get("dimensions", []) else None
-            primary_unit = _detect_primary_unit(slug) if unit_col else None
-            primary_indic = (
-                _pick_primary_indicator(slug)
-                if "indic_de" in meta.get("dimensions", [])
-                else None
-            )
-            primary_dim_filter: str | None = primary_unit or primary_indic
-            primary_dim_col: str | None = unit_col or (
-                "indic_de" if primary_indic else None
-            )
+            entry["facts"].append({"label": "Total rows", "value": row_str})
+            entry["facts"].append({"label": "Years covered", "value": year_str})
 
-            # Available units
-            if unit_col and primary_unit:
+            # Detect primary unit/indicator
+            unit_col = "unit" if "unit" in stats.col_names else None
+            primary_dim_col: str | None = None
+            primary_dim_filter: str | None = None
+
+            if unit_col:
+                pu = _pick_primary_unit(stats)
+                if pu:
+                    primary_dim_filter = pu
+                    primary_dim_col = unit_col
+                    entry["facts"].append({"label": "Primary unit", "value": pu})
+
+            if not primary_dim_filter and "indic_de" in stats.col_names:
+                pi = _pick_primary_indicator(stats)
+                if pi:
+                    primary_dim_filter = pi
+                    primary_dim_col = "indic_de"
+
+            # Indicator list fact
+            if stats.indicators:
                 entry["facts"].append(
                     {
-                        "label": "Primary unit",
-                        "value": primary_unit,
+                        "label": "Available indicators",
+                        "value": ", ".join(stats.indicators),
                     }
                 )
 
-            # List available units briefly
-            if unit_col and col_names:
-                try:
-                    with gcs_connect(path) as con:
-                        units = con.sql(
-                            "SELECT DISTINCT unit FROM read_parquet(?::VARCHAR) "
-                            "WHERE unit IS NOT NULL ORDER BY 1 LIMIT 10",
-                            params=[path],
-                        ).fetchall()
-                        unit_list = [r[0] for r in units]
-                        if unit_list:
-                            entry["summary"]["units"] = unit_list
-                except Exception:
-                    pass
-
-            # List available indicators (for demo balance)
-            if "indic_de" in col_names:
-                try:
-                    with gcs_connect(path) as con:
-                        indics = con.sql(
-                            "SELECT DISTINCT indic_de FROM read_parquet(?::VARCHAR) "
-                            "WHERE indic_de IS NOT NULL ORDER BY 1 LIMIT 15",
-                            params=[path],
-                        ).fetchall()
-                        indic_list = [r[0] for r in indics]
-                        if indic_list:
-                            entry["summary"]["indicators"] = indic_list
-                            entry["facts"].append(
-                                {
-                                    "label": "Available indicators",
-                                    "value": ", ".join(indic_list),
-                                }
-                            )
-                except Exception:
-                    pass
-
-            # Data queries (detail mode only)
+            # Data queries (detail mode only) — second GCS connection
             if detail and primary_dim_filter and primary_dim_col:
-                latest_year = _get_latest_year(path)
-                if latest_year:
-                    entry["facts"].append(
-                        {
-                            "label": "Latest year",
-                            "value": str(latest_year),
-                        }
+                with gcs_connect(path) as con:
+                    detail_facts, extra_dim_where = _collect_detail_facts(
+                        con,
+                        path,
+                        stats.col_names,
+                        primary_dim_filter,
+                        primary_dim_col,
+                        limit,
+                        stats.year_max,
+                        stats.year_max,
                     )
-
-                # Build extra dimension filters (sex='T', nace_r2='TOTAL', etc.)
-                extra_dim_where = _build_extra_dim_where(col_names, primary_dim_col)
-                if extra_dim_where:
-                    entry["summary"]["extra_dim_filters"] = extra_dim_where.strip(
-                        " AND "
-                    )
-
-                if "geo" in col_names:
-                    with gcs_connect(path) as con:
-                        ranking_year = latest_year or year_max
-                        ranking_facts = _build_ranking_facts(
-                            con,
-                            path,
-                            primary_dim_filter,
-                            primary_dim_col,
-                            limit,
-                            ranking_year,
-                            extra_dim_where,
+                    if extra_dim_where:
+                        entry["summary"]["extra_dim_filters"] = extra_dim_where.strip(
+                            " AND "
                         )
-                        entry["facts"].extend(ranking_facts)
-
-                        if "year" in col_names:
-                            trend_facts = _build_trend_facts(
-                                con,
-                                path,
-                                primary_dim_filter,
-                                primary_dim_col,
-                                limit,
-                                extra_dim_where,
-                            )
-                            if trend_facts:
-                                entry["facts"].extend(trend_facts)
-                                entry["summary"]["has_trend"] = True
+                    if detail_facts:
+                        entry["facts"].extend(detail_facts)
+                        entry["summary"]["has_trend"] = True
 
         except Exception as exc:
             entry["error"] = str(exc)
