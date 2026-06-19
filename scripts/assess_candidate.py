@@ -167,18 +167,23 @@ def _dim_comment(dim: str) -> str:
 
 def _generate_clean_sql(dims: list[str]) -> str:
     """Generate clean.sql with proper JOINs and comments."""
-    cols = [f"    r.{d}" for d in dims] + ["r.year"]
+    cols = [f"    r.{d}" for d in dims]
 
     lines = [
         f"-- clean.sql: auto-generated for {', '.join(dims)}",
         "SELECT",
     ]
     lines.extend(c + "," for c in cols)
+    lines.append("    CAST(r.year AS INTEGER) AS year,")
     lines.append("    f.label_en AS freq_label_en,")
     lines.append("    u.label_en AS unit_label_en,")
 
+    # Known codelist labels to include in SELECT
+    if "nace_r2" in dims:
+        lines.append("    n.label_en AS nace_label_en,")
+
     # Add enrichment hints for extra dimensions
-    extra_dims = [d for d in dims if d not in ("freq", "unit", "geo")]
+    extra_dims = [d for d in dims if d not in ("freq", "unit", "nace_r2", "geo")]
     for d in extra_dims:
         hint = _dim_comment(d)
         if "\n" in hint:
@@ -192,7 +197,7 @@ def _generate_clean_sql(dims: list[str]) -> str:
         lines.append("    g.parent_code AS nuts_parent_code,")
         lines.append("    gp.label_en AS nuts_parent_label_en,")
 
-    lines.append("    r.value,")
+    lines.append("    CAST(r.value AS DOUBLE) AS value,")
     lines.append("    r.flag,")
     lines.append("    fl.description_en AS flag_desc_en")
 
