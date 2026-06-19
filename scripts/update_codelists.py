@@ -153,6 +153,16 @@ def update_units() -> int:
     return len(rows)
 
 
+def update_indic_de() -> int:
+    """Fetch INDIC_DE codelist and write indic_de.csv."""
+    labels = _fetch_codelist("INDIC_DE")
+    # Filter to codes that actually appear in demo-balance data
+    rows = [(code, labels[code]) for code in sorted(labels)]
+    _write_csv("indic_de.csv", ["code", "label_en"], rows)
+    print(f"  ✅ indic_de.csv: {len(rows)} entries")
+    return len(rows)
+
+
 def update_flags() -> int:
     """Fetch OBS_FLAG codelist and write flags.csv."""
     labels = _fetch_codelist("OBS_FLAG")
@@ -172,6 +182,7 @@ def main():
     total += update_nace()
     total += update_freq()
     total += update_units()
+    total += update_indic_de()
     total += update_flags()
     print(f"✔ Done: {total} total entries across 5 codelists")
 
