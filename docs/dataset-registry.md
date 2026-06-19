@@ -12,6 +12,7 @@
 | `eurostat-pop-density-nuts3` | `DEMO_R_D3DENS` | Demography / Population density | 3 (freq, unit, geo) | 73,010 | ✅ |
 | `eurostat-demo-balance-nuts3` | `DEMO_R_GIND3` | Demography / Demographic balance | 3 (freq, indic_de, geo) | 608,088 | ✅ |
 | `eurostat-tourism-nuts3` | `TOUR_OCC_NIN2` | Tourism / Nights spent by NUTS3 | 5 (freq, c_resid, unit, nace_r2, geo) | 1,161,108 | ✅ |
+| `eurostat-tran-sf-roadnu` | `TRAN_SF_ROADNU` | Road accidents by NUTS3 | 3 (freq, unit, geo) | 53,419 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
