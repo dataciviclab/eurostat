@@ -14,6 +14,7 @@
 | `eurostat-tourism-nuts3` | `TOUR_OCC_NIN2` | Tourism / Nights spent by NUTS3 | 5 (freq, c_resid, unit, nace_r2, geo) | 1,161,108 | ✅ |
 | `eurostat-tran-sf-roadnu` | `TRAN_SF_ROADNU` | Road accidents by NUTS3 | 3 (freq, unit, geo) | 53,419 | ✅ |
 | `eurostat-demo-r-magec3-nuts3` | `DEMO_R_MAGEC3` | Demography / Deaths by age group and sex | 5 (freq, sex, unit, age, geo) | 1,618,272 | ✅ |
+| `eurostat-demo-r-pjangrp3-nuts3` | `DEMO_R_PJANGRP3` | Demography / Population by age group | 5 (freq, sex, unit, age, geo) | 1,686,888 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
