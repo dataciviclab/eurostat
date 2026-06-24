@@ -29,13 +29,13 @@ Then **verify the output before committing**:
 
 ```bash
 # Schema: check columns and types
-toolkit layer --config datasets/{slug}/dataset.yml --mode schema
+toolkit inspect config --config datasets/{slug}/dataset.yml --mode schema
 
 # Preview: spot-check rows
-toolkit layer --config datasets/{slug}/dataset.yml --mode preview --limit 5
+toolkit inspect config --config datasets/{slug}/dataset.yml --mode preview --limit 5
 
 # Mart: check row count and NUTS level distribution
-toolkit layer --config datasets/{slug}/dataset.yml --layer mart --mode sql --sql "SELECT nuts_level, COUNT(*) AS n FROM data GROUP BY nuts_level"
+toolkit inspect config --config datasets/{slug}/dataset.yml --layer mart --mode sql --sql "SELECT nuts_level, COUNT(*) AS n FROM data GROUP BY nuts_level"
 ```
 
 Also review the generated `mart.sql`. The scaffold produces a minimal version — you may want to:
