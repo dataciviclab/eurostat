@@ -45,5 +45,5 @@ registry:
   dataflow: "NRG_CHDDR2_M"
   theme: "Cooling and heating degree days by NUTS 3 region - monthly data"
   nuts_level: 3
-  dimensions: ["freq", "unit", "indic_nrg", "geo"]
+  dimensions: ["freq", "unit", "indic_nrg", "geo", "month"]
   description: "Cooling and heating degree days by NUTS 3 region - monthly data"

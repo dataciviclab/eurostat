@@ -144,7 +144,7 @@ def normalize_stream(
             if is_monthly:
                 parts_ym = period.split("-")
                 row["year"] = parts_ym[0]
-                row["month"] = parts_ym[1] if len(parts_ym) > 1 else "01"
+                row["month"] = str(int(parts_ym[1])) if len(parts_ym) > 1 else "1"
             else:
                 row["year"] = period
             row["value"] = str(value_parsed) if value_parsed is not None else ""
