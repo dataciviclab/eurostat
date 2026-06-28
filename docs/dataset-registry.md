@@ -6,7 +6,7 @@
 |---|---|---|---|---|---|
 | `eurostat-gdp-nuts3` | `NAMA_10R_3GDP` | Economy / GDP per capita | 3 (freq, unit, geo) | 308,950 | ✅ |
 | `eurostat-gva-nuts3` | `NAMA_10R_3GVA` | Economy / Gross Value Added by NACE | 4 (freq, nace_r2, unit, geo) | 1,339,200 | ✅ |
-| `eurostat-crime-nuts3` | `CRIM_GEN` | Crime / Recorded offences by ICCS | 4 (freq, iccs, unit, geo) | 4,035 | ✅ |
+| `eurostat-crime-nuts3` | `CRIM_GEN_REG` | Crime / Police-recorded offences by NUTS3 | 4 (freq, iccs, unit, geo) | 436,118 | ✅ |
 | `eurostat-pop-nuts3` | `DEMO_R_D2JAN` | Demography / Population on 1 Jan | 5 (freq, unit, sex, age, geo) | 300,348 | ✅ |
 | `eurostat-emp-nuts3` | `NAMA_10R_3EMPERS` | Economy / Employment by NACE | 5 (freq, unit, wstatus, nace_r2, geo) | 1,541,975 | ✅ |
 | `eurostat-pop-density-nuts3` | `DEMO_R_D3DENS` | Demography / Population density | 3 (freq, unit, geo) | 73,010 | ✅ |
@@ -16,7 +16,8 @@
 | `eurostat-demo-r-magec3-nuts3` | `DEMO_R_MAGEC3` | Demography / Deaths by age group and sex | 5 (freq, sex, unit, age, geo) | 1,618,272 | ✅ |
 | `eurostat-demo-r-pjangrp3-nuts3` | `DEMO_R_PJANGRP3` | Demography / Population by age group | 5 (freq, sex, unit, age, geo) | 1,686,888 | ✅ |
 | `eurostat-demo-r-fagec3-nuts3` | `DEMO_R_FAGEC3` | Demography / Live births by age group | 4 (freq, age, unit, geo) | 322,968 | ✅ |
-| `eurostat-nrg-chddr2-a-nuts3` | `NRG_CHDDR2_A` | Energy / Heating and cooling degree days | 4 (freq, unit, indic_nrg, geo) | 165,600 | ✅ |
+| `eurostat-nrg-chddr2-a-nuts3` | `NRG_CHDDR2_A` | Energy / Heating and cooling degree days (annual) | 4 (freq, unit, indic_nrg, geo) | 165,600 | ✅ |
+| `eurostat-nrg-chddr2-m-nuts3` | `NRG_CHDDR2_M` | Energy / Heating and cooling degree days (monthly) | 5 (freq, unit, indic_nrg, geo, month) | 1,987,200 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
@@ -37,7 +38,7 @@ Want to add one? Check the [good first issues](https://github.com/dataciviclab/e
 | ~~`DEMO_R_MAGEC3`~~ | Deaths by age group and sex | NUTS3 | ✅ published |
 | `PAT_EP_RIPC` | Patent applications to the EPO | NUTS3 | medium |
 | ~~`NRG_CHDDR2_A`~~ | Heating and cooling degree days (annual) | NUTS3 | ✅ published |
-| `NRG_CHDDR2_M` | Heating and cooling degree days (monthly) | NUTS3 | high |
+| ~~`NRG_CHDDR2_M`~~ | Heating and cooling degree days (monthly) | NUTS3 | ✅ published |
 
 Total Eurostat catalog: ~8,200 dataflows — 121 at NUTS3 level.
 

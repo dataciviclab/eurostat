@@ -1,6 +1,8 @@
--- mart.sql: Reati denunciati NUTS3 — Italia (solo province)
+-- mart.sql: Gradi giorno mensili NUTS3 — Italia
 SELECT
     year,
+    month,
+    month_label_en,
     geo,
     geo_label_en,
     nuts_level,
@@ -8,9 +10,10 @@ SELECT
     nuts_parent_label_en,
     freq,
     freq_label_en,
-    iccs,
     unit,
     unit_label_en,
+    indic_nrg,
+    indic_nrg_label_en,
     value,
     flag,
     flag_desc_en
@@ -19,4 +22,4 @@ WHERE geo LIKE 'IT%'
   AND unit = 'NR'
   AND nuts_level = 'NUTS3'
   AND value IS NOT NULL
-ORDER BY year DESC, geo, iccs
+ORDER BY year DESC, month DESC, geo, indic_nrg

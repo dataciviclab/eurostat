@@ -1,4 +1,4 @@
--- clean.sql: CRIM_GEN — dimensione extra iccs
+-- clean.sql: CRIM_GEN_REG — dimensione extra iccs
 SELECT
     r.freq, r.iccs, r.unit, r.geo, r.year,
     f.label_en AS freq_label_en,
