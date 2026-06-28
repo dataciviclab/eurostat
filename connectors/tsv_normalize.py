@@ -25,6 +25,7 @@ from pathlib import Path
 SDMX_BASE = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data"
 MISSING = ":"
 FLAG_RE = re.compile(r"\s+([a-z])$")
+MONTHLY_RE = re.compile(r"^\d{4}-\d{2}$")
 
 
 def eurostat_url(flow: str) -> str:
@@ -96,9 +97,16 @@ def normalize_stream(
         f"Year columns: {year_cols[0]}..{year_cols[-1]} ({len(year_cols)} years)\n"
     )
 
+    # Auto-detect monthly format (YYYY-MM)
+    is_monthly = bool(year_cols and MONTHLY_RE.match(year_cols[0]))
+    if is_monthly:
+        sys.stderr.write("Detected monthly data — adding month column\n")
+
     # Output CSV — lineterminator='\n' per evitare \r\n in stdout/pipe
+    fieldnames = list(dims) + (
+        ["year", "month", "value", "flag"] if is_monthly else ["year", "value", "flag"]
+    )
     buf = io.StringIO()
-    fieldnames = list(dims) + ["year", "value", "flag"]
     writer = csv.DictWriter(buf, fieldnames=fieldnames, lineterminator="\n")
     writer.writeheader()
 
@@ -127,13 +135,18 @@ def normalize_stream(
         for i, d in enumerate(dims):
             base_row[d] = dim_values[i] if i < len(dim_values) else ""
 
-        # Each subsequent column is a year
-        for i, year in enumerate(year_cols):
+        # Each subsequent column is a time period (year or year-month)
+        for i, period in enumerate(year_cols):
             if i + 1 >= len(cols):
                 continue
             value_parsed, flag = parse_value(cols[i + 1])
             row = dict(base_row)
-            row["year"] = year
+            if is_monthly:
+                parts_ym = period.split("-")
+                row["year"] = parts_ym[0]
+                row["month"] = str(int(parts_ym[1])) if len(parts_ym) > 1 else "1"
+            else:
+                row["year"] = period
             row["value"] = str(value_parsed) if value_parsed is not None else ""
             row["flag"] = flag or ""
             writer.writerow(row)
@@ -151,15 +164,27 @@ def normalize_stream(
             parquet_path = output  # output path already has .parquet extension
             tmp_csv = output.with_suffix(".csv.tmp")
             tmp_csv.write_text(csv_content, encoding="utf-8")
-            duckdb.sql(
-                f"COPY ("
-                f"SELECT * EXCLUDE (year, value), "
-                f"CAST(year AS INTEGER) AS year, "
-                f"CAST(NULLIF(value, '') AS DOUBLE) AS value "
-                f"FROM read_csv('{tmp_csv}', "
-                "auto_detect=true, all_varchar=true)"
-                f") TO '{parquet_path}' (FORMAT PARQUET)"
-            )
+            if is_monthly:
+                duckdb.sql(
+                    f"COPY ("
+                    f"SELECT * EXCLUDE (year, month, value), "
+                    f"CAST(year AS INTEGER) AS year, "
+                    f"CAST(month AS INTEGER) AS month, "
+                    f"CAST(NULLIF(value, '') AS DOUBLE) AS value "
+                    f"FROM read_csv('{tmp_csv}', "
+                    "auto_detect=true, all_varchar=true)"
+                    f") TO '{parquet_path}' (FORMAT PARQUET)"
+                )
+            else:
+                duckdb.sql(
+                    f"COPY ("
+                    f"SELECT * EXCLUDE (year, value), "
+                    f"CAST(year AS INTEGER) AS year, "
+                    f"CAST(NULLIF(value, '') AS DOUBLE) AS value "
+                    f"FROM read_csv('{tmp_csv}', "
+                    "auto_detect=true, all_varchar=true)"
+                    f") TO '{parquet_path}' (FORMAT PARQUET)"
+                )
             tmp_csv.unlink()
             sys.stderr.write(f"Written {row_count} rows to {parquet_path}\n")
         else:

@@ -153,6 +153,73 @@ class TestNormalizeStream:
         assert "FR" not in csv_content
         assert "DE" not in csv_content
 
+    def test_monthly_detect(self):
+        """TSV con colonne YYYY-MM → header include 'month', valori splittati"""
+        tsv = (
+            "freq,unit,indic_nrg,geo\\TIME_PERIOD\t2025-01\t2025-02\n"
+            "M,NR,HDD,IT\t1000\t1200\n"
+            "M,NR,CDD,IT\t50\t80\n"
+        )
+        csv_content = normalize_stream(self._tsv_stream(tsv))
+        rows = [r.split(",") for r in csv_content.strip().split("\n")]
+        header = rows[0]
+        # Header deve includere month dopo year
+        assert "month" in header, f"Missing 'month' in header: {header}"
+        month_idx = header.index("month")
+        year_idx = header.index("year")
+        # 2 righe × 2 mesi = 4 righe dati + header
+        assert len(rows) == 5, f"Expected 5 rows (header + 4 data), got {len(rows)}"
+        # Verifica split YYYY-MM: 2025-01 → year=2025, month=1
+        hdd_jan = [
+            r
+            for r in rows[1:]
+            if r[header.index("indic_nrg")] == "HDD" and r[month_idx] == "1"
+        ]
+        assert len(hdd_jan) == 1, f"Expected HDD January row, got {len(hdd_jan)}"
+        assert hdd_jan[0][year_idx] == "2025"
+        assert hdd_jan[0][month_idx] == "1"
+        # Verifica valore numerico
+        assert hdd_jan[0][header.index("value")] == "1000.0"
+        # Verifica secondo mese: 2025-02 → month=2
+        cdd_feb = [
+            r
+            for r in rows[1:]
+            if r[header.index("indic_nrg")] == "CDD" and r[month_idx] == "2"
+        ]
+        assert len(cdd_feb) == 1
+        assert cdd_feb[0][year_idx] == "2025"
+
+    def test_monthly_missing(self):
+        """Missing mensili (':') → cella vuota, flag preservati"""
+        tsv = (
+            "freq,unit,indic_nrg,geo\\TIME_PERIOD\t2025-01\t2025-02\n"
+            "M,NR,HDD,IT\t:\t1500  p\n"
+        )
+        csv_content = normalize_stream(self._tsv_stream(tsv))
+        rows = [r for r in csv_content.strip().split("\n") if r]
+        # header + 2 righe (2 mesi)
+        assert len(rows) == 3, f"Expected 3 rows, got {len(rows)}"
+        header = rows[0].split(",")
+        month_idx = header.index("month")
+        # Gennaio: missing
+        jan_row = [r for r in rows[1:] if r.split(",")[month_idx] == "1"]
+        assert len(jan_row) == 1
+        jan_cols = jan_row[0].split(",")
+        val_idx = header.index("value")
+        flag_idx = header.index("flag")
+        assert jan_cols[val_idx] == "", (
+            f"Expected empty value for missing, got '{jan_cols[val_idx]}'"
+        )
+        assert jan_cols[flag_idx] == "", (
+            f"Expected empty flag for missing, got '{jan_cols[flag_idx]}'"
+        )
+        # Febbraio: 1500 con flag p
+        feb_row = [r for r in rows[1:] if r.split(",")[month_idx] == "2"]
+        assert len(feb_row) == 1
+        feb_cols = feb_row[0].split(",")
+        assert feb_cols[val_idx] == "1500.0"
+        assert feb_cols[flag_idx] == "p"
+
     def test_geo_filter_nuts3(self):
         """filter_geo='IT' su 4-dim (con nace_r2)"""
         tsv = (

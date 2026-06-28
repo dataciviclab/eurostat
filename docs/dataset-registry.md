@@ -16,7 +16,8 @@
 | `eurostat-demo-r-magec3-nuts3` | `DEMO_R_MAGEC3` | Demography / Deaths by age group and sex | 5 (freq, sex, unit, age, geo) | 1,618,272 | ✅ |
 | `eurostat-demo-r-pjangrp3-nuts3` | `DEMO_R_PJANGRP3` | Demography / Population by age group | 5 (freq, sex, unit, age, geo) | 1,686,888 | ✅ |
 | `eurostat-demo-r-fagec3-nuts3` | `DEMO_R_FAGEC3` | Demography / Live births by age group | 4 (freq, age, unit, geo) | 322,968 | ✅ |
-| `eurostat-nrg-chddr2-a-nuts3` | `NRG_CHDDR2_A` | Energy / Heating and cooling degree days | 4 (freq, unit, indic_nrg, geo) | 165,600 | ✅ |
+| `eurostat-nrg-chddr2-a-nuts3` | `NRG_CHDDR2_A` | Energy / Heating and cooling degree days (annual) | 4 (freq, unit, indic_nrg, geo) | 165,600 | ✅ |
+| `eurostat-nrg-chddr2-m-nuts3` | `NRG_CHDDR2_M` | Energy / Heating and cooling degree days (monthly) | 5 (freq, unit, indic_nrg, geo, month) | 1,987,200 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
@@ -37,7 +38,7 @@ Want to add one? Check the [good first issues](https://github.com/dataciviclab/e
 | ~~`DEMO_R_MAGEC3`~~ | Deaths by age group and sex | NUTS3 | ✅ published |
 | `PAT_EP_RIPC` | Patent applications to the EPO | NUTS3 | medium |
 | ~~`NRG_CHDDR2_A`~~ | Heating and cooling degree days (annual) | NUTS3 | ✅ published |
-| `NRG_CHDDR2_M` | Heating and cooling degree days (monthly) | NUTS3 | high |
+| ~~`NRG_CHDDR2_M`~~ | Heating and cooling degree days (monthly) | NUTS3 | ✅ published |
 
 Total Eurostat catalog: ~8,200 dataflows — 121 at NUTS3 level.
 
