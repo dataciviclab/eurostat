@@ -6,18 +6,18 @@ dataset:
   source_id: "eurostat"
   years: [2026]
   time_coverage:
-    start_year: 1993
-    end_year: 2007
+    start_year: 2008
+    end_year: 2024
 
 raw:
   output_policy: overwrite
   sources:
-    - name: "eurostat_crim_gen"
+    - name: "eurostat_crim_gen_reg"
       type: "script"
       args:
-        command: "../../connectors/tsv_normalize.py --flow CRIM_GEN --output crim_gen_normalized.parquet --format parquet"
-        output: "crim_gen_normalized.parquet"
-        filename: "crim_gen_normalized.parquet"
+        command: "../../connectors/tsv_normalize.py --flow CRIM_GEN_REG --output crim_gen_reg_normalized.parquet --format parquet"
+        output: "crim_gen_reg_normalized.parquet"
+        filename: "crim_gen_reg_normalized.parquet"
       primary: true
 
 clean:
@@ -41,11 +41,9 @@ mart:
 validation:
   fail_on_error: true
 
-
-# Registry metadata for MCP client auto-discovery
 registry:
-  dataflow: "CRIM_GEN"
-  theme: "Crime / Recorded offences"
+  dataflow: "CRIM_GEN_REG"
+  theme: "Police-recorded offences by NUTS 3 region"
   nuts_level: 3
   dimensions: ["freq", "iccs", "unit", "geo"]
-  description: "Recorded crimes by NUTS 3 region and ICCS category"
+  description: "Police-recorded offences by NUTS 3 region"

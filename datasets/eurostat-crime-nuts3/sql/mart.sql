@@ -1,4 +1,4 @@
--- mart.sql: Reati denunciati NUTS3 — Italia
+-- mart.sql: Reati denunciati NUTS3 — Italia (solo province)
 SELECT
     year,
     geo,
@@ -6,6 +6,8 @@ SELECT
     nuts_level,
     nuts_parent_code,
     nuts_parent_label_en,
+    freq,
+    freq_label_en,
     iccs,
     unit,
     unit_label_en,
@@ -15,5 +17,6 @@ SELECT
 FROM clean_input
 WHERE geo LIKE 'IT%'
   AND unit = 'NR'
+  AND nuts_level = 'NUTS3'
   AND value IS NOT NULL
 ORDER BY year DESC, geo, iccs
