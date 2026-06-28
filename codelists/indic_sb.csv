@@ -1,0 +1,475 @@
+code,label_en
+V11110,Enterprises - number
+V11111,Enterprises broken down by legal status - number
+V11112,Enterprises broken down by size class of gross premiums written - number
+V11113,Enterprises broken down by size class of gross technical provisions - number
+V11114_C,Enterprises broken down by residence of the parent enterprise - number
+V11115,Enterprises broken down by country of residence of the parent enterprise - number
+V11116,Enterprises broken down by size classes of the balance sheet total - number
+V11117,Number of enterprises broken down by category of credit institutions - number
+V11150,Enterprises with non-autonomous pension funds - number
+V11210,Local units - number
+V11410,Total number and location of branches in other countries - number
+V11411,Branches broken down by location in non-EEA countries - number
+V11510,Financial subsidiaries broken down by location in other countries - number
+V11610,Pension schemes - number
+V11710,Enterprises with members in other EEA countries - number
+V11910,Population of active enterprises in t - number
+V11920,Births of enterprises in t - number
+V11930,Deaths of enterprises in t - number
+V11941,Enterprises newly born in t-1 having survived to t - number
+V11942,Enterprises newly born in t-2 having survived to t - number
+V11943,Enterprises newly born in t-3 having survived to t - number
+V11944,Enterprises newly born in t-4 having survived to t - number
+V11945,Enterprises newly born in t-5 having survived to t - number
+V11950,High growth enterprises measured in employment - number
+V11951,High growth enterprises measured in turnover - number
+V11952,Young high growth enterprises (gazelles) measured in employment - number
+V11953,Young high growth enterprises (gazelles) measured in turnover - number
+V11955,Medium growth enterprises measured in employment - number
+V11956,Medium growth enterprises measured in turnover - number
+V11957,Young medium-growth enterprises measured in employment - number
+V11958,Young medium-growth enterprises measured in turnover - number
+V11960,High growth enterprises measured in employment (growth by 10% or more) - number
+V12110,Turnover or gross premiums written - million euro
+V12111,Gross direct premiums written - million euro
+V12112,"Gross reinsurance premiums accepted, written premiums - million euro"
+V12113,"Gross direct premiums written, individual premiums - million euro"
+V12114,"Gross direct premiums written, premiums under group contracts - million euro"
+V12115,"Gross direct premiums written, periodic premiums - million euro"
+V12116,"Gross direct premiums written, single premiums - million euro"
+V12117,"Gross direct premiums written, premiums from non-bonus contracts - million euro"
+V12118,"Gross direct premiums written, premiums from bonus contracts - million euro"
+V12119,"Gross direct premiums written, premiums from contracts where the investment risk is borne by policyholders - million euro"
+V12120,Production value - million euro
+V12130,Gross margin on goods for resale - million euro
+V12140,Value added at basic prices - million euro
+V12150,Value added at factor cost - million euro
+V12170,Gross operating surplus - million euro
+V13110,Total purchases of goods and services - million euro
+V13120,Purchases of goods and services purchased for resale in the same condition as received - million euro
+V13131,Payments for agency workers - million euro
+V13210,Change in stocks of goods and services - million euro
+V13211,Change in stocks of goods and services purchased for resale in the same condition as received - million euro
+V13213,Change in stocks of finished products and work in progress manufactured by the unit - million euro
+V13310,Personnel costs - million euro
+V13320,Wages and Salaries - million euro
+V13330,Social security costs - million euro
+V13410,Operating costs linked to buildings and equipment - million euro
+V13411,Payments for long term rental and operational and financial leasing of goods - million euro
+V13420,Cost of selling - million euro
+V13430,Other operating costs - million euro
+V15110,Gross investment in tangible goods - million euro
+V15120,Gross investment in land - million euro
+V15130,Gross investment in existing buildings and structures - million euro
+V15140,Gross investment in construction and alteration of buildings - million euro
+V15150,Gross investment in machinery and equipment - million euro
+V15210,Sales of tangible investment goods - million euro
+V15250,Net investment in tangible goods - million euro
+V15310,Value of tangible goods acquired through financial leasing - million euro
+V15420,Gross investment in concessions - million euro
+V15441,Investment in purchased software - million euro
+V15442,Investment in software purchased by the unit - million euro
+V15460,Income from intellectual property rights - million euro
+V15470,Purchase of advertising space or time for resale - million euro
+V16110,Persons employed - number
+V16111_C,Persons employed broken down by category of credit institutions - number
+V16112,Women employed - number
+V16113,Persons employed on a fixed salary basis - number
+V16118,Jobs created
+V16119,Jobs lost - number
+V16120,Unpaid persons employed - number
+V16130,Employees - number
+V16131,Part-time employees - number
+V16132,Apprentices - number
+V16133,Female employees - number
+V16135,Homeworkers - number
+V16136,Female employees - number
+V16140,Employees in full time equivalent units - number
+V16150,Hours worked by employees - number
+V16160,Jobs - number
+V16910,Persons employed in the population of active enterprises in t - number
+V16911,Employees in the population of active enterprises in t - number
+V16920,Persons employed in the population of births in t - number
+V16921,Employees in the population of births in t - number
+V16930,Persons employed in the population of deaths in t - number
+V16931,Employees in the population of deaths in t - number
+V16941,Persons employed in the population of enterprises newly born in t-1 having survived to t - number
+V16942,Persons employed in the population of enterprises newly born in t-2 having survived to t - number
+V16943,Persons employed in the population of enterprises newly born in t-3 having survived to t - number
+V16944,Persons employed in the population of enterprises newly born in t-4 having survived to t - number
+V16945,Persons employed in the population of enterprises newly born in t-5 having survived to t - number
+V16951,Persons employed in the year of birth in the population of enterprises newly born in t-1 having survived to t - number
+V16952,Persons employed in the year of birth in the population of enterprises newly born in t-2 having survived to t - number
+V16953,Persons employed in the year of birth in the population of enterprises newly born in t-3 having survived to t - number
+V16954,Persons employed in the year of birth in the population of enterprises newly born in t-4 having survived to t - number
+V16955,Persons employed in the year of birth in the population of enterprises newly born in t-5 having survived to t - number
+V16961,Employees in high growth enterprises measured in employment (growth by 10% or more) - number
+V17320,Retail stores - number
+V17330,Category of sales space for retail stores engaged in retail trade - number
+V17331,Sales space - square meter
+V17340,Fixed market stands and/ or stalls - number
+V18100,"Turnover from agriculture, forestry, fishing and industrial activities - million euro"
+V18110,Turnover from the principal activity at 3-digit level NACE Rev. 2 - million euro
+V18120,Turnover from industrial activities - million euro
+V18121,Turnover from industrial activities excluding construction - million euro
+V18122,Turnover from construction - million euro
+V18130,Turnover from trading activities of purchase and resale - million euro
+V18140,Turnover from intermediary activities (agents) - million euro
+V18150,Turnover from service activities - million euro
+V18160,Turnover from trading activities of purchase and resale and intermediary activities (agents) - million euro
+V18210,Breakdown of turnover by product (according to Section G of the CPA) - million euro
+V18310,Turnover from building - million euro
+V18320,Turnover from civil engineering - million euro
+V20110,Purchases of energy products - million euro
+V20111,Purchases of solid fuels - million euro
+V20112,Purchases of petroleum products - million euro
+V20113,Purchases of natural and derived gas - million euro
+V20114,Purchases of renewable energy sources - million euro
+V20115,Purchases of heat - million euro
+V20116,Purchases of electricity - million euro
+V20210,Purchases of hard coal - million euro
+V20220,Purchases of coke - million euro
+V20230,Purchases of patent fuels - million euro
+V20240,Purchases of gasoil - million euro
+V20250,Purchases of heavy fuel - million euro
+V20260,Purchases of other petroleum products - million euro
+V20270,Purchases of natural gas - million euro
+V20280,Purchases of derived gas - million euro
+V20290,Purchases of renewable energy sources - million euro
+V20300,Purchases of heat - million euro
+V20310,Purchases of electricity - million euro
+V21110,Investment in equipment and plant for pollution control - million euro
+V21120,Investment in equipment and plant linked to cleaner technology ('integrated technology') - million euro
+V21140,Total current expenditure on environmental protection - million euro
+V22110,Total intra-mural R & D expenditure - million euro
+V22120,Total number of R & D personnel - number
+V23110,Payments to sub-contractors - million euro
+V23120,Income from sub-contracting - million euro
+V25111,Share of turnover to resale traders: retail traders - percentage
+V25112,Share of turnover to professional users (wholesalers - percentage
+V25113,Share of turnover to final consumers (retail trade activity) - percentage
+V25211,Share of purchases from wholesalers - percentage
+V25212,Share of purchases from producers - percentage
+V32110,Gross premiums earned - million euro
+V32112,Gross change in the provision for unearned premiums - million euro
+V32114,Gross premiums written broken down by legal status - million euro
+V32115,Gross direct premiums written broken down according to the country of residence of the parent enterprise - million euro
+V32116,"Gross reinsurance premiums accepted, written premiums broken down according to the country of residence of the parent enterprise - million euro"
+V32120,Allocated investment return transferred from the non-technical account - million euro
+V32130,Gross claims incurred - million euro
+V32131,Gross claims payments - million euro
+V32132,Gross claims payments in respect of claims incurred in the current accounting year - million euro
+V32134,Gross change in the provision for outstanding claims - million euro
+V32140,Gross operating expenses - million euro
+V32150,Change in the equalisation provision - million euro
+V32160,"Other items in the technical account, gross amount - million euro"
+V32161,"Other technical income, net amount - million euro"
+V32162,"Net changes in other technical provisions, not shown under other headings - million euro"
+V32163,"Bonuses and rebates, net amount - million euro"
+V32164,"Other technical charges, net amount - million euro"
+V32170,Gross balance of the techncial account (sub-total I) - million euro
+V32180,Reinsurance balance - million euro
+V32181,Reinsurers share of gross premiums written - million euro
+V32182,Reinsurers share of gross premiums written broken down according to the country of residence of the parent enterprise - million euro
+V32183,Reinsurers share of gross change in the provision for unearned premiums - million euro
+V32185,Reinsurers share of gross claims payments - million euro
+V32186,Reinsurers share of gross change in the provision for outstanding claims - million euro
+V32187,Reinsurance commissions and profit participations - million euro
+V32188,Reinsurers share of the gross amount of other items in the technical account - million euro
+V32190,Net balance of the technical account (sub-total II) - million euro
+V32220,Investment income - million euro
+V32230,Unrealised gains on investments - million euro
+V32250,Gross change in life insurance provision - million euro
+V32270,Investments charges - million euro
+V32280,Unrealised losses on investments - million euro
+V32290,Allocated investment return transferred to the non-technical account - million euro
+V32334,Reinsurers share of gross change in life insurance provision - million euro
+V32420,Investment income - million euro
+V32430,Allocated investment return transferred from the life-assurance technical account - million euro
+V32440,Investment charges - million euro
+V32450,Allocated investment return transferred to the non-life insurance technical account - million euro
+V32460,Other income - million euro
+V32470,"Other charges, including value adjustments - million euro"
+V32480,Profit or loss on ordinary activities - million euro
+V32490,Extraordinary profit or loss - million euro
+V32500,All taxes - million euro
+V32510,Profit or loss for the financial year - million euro
+V32611,Commissions for total insurance business - million euro
+V32612,Commissions for direct insurance business - million euro
+V32614,External expenses on goods and services - million euro
+V32615,External and internal claims management expenses - million euro
+V32616,Acquisition costs - million euro
+V32617,Administrative expenses - million euro
+V32618,Gross other technical charges - million euro
+V32619,Investment management charges - million euro
+V32711,Income from participating interests - million euro
+V32713,Income from land and buildings - million euro
+V32714,Income from other investments - million euro
+V32715,Value re-adjustments on investments - million euro
+V32716,Gains on the realization on investments - million euro
+V32721,"Investment management charges, including interest - million euro"
+V32722,Value adjustments on investments - million euro
+V32723,Losses on the realization on investments - million euro
+V33111,"Gross premiums written in direct business by (sub) categories of the CPA (5-digit level and subcategories 66.03.21, 66.03.22) - million euro"
+V33121,"Reinsurers share of gross direct premiums written by (sub) categories of the CPA (5 digit level and subcategories 66.03.21,66.03.22) - million euro"
+V33131,"Gross claims incurred, direct business by (sub) categories of the CPA (5-digit level and subcategories 66.03.21, 66.03.22) - million euro"
+V33141,"Gross operating expenses, direct business by (sub) categories of the CPA (5-digit level and subcategories 66.03.21, 66.03.22) - million euro"
+V33151,"Reinsurance balance, direct business by (sub) categories of the CPA (5-digit level and subcategories 66.03.21, 66.03.22) - million euro"
+V34110,Geographical breakdown - in general - of gross direct premiums written - million euro
+V34120,"Geographical breakdown - in general - of gross reinsurance premiums accepted, premiums written - million euro"
+V34130,Geographical breakdown - in general - of reinsurers share of gross premiums written - million euro
+V34311,"Gross direct premiums written by CPA category (5-digit level) and by Member State, geographical breakdown of the business written under the right of establishment - million euro"
+V34321,"Gross direct premiums written by CPA category (5-digit level) and by Member State, geographical breakdown of the business written under the right of freedom to provide services - million euro"
+V36110,Land and buildings - million euro
+V36111,Land and buildings occupied by an insurance enterprise for its own activities - million euro
+V36112,Land and buildings (current value) - million euro
+V36120,Investments in affiliated enterprises and participating interests - million euro
+V36121,Shares in affiliated enterprises and participating interests - million euro
+V36122,"Debt securities issued by, and loans to, affiliated enterprises and to enterprises with which an insurance enterprise is linked in virtue of a particiapting interest - million euro"
+V36123,Investments in affiliated enterprises and participating interest (current value) - million euro
+V36130,Other financial investments - million euro
+V36131,Shares and other variable-yield securities and units in unit trusts - million euro
+V36132,Debt securities and other fixed-income securities - million euro
+V36133,Participation in investments pools - million euro
+V36134,Loans guaranted by mortgages - million euro
+V36135,Other loans - million euro
+V36136,Other (incl. deposits with credit institutions) - million euro
+V36138,Other financial investments (current value) - million euro
+V36140,Deposits with ceding enterprises - million euro
+V36200,Investments for the benefit of life-assurance policyholders who bear the investment risk - million euro
+V36210,Investments for the benefit of life-assurance policyholders who bear the investment risk - land and buildings - million euro
+V36220,Investments for the benefit of life-assurance policyholders who bear the investment risk - other financial investments - million euro
+V36300,Balance sheet total - million euro
+V37100,Total capital and reserves - million euro
+V37101,"Total capital and reserves, broken down by legal status - million euro"
+V37110,Subscribed capital or equivalent funds - million euro
+V37120,"Share premium account, revaluation reserve, reserve - million euro"
+V37200,Subordinated liabilities - million euro
+V37300,Total gross technical provisions - million euro
+V37301,Total net technical provisions - million euro
+V37310,Gross provision for unearned premiums - million euro
+V37320,Gross life assurance provision - million euro
+V37330,Gross provision for outstanding claims - million euro
+V37331,"Gross provision for outstanding claims, related to direct business - million euro"
+V37332,Gross provision for outstanding claims related to business accepted - million euro
+V37333,"Gross provision for outstanding claims, related to direct business, by product - million euro"
+V37340,Gross provision for bonuses and rebates - million euro
+V37350,Equalization provision - million euro
+V37360,Gross other technical provisions - million euro
+V37370,Gross technical provisions for life-assurance policies where the investment risk is borne by the policyholders - million euro
+V37410,Debenture loans - million euro
+V37420,Amounts owed to credit institutions - million euro
+V39100,"Contracts outstanding at the end of the accounting year, relating to direct business for all individual life insurance contracts and for the following subcategories of the CPA: 66.01.1, 66.03.1, 66.03.4, 66.03.5 - number"
+V39200,"Insured persons at the end of the accounting year, relating to direct business for all group life insurance contracts and for the following subcategory of the CPA: 66.03.1 - number"
+V39300,"Insured vehicles at the end of the accounting year, relating to direct business, for the following subcategory of the CPA: 66.03.2 - number"
+V39400,"Gross insured sum at the end of the accounting year, relating to direct business, for the following subcategories of the CPA: 66.01.1 and 66.01.4 - million euro"
+V39500,"Claims incurred during the accounting year, relating to direct business, for the following subcategory of the CPA: 66.03.2 - number"
+V42110,Interest receivable and similar income - million euro
+V42111,Interest receivable and similar income arising from fixed-income securities - million euro
+V42120,Interest payable and similar charges - million euro
+V42121,Interest payable and similar charges linked to debt securities in issue - million euro
+V42130,Income from securities - million euro
+V42131,Income from shares and other variable-yield securities - million euro
+V42140,Commissions receivable - million euro
+V42150,Commissions payable - million euro
+V42200,Net profit or net loss on financial operations - million euro
+V42310,Other operating income - million euro
+V42320,General administrative expenses - million euro
+V42322,Other administrative expenses - million euro
+V42330,Other operating charges - million euro
+V42350,Value adjustments and value readjustments in respect of loans and advances and provisions for contingent liabilities and for commitments - million euro
+V42360,Other value adjustments and value readjustments - million euro
+V42400,Profit or loss on ordinary activities - million euro
+V42500,Extraordinary profit or loss - million euro
+V42510,"All taxes (tax on profit or loss on ordinary activities, tax on extraordinary profit or loss, other taxes) - million euro"
+V42600,Profit or loss for the financial year - million euro
+V43110,Loans and advances to customers - million euro
+V43210,Amounts owed to customers - million euro
+V43290,Total of capital and reserves - million euro
+V43300,Balance sheet total (CI) - million euro
+V43310,Balance sheet total broken down according to the residence of the parent enterprise - million euro
+V43320,Balance sheet total broken down by legal status - million euro
+V44110,Interest receivable and similar income broken down by (sub)categories of the CPA - million euro
+V44120,Interest payable and similar charges broken down by (sub)categories of the CPA - million euro
+V44130,Commissions receivable broken down by (sub)categories of the CPA - million euro
+V44140,Commissions payable broken down by (sub)categories of the CPA - million euro
+V45110,Geographical breakdown of the total number of EEA branches - number
+V45210,Geographical breakdown of interest receivable and similar income - million euro
+V45220,Geographical breakdown of balance sheet total - million euro
+V45310,Geographical breakdown of interest receivable and similar income via the freedom to provide services business in other EEA countries - million euro
+V45321,Turnover per enterprise - thousand euro
+V45410,Geographical breakdown of interest receivable and similar income via branch business (in non-EEA countries) - million euro
+V45420,Geographical breakdown of interest receivable and similar income via freedom to provide services business (in non-EEA countries) - million euro
+V47110,Accounts broken down by (sub)categories of the CPA - number
+V47120,Loans and advances to customers broken down by (sub)categories of the CPA - number
+V47130,Automatic teller machines (ATM) owned by credit institutions - number
+V48001,Pension contributions receivable from members - million euro
+V48002,Pension contributions receivable from employers - million euro
+V48003,Incoming transfers - million euro
+V48004,Other pension contributions - million euro
+V48005,Pension contributions to defined benefits schemes - million euro
+V48006,Pension contributions to defined contributions schemes - million euro
+V48007,Pension contributions to hybrid schemes - million euro
+V48010,Investment income (PF) - million euro
+V48011,Capital gains and losses - million euro
+V48021,Insurance claims receivable - million euro
+V48022,Other income (PF) - million euro
+V48030,Total expenditure on pensions - million euro
+V48031,Regular pension payments - million euro
+V48032,Pension payments of lump sums - million euro
+V48033,Outgoing transfers - million euro
+V48040,Net change in technical provisions (reserves) - million euro
+V48050,Insurance premiums payable - million euro
+V48060,Total operational expenses - million euro
+V48070,All taxes - million euro
+V48080,Turnover of non-autonomous pension funds - million euro
+V48100,Total investments (PF) - million euro
+V48101,Total investments invested in 'the sponsoring enterprise' - million euro
+V48102,Total investments at market values - million euro
+V48104,Total investments at market values - million euro
+V48110,Land and buildings (PF) - million euro
+V48120,Investments in affiliated enterprises and participating interests (PF) - million euro
+V48130,Shares and other variable-yield securities - million euro
+V48131,Shares traded on a regulated market - million euro
+V48132,Shares quoted on a regulated market specialised in SMEs - million euro
+V48133,Non publicly traded shares - million euro
+V48134,Other variable yield securities - million euro
+V48140,Units in undertaking for collective investment in transferable securities - million euro
+V48150,Debt securities and other fixed-income securities - million euro
+V48151,Debt securities and other fixed-income securities issued by public administrations - million euro
+V48152,Other debt securities and other fixed income securities - million euro
+V48160,Participation in investment pools (PF) - million euro
+V48170,Loans guaranteed by mortgages and other loans not covered elsewhere - million euro
+V48180,Other investments - million euro
+V48200,Other assets - million euro
+V48300,Capital and reserves - million euro
+V48400,Net technical provisions (PF) - million euro
+V48500,Other liabilities - million euro
+V48610,Geographical breakdown of turnover - million euro
+V48620,Shares and other variable-yield securities broken down by location - million euro
+V48630,Total investments broken down by location - million euro
+V48700,Members - number
+V48701,Members of defined benefits schemes - number
+V48702,Members of defined contributions schemes - number
+V48703,Members of hybrid schemes - number
+V48704,Active members - number
+V48705,Deferred members - number
+V48706,Retired persons - number
+V48707,Female members - number
+V48710,Members - number
+V85456,Share of employees in the number of persons employed - percentage
+V85564,Gross operating surplus per person employed - thousand euro
+V91100,Turnover per person employed - thousand euro
+V91110,Apparent labour productivity (gross value added per person employed) - thousand euro
+V91111,Enterprises - percentage
+V91120,Wage adjusted labour productivity (apparent labour productivity by average personnel costs) - percentage
+V91121,Simple wage adjusted labour productivity (gross value added by personnel costs) - percentage
+V91130,Gross value added per employee - thousand euro
+V91140,Gross value added per employee FTE - thousand euro
+V91150,Gross value added per hour worked by employees
+V91170,Share of personnel costs in production - percentage
+V91210,Average personnel costs (personnel costs per employee) - thousand euro
+V91220,Labour cost per employee FTE - thousand euro
+V91230,Labour cost per hour worked by employees
+V91275,Share of employees in persons employed - percentage
+V91290,Growth rate of employment - percentage
+V91310,Employer's social charges as a percentage of personnel costs - percentage
+V91616,Jobs - percentage
+V92100,Persons employed per enterprise - number
+V92102,Value added at factor cost per enterprise - thousand euro
+V92110,Gross operating surplus/turnover (gross operating rate) - percentage
+V92111,Value added at factor cost in production value - percentage
+V92112,Share of personnel costs in total purchases of goods and services - percentage
+V92113,Share of gross operating surplus in value added - percentage
+V92300,Growth rate of value added at factor cost at constant prices - percentage
+V92310,Growth rate of production in constant prices - percentage
+V94110,Share of principal activity in turnover (degree of specialisation) - percentage
+V94210,Share of value added in manufacturing total - percentage
+V94220,Share of value added in industry total - percentage
+V94240,Share of production value in manufacturing total - percentage
+V94270,Share of turnover in manufacturing total - percentage
+V94310,Share of employment in manufacturing total - percentage
+V94320,Share of employment in industry total - percentage
+V94410,Ratio of stocks of finished products and work in progress to production value - percentage
+V94414,Investment per person employed - thousands euro
+V94415,Investment rate (investment/value added at factors cost) - percentage
+V95110,Share of R&D expenditure in value added - percentage
+V95120,Share of R&D employment in the number of persons employed - percentage
+V97010,Net business population growth - percentage
+V97015,Business churn: birth rate + death rate - percentage
+V97020,Birth rate: number of enterprise births in the reference period (t) divided by the number of enterprises active in t - percentage
+V97021,Proportion of enterprise births in the reference period (t) by size class - percentage
+V97022,"Density of birth rate: number of enterprise births in the reference period (t) divided by the population (in 10,000) in t - percentage"
+V97023,"Density of birth rate (narrow version): number of enterprise births in the reference period (t) divided by the population aged 20-59 (in 10,000) in t - percentage"
+V97030,Death rate: number of enterprise deaths in the reference period (t) divided by the number of enterprises active in t - percentage
+V97031,Proportion of enterprise deaths in the reference period (t) by size class - percentage
+V97041,Survival rate 1: number of enterprises in the reference period (t) newly born in t-1 having survived to t divided by the number of enterprise births in t-1 - percentage
+V97042,Survival rate 2: number of enterprises in the reference period (t) newly born in t-2 having survived to t divided by the number of enterprise births in t-2 - percentage
+V97043,Survival rate 3: number of enterprises in the reference period (t) newly born in t-3 having survived to t divided by the number of enterprise births in t-3 - percentage
+V97044,Survival rate 4: number of enterprises in the reference period (t) newly born in t-4 having survived to t divided by the number of enterprise births in t-4 - percentage
+V97045,Survival rate 5: number of enterprises in the reference period (t) newly born in t-5 having survived to t divided by the number of enterprise births in t-5 - percentage
+V97051,1 year old enterprises' share of the business population - percentage
+V97052,2 year old enterprises' share of the business population - percentage
+V97053,3 year old enterprises' share of the business population - percentage
+V97054,4 year old enterprises' share of the business population - percentage
+V97055,5 year old enterprises' share of the business population - percentage
+V97120,Employment share of enterprise births: number of persons employed in the reference period (t) among enterprises newly born in t divided by the number of persons employed in t among the stock of enterprises active in t - percentage
+V97121,Average size of newly born enterprises: number of persons employed in the reference period (t) among enterprises newly born in t divided by the number of enterprises newly born in t - number
+V97122,New enterprise paid employment rate: number of employees in the reference period (t) among enterprises newly born in t divided by the number of persons employed in t among enterprises newly born in t - percentage
+V97130,Employment share of enterprise deaths: number of persons employed in the reference period (t) among enterprise deaths divided by the number of persons employed in t among the stock of active enterprises in t - percentage
+V97131,Average employment in enterprise deaths: number of persons employed in the reference period (t) among enterprise deaths  in t divided by the number of enterprise deaths in t - number
+V97141,"One-year old enterprises employment growth rate: number of persons employed in the reference period (t) among enterprises newly born in t-1 having survived to t divided by the number of persons employed in t-1 by the same enterprises, expressed as a percentage growth rate - percentage"
+V97142,"Two-year old enterprises employment growth rate: number of persons employed in the reference period (t) among enterprises newly born in t-2 having survived to t divided by the number of persons employed in t-2 by the same enterprises, expressed as a percentage growth rate - percentage"
+V97143,"Three-year old enterprises employment growth rate: number of persons employed in the reference period (t) among enterprises newly born in t-3 having survived to t divided by the number of persons employed in t-3 by the same enterprises, expressed as a percentage growth rate - percentage"
+V97144,"Four-year old enterprises employment growth rate: number of persons employed in the reference period (t) among enterprises newly born in t-4 having survived to t divided by the number of persons employed in t-4 by the same enterprises, expressed as a percentage growth rate - percentage"
+V97145,"Five-year old enterprises employment growth rate: number of persons employed in the reference period (t) among enterprises newly born in t-5 having survived to t divided by the number of persons employed in t-5 by the same enterprises, expressed as a percentage growth rate - percentage"
+V97151,"Employment share of 1 year old enterprises: Number of persons employed in enterprises newly born in t-1 having survived to t, divided by the number of persons employed in the population of active enterprises in t"
+V97152,"Employment share of 2 year old enterprises: Number of persons employed in enterprises newly born in t-2 having survived to t, divided by the number of persons employed in the population of active enterprises in t - percentage"
+V97153,"Employment share of 3 year old enterprises: Number of persons employed in enterprises newly born in t-3 having survived to t, divided by the number of persons employed in the population of active enterprises in t - percentage"
+V97154,"Employment share of 4 year old enterprises: Number of persons employed in enterprises newly born in t-4 having survived to t, divided by the number of persons employed in the population of active enterprises in t - percentage"
+V97155,"Employment share of 5 year old enterprises: Number of persons employed in enterprises newly born in t-5 having survived to t, divided by the number of persons employed in the population of active enterprises in t - percentage"
+V97161,Average size of one-year old enterprises: number of persons employed in the reference period (t) among enterprises newly born in t-1 having survived to t divided by the number of enterprises in t newly born in t-1 having survived to t - number
+V97162,Average size of two-year old enterprises: number of persons employed in the reference period (t) among enterprises newly born in t-2 having survived to t divided by the number of enterprises in t newly born in t-2 having survived to t - number
+V97163,Average size of three-year old enterprises: number of persons employed in the reference period (t) among enterprises newly born in t-3 having survived to t divided by the number of enterprises in t newly born in t-3 having survived to t - number
+V97164,Average size of four-year old enterprises: number of persons employed in the reference period (t) among enterprises newly born in t-4 having survived to t divided by the number of enterprises in t newly born in t-4 having survived to t - number
+V97165,Average size of five-year old enterprises: number of persons employed in the reference period (t) among enterprises newly born in t-5 having survived to t divided by the number of enterprises in t newly born in t-5 having survived to t - number
+V97241,Enterprises newly born in the year (n) having survived to n+1 - number
+V97242,Enterprises newly born in the year (n) having survived to n+2 - number
+V97243,Enterprises newly born in the year (n) having survived to n+3 - number
+V97244,Enterprises newly born in the year (n) having survived to n+4 - number
+V97245,Enterprises newly born in the year (n) having survived to n+5 - number
+V97251,Cohort survival rate 1: newly born enterprises in the year (n) having survived to (n+1) divided by the number of enterprise births in (n) - number
+V97252,Cohort survival rate 2: newly born enterprises in the year (n) having survived to (n+2) divided by the number of enterprise births in (n) - number
+V97253,Cohort survival rate 3: newly born enterprises in the year (n) having survived to (n+3) divided by the number of enterprise births in (n) - number
+V97254,Cohort survival rate 4: newly born enterprises in the year (n) having survived to (n+4) divided by the number of enterprise births in (n) - number
+V97255,Cohort survival rate 5: newly born enterprises in the year (n) having survived to (n+5) divided by the number of enterprise births in (n) - number
+V97341,Persons employed in the survival year among enterprises newly born in (n) having survived to n+1 - number
+V97342,Persons employed in the survival year among enterprises newly born in (n) having survived to n+2 - number
+V97343,Persons employed in the survival year among enterprises newly born in (n) having survived to n+3 - number
+V97344,Persons employed in the survival year among enterprises newly born in (n) having survived to n+4 - number
+V97345,Persons employed in the survival year among enterprises newly born in (n) having survived to n+5 - number
+V97351,Persons employed in the year of birth in the population of enterprises newly born in (n) having survived to n+1 - number
+V97352,Persons employed in the year of birth in the population of enterprises newly born in (n) having survived to n+2 - number
+V97353,Persons employed in the year of birth in the population of enterprises newly born in (n) having survived to n+3 - number
+V97354,Persons employed in the year of birth in the population of enterprises newly born in (n) having survived to n+4 - number
+V97355,Persons employed in the year of birth in the population of enterprises newly born in (n) having survived to n+5 - number
+V97361,One-year old enterprises employment growth rate: persons employed in the year (n+1) among enterprises newly born in (n) having survived to n+1 divided by the number of persons employed in (n) by the same enterprises - number
+V97362,Two-year old enterprises employment growth rate: persons employed in the year (n+2) among enterprises newly born in (n) having survived to n+2 divided by the number of persons employed in (n) by the same enterprises - number
+V97363,Three-year old enterprises employment growth rate: persons employed in the year (n+3) among enterprises newly born in (n) having survived to n+3 divided by the number of persons employed in (n) by the same enterprises - number
+V97364,Four-year old enterprises employment growth rate: persons employed in the year (n+4) among enterprises newly born in (n) having survived to n+4 divided by the number of persons employed in (n) by the same enterprises - number
+V97365,Five-year old enterprises employment growth rate: persons employed in the year (n+5) among enterprises newly born in (n) having survived to n+5 divided by the number of persons employed in (n) by the same enterprises - number
+V97450,"Share of high growth enterprises in the population of active enterprises, measured in employment - percentage"
+V97451,"Share of high growth enterprises in the population of active enterprises, measured in turnover - percentage"
+V97452,"Share of young high growth enterprises (gazelles) in the population of active enterprises, measured in employment - percentage"
+V97453,"Share of young high growth enterprises (gazelles) in the population of active enterprises, measured in turnover - percentage"
+V97455,Share of medium growth enterprises in the population of active enterprises measured in employment - percentage
+V97456,Share of medium growth enterprises in the population of active enterprises measured in turnover - percentage
+V97457,Share of young medium growth enterprises in the population of active enterprises measured in employment - percentage
+V97458,Share of young medium growth enterprises in the population of active enterprises measured in turnover - percentage
+V97460,Share of high growth enterprises measured in employment: number of high growth enterprises divided by the number of active enterprises with at least 10 employees - percentage
+V97461,Employment share of high growth enterprises measured in employment: number of employees among high growth divided by the number of employees among the stock of active enterprises with at least 10 employees - percentage
+V97462,Average size of high growth enterprises measured in employment: number of employees in the reference period (t) among high growth enterprises measured in employment in t divided by the number of high growth enterprises measured in employment in t - number
+V99110,Turnover at constant prices - million euro
+V99120,Production value at constant prices - million euro
+V99150,Value added at factor cost at constant prices - million euro

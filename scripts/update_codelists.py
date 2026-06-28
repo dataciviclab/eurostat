@@ -181,6 +181,15 @@ def update_indic_nrg() -> int:
     return len(rows)
 
 
+def update_indic_sb() -> int:
+    """Fetch INDIC_SB codelist and write indic_sb.csv."""
+    labels = _fetch_codelist("INDIC_SB")
+    rows = [(code, labels[code]) for code in sorted(labels)]
+    _write_csv("indic_sb.csv", ["code", "label_en"], rows)
+    print(f"  ✅ indic_sb.csv: {len(rows)} entries")
+    return len(rows)
+
+
 def update_flags() -> int:
     """Fetch OBS_FLAG codelist and write flags.csv."""
     labels = _fetch_codelist("OBS_FLAG")
@@ -203,8 +212,9 @@ def main():
     total += update_indic_de()
     total += update_c_resid()
     total += update_indic_nrg()
+    total += update_indic_sb()
     total += update_flags()
-    print(f"✔ Done: {total} total entries across 7 codelists")
+    print(f"✔ Done: {total} total entries across 8 codelists")
 
 
 if __name__ == "__main__":
