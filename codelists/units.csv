@@ -177,6 +177,8 @@ I21,"Index, 2021=100"
 I21_NSA,"Index, 2021=100 (NSA)"
 I21_SCA,"Index, 2021=100 (SCA)"
 I25,"Index, 2025=100"
+I25_A_AVG,"Annual average index, 2025=100"
+I25_Q,"Quarterly index, 2025=100"
 I90,"Index, 1990=100"
 I91,"Index, 1991=100"
 I95,"Index, 1995=100"
@@ -238,6 +240,7 @@ MCG_M3,Micrograms per cubic metre
 MEUR_AWU,Million euro per annual working unit (AWU)
 MEUR_CLV10,"Million euro, chain-linked volumes, reference year 2010 (at 2010 exchange rates)"
 MEUR_CLV15,"Million-euro, chain-linked volumes, reference year 2015"
+MEUR_CLV20,"Million-euro, chain-linked volumes, reference year 2020"
 MEUR_HAB,Million euro per inhabitant
 MEUR_KP,Million euro at constant prices
 MEUR_KP00,Million euro (at constant 2000 prices)
@@ -459,6 +462,7 @@ PC_GDP_NSA,"Percentage of gross domestic product (GDP), (NSA)"
 PC_GDP_SCA,"Percentage of gross domestic product (GDP), (SCA)"
 PC_GERD,Percentage of gross domestic expenditure on R&D (GERD)
 PC_GEXP,Percentage of government expenditure
+PC_GFCF,Percentage of gross fixed capital formation (GFCF)
 PC_GNI,Percentage of gross national income (GNI)
 PC_GRSEXP,Percentage of total gross exports
 PC_GRSEXP_EU,Percentage of EU gross exports

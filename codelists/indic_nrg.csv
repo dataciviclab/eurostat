@@ -1,0 +1,24 @@
+code,label_en
+10_196102,Closing stocks
+API_DEG,API Gravity - degree
+AVGPRC_USD_BBL,Average price - USD per barrel
+AVGPRC_USD_T,Average price - USD per tonne
+B_190100,Primary production
+B_190300,Imports
+B_190400,Stock Changes
+B_190500,Exports
+B_190600,Net Imports
+B_190900,Supply
+B_191008,Refinery intake
+B_191108,Refinery output
+B_195500,Demand
+B_197000,Total gross production
+CDD,Cooling degree days
+CMPY_NR,Reporting companies - number
+HDD,Heating degree days
+MSHH,Medium size households
+MSIND,"Non-household, medium size consumers"
+SULPH_PC,Sulphur content - percentage (%)
+VAL_THS_USD,Value - thousand USD
+VOL_THS_BBL,Volume - thousand barrels
+WT_THS_T,Weight - thousand tonnes
