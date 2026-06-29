@@ -18,6 +18,7 @@
 | `eurostat-demo-r-fagec3-nuts3` | `DEMO_R_FAGEC3` | Demography / Live births by age group | 4 (freq, age, unit, geo) | 322,968 | ✅ |
 | `eurostat-nrg-chddr2-a-nuts3` | `NRG_CHDDR2_A` | Energy / Heating and cooling degree days (annual) | 4 (freq, unit, indic_nrg, geo) | 165,600 | ✅ |
 | `eurostat-nrg-chddr2-m-nuts3` | `NRG_CHDDR2_M` | Energy / Heating and cooling degree days (monthly) | 5 (freq, unit, indic_nrg, geo, month) | 1,987,200 | ✅ |
+| `eurostat-bd-hgnace2-r3-nuts3` | `BD_HGNACE2_R3` | Business / Business demography & high-growth | 4 (freq, indic_sb, nace_r2, geo) | 4,391,569 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
@@ -31,6 +32,7 @@ Want to add one? Check the [good first issues](https://github.com/dataciviclab/e
 | Dataflow | Theme | NUTS | Priority |
 |---|---|---|---|
 | `LFST_R_LFE2EMPRT` | Labour / Employment rates by sex & age | NUTS2 | high |
+| `BD_HGNACE2_R3` | Business demography & high-growth | NUTS3 | ✅ published |
 | `BD_SIZE_R3` | Business demography by size class | NUTS3 | medium |
 | `TRAN_R_RAIL` | Transport / Rail passengers | NUTS3 | medium |
 | `EDUC_UOE_ENRL_R3` | Education / Enrolment | NUTS3 | medium |
