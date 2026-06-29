@@ -19,6 +19,7 @@
 | `eurostat-nrg-chddr2-a-nuts3` | `NRG_CHDDR2_A` | Energy / Heating and cooling degree days (annual) | 4 (freq, unit, indic_nrg, geo) | 165,600 | ✅ |
 | `eurostat-nrg-chddr2-m-nuts3` | `NRG_CHDDR2_M` | Energy / Heating and cooling degree days (monthly) | 5 (freq, unit, indic_nrg, geo, month) | 1,987,200 | ✅ |
 | `eurostat-bd-hgnace2-r3-nuts3` | `BD_HGNACE2_R3` | Business / Business demography & high-growth | 4 (freq, indic_sb, nace_r2, geo) | 4,391,569 | ✅ |
+| `eurostat-pop-structure-nuts3` | `DEMO_R_PJANIND3` | Demography / Population structure indicators | 4 (freq, indic_de, unit, geo) | 1,327,452 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
@@ -41,6 +42,7 @@ Want to add one? Check the [good first issues](https://github.com/dataciviclab/e
 | `PAT_EP_RIPC` | Patent applications to the EPO | NUTS3 | medium |
 | ~~`NRG_CHDDR2_A`~~ | Heating and cooling degree days (annual) | NUTS3 | ✅ published |
 | ~~`NRG_CHDDR2_M`~~ | Heating and cooling degree days (monthly) | NUTS3 | ✅ published |
+| ~~`DEMO_R_PJANIND3`~~ | Population structure indicators | NUTS3 | ✅ published |
 
 Total Eurostat catalog: ~8,200 dataflows — 121 at NUTS3 level.
 
