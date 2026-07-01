@@ -20,6 +20,7 @@
 | `eurostat-nrg-chddr2-m-nuts3` | `NRG_CHDDR2_M` | Energy / Heating and cooling degree days (monthly) | 5 (freq, unit, indic_nrg, geo, month) | 1,987,200 | ✅ |
 | `eurostat-bd-hgnace2-r3-nuts3` | `BD_HGNACE2_R3` | Business / Business demography & high-growth | 4 (freq, indic_sb, nace_r2, geo) | 4,391,569 | ✅ |
 | `eurostat-pop-structure-nuts3` | `DEMO_R_PJANIND3` | Demography / Population structure indicators | 4 (freq, indic_de, unit, geo) | 1,327,452 | ✅ |
+| `eurostat-labour-productivity-nuts3` | `NAMA_10R_3NLP` | Economy / Nominal Labour productivity | 4 (freq, na_item, unit, geo) | 121,725 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
