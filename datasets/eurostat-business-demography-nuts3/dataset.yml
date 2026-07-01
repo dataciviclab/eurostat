@@ -1,0 +1,49 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_business_demography_nuts3"
+  source_id: "eurostat"
+  years: [2026]
+  time_coverage:
+    start_year: 2008
+    end_year: 2020
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_bd_size_r3"
+      type: "script"
+      args:
+        command: "../../connectors/tsv_normalize.py --flow BD_SIZE_R3 --output bd_size_r3_normalized.parquet"
+        output: "bd_size_r3_normalized.parquet"
+        filename: "bd_size_r3_normalized.parquet"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  validate:
+    min_rows: 100
+
+mart:
+  tables:
+    - name: "mart_eurostat_business_demography_nuts3"
+      sql: "sql/mart.sql"
+  required_tables:
+    - "mart_eurostat_business_demography_nuts3"
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "BD_SIZE_R3"
+  theme: "Business demography by size class and NUTS 3 region (2008-2020)"
+  nuts_level: 3
+  dimensions: ["freq", "indic_sb", "sizeclas", "nace_r2", "geo"]
+  description: "Business demography by size class and NUTS 3 region (2008-2020)"
