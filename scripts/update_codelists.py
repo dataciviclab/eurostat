@@ -208,6 +208,15 @@ def update_clc18() -> int:
     return len(rows)
 
 
+def update_landuse() -> int:
+    """Fetch LANDUSE codelist and write landuse.csv."""
+    labels = _fetch_codelist("LANDUSE")
+    rows = [(code, labels[code]) for code in sorted(labels)]
+    _write_csv("landuse.csv", ["code", "label_en"], rows)
+    print(f"  ✅ landuse.csv: {len(rows)} entries")
+    return len(rows)
+
+
 def update_na_item() -> int:
     """Fetch NA_ITEM codelist and write na_item.csv."""
     labels = _fetch_codelist("NA_ITEM")
@@ -242,9 +251,10 @@ def main():
     total += update_indic_sb()
     total += update_levels()
     total += update_clc18()
+    total += update_landuse()
     total += update_na_item()
     total += update_flags()
-    print(f"✔ Done: {total} total entries across 11 codelists")
+    print(f"✔ Done: {total} total entries across 12 codelists")
 
 
 if __name__ == "__main__":
