@@ -1,0 +1,58 @@
+code,label_en
+HENVI,Land use with heavy environmental impact
+L0008,Land area - total
+LAND,Land area
+TOTAL,Total area
+U100,Primary sector
+U110,Agriculture
+U111,Agriculture (excluding fallow land and kitchen gardens)
+U112,Fallow land
+U113,Kitchen gardens
+U120,Forestry
+U130,Fishing and aquaculture
+U140,Mining and quarrying
+U150,Other primary sector activities
+U200,Secondary sector
+U210,Energy production
+U220,Industry and manufacturing
+U221,"Manufacturing of food products, beverages and tobacco products"
+U222,Manufacturing of textile products
+U223,"Coal, crude petroleum and metal processing"
+U224,Production of other non-metal mineral products
+U225,Chemical and allied industries
+U226,Manufacturing of machinery and equipment
+U227,Manufacturing of wood based products and related activities
+U228,Printing and reproduction
+U300,"Tertiary sector, transports, utilities and residential areas"
+U310,"Transport, telecommunication, energy distribution, storage, protective works"
+U311,Railway transport
+U312,Road transport
+U313,Water transport
+U314,Air transport
+U315,Transport via pipelines
+U316,Telecommunication
+U317,Logistics and storage
+U318,Protection infrastructure
+U319,"Electricity, gas and thermal power distribution"
+U320,Water and waste treatment
+U321,Water supply and treatment
+U322,Waste treatment
+U330,Construction
+U340,"Commercial, financial, professional and information services"
+U340-370,Services and residential area
+U341,Commerce
+U342,"Financial, professional and information services"
+U350,Community services
+U360,"Arts, entertainement and recreation"
+U361,Arts and entertainement
+U362,Sports
+U364,Nature reserves
+U370,Residential area
+U400,Unused and abandoned areas
+U410,Abandoned areas
+U411,Abandoned industrial area
+U412,Abandoned commercial area
+U413,Abandoned transport area
+U414,Abandoned residential area
+U415,Other abandoned areas
+U420,Semi-natural and natural areas not in use

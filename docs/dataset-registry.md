@@ -22,6 +22,7 @@
 | `eurostat-pop-structure-nuts3` | `DEMO_R_PJANIND3` | Demography / Population structure indicators | 4 (freq, indic_de, unit, geo) | 1,327,452 | ✅ |
 | `eurostat-labour-productivity-nuts3` | `NAMA_10R_3NLP` | Economy / Nominal Labour productivity | 4 (freq, na_item, unit, geo) | 121,725 | ✅ |
 | `eurostat-soil-erosion-nuts3` | `AEI_PR_SOILER` | Environment / Estimated soil erosion by water | 5 (freq, levels, clc18, unit, geo) | 523,200 | ✅ |
+| `eurostat-area-nuts3` | `REG_AREA3` | Geography / Area by land use category | 4 (freq, landuse, unit, geo) | 65,240 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
@@ -46,6 +47,7 @@ Want to add one? Check the [good first issues](https://github.com/dataciviclab/e
 | ~~`NRG_CHDDR2_M`~~ | Heating and cooling degree days (monthly) | NUTS3 | ✅ published |
 | ~~`DEMO_R_PJANIND3`~~ | Population structure indicators | NUTS3 | ✅ published |
 | ~~`AEI_PR_SOILER`~~ | Estimated soil erosion by water | NUTS3 | ✅ published |
+| ~~`REG_AREA3`~~ | Area by NUTS 3 region | NUTS3 | ✅ published |
 
 Total Eurostat catalog: ~8,200 dataflows — 121 at NUTS3 level.
 
