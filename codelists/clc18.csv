@@ -1,0 +1,69 @@
+code,label_en
+CLC1,Artificial surfaces
+CLC11,Urban fabric
+CLC111,Continuous urban fabric
+CLC112,Discontinuous urban fabric
+CLC12,"Industrial, commercial and transport units"
+CLC121,Industrial or commercial units and public facilities
+CLC122,Road and rail networks and associated land
+CLC123,Port areas
+CLC124,Airports
+CLC13,"Mine, dump and construction sites"
+CLC131,Mineral extraction sites
+CLC132,Dump sites
+CLC133,Construction sites
+CLC14,"Artificial, non-agricultural vegetated areas"
+CLC141,Green urban areas
+CLC142,Sport and leisure facilities
+CLC2,Agricultural areas
+CLC21,Arable land
+CLC211,Non-irrigated arable land
+CLC212,Permanently irrigated arable land
+CLC213,Rice fields
+CLC22,Permanent crops
+CLC221,Vineyards
+CLC222,Fruit trees and berry plantations
+CLC223,Olive groves
+CLC23,Pastures
+CLC231,"Pastures, meadows and other permanent grasslands under agricultural use"
+CLC23_321,Pastures and natural grassland
+CLC24,Heterogeneous agricultural areas
+CLC241,Annual crops associated with permanent crops
+CLC242,Complex cultivation patterns
+CLC243,"Land principally occupied by agriculture, with significant areas of natural vegetation"
+CLC244,Agro-forestry areas
+CLC2X23,Agricultural areas (excluding pastures)
+CLC2_321,Agricultural areas and natural grassland
+CLC2_3X331_332_335,"Agricultural areas, forest and semi natural areas (excluding beaches, dunes, sand plains, bare rock and glaciers and perpetual snow)"
+CLC3,Forest and semi-natural areas
+CLC31,Forests
+CLC311,Broad-leaved forest
+CLC312,Coniferous forest
+CLC313,Mixed forest
+CLC32,Scrub and/or herbaceous vegetation associations
+CLC321,Natural grassland
+CLC322,Moors and heathland
+CLC323,Sclerophyllous vegetation
+CLC324,Transitional woodland/shrub
+CLC33,Open spaces with little or no vegetation
+CLC331,"Beaches, dunes, and sand plains"
+CLC332,Bare rock
+CLC333,Sparsely vegetated areas
+CLC334,Burnt areas
+CLC335,Glaciers and perpetual snow
+CLC4,Wetlands
+CLC41,Inland wetlands
+CLC411,Inland marshes
+CLC412,Peatbogs
+CLC42,Coastal wetlands
+CLC421,Coastal salt marshes
+CLC422,Salines
+CLC423,Intertidal flats
+CLC5,Water bodies
+CLC51,Inland waters
+CLC511,Water courses
+CLC512,Water bodies
+CLC52,Marine waters
+CLC521,Coastal lagoons
+CLC522,Estuaries
+CLC523,Sea and ocean

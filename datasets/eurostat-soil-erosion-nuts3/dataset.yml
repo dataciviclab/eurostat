@@ -1,0 +1,49 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_soil_erosion_nuts3"
+  source_id: "eurostat"
+  years: [2026]
+  time_coverage:
+    start_year: 2000
+    end_year: 2023
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_aei_pr_soiler"
+      type: "script"
+      args:
+        command: "../../connectors/tsv_normalize.py --flow AEI_PR_SOILER --output aei_pr_soiler_normalized.parquet"
+        output: "aei_pr_soiler_normalized.parquet"
+        filename: "aei_pr_soiler_normalized.parquet"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  validate:
+    min_rows: 100
+
+mart:
+  tables:
+    - name: "mart_eurostat_soil_erosion_nuts3"
+      sql: "sql/mart.sql"
+  required_tables:
+    - "mart_eurostat_soil_erosion_nuts3"
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "AEI_PR_SOILER"
+  theme: "Estimated soil erosion by water by NUTS 3 region"
+  nuts_level: 3
+  dimensions: ["freq", "levels", "clc18", "unit", "geo"]
+  description: "Estimated soil erosion by water by NUTS 3 region"

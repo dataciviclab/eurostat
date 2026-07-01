@@ -190,6 +190,24 @@ def update_indic_sb() -> int:
     return len(rows)
 
 
+def update_levels() -> int:
+    """Fetch LEVELS codelist and write levels.csv."""
+    labels = _fetch_codelist("LEVELS")
+    rows = [(code, labels[code]) for code in sorted(labels)]
+    _write_csv("levels.csv", ["code", "label_en"], rows)
+    print(f"  ✅ levels.csv: {len(rows)} entries")
+    return len(rows)
+
+
+def update_clc18() -> int:
+    """Fetch CLC18 codelist and write clc18.csv."""
+    labels = _fetch_codelist("CLC18")
+    rows = [(code, labels[code]) for code in sorted(labels)]
+    _write_csv("clc18.csv", ["code", "label_en"], rows)
+    print(f"  ✅ clc18.csv: {len(rows)} entries")
+    return len(rows)
+
+
 def update_na_item() -> int:
     """Fetch NA_ITEM codelist and write na_item.csv."""
     labels = _fetch_codelist("NA_ITEM")
@@ -222,9 +240,11 @@ def main():
     total += update_c_resid()
     total += update_indic_nrg()
     total += update_indic_sb()
+    total += update_levels()
+    total += update_clc18()
     total += update_na_item()
     total += update_flags()
-    print(f"✔ Done: {total} total entries across 9 codelists")
+    print(f"✔ Done: {total} total entries across 11 codelists")
 
 
 if __name__ == "__main__":
