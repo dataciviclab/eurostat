@@ -24,6 +24,7 @@
 | `eurostat-soil-erosion-nuts3` | `AEI_PR_SOILER` | Environment / Estimated soil erosion by water | 5 (freq, levels, clc18, unit, geo) | 523,200 | ✅ |
 | `eurostat-area-nuts3` | `REG_AREA3` | Geography / Area by land use category | 4 (freq, landuse, unit, geo) | 65,240 | ✅ |
 | `eurostat-fertility-nuts3` | `DEMO_R_FIND3` | Demography / Fertility indicators | 4 (freq, indic_de, unit, geo) | 76,392 | ✅ |
+| `eurostat-business-demography-nuts3` | `BD_SIZE_R3` | Business / Business demography by size class | 5 (freq, indic_sb, sizeclas, nace_r2, geo) | 120,955 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
@@ -38,7 +39,7 @@ Want to add one? Check the [good first issues](https://github.com/dataciviclab/e
 |---|---|---|---|
 | `LFST_R_LFE2EMPRT` | Labour / Employment rates by sex & age | NUTS2 | high |
 | `BD_HGNACE2_R3` | Business demography & high-growth | NUTS3 | ✅ published |
-| `BD_SIZE_R3` | Business demography by size class | NUTS3 | medium |
+| ~~`BD_SIZE_R3`~~ | Business demography by size class | NUTS3 | ✅ published |
 | `TRAN_R_RAIL` | Transport / Rail passengers | NUTS3 | medium |
 | `EDUC_UOE_ENRL_R3` | Education / Enrolment | NUTS3 | medium |
 | `HLTH_RS_PHYSREG` | Health / Physicians | NUTS2 | low |

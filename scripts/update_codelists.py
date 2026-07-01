@@ -226,6 +226,15 @@ def update_na_item() -> int:
     return len(rows)
 
 
+def update_sizeclas() -> int:
+    """Fetch SIZECLAS codelist and write sizeclas.csv."""
+    labels = _fetch_codelist("SIZECLAS")
+    rows = [(code, labels[code]) for code in sorted(labels)]
+    _write_csv("sizeclas.csv", ["code", "label_en"], rows)
+    print(f"  ✅ sizeclas.csv: {len(rows)} entries")
+    return len(rows)
+
+
 def update_flags() -> int:
     """Fetch OBS_FLAG codelist and write flags.csv."""
     labels = _fetch_codelist("OBS_FLAG")
@@ -253,8 +262,9 @@ def main():
     total += update_clc18()
     total += update_landuse()
     total += update_na_item()
+    total += update_sizeclas()
     total += update_flags()
-    print(f"✔ Done: {total} total entries across 12 codelists")
+    print(f"✔ Done: {total} total entries across 13 codelists")
 
 
 if __name__ == "__main__":
