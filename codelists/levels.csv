@@ -1,0 +1,83 @@
+code,label_en
+ALL,All levels
+BAD,Bad
+BASIC,Basic
+BROAD,Broad
+B_VB,Bad or very bad
+DIF,Difficult
+EASY,Easy
+FAIR,Fair
+FBAD,Fairly bad
+FCMN,Fairly common
+FDIF,Fairly difficult
+FDIF_VDIF,Fairly difficult or very difficult
+FEASY,Fairly easy
+FEASY_EASY_VEASY,"Fairly easy, easy or very easy"
+FEASY_VEASY,Fairly easy or very easy
+FGOOD,Fairly good
+GOOD,Good
+GRT,Great
+GRT_DIF_SOME,"Great, difficult or some"
+GRT_MOD_SOME,"Great, moderate or some"
+HIGH,High
+HIGH_LOW,High or low
+HVY,Heavy
+INT,Intermediate
+LBASIC,At least basic
+LGHT,Light
+LMOD,At least moderate
+LOT,A lot
+LOW,Low
+LOW_NONE,Low or none
+LTD,Limited
+LTD_NSEV_NONE,Limited but not severely or not limited at all
+LTL,A little
+L_VL,Low or very low
+MED,Medium
+MILD,Mild
+MOD,Moderate
+MODS,Moderately severe
+MOD_HVY,Moderate or heavy
+MOD_LOW,Moderate or low
+MOD_MODS_SEV,"Moderate, moderately severe or severe"
+MOD_SEV,Moderate or severe
+MOD_S_VS,"Moderate, severe or very severe"
+MOT,Mother tongue
+M_VM,Mild or very mild
+NAP,Not applicable
+NCMN,Not common at all
+NLOW,Not low
+NMATCH,No match
+NONE,None
+NONE_LGHT,None or light
+NONE_MIN,None or minimum
+NRP,No response
+NSEV,Non severe
+NSP,Not specified
+NVCMN,Not very common
+POOR,Poor
+PROF,Proficient
+SEV,Severe
+SEV_MOD_LOW,"Severe, moderate or low"
+SM_SEV,Some or severe
+SOME,Some
+STR,Strong
+S_VS,Severe or very severe
+TOTAL,Total
+TYNG_SPK,Too young to speak
+UNK,Unknown
+VBAD,Very bad
+VB_FB,Very bad or fairly bad
+VCMN,Very common
+VDIF,Very difficult
+VEASY,Very easy
+VGOOD,Very good
+VG_FG,Very good or fairly good
+VG_G,Very good or good
+VHIGH,Very high
+VHIGH_MOD,Very high or moderate
+VH_H,Very high or high
+VLOW,Very low
+VMILD,Very mild
+VSEV,Very severe
+XTRM,Extreme
