@@ -28,7 +28,7 @@
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
-- Mart filters for **Italy NUTS3** (provinces)
+- NUTS3 marts filter for **Italy NUTS3** (provinces); NUTS2 marts for **Italy NUTS2** (regions)
 - Clean + mart parquet available locally in `out/data/` and on GCS via the [publish workflow](.github/workflows/publish.yml)
 
 ## Planned
@@ -42,7 +42,7 @@ Want to add one? Check the [good first issues](https://github.com/dataciviclab/e
 | `BD_SIZE_R3` | Business demography by size class | NUTS3 | medium |
 | `TRAN_R_RAIL` | Transport / Rail passengers | NUTS3 | medium |
 | `EDUC_UOE_ENRL_R3` | Education / Enrolment | NUTS3 | medium |
-| `HLTH_RS_PHYSREG` | Health / Physicians | NUTS2 | low |
+| ~~`HLTH_RS_PHYSREG`~~ | Health / Physicians | NUTS2 | ✅ published |
 | ~~`DEMO_R_MAGEC3`~~ | Deaths by age group and sex | NUTS3 | ✅ published |
 | `PAT_EP_RIPC` | Patent applications to the EPO | NUTS3 | medium |
 | ~~`NRG_CHDDR2_A`~~ | Heating and cooling degree days (annual) | NUTS3 | ✅ published |
