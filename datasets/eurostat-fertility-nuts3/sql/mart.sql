@@ -1,4 +1,4 @@
--- mart.sql: Italy NUTS3 — business demography by size class
+-- mart.sql: Italy NUTS3 view — all dimensions preserved
 SELECT
     year,
     geo,
@@ -8,12 +8,10 @@ SELECT
     nuts_parent_label_en,
     freq,
     freq_label_en,
-    indic_sb,
-    indic_sb_label_en,
-    sizeclas,
-    sizeclas_label_en,
-    nace_r2,
-    nace_r2_label_en,
+    indic_de,
+    indic_de_label_en,
+    unit,
+    unit_label_en,
     value,
     flag,
     flag_desc_en
@@ -21,4 +19,4 @@ FROM clean_input
 WHERE geo LIKE 'IT%'
   AND nuts_level = 'NUTS3'
   AND value IS NOT NULL
-ORDER BY year DESC, geo, freq, indic_sb, sizeclas, nace_r2
+ORDER BY year DESC, geo, indic_de

@@ -23,7 +23,8 @@
 | `eurostat-labour-productivity-nuts3` | `NAMA_10R_3NLP` | Economy / Nominal Labour productivity | 4 (freq, na_item, unit, geo) | 121,725 | ✅ |
 | `eurostat-soil-erosion-nuts3` | `AEI_PR_SOILER` | Environment / Estimated soil erosion by water | 5 (freq, levels, clc18, unit, geo) | 523,200 | ✅ |
 | `eurostat-area-nuts3` | `REG_AREA3` | Geography / Area by land use category | 4 (freq, landuse, unit, geo) | 65,240 | ✅ |
-| `eurostat-business-demography-nuts3` | `BD_SIZE_R3` | Business / Business demography by size class | 5 (freq, indic_sb, sizeclas, nace_r2, geo) | 128,498 | ✅ |
+| `eurostat-fertility-nuts3` | `DEMO_R_FIND3` | Demography / Fertility indicators | 4 (freq, indic_de, unit, geo) | 76,392 | ✅ |
+| `eurostat-business-demography-nuts3` | `BD_SIZE_R3` | Business / Business demography by size class | 5 (freq, indic_sb, sizeclas, nace_r2, geo) | 120,955 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
@@ -49,6 +50,7 @@ Want to add one? Check the [good first issues](https://github.com/dataciviclab/e
 | ~~`DEMO_R_PJANIND3`~~ | Population structure indicators | NUTS3 | ✅ published |
 | ~~`AEI_PR_SOILER`~~ | Estimated soil erosion by water | NUTS3 | ✅ published |
 | ~~`REG_AREA3`~~ | Area by NUTS 3 region | NUTS3 | ✅ published |
+| ~~`DEMO_R_FIND3`~~ | Fertility indicators | NUTS3 | ✅ published |
 
 Total Eurostat catalog: ~8,200 dataflows — 121 at NUTS3 level.
 
