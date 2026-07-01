@@ -23,6 +23,7 @@
 | `eurostat-labour-productivity-nuts3` | `NAMA_10R_3NLP` | Economy / Nominal Labour productivity | 4 (freq, na_item, unit, geo) | 121,725 | ✅ |
 | `eurostat-soil-erosion-nuts3` | `AEI_PR_SOILER` | Environment / Estimated soil erosion by water | 5 (freq, levels, clc18, unit, geo) | 523,200 | ✅ |
 | `eurostat-area-nuts3` | `REG_AREA3` | Geography / Area by land use category | 4 (freq, landuse, unit, geo) | 65,240 | ✅ |
+| `eurostat-physicians-nuts2` | `HLTH_RS_PHYSREG` | Health / Physicians by NUTS2 region | 3 (freq, unit, geo) | 27,360 | ✅ |
 | `eurostat-fertility-nuts3` | `DEMO_R_FIND3` | Demography / Fertility indicators | 4 (freq, indic_de, unit, geo) | 76,392 | ✅ |
 
 All published datasets:
