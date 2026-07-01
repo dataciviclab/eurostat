@@ -23,12 +23,13 @@
 | `eurostat-labour-productivity-nuts3` | `NAMA_10R_3NLP` | Economy / Nominal Labour productivity | 4 (freq, na_item, unit, geo) | 121,725 | ✅ |
 | `eurostat-soil-erosion-nuts3` | `AEI_PR_SOILER` | Environment / Estimated soil erosion by water | 5 (freq, levels, clc18, unit, geo) | 523,200 | ✅ |
 | `eurostat-area-nuts3` | `REG_AREA3` | Geography / Area by land use category | 4 (freq, landuse, unit, geo) | 65,240 | ✅ |
+| `eurostat-physicians-nuts2` | `HLTH_RS_PHYSREG` | Health / Physicians by NUTS2 region | 3 (freq, unit, geo) | 27,360 | ✅ |
 | `eurostat-fertility-nuts3` | `DEMO_R_FIND3` | Demography / Fertility indicators | 4 (freq, indic_de, unit, geo) | 76,392 | ✅ |
 | `eurostat-business-demography-nuts3` | `BD_SIZE_R3` | Business / Business demography by size class | 5 (freq, indic_sb, sizeclas, nace_r2, geo) | 120,955 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
-- Mart filters for **Italy NUTS3** (provinces)
+- NUTS3 marts filter for **Italy NUTS3** (provinces); NUTS2 marts for **Italy NUTS2** (regions)
 - Clean + mart parquet available locally in `out/data/` and on GCS via the [publish workflow](.github/workflows/publish.yml)
 
 ## Planned
@@ -42,7 +43,7 @@ Want to add one? Check the [good first issues](https://github.com/dataciviclab/e
 | ~~`BD_SIZE_R3`~~ | Business demography by size class | NUTS3 | ✅ published |
 | `TRAN_R_RAIL` | Transport / Rail passengers | NUTS3 | medium |
 | `EDUC_UOE_ENRL_R3` | Education / Enrolment | NUTS3 | medium |
-| `HLTH_RS_PHYSREG` | Health / Physicians | NUTS2 | low |
+| ~~`HLTH_RS_PHYSREG`~~ | Health / Physicians | NUTS2 | ✅ published |
 | ~~`DEMO_R_MAGEC3`~~ | Deaths by age group and sex | NUTS3 | ✅ published |
 | `PAT_EP_RIPC` | Patent applications to the EPO | NUTS3 | medium |
 | ~~`NRG_CHDDR2_A`~~ | Heating and cooling degree days (annual) | NUTS3 | ✅ published |
