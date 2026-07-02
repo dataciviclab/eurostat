@@ -24,6 +24,7 @@
 | `eurostat-soil-erosion-nuts3` | `AEI_PR_SOILER` | Environment / Estimated soil erosion by water | 5 (freq, levels, clc18, unit, geo) | 523,200 | ✅ |
 | `eurostat-area-nuts3` | `REG_AREA3` | Geography / Area by land use category | 4 (freq, landuse, unit, geo) | 65,240 | ✅ |
 | `eurostat-physicians-nuts2` | `HLTH_RS_PHYSREG` | Health / Physicians by NUTS2 region | 3 (freq, unit, geo) | 27,360 | ✅ |
+| `eurostat-hospital-beds-nuts2` | `HLTH_RS_BDSRG2` | Health / Available beds in hospitals by NUTS2 region | 3 (freq, unit, geo) | 25,888 | ✅ |
 | `eurostat-fertility-nuts3` | `DEMO_R_FIND3` | Demography / Fertility indicators | 4 (freq, indic_de, unit, geo) | 76,392 | ✅ |
 | `eurostat-business-demography-nuts3` | `BD_SIZE_R3` | Business / Business demography by size class | 5 (freq, indic_sb, sizeclas, nace_r2, geo) | 120,955 | ✅ |
 
