@@ -1,0 +1,49 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_early_school_leavers_nuts2"
+  source_id: "eurostat"
+  years: [2026]
+  time_coverage:
+    start_year: 2000
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_edat_lfse_16"
+      type: "script"
+      args:
+        command: "../../connectors/tsv_normalize.py --flow EDAT_LFSE_16 --output edat_lfse_16_normalized.parquet"
+        output: "edat_lfse_16_normalized.parquet"
+        filename: "edat_lfse_16_normalized.parquet"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  validate:
+    min_rows: 100
+
+mart:
+  tables:
+    - name: "mart_eurostat_early_school_leavers_nuts2"
+      sql: "sql/mart.sql"
+  required_tables:
+    - "mart_eurostat_early_school_leavers_nuts2"
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "EDAT_LFSE_16"
+  theme: "Early leavers from education and training by NUTS 2 region"
+  nuts_level: 2
+  dimensions: ["freq", "unit", "sex", "age", "geo"]
+  description: "Early leavers from education and training by NUTS 2 region"
