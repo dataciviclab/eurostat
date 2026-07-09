@@ -1,0 +1,29 @@
+code,label_en
+ABR,Abroad
+BES,Business enterprise sector
+BES_IND_DOM,Independent enterprises and enterprises within the domestic group
+BES_MN,Multi-national enterprises
+BES_MN_DOMC,Multi-national enterprises domestically controlled
+BES_MN_FORC,Multi-national enterprises foreign controlled
+GOV,Government sector
+GOV_CTL,Central (or federal) government
+GOV_LOC,Local (or municipal) government
+GOV_NPI,Non-profit institutions controlled by government
+GOV_PNP,Government sector or private non-profit sector
+GOV_REG,Regional (or state) government
+HES,Higher education sector
+HESC_RO,Research organizations the R&D of which is controlled by higher education institutions
+HEST,Tertiary level education institutions
+HESTI,Education institutions
+HESTI_OTH,Other tertiary level education institutions
+HESTI_UNI,Universities
+HEST_UNIHOS,University hospitals or clinics
+HEST_UNIRI,University research institutes or centres
+HOS,Hospitals
+INA,Individual applicant
+OTH,Other sectors
+PNP,Private non-profit sector
+PNP_HH_IND,Households and private individuals (engaged or not engaged in market activities)
+PNP_SHH,Non-profit institutions serving households
+TOTAL,All sectors
+UNK,Unknown

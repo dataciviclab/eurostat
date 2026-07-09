@@ -208,6 +208,15 @@ def update_clc18() -> int:
     return len(rows)
 
 
+def update_sectperf() -> int:
+    """Fetch SECTPERF codelist and write sectperf.csv."""
+    labels = _fetch_codelist("SECTPERF")
+    rows = [(code, labels[code]) for code in sorted(labels)]
+    _write_csv("sectperf.csv", ["code", "label_en"], rows)
+    print(f"  ✅ sectperf.csv: {len(rows)} entries")
+    return len(rows)
+
+
 def update_landuse() -> int:
     """Fetch LANDUSE codelist and write landuse.csv."""
     labels = _fetch_codelist("LANDUSE")
@@ -260,6 +269,7 @@ def main():
     total += update_indic_sb()
     total += update_levels()
     total += update_clc18()
+    total += update_sectperf()
     total += update_landuse()
     total += update_na_item()
     total += update_sizeclas()
