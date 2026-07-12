@@ -28,6 +28,7 @@
 | `eurostat-poverty-risk-nuts2` | `ILC_LI41` | Social / At-risk-of-poverty rate by NUTS2 region | 3 (freq, unit, geo) | 9,016 | ✅ |
 | `eurostat-early-school-leavers-nuts2` | `EDAT_LFSE_16` | Education / Early leavers from education by NUTS2 region | 5 (freq, unit, sex, age, geo) | 39,936 | ✅ |
 | `eurostat-rd-expenditure-nuts2` | `RD_E_GERDREG` | Innovation / GERD by sector of performance by NUTS2 region | 4 (freq, sectperf, unit, geo) | 909,090 | ✅ |
+| `eurostat-tertiary-education-nuts2` | `TGS00109` | Education / Tertiary educational attainment by NUTS2 region | 6 (freq, unit, isced11, age, sex, geo) | 12,276 | ✅ |
 | `eurostat-fertility-nuts3` | `DEMO_R_FIND3` | Demography / Fertility indicators | 4 (freq, indic_de, unit, geo) | 76,392 | ✅ |
 | `eurostat-business-demography-nuts3` | `BD_SIZE_R3` | Business / Business demography by size class | 5 (freq, indic_sb, sizeclas, nace_r2, geo) | 120,955 | ✅ |
 
