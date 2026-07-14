@@ -1,138 +1,123 @@
-# Eurostat 🇪🇺 for DataCivicLab
+# Eurostat 🇪🇺 — European regional data, open and queryable
 
-[![CI](https://github.com/dataciviclab/eurostat/actions/workflows/ci.yml/badge.svg)](https://github.com/dataciviclab/eurostat/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.12%2B-blue)](pyproject.toml)
-[![Data on GCS](https://img.shields.io/badge/data-GCS-blue)](https://console.cloud.google.com/storage/browser/dataciviclab-clean/eurostat)
-[![MCP](https://img.shields.io/badge/MCP-ready-purple)](eurostat-mcp/server.py)
-[![Contributors welcome](https://img.shields.io/badge/contributors-welcome-brightgreen)](docs/contributing.md)
-[![Discussions](https://img.shields.io/badge/discussions-join-8B5CF6)](https://github.com/dataciviclab/eurostat/discussions)
+> **19+ datasets on economy, demography, health, education, crime, climate and environment — at NUTS2 (regional) and NUTS3 (provincial) level for all EU countries.**
 
-**Eurostat datasets, connectors and pipelines** — designed for regional (NUTS2/NUTS3) analysis across Europe.
-Part of [DataCivicLab](https://github.com/dataciviclab), a civic data laboratory.
+Eurostat for DataCivicLab downloads, normalises and publishes Eurostat SDMX data as columnar parquet files on Google Cloud Storage. All data is open, free, and SQL-queryable.
 
-## What this is
+---
 
-A reproducible pipeline that fetches, normalizes and publishes Eurostat SDMX-TSV data as columnar parquet files on Google Cloud Storage.
+## 🟢 Query the data via MCP
 
-- **Raw**: SDMX-TSV bulk download — all EU countries, all available years
-- **Clean**: unpivoted rows + codelist enrichment (geo hierarchy, unit labels, quality flags) — **public on GCS**
-- **Mart**: Italy-focused views with business logic — **public on GCS**
+All datasets are accessible via an MCP server. Connect it to your AI client (Claude, Copilot, OpenCode) with the standard Lab configuration. Use `eurostat_query` to run SQL on any dataset:
 
-## Published datasets
+```sql
+-- GDP per capita of Italian provinces (2024)
+SELECT geo_label_en, ROUND(value) AS gdp_pc
+FROM data WHERE geo LIKE 'IT%' AND unit='EUR_HAB' AND year=2024
+ORDER BY value DESC;
 
-See [docs/dataset-registry.md](docs/dataset-registry.md) for the full list of published and planned datasets (slug, dataflow, theme, row count, status).
+-- At-risk-of-poverty rate by region (2024)
+SELECT geo_label_en, ROUND(value, 1) AS pct
+FROM data WHERE unit='PC' AND year=2024 AND geo LIKE 'IT%' AND nuts_level='NUTS2'
+ORDER BY value DESC;
 
-## Access the data
-
-### Via MCP (recommended for AI agents)
-
-The repo includes an MCP server exposing 4 tools:
-
-| Tool | Description |
-|---|---|
-| `eurostat_list_datasets` | List available datasets with metadata |
-| `eurostat_describe_dataset` | Inspect schema, years, and dimension values |
-| `eurostat_query` | Run SQL against a dataset (`FROM data`) |
-| `eurostat_get_codelist` | Resolve freq/unit/flag/nuts_italy codes |
-
-Source: [eurostat-mcp/server.py](eurostat-mcp/server.py)
-
-Register in your MCP client:
-
-```json
-{
-  "eurostat": {
-    "command": ["python", "path/to/eurostat-mcp/server.py"],
-    "env": { "PYTHONPATH": "path/to/eurostat-mcp" },
-    "enabled": true
-  }
-}
+-- Early school leaving across Europe (2024)
+SELECT geo_label_en, ROUND(value, 1) AS pct
+FROM data WHERE unit='PC' AND sex='T' AND year=2024 AND nuts_level='NUTS2'
+ORDER BY value DESC;
 ```
 
-### Direct DuckDB access
+**Available tools:**
+- `eurostat_list_datasets` — list with metadata
+- `eurostat_describe_dataset` — schema, years, dimensions
+- `eurostat_query` — SQL on `FROM data`
+- `eurostat_get_codelist` — code lookups
 
-All datasets are public on GCS. Query directly with DuckDB:
+---
+
+## 💬 Join the discussions
+
+**Discussions** are the heart of the project. Each dataset has open questions to explore with data:
+
+| Theme | Discussion |
+|---|---|
+| 💼 [Economy](https://github.com/dataciviclab/eurostat/discussions/93) | Labour productivity — who produces most per worker in the EU? |
+| 📚 [Education](https://github.com/dataciviclab/eurostat/discussions/94) | Early school leaving — who drops out and where? |
+| 🏥 [Health](https://github.com/dataciviclab/eurostat/discussions/95) | Hospital beds — healthcare capacity by region |
+| 🏢 [Business](https://github.com/dataciviclab/eurostat/discussions/96) | Enterprise births — where are startups created? |
+| 🔬 [R&D](https://github.com/dataciviclab/eurostat/discussions/97) | R&D spending — who invests in innovation? |
+
+Found something interesting? Start a discussion. Have a question? Use **Q&A**.
+
+---
+
+## 📦 Data overview
+
+| | |
+|---|---|
+| **Published datasets** | **19 NUTS3 + 8 NUTS2** (27 total) |
+| **Period** | 1980 — 2025 (varies by dataset) |
+| **Granularity** | NUTS3 (province) and NUTS2 (region) |
+| **Coverage** | All EU + EFTA + candidate countries |
+| **Format** | Parquet on public GCS |
+
+### Coverage by theme
+
+| Theme | Datasets |
+|---|---|
+| 💼 Economy | GDP, GVA, Employment, **Productivity** |
+| 👥 Demography | Population, Deaths, Births, Ageing, **Structure** |
+| 🚓 Crime | Recorded offences by ICCS |
+| 🏨 Tourism | Nights spent at accommodation |
+| 🚗 Transport | Road accidents |
+| 🌡️ Climate | Heating/cooling degree days |
+| 🌱 Environment | Soil erosion |
+| 🏢 Business | Enterprise births/deaths, high-growth |
+| 🏥 Health | Physicians, Hospital beds |
+| 📊 Social | Poverty risk, **Income inequality** |
+| 📚 Education | **Early school leaving**, **Tertiary attainment** |
+| 🔬 Innovation | **R&D expenditure** |
+
+Full list: [docs/dataset-registry.md](docs/dataset-registry.md)
+
+---
+
+## 🧭 How to use
+
+- **Explore discussions** — each theme starts with an open question
+- **Query with SQL** — via MCP or DuckDB directly on GCS
+- **Download the parquet** — from public GCS buckets
+- **Add a dataset** — see [docs/contributing.md](docs/contributing.md)
+
+### Direct access (DuckDB)
 
 ```python
 import duckdb
 
-# GDP per capita of Italian provinces (latest year)
+# GDP per capita of Italian provinces
 duckdb.sql("""
-    SELECT geo, value
+    SELECT geo_label_en, ROUND(value) AS gdp_pc
     FROM read_parquet('gs://dataciviclab-clean/eurostat/eurostat_gdp_nuts3/*_clean.parquet')
-    WHERE geo LIKE 'IT%' AND unit = 'EUR_HAB'
+    WHERE geo LIKE 'IT%' AND unit='EUR_HAB' AND year=2024
     ORDER BY value DESC
 """).show()
-
-# Population by region (from mart, Italy-filtered)
-duckdb.sql("""
-    SELECT geo, SUM(value) AS pop
-    FROM read_parquet('gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/mart_pop_nuts3.parquet')
-    WHERE sex = 'T' AND age = 'TOTAL'
-    GROUP BY geo
-    ORDER BY pop DESC
-""").show()
 ```
 
-GCS buckets (public):
-- **Clean**: `gs://dataciviclab-clean/eurostat/{slug}/` — parquet per year (`*_clean.parquet`)
-- **Mart**: `gs://dataciviclab-mart/eurostat/{slug}/` — Italy-filtered views
+**Public GCS buckets:**
+- Clean: `gs://dataciviclab-clean/eurostat/{slug}/`
+- Mart: `gs://dataciviclab-mart/eurostat/{slug}/`
 
-## Structure
+---
 
-```
-eurostat/
-├── connectors/          # SDMX-TSV normalizer (universal, DSD-agnostic)
-├── datasets/            # dataset.yml + clean.sql + mart.sql per dataflow
-├── eurostat-mcp/        # MCP server (4 tools)
-├── codelists/           # geo, nace_r2, unit, freq, flag lookups
-├── scripts/
-│   ├── update_codelists.py   # fetches all codelists from Eurostat API
-│   └── assess_candidate.py   # probes a new dataflow and generates skeleton
-├── tests/               # pytest suite (connector + fixtures)
-├── docs/                # dataset registry, contributing guide
-└── .github/workflows/   # CI + monthly publish to GCS
-```
+## 📚 Technical docs
 
-## Quick start
+- [Dataset registry](docs/dataset-registry.md) — published + planned
+- [Contributing](docs/contributing.md) — how to add a dataset
+- [Pipeline](.github/workflows/publish.yml) — CI + automatic publish
 
-```bash
-# Requires Python 3.12+
-pip install -e ".[dev]"
-pip install -e ".[mcp]"
+## Connect
 
-# Run all tests
-pytest tests/ eurostat-mcp/tests/ -v
-
-# Run a dataset pipeline (script source requires env var)
-TOOLKIT_ALLOW_SCRIPT_SOURCE=1 \
-  toolkit run full --config datasets/eurostat-gdp-nuts3/dataset.yml --years 2026
-
-# Add a new dataset (probe, generate skeleton, then run pipeline)
-python scripts/assess_candidate.py --flow LFST_R_LFE2EMPRT
-```
-
-## How it works
-
-The connector (`tsv_normalize.py`) downloads SDMX-TSV from the Eurostat API, detects dimensions from the header, and writes unpivoted **parquet** files with columns `[dim1..dimN, year, value, flag]`.
-
-The toolkit pipeline then:
-1. Runs the connector (`type: script`) → raw parquet
-2. Applies `clean.sql` → enriches with codelist labels (geo, unit, freq, flags)
-3. Applies `mart.sql` → filters Italy, adds business logic
-4. **CI publish workflow** → syncs clean + mart parquet to GCS
-
-## Get involved
-
-- **Discuss** — join [GitHub Discussions](https://github.com/dataciviclab/eurostat/discussions) to ask questions, share findings, propose new datasets or methods.
-- **Good first issues** — [browse beginner-friendly tasks](https://github.com/dataciviclab/eurostat/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) to add a new Eurostat dataflow.
-- **DataCivicLab Forum** — larger conversations about civic data in Italy happen on the [main Lab hub](https://github.com/orgs/dataciviclab/discussions).
-
-## Contributing
-
-See [docs/contributing.md](docs/contributing.md).
-
-## License
-
-MIT — see [LICENSE](LICENSE).
+- [GitHub Discussions](https://github.com/dataciviclab/eurostat/discussions) — questions, findings, ideas
+- [Good first issues](https://github.com/dataciviclab/eurostat/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) — contribute
+- [DataCivicLab](https://github.com/dataciviclab) — the lab
+- [License: MIT](LICENSE)
