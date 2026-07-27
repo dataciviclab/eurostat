@@ -1,0 +1,4 @@
+# Pre-existing lint: these rules were introduced in ruff 0.16.0
+# and affect existing code that works correctly.
+# TODO: fix and remove these ignores
+lint.ignore = ["BLE001", "DTZ011", "S110", "S112"]
