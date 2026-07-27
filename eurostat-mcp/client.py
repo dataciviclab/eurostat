@@ -17,7 +17,6 @@ from pathlib import Path
 from typing import Any
 
 import yaml
-
 from lab_connectors.duckdb import gcs_connect
 from lab_connectors.mcp.cache import TtlCache
 
@@ -169,10 +168,8 @@ def _validate_slug(slug: str) -> str:
 
 def _validate_limit(limit: int) -> int:
     limit = int(limit)
-    if limit < 1:
-        limit = 1
-    if limit > 500:
-        limit = 500
+    limit = max(limit, 1)
+    limit = min(limit, 500)
     return limit
 
 
@@ -189,7 +186,7 @@ def _validate_sql_safe(sql: str) -> None:
     """Reject SQL containing dangerous functions or filesystem paths."""
     # Strip comments before checking the starting keyword
     stripped = _strip_sql_comments(sql).upper()
-    if not (stripped.startswith("SELECT") or stripped.startswith("WITH")):
+    if not (stripped.startswith(("SELECT", "WITH"))):
         raise ValueError(
             "Only SELECT queries (or WITH...SELECT CTEs) are allowed. "
             "Your query must start with SELECT or WITH."

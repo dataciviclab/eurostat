@@ -11,14 +11,13 @@ from __future__ import annotations
 
 from typing import Any
 
-from lab_connectors.mcp import create_mcp_server, guard_timed
-
 from client import (
     describe_dataset,
     get_codelist,
     list_datasets,
     query,
 )
+from lab_connectors.mcp import create_mcp_server, guard_timed
 
 SERVER = "eurostat"
 
@@ -64,7 +63,9 @@ mcp = create_mcp_server(
     structured_output=True,
 )
 def eurostat_list_datasets() -> dict[str, Any]:
-    return _list_response(guard_timed(list_datasets, "eurostat_list_datasets", logger_name=SERVER))
+    return _list_response(
+        guard_timed(list_datasets, "eurostat_list_datasets", logger_name=SERVER)
+    )
 
 
 @mcp.tool(
@@ -79,7 +80,9 @@ def eurostat_list_datasets() -> dict[str, Any]:
     structured_output=True,
 )
 def eurostat_describe_dataset(slug: str) -> dict[str, Any]:
-    return guard_timed(describe_dataset, "eurostat_describe_dataset", slug, logger_name=SERVER)
+    return guard_timed(
+        describe_dataset, "eurostat_describe_dataset", slug, logger_name=SERVER
+    )
 
 
 @mcp.tool(
@@ -96,9 +99,9 @@ def eurostat_describe_dataset(slug: str) -> dict[str, Any]:
     structured_output=True,
 )
 def eurostat_query(slug: str, sql: str, limit: int = 100) -> dict[str, Any]:
-    return _list_response(guard_timed(
-        query, "eurostat_query", slug, sql, limit, logger_name=SERVER
-    ))
+    return _list_response(
+        guard_timed(query, "eurostat_query", slug, sql, limit, logger_name=SERVER)
+    )
 
 
 @mcp.tool(
@@ -110,7 +113,9 @@ def eurostat_query(slug: str, sql: str, limit: int = 100) -> dict[str, Any]:
     structured_output=True,
 )
 def eurostat_get_codelist(codelist_id: str) -> dict[str, Any]:
-    return guard_timed(get_codelist, "eurostat_get_codelist", codelist_id, logger_name=SERVER)
+    return guard_timed(
+        get_codelist, "eurostat_get_codelist", codelist_id, logger_name=SERVER
+    )
 
 
 if __name__ == "__main__":

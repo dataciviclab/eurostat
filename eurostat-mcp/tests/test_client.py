@@ -5,11 +5,10 @@ import tempfile
 
 import duckdb
 import pytest
-
 from client import (
     DATASETS,
-    _validate_slug,
     _validate_limit,
+    _validate_slug,
     _validate_sql_safe,
     describe_dataset,
     get_codelist,
@@ -17,8 +16,8 @@ from client import (
     query,
 )
 
-
 # ── _validate_slug ───────────────────────────────────────────────────────────
+
 
 class TestValidateSlug:
     def test_valid_slug(self):
@@ -34,6 +33,7 @@ class TestValidateSlug:
 
 
 # ── _validate_limit ──────────────────────────────────────────────────────────
+
 
 class TestValidateLimit:
     def test_default_valid(self):
@@ -52,6 +52,7 @@ class TestValidateLimit:
 
 
 # ── _validate_sql_safe ───────────────────────────────────────────────────────
+
 
 class TestValidateSqlSafe:
     def test_valid_sql(self):
@@ -104,6 +105,7 @@ class TestValidateSqlSafe:
 
 # ── list_datasets ────────────────────────────────────────────────────────────
 
+
 class TestListDatasets:
     def test_returns_list(self):
         result = list_datasets()
@@ -125,6 +127,7 @@ class TestListDatasets:
 
 
 # ── get_codelist ─────────────────────────────────────────────────────────────
+
 
 class TestGetCodelist:
     def test_freq(self):
@@ -153,6 +156,7 @@ class TestGetCodelist:
 
 
 # ── query (contract, no network) ─────────────────────────────────────────────
+
 
 class TestQueryContract:
     """Test query() SQL rewriting and guards using a local parquet file.
@@ -246,6 +250,7 @@ class TestQueryContract:
 
 
 # ── describe_dataset (contract, no network) ────────────────────────────────────
+
 
 class TestDescribeDataset:
     """Test describe_dataset() using a local parquet file (no GCS)."""
