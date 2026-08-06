@@ -253,6 +253,15 @@ def update_flags() -> int:
     return len(rows)
 
 
+def update_iccs() -> int:
+    """Fetch ICCS codelist (crime categories) and write iccs.csv."""
+    labels = _fetch_codelist("ICCS")
+    rows = [(code, labels[code]) for code in sorted(labels)]
+    _write_csv("iccs.csv", ["code", "label_en"], rows)
+    print(f"  ✅ iccs.csv: {len(rows)} entries")
+    return len(rows)
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 
@@ -274,6 +283,7 @@ def main():
     total += update_na_item()
     total += update_sizeclas()
     total += update_flags()
+    total += update_iccs()
     print(f"✔ Done: {total} total entries across 13 codelists")
 
 

@@ -1,0 +1,33 @@
+-- mart_sintesi — At-risk-of-poverty by country: national aggregates and ranking.
+--
+-- One row per (country, year). Built from NUTS2-level data of each country:
+--   • at-risk-of-poverty share (country-level PC value, %)
+--   • rank among EU countries by poverty share
+--   • % distance from the EU country average
+--
+-- The country geo (geo = country code, nuts_level = 'country') holds the
+-- official PC value; NUTS2 rows are the regional breakdown.
+
+WITH country_values AS (
+    SELECT
+        year,
+        geo AS country,
+        MAX(CASE WHEN unit = 'PC' THEN value END) AS rischio_poverta_pct
+    FROM clean_input
+    WHERE nuts_level = 'country'
+      AND value IS NOT NULL
+    GROUP BY year, geo
+)
+SELECT
+    cv.year,
+    cv.country,
+    cv.rischio_poverta_pct,
+    -- Cross-country rank by poverty share (1 = highest poverty, same year)
+    ROW_NUMBER() OVER (PARTITION BY cv.year ORDER BY cv.rischio_poverta_pct DESC) AS rank_procapite_eu,
+    -- % distance from the EU country average
+    ROUND(
+        (cv.rischio_poverta_pct - AVG(cv.rischio_poverta_pct) OVER (PARTITION BY cv.year))
+        / NULLIF(ABS(AVG(cv.rischio_poverta_pct) OVER (PARTITION BY cv.year)), 0) * 100, 1
+    ) AS distanza_media_eu_pct
+FROM country_values cv
+ORDER BY cv.year DESC, rank_procapite_eu

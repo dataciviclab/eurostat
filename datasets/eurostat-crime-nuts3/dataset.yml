@@ -4,6 +4,8 @@ schema_version: 1
 dataset:
   name: "eurostat_crime_nuts3"
   source_id: "eurostat"
+  tags: [giustizia, criminalita, reati, eurostat, benchmark, nuts3]
+  category: giustizia
   years: [2026]
   time_coverage:
     start_year: 2008
@@ -15,7 +17,7 @@ raw:
     - name: "eurostat_crim_gen_reg"
       type: "script"
       args:
-        command: "../../connectors/tsv_normalize.py --flow CRIM_GEN_REG --output crim_gen_reg_normalized.parquet --format parquet"
+        command: "../../connectors/tsv_normalize.py --flow CRIM_GEN_REG --output crim_gen_reg_normalized.parquet"
         output: "crim_gen_reg_normalized.parquet"
         filename: "crim_gen_reg_normalized.parquet"
       primary: true
@@ -28,15 +30,56 @@ clean:
     delim: ","
     encoding: utf-8
     header: true
+  required_columns:
+    - freq
+    - iccs
+    - iccs_label_en
+    - unit
+    - geo
+    - year
+    - freq_label_en
+    - unit_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
   validate:
     min_rows: 100
+    # NOTE: `value` is NOT in not_null — Eurostat has legitimate coverage gaps
+    # (NaN flag, esp. recent years and small regions).
+    not_null:
+      - geo
+      - year
+      - iccs
 
 mart:
   tables:
-    - name: "mart_crime_nuts3"
-      sql: "sql/mart.sql"
+    - name: "mart_geo_benchmark"
+      sql: "sql/mart_geo_benchmark.sql"
+    - name: "mart_sintesi"
+      sql: "sql/mart_sintesi.sql"
+    - name: "mart_trend"
+      sql: "sql/mart_trend.sql"
   required_tables:
-    - "mart_crime_nuts3"
+    - "mart_geo_benchmark"
+    - "mart_sintesi"
+    - "mart_trend"
+  validate:
+    table_rules:
+      mart_geo_benchmark:
+        required_columns: [year, geo, geo_label_en, iccs, country, unit, value]
+        primary_key: [year, geo, iccs, unit]
+        min_rows: 10000
+      mart_sintesi:
+        required_columns: [year, country, iccs, reati_per_100k, rank_procapite_eu]
+        primary_key: [year, country, iccs]
+        min_rows: 100
+      mart_trend:
+        required_columns: [geo, geo_label_en, iccs, first_year, last_year, cagr_pct]
+        primary_key: [geo, iccs]
+        min_rows: 1000
 
 validation:
   fail_on_error: true
