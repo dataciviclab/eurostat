@@ -132,6 +132,7 @@ class TestListDatasets:
 class TestMartDerivation:
     """Analytical marts are auto-discovered from dataset.yml mart.tables."""
 
+    @pytest.mark.contract
     def test_marts_exist(self):
         """At least the 5 migrated datasets expose analytical marts."""
         marts = list_datasets("mart")
@@ -141,6 +142,7 @@ class TestMartDerivation:
             mart_slugs = [m["slug"] for m in marts if m["slug"].startswith(f"{slug}__")]
             assert len(mart_slugs) >= 3, f"{slug} should expose >= 3 marts"
 
+    @pytest.mark.policy
     def test_mart_type_filter(self):
         """type filter isolates clean from mart entries."""
         cleans = list_datasets("clean")
@@ -152,10 +154,12 @@ class TestMartDerivation:
         mart_slugs = {m["slug"] for m in marts}
         assert not (clean_slugs & mart_slugs)
 
+    @pytest.mark.policy
     def test_invalid_type_rejected(self):
         with pytest.raises(ValueError):
             list_datasets("bogus")
 
+    @pytest.mark.contract
     def test_mart_slug_convention(self):
         """Mart slug is {dataset}__{mart_table}."""
         marts = list_datasets("mart")
@@ -166,6 +170,7 @@ class TestMartDerivation:
             # The mart table is declared in the source dataset.yml.
             assert DATASETS[m["slug"]]["mart_table"] == table
 
+    @pytest.mark.contract
     def test_mart_parquet_url(self):
         """Mart URL points to the mart bucket, no-year layout."""
         for m in list_datasets("mart"):
