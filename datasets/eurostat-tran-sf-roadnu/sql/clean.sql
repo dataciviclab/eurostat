@@ -23,10 +23,10 @@ SELECT
     gp.label_en AS nuts_parent_label_en,
     CAST(r.value AS DOUBLE) AS value,
     r.flag,
-    fl.description_en AS flag_desc_en
+    fl.label_en AS flag_desc_en
 FROM raw_input r
-LEFT JOIN read_csv('codelists/freq.csv', auto_detect=true, delim=',', header=true) f ON r.freq = f.freq
-LEFT JOIN read_csv('codelists/units.csv', auto_detect=true, delim=',', header=true) u ON r.unit = u.unit
+LEFT JOIN read_parquet('{support.freq.path}') f ON r.freq = f.code
+LEFT JOIN read_parquet('{support.unit.path}') u ON r.unit = u.code
 LEFT JOIN read_csv('codelists/geo.csv', auto_detect=true, delim=',', header=true) g ON r.geo = g.code
 LEFT JOIN read_csv('codelists/geo.csv', auto_detect=true, delim=',', header=true) gp ON g.parent_code = gp.code
-LEFT JOIN read_csv('codelists/flags.csv', auto_detect=true, delim=',', header=true) fl ON r.flag = fl.flag
+LEFT JOIN read_parquet('{support.flag.path}') fl ON r.flag = fl.code

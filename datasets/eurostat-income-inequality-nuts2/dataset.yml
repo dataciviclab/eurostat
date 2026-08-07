@@ -21,6 +21,23 @@ raw:
         flow: "ILC_DI11_R"
       primary: true
 
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+
 clean:
   sql: "sql/clean.sql"
   read:

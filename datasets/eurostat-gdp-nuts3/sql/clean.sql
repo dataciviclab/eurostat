@@ -4,6 +4,11 @@
 -- (or more dimensions: freq, ..., geo, year, value, flag).
 -- Here we enrich with codelist labels.
 --
+-- Codelists come from `support:` (type codelist, materialized by the toolkit
+-- via SdmxSource.fetch_codelist — see dataset.yml). Only the geo hierarchy
+-- still reads the repo CSV (nuts_level/parent_code are not in the SDMX
+-- codelist annotation set; tracked as debt).
+--
 -- Contract note: `country` is derived from the 2-letter ISO prefix of the geo
 -- code, but ONLY for real NUTS geographies (nuts_level in country/NUTS1/NUTS2/NUTS3).
 -- Aggregated geographies (EU, EA, G20, ACP, ...) get NULL so they never pollute
@@ -24,10 +29,10 @@ SELECT
     gp.label_en AS nuts_parent_label_en,
     r.value,
     r.flag,
-    fl.description_en AS flag_desc_en
+    fl.label_en AS flag_desc_en
 FROM raw_input r
-LEFT JOIN read_csv('codelists/freq.csv', auto_detect=true, delim=',', header=true) f ON r.freq = f.freq
-LEFT JOIN read_csv('codelists/units.csv', auto_detect=true, delim=',', header=true) u ON r.unit = u.unit
+LEFT JOIN read_parquet('{support.freq.path}') f ON r.freq = f.code
+LEFT JOIN read_parquet('{support.unit.path}') u ON r.unit = u.code
 LEFT JOIN read_csv('codelists/geo.csv', auto_detect=true, delim=',', header=true) g ON r.geo = g.code
 LEFT JOIN read_csv('codelists/geo.csv', auto_detect=true, delim=',', header=true) gp ON g.parent_code = gp.code
-LEFT JOIN read_csv('codelists/flags.csv', auto_detect=true, delim=',', header=true) fl ON r.flag = fl.flag
+LEFT JOIN read_parquet('{support.flag.path}') fl ON r.flag = fl.code

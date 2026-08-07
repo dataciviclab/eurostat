@@ -21,6 +21,28 @@ raw:
         flow: "CRIM_GEN_REG"
       primary: true
 
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: iccs
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: ICCS
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+
 clean:
   sql: "sql/clean.sql"
   read:
