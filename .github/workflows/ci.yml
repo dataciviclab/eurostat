@@ -54,6 +54,6 @@ jobs:
         run: |
           for cfg in $(find datasets -maxdepth 2 -name dataset.yml | sort); do
             echo "→ $cfg"
-            toolkit inspect paths --config "$cfg" --year 2026 > /dev/null 2>&1
+            toolkit run preflight --config "$cfg" --years 2026 > /dev/null
           done
           echo "✅ All configs valid"
