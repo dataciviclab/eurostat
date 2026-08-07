@@ -66,7 +66,7 @@ jobs:
           SMOKE="${{ inputs.smoke && '--sample-rows 1000' || '' }}"
           for dir in ${{ steps.datasets.outputs.datasets }}; do
             echo "=== $dir ==="
-            toolkit run full --config "$dir/dataset.yml" --years $YEAR $SMOKE
+            toolkit run -c "$dir/dataset.yml" --years $YEAR $SMOKE
           done
 
       # ── GCS auth ─────────────────────────────────────────────────────
