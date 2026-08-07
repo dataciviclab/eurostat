@@ -16,6 +16,13 @@ domain knowledge about the underlying Eurostat data.
 
 Skip-based: tests run against locally produced parquet files, so CI does
 not break when the pipeline has not been executed on the runner.
+
+CI limitation (documented decision): the semantic suite only runs where the
+marts have been produced. There is no CI job executing the pipeline because
+raw data is downloaded live from the Eurostat SDMX API (network-fragile) and
+no other repo in the lab runs live pipeline jobs in CI. To validate locally:
+    toolkit run -c datasets/<slug>/dataset.yml --years 2026   # per dataset
+    pytest tests/test_analytical_marts.py -q
 """
 
 from pathlib import Path
@@ -99,6 +106,49 @@ def _dim_filter(ds: dict) -> str:
     return ""
 
 
+# EU27 post-2020 composition in Eurostat geo codes (Greece = 'EL', not 'GR').
+# Mirrors the eu_countries CTE used in the mart SQL files — keep in sync.
+_EU27 = [
+    "AT",
+    "BE",
+    "BG",
+    "HR",
+    "CY",
+    "CZ",
+    "DK",
+    "EE",
+    "FI",
+    "FR",
+    "DE",
+    "EL",
+    "HU",
+    "IE",
+    "IT",
+    "LV",
+    "LT",
+    "LU",
+    "MT",
+    "NL",
+    "PL",
+    "PT",
+    "RO",
+    "SK",
+    "SI",
+    "ES",
+    "SE",
+]
+
+
+def _eu27_body() -> str:
+    """SQL IN-clause body for the EU27 country list."""
+    return "country IN ('" + "','".join(_EU27) + "')"
+
+
+def _eu27_filter() -> str:
+    """SQL filter restricting a query to EU27 rows."""
+    return f" AND {_eu27_body()}"
+
+
 class TestSharedBenchmarkContract:
     """Same benchmark semantics for every analytical dataset."""
 
@@ -167,21 +217,44 @@ class TestSharedBenchmarkContract:
 
     @pytest.mark.parametrize("ds", ANALYTICAL_DATASETS, ids=lambda d: d["slug"])
     def test_benchmark_columns_complete(self, ds):
-        """Every benchmark-unit row carries all benchmark columns."""
+        """EU27 benchmark-unit rows carry all benchmark columns.
+
+        Non-EU rows (CH, NO, TR, RS, ...) keep media_eu_value and
+        distanza_media_eu_pct (the EU27 reference) but have percentile_eu
+        NULL — they are not ranked within the EU27 distribution.
+        """
         f = _skip_if_missing(ds["slug"], "mart_geo_benchmark")
         dim = _dim_filter(ds)
+        eu_filter = _eu27_filter()
         n_incomplete = duckdb.sql(
             f"""
             SELECT COUNT(*)
             FROM read_parquet('{f}')
             WHERE year = {CHECK_YEAR} AND unit = '{ds["benchmark_unit"]}'
-              AND nuts_level = '{ds["nuts_level"]}'{dim}
+              AND nuts_level = '{ds["nuts_level"]}'{dim}{eu_filter}
               AND (media_eu_value IS NULL OR media_paese_value IS NULL
                    OR percentile_eu IS NULL OR rank_nazionale IS NULL
                    OR distanza_media_eu_pct IS NULL)
             """
         ).fetchone()[0]
-        assert n_incomplete == 0, "benchmark-unit rows with NULL benchmark columns"
+        assert n_incomplete == 0, "EU27 benchmark-unit rows with NULL benchmark columns"
+
+    @pytest.mark.parametrize("ds", ANALYTICAL_DATASETS, ids=lambda d: d["slug"])
+    def test_non_eu_percentile_null(self, ds):
+        """Non-EU rows have percentile_eu NULL (not ranked within EU27)."""
+        f = _skip_if_missing(ds["slug"], "mart_geo_benchmark")
+        dim = _dim_filter(ds)
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = {CHECK_YEAR} AND unit = '{ds["benchmark_unit"]}'
+              AND nuts_level = '{ds["nuts_level"]}'{dim}
+              AND NOT ({_eu27_body()})
+              AND percentile_eu IS NOT NULL
+            """
+        ).fetchone()[0]
+        assert n_bad == 0, "non-EU rows with percentile_eu computed"
 
     @pytest.mark.parametrize("ds", ANALYTICAL_DATASETS, ids=lambda d: d["slug"])
     def test_trend_cagr_null_when_single_year(self, ds):
@@ -460,7 +533,15 @@ class TestCrimeNuts3Facts:
         assert 0.5 <= media <= 1.5  # verified: 1.0
 
     def test_iccs_labels_resolved(self):
-        """ICCS labels are resolved from the codelist (no NULL labels)."""
+        """ICCS labels are resolved from the codelist (no NULL labels).
+
+        Note on the 'ICSS' prefix: the Eurostat SDMX source itself publishes
+        two codes with a typo ('ICSS02041_02043_02044', 'ICSS02042_02043_02044').
+        The codelist mirrors the source faithfully; those codes do not appear
+        in the CRIM_GEN_REG dataflow (only the 7 correct ICCS codes do), so
+        the join never sees them. If Eurostat ever publishes them, this test
+        fails and the codelist note should be revisited.
+        """
         f = _skip_if_missing("eurostat_crime_nuts3", "mart_geo_benchmark")
         n_null = duckdb.sql(
             f"""

@@ -1,17 +1,27 @@
--- mart_geo_benchmark — GDP by NUTS geography: EU-wide benchmark analytics.
+-- mart_geo_benchmark — GDP by NUTS geography: EU27-wide benchmark analytics.
 --
--- One row per (geo, year, unit). Replaces the old pass-through mart
--- (filter Italy only) with EU-wide comparative analytics:
---   • media EU per year (same nuts_level comparison)
+-- One row per (year, geo, unit). Replaces the old pass-through mart
+-- (filter Italy only) with EU27-wide comparative analytics:
+--   • EU27 average per year (same nuts_level and unit comparison)
 --   • country average per year
---   • percentile within EU (same year, same nuts_level)
+--   • percentile within EU27 (same year, nuts_level, unit)
 --   • national rank within country
---   • % distance from the EU average
+--   • % distance from the EU27 average
 --
--- Benchmark columns are computed per (year, nuts_level) so NUTS2 regions are
--- compared with NUTS2 regions and NUTS3 provinces with NUTS3 provinces.
+-- SCOPE: benchmark columns are computed ONLY for EU27 countries (post-2020
+-- composition, Greece = 'EL' in Eurostat geo codes). Non-EU rows (CH, NO,
+-- TR, RS, ME, MK, AL, ...) stay in the mart with NULL benchmark so they
+-- never distort EU averages/ranks/percentiles.
+--
+-- Benchmark columns are computed for unit = 'EUR_HAB' only (meaningful
+-- per-capita comparison). Other units (MIO_EUR, ...) carry no benchmark.
 
-WITH base AS (
+WITH eu_countries AS (
+    SELECT unnest(['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','EL',
+                   'HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK',
+                   'SI','ES','SE']) AS code
+),
+base AS (
     SELECT
         year,
         geo,
@@ -24,7 +34,8 @@ WITH base AS (
         unit_label_en,
         value,
         flag,
-        flag_desc_en
+        flag_desc_en,
+        country IN (SELECT code FROM eu_countries) AS is_eu
     FROM clean_input
     WHERE value IS NOT NULL
       AND country IS NOT NULL
@@ -40,9 +51,9 @@ SELECT
     b.unit,
     b.unit_label_en,
     b.value,
-    -- EU average for the same year, NUTS level and unit (EUR_HAB only, meaningful benchmark)
+    -- EU27 average for the same year, NUTS level and unit (EUR_HAB only)
     CASE
-        WHEN b.unit = 'EUR_HAB' THEN ROUND(AVG(b.value) OVER (PARTITION BY b.year, b.nuts_level, b.unit), 1)
+        WHEN b.unit = 'EUR_HAB' THEN ROUND(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit), 1)
         ELSE NULL
     END AS media_eu_value,
     -- Country average for the same year, NUTS level and unit
@@ -50,9 +61,10 @@ SELECT
         WHEN b.unit = 'EUR_HAB' THEN ROUND(AVG(b.value) OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit), 1)
         ELSE NULL
     END AS media_paese_value,
-    -- Percentile within the EU (same year, nuts_level, unit)
+    -- Percentile within EU27 (same year, nuts_level, unit); NULL outside EU27
     CASE
-        WHEN b.unit = 'EUR_HAB' THEN ROUND(PERCENT_RANK() OVER (PARTITION BY b.year, b.nuts_level, b.unit ORDER BY b.value), 4)
+        WHEN b.unit = 'EUR_HAB' AND b.is_eu THEN ROUND(
+            PERCENT_RANK() OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.is_eu ORDER BY b.value), 4)
         ELSE NULL
     END AS percentile_eu,
     -- National rank (1 = highest GDP per capita in the country, same year/level/unit)
@@ -60,11 +72,11 @@ SELECT
         WHEN b.unit = 'EUR_HAB' THEN ROW_NUMBER() OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit ORDER BY b.value DESC)
         ELSE NULL
     END AS rank_nazionale,
-    -- % distance from the EU average (same year, nuts_level, unit)
+    -- % distance from the EU27 average (same year, nuts_level, unit)
     CASE
         WHEN b.unit = 'EUR_HAB' THEN ROUND(
-            (b.value - AVG(b.value) OVER (PARTITION BY b.year, b.nuts_level, b.unit))
-            / NULLIF(ABS(AVG(b.value) OVER (PARTITION BY b.year, b.nuts_level, b.unit)), 0) * 100, 1)
+            (b.value - AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit))
+            / NULLIF(ABS(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit)), 0) * 100, 1)
         ELSE NULL
     END AS distanza_media_eu_pct,
     b.flag,

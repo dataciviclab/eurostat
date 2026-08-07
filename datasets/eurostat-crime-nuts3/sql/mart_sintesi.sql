@@ -9,12 +9,18 @@
 -- The country geo (geo = country code, nuts_level = 'country') holds the
 -- official P_HTHAB value; NUTS3 rows are the regional breakdown.
 
-WITH country_values AS (
+WITH eu_countries AS (
+    SELECT unnest(['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','EL',
+                   'HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK',
+                   'SI','ES','SE']) AS code
+),
+country_values AS (
     SELECT
         year,
         iccs,
         iccs_label_en,
         geo AS country,
+        geo IN (SELECT code FROM eu_countries) AS is_eu,
         MAX(CASE WHEN unit = 'P_HTHAB' THEN value END) AS reati_per_100k
     FROM clean_input
     WHERE nuts_level = 'country'
@@ -27,12 +33,12 @@ SELECT
     cv.iccs,
     cv.iccs_label_en,
     cv.reati_per_100k,
-    -- Cross-country rank by offence rate (1 = highest rate, same year/iccs)
-    ROW_NUMBER() OVER (PARTITION BY cv.year, cv.iccs ORDER BY cv.reati_per_100k DESC) AS rank_procapite_eu,
-    -- % distance from the EU country average (same year/iccs)
+    -- Cross-country rank by offence rate (EU27 only, 1 = highest rate, same year/iccs)
+    CASE WHEN cv.is_eu THEN ROW_NUMBER() OVER (PARTITION BY cv.year, cv.iccs, cv.is_eu ORDER BY cv.reati_per_100k DESC) ELSE NULL END AS rank_procapite_eu,
+    -- % distance from the EU27 country average (same year/iccs)
     ROUND(
-        (cv.reati_per_100k - AVG(cv.reati_per_100k) OVER (PARTITION BY cv.year, cv.iccs))
-        / NULLIF(ABS(AVG(cv.reati_per_100k) OVER (PARTITION BY cv.year, cv.iccs)), 0) * 100, 1
+        (cv.reati_per_100k - AVG(cv.reati_per_100k) FILTER (WHERE cv.is_eu) OVER (PARTITION BY cv.year, cv.iccs))
+        / NULLIF(ABS(AVG(cv.reati_per_100k) FILTER (WHERE cv.is_eu) OVER (PARTITION BY cv.year, cv.iccs)), 0) * 100, 1
     ) AS distanza_media_eu_pct
 FROM country_values cv
 ORDER BY cv.year DESC, cv.iccs, rank_procapite_eu

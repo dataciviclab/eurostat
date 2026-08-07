@@ -3,15 +3,21 @@
 -- One row per (country, year). Built from NUTS3-level data of each country:
 --   • total GDP (sum of MIO_EUR across all NUTS3 of the country)
 --   • GDP per capita (country-level EUR_HAB value, i.e. country geo)
---   • rank among EU countries by GDP per capita and by total GDP
+--   • rank among EU27 countries by GDP per capita and by total GDP
 --
 -- The country geo (geo = country code, nuts_level = 'country') holds the
 -- official EUR_HAB value; NUTS3 rows hold MIO_EUR parts of the total.
 
-WITH country_values AS (
+WITH eu_countries AS (
+    SELECT unnest(['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','EL',
+                   'HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK',
+                   'SI','ES','SE']) AS code
+),
+country_values AS (
     SELECT
         year,
         geo AS country,
+        geo IN (SELECT code FROM eu_countries) AS is_eu,
         MAX(CASE WHEN unit = 'EUR_HAB' THEN value END) AS gdp_procapite,
         MAX(CASE WHEN unit = 'MIO_EUR' THEN value END) AS gdp_totale_mio
     FROM clean_input
@@ -37,14 +43,14 @@ SELECT
     cv.gdp_procapite,
     cv.gdp_totale_mio,
     nt.gdp_nuts3_sum_mio,
-    -- Cross-country rank by GDP per capita (1 = richest in the EU, same year)
-    ROW_NUMBER() OVER (PARTITION BY cv.year ORDER BY cv.gdp_procapite DESC) AS rank_procapite_eu,
-    -- Cross-country rank by total GDP
-    ROW_NUMBER() OVER (PARTITION BY cv.year ORDER BY cv.gdp_totale_mio DESC) AS rank_totale_eu,
-    -- % distance from the EU country average by GDP per capita
+    -- Cross-country rank (EU27 only) by GDP per capita (1 = richest in the EU, same year)
+    CASE WHEN cv.is_eu THEN ROW_NUMBER() OVER (PARTITION BY cv.year, cv.is_eu ORDER BY cv.gdp_procapite DESC) ELSE NULL END AS rank_procapite_eu,
+    -- Cross-country rank (EU27 only) by total GDP
+    CASE WHEN cv.is_eu THEN ROW_NUMBER() OVER (PARTITION BY cv.year, cv.is_eu ORDER BY cv.gdp_totale_mio DESC) ELSE NULL END AS rank_totale_eu,
+    -- % distance from the EU27 country average by GDP per capita
     ROUND(
-        (cv.gdp_procapite - AVG(cv.gdp_procapite) OVER (PARTITION BY cv.year))
-        / NULLIF(ABS(AVG(cv.gdp_procapite) OVER (PARTITION BY cv.year)), 0) * 100, 1
+        (cv.gdp_procapite - AVG(cv.gdp_procapite) FILTER (WHERE cv.is_eu) OVER (PARTITION BY cv.year))
+        / NULLIF(ABS(AVG(cv.gdp_procapite) FILTER (WHERE cv.is_eu) OVER (PARTITION BY cv.year)), 0) * 100, 1
     ) AS distanza_media_eu_pct
 FROM country_values cv
 LEFT JOIN nuts3_total nt ON cv.year = nt.year AND cv.country = nt.country
