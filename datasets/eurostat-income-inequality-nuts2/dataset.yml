@@ -4,6 +4,8 @@ schema_version: 1
 dataset:
   name: "eurostat_income_inequality_nuts2"
   source_id: "eurostat"
+  tags: [welfare-lavoro, disuguaglianza, reddito, eurostat, benchmark, nuts2]
+  category: welfare-lavoro
   years: [2026]
   time_coverage:
     start_year: 2003
@@ -13,11 +15,10 @@ raw:
   output_policy: overwrite
   sources:
     - name: "eurostat_ilc_di11_r"
-      type: "script"
+      type: "sdmx"
       args:
-        command: "../../connectors/tsv_normalize.py --flow ILC_DI11_R --output ilc_di11_r_normalized.parquet"
-        output: "ilc_di11_r_normalized.parquet"
-        filename: "ilc_di11_r_normalized.parquet"
+        agency: "ESTAT"
+        flow: "ILC_DI11_R"
       primary: true
 
 clean:
@@ -28,15 +29,53 @@ clean:
     delim: ","
     encoding: utf-8
     header: true
+  required_columns:
+    - freq
+    - unit
+    - geo
+    - year
+    - freq_label_en
+    - unit_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
   validate:
     min_rows: 100
+    # NOTE: `value` is NOT in not_null — Eurostat has legitimate coverage gaps
+    # (NaN flag, esp. recent years and small regions).
+    not_null:
+      - geo
+      - year
 
 mart:
   tables:
-    - name: "mart_eurostat_income_inequality_nuts2"
-      sql: "sql/mart.sql"
+    - name: "mart_geo_benchmark"
+      sql: "sql/mart_geo_benchmark.sql"
+    - name: "mart_sintesi"
+      sql: "sql/mart_sintesi.sql"
+    - name: "mart_trend"
+      sql: "sql/mart_trend.sql"
   required_tables:
-    - "mart_eurostat_income_inequality_nuts2"
+    - "mart_geo_benchmark"
+    - "mart_sintesi"
+    - "mart_trend"
+  validate:
+    table_rules:
+      mart_geo_benchmark:
+        required_columns: [year, geo, geo_label_en, country, unit, value]
+        primary_key: [year, geo, unit]
+        min_rows: 3000
+      mart_sintesi:
+        required_columns: [year, country, s80s20_ratio, rank_procapite_eu]
+        primary_key: [year, country]
+        min_rows: 30
+      mart_trend:
+        required_columns: [geo, geo_label_en, first_year, last_year, cagr_pct]
+        primary_key: [geo]
+        min_rows: 100
 
 validation:
   fail_on_error: true
