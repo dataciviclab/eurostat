@@ -108,6 +108,18 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC11",
     },
+    {
+        "slug": "eurostat_early_school_leavers_nuts2",
+        "benchmark_unit": "PC",
+        # Extra breakdown dimension: benchmark slice is sex='T' (total).
+        "dim": "sex",
+        "dim_value": "T",
+        # Single-unit dataset: any other unit must carry NULL benchmark.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS2",
+        "other_unit_geo": "ITC4",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -769,3 +781,66 @@ class TestTranSfRoadnuFacts:
         ).fetchone()
         assert row is not None
         assert row[0] >= 20
+
+
+class TestEarlySchoolLeaversNuts2Facts:
+    """Verified facts for eurostat-early-school-leavers-nuts2."""
+
+    def test_italy_rank8_eu(self):
+        """Italy ranks 8th of 27 EU27 by early school leaving (2024)."""
+        f = _skip_if_missing("eurostat_early_school_leavers_nuts2", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT abbandono_pct, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        assert 5 <= row[1] <= 10  # verified: rank 8 of 27
+
+    def test_sicilia_top_italy(self):
+        """Sicilia has the highest early leaving share among IT regions (2024)."""
+        f = _skip_if_missing(
+            "eurostat_early_school_leavers_nuts2", "mart_geo_benchmark"
+        )
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND unit = 'PC' AND sex = 'T'
+              AND nuts_level = 'NUTS2' AND country = 'IT' AND geo = 'ITG1'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Sicilia ranked 1st (highest) in Italy
+
+    def test_calabria_halved(self):
+        """Calabria early leaving roughly halved over the observed window."""
+        f = _skip_if_missing("eurostat_early_school_leavers_nuts2", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT first_value, last_value, cagr_pct
+            FROM read_parquet('{f}')
+            WHERE geo = 'ITF6' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()
+        assert row is not None
+        first_val, last_val, cagr = row
+        assert last_val < first_val * 0.5  # verified: 24.4 -> 6.5
+        assert cagr < -4.0  # verified: -5.15
+
+    def test_benchmark_only_total_sex(self):
+        """Benchmark columns exist only for sex='T' rows (reference slice)."""
+        f = _skip_if_missing(
+            "eurostat_early_school_leavers_nuts2", "mart_geo_benchmark"
+        )
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND unit = 'PC' AND sex != 'T'
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
