@@ -169,10 +169,12 @@ jobs:
         if: ${{ !inputs.smoke }}
         id: diff
         run: |
-          if git diff --quiet -- registry/; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
+          # registry/ è untracked su main (generato da build_registry) —
+          # git diff ignora gli untracked, quindi usiamo git status.
+          if git status --porcelain -- registry/ | grep -q .; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
       # ── PR draft registry (pattern DI) ───────────────────────────────
