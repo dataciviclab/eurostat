@@ -30,6 +30,12 @@ from pathlib import Path
 import duckdb
 import pytest
 
+# Lab test-policy: every test must declare the contract it protects.
+# This whole suite protects the analytical mart contract (benchmark
+# semantics, EU27 scope, verified data facts) — public interface of the
+# marts, so the module-level marker is `contract`.
+pytestmark = pytest.mark.contract
+
 REPO_ROOT = Path(__file__).parent.parent
 MART_BASE = REPO_ROOT / "out" / "data" / "mart"
 
