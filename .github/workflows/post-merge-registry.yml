@@ -1,0 +1,173 @@
+# Post-Merge Registry — eurostat
+#
+# Aggiorna gli artifact registry (clean_catalog, mart_catalog, pipeline_signals,
+# codelists) dopo il merge di una PR che tocca datasets/**. Pattern DI
+# (post-merge-candidate.yml): la CI NON committa su main — apre una PR draft
+# "chore(post-merge)" che il maintainer completa e mergia.
+#
+# Dipende da toolkit #452 (toolkit.registry) — il wrapper scripts/build_registry.py
+# importa `toolkit.registry.builders.build_registry`.
+
+name: Post-Merge Registry
+
+on:
+  pull_request:
+    types: [closed]
+    paths:
+      - "datasets/**"
+      - "scripts/build_registry.py"
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Dataset slug da processare (es. eurostat-gdp-nuts3) — vuoto = tutti i cambiati"
+        required: false
+        type: string
+
+concurrency:
+  group: post-merge-registry-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  run-changed:
+    # Run dei dataset cambiati dalla PR (o dello slug manuale) per generare
+    # i parquet locali che alimentano il registry. Il publish mensile resta
+    # responsabile del sync GCS.
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.detect.outputs.changed }}
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha || github.ref }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install toolkit + deps
+        run: |
+          pip install git+https://github.com/dataciviclab/toolkit.git
+          pip install git+https://github.com/dataciviclab/lab-connectors.git
+          pip install -e ".[mcp]"
+          chmod +x connectors/*.py
+
+      - name: Detect changed dataset dirs
+        id: detect
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          SLUG_INPUT: ${{ inputs.slug }}
+        run: |
+          if [ -n "$SLUG_INPUT" ]; then
+            echo "datasets/$SLUG_INPUT" > changed_dirs.txt
+          else
+            gh pr view "$PR_NUMBER" --json files --jq ".files[].path" | \
+              grep '^datasets/' | cut -d/ -f2 | sort -u > changed_dirs.txt
+          fi
+          # Filtra solo dir con dataset.yml
+          DIRS=""
+          while read -r d; do
+            [ -n "$d" ] && [ -f "datasets/$d/dataset.yml" ] && DIRS="$DIRS datasets/$d"
+          done < changed_dirs.txt
+          if [ -n "$DIRS" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "$DIRS" > changed_dirs_final.txt
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload changed dirs
+        if: steps.detect.outputs.changed == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: changed-dirs
+          path: changed_dirs_final.txt
+          retention-days: 1
+
+      - name: Run changed datasets
+        if: steps.detect.outputs.changed == 'true'
+        env:
+          TOOLKIT_ALLOW_SCRIPT_SOURCE: "1"
+        run: |
+          YEAR=$(date +%Y)
+          for dir in $(cat changed_dirs_final.txt); do
+            echo "=== $dir ==="
+            toolkit run -c "$dir/dataset.yml" --years $YEAR || echo "⚠️  run fallito (skip): $dir"
+          done
+
+  build-and-pr:
+    needs: run-changed
+    if: needs.run-changed.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha || github.ref }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install toolkit
+        run: pip install git+https://github.com/dataciviclab/toolkit.git
+
+      - name: Download changed dirs
+        uses: actions/download-artifact@v8
+        with:
+          name: changed-dirs
+          path: .
+
+      - name: Build registry
+        env:
+          TOOLKIT_ALLOW_SCRIPT_SOURCE: "1"
+        run: python scripts/build_registry.py --write
+
+      - name: Check registry diff
+        id: diff
+        run: |
+          if git diff --quiet -- registry/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create draft registry PR
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          BRANCH="post-merge-registry/pr-${PR_NUMBER}-registry"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+
+          git add registry/
+          git commit -m "chore(post-merge): aggiorna registry per PR #${PR_NUMBER}" || exit 0
+
+          git push --force-with-lease -u origin "$BRANCH"
+
+          EXISTING_PR=$(gh pr list --head "$BRANCH" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING_PR" ]; then
+            gh pr edit "$EXISTING_PR" \
+              --title "chore(post-merge): aggiorna registry per PR #${PR_NUMBER}" \
+              --body "Registry artifacts updated after merge of #${PR_NUMBER} (datasets changed)." \
+              --add-label post-merge
+          else
+            gh pr create \
+              --base main \
+              --head "$BRANCH" \
+              --title "chore(post-merge): aggiorna registry per PR #${PR_NUMBER}" \
+              --body "Registry artifacts updated after merge of #${PR_NUMBER} (datasets changed)." \
+              --label post-merge \
+              --draft
+          fi

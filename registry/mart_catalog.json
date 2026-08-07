@@ -99,7 +99,7 @@
       ],
       "min_rows": 10000,
       "run": {
-        "run_id": "20260807T095231Z_4ee77acc",
+        "run_id": "20260807T182654Z_8488a51f",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -108,17 +108,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 436118,
           "clean": 436118,
           "mart": 306444
         },
         "output_bytes": {
-          "raw": 1136487,
-          "clean": 1004905,
-          "mart": 2348382
+          "raw": 14922768,
+          "clean": 1068741,
+          "mart": 2348196
         },
-        "started_at": "2026-08-07T09:52:31.452818+00:00",
-        "finished_at": "2026-08-07T09:52:37.641850+00:00",
-        "duration_seconds": 6.189
+        "started_at": "2026-08-07T18:26:54.352298+00:00",
+        "finished_at": "2026-08-07T18:27:03.866477+00:00",
+        "duration_seconds": 9.514
       },
       "location": {
         "type": "gcs",
@@ -145,7 +146,7 @@
       ],
       "min_rows": 100,
       "run": {
-        "run_id": "20260807T095231Z_4ee77acc",
+        "run_id": "20260807T182654Z_8488a51f",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -154,17 +155,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 436118,
           "clean": 436118,
           "mart": 306444
         },
         "output_bytes": {
-          "raw": 1136487,
-          "clean": 1004905,
-          "mart": 2348382
+          "raw": 14922768,
+          "clean": 1068741,
+          "mart": 2348196
         },
-        "started_at": "2026-08-07T09:52:31.452818+00:00",
-        "finished_at": "2026-08-07T09:52:37.641850+00:00",
-        "duration_seconds": 6.189
+        "started_at": "2026-08-07T18:26:54.352298+00:00",
+        "finished_at": "2026-08-07T18:27:03.866477+00:00",
+        "duration_seconds": 9.514
       },
       "location": {
         "type": "gcs",
@@ -191,7 +193,7 @@
       ],
       "min_rows": 1000,
       "run": {
-        "run_id": "20260807T095231Z_4ee77acc",
+        "run_id": "20260807T182654Z_8488a51f",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -200,17 +202,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 436118,
           "clean": 436118,
           "mart": 306444
         },
         "output_bytes": {
-          "raw": 1136487,
-          "clean": 1004905,
-          "mart": 2348382
+          "raw": 14922768,
+          "clean": 1068741,
+          "mart": 2348196
         },
-        "started_at": "2026-08-07T09:52:31.452818+00:00",
-        "finished_at": "2026-08-07T09:52:37.641850+00:00",
-        "duration_seconds": 6.189
+        "started_at": "2026-08-07T18:26:54.352298+00:00",
+        "finished_at": "2026-08-07T18:27:03.866477+00:00",
+        "duration_seconds": 9.514
       },
       "location": {
         "type": "gcs",
@@ -425,12 +428,27 @@
       ],
       "min_rows": 1000,
       "run": {
-        "run_id": "20260807T102014Z_8d7a0f97",
+        "run_id": "20260807T182639Z_634133e6",
         "year": 2026,
-        "status": "FAILED",
-        "started_at": "2026-08-07T10:20:14.944552+00:00",
-        "finished_at": "2026-08-07T10:20:15.018093+00:00",
-        "duration_seconds": 0.074
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 308950,
+          "clean": 308950,
+          "mart": 298689
+        },
+        "output_bytes": {
+          "raw": 10958722,
+          "clean": 1014606,
+          "mart": 1376181
+        },
+        "started_at": "2026-08-07T18:26:39.299790+00:00",
+        "finished_at": "2026-08-07T18:26:47.004592+00:00",
+        "duration_seconds": 7.705
       },
       "location": {
         "type": "gcs",
@@ -456,12 +474,27 @@
       ],
       "min_rows": 30,
       "run": {
-        "run_id": "20260807T102014Z_8d7a0f97",
+        "run_id": "20260807T182639Z_634133e6",
         "year": 2026,
-        "status": "FAILED",
-        "started_at": "2026-08-07T10:20:14.944552+00:00",
-        "finished_at": "2026-08-07T10:20:15.018093+00:00",
-        "duration_seconds": 0.074
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 308950,
+          "clean": 308950,
+          "mart": 298689
+        },
+        "output_bytes": {
+          "raw": 10958722,
+          "clean": 1014606,
+          "mart": 1376181
+        },
+        "started_at": "2026-08-07T18:26:39.299790+00:00",
+        "finished_at": "2026-08-07T18:26:47.004592+00:00",
+        "duration_seconds": 7.705
       },
       "location": {
         "type": "gcs",
@@ -486,12 +519,27 @@
       ],
       "min_rows": 1000,
       "run": {
-        "run_id": "20260807T102014Z_8d7a0f97",
+        "run_id": "20260807T182639Z_634133e6",
         "year": 2026,
-        "status": "FAILED",
-        "started_at": "2026-08-07T10:20:14.944552+00:00",
-        "finished_at": "2026-08-07T10:20:15.018093+00:00",
-        "duration_seconds": 0.074
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 308950,
+          "clean": 308950,
+          "mart": 298689
+        },
+        "output_bytes": {
+          "raw": 10958722,
+          "clean": 1014606,
+          "mart": 1376181
+        },
+        "started_at": "2026-08-07T18:26:39.299790+00:00",
+        "finished_at": "2026-08-07T18:26:47.004592+00:00",
+        "duration_seconds": 7.705
       },
       "location": {
         "type": "gcs",
@@ -547,7 +595,7 @@
       ],
       "min_rows": 5000,
       "run": {
-        "run_id": "20260807T095228Z_25ae72b1",
+        "run_id": "20260807T182705Z_28fbcacf",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -556,17 +604,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 26829,
           "clean": 26829,
           "mart": 15016
         },
         "output_bytes": {
-          "raw": 69422,
-          "clean": 63024,
-          "mart": 130376
+          "raw": 635846,
+          "clean": 76018,
+          "mart": 130493
         },
-        "started_at": "2026-08-07T09:52:28.140844+00:00",
-        "finished_at": "2026-08-07T09:52:29.766859+00:00",
-        "duration_seconds": 1.626
+        "started_at": "2026-08-07T18:27:05.500878+00:00",
+        "finished_at": "2026-08-07T18:27:07.914443+00:00",
+        "duration_seconds": 2.414
       },
       "location": {
         "type": "gcs",
@@ -591,7 +640,7 @@
       ],
       "min_rows": 30,
       "run": {
-        "run_id": "20260807T095228Z_25ae72b1",
+        "run_id": "20260807T182705Z_28fbcacf",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -600,17 +649,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 26829,
           "clean": 26829,
           "mart": 15016
         },
         "output_bytes": {
-          "raw": 69422,
-          "clean": 63024,
-          "mart": 130376
+          "raw": 635846,
+          "clean": 76018,
+          "mart": 130493
         },
-        "started_at": "2026-08-07T09:52:28.140844+00:00",
-        "finished_at": "2026-08-07T09:52:29.766859+00:00",
-        "duration_seconds": 1.626
+        "started_at": "2026-08-07T18:27:05.500878+00:00",
+        "finished_at": "2026-08-07T18:27:07.914443+00:00",
+        "duration_seconds": 2.414
       },
       "location": {
         "type": "gcs",
@@ -635,7 +685,7 @@
       ],
       "min_rows": 100,
       "run": {
-        "run_id": "20260807T095228Z_25ae72b1",
+        "run_id": "20260807T182705Z_28fbcacf",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -644,17 +694,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 26829,
           "clean": 26829,
           "mart": 15016
         },
         "output_bytes": {
-          "raw": 69422,
-          "clean": 63024,
-          "mart": 130376
+          "raw": 635846,
+          "clean": 76018,
+          "mart": 130493
         },
-        "started_at": "2026-08-07T09:52:28.140844+00:00",
-        "finished_at": "2026-08-07T09:52:29.766859+00:00",
-        "duration_seconds": 1.626
+        "started_at": "2026-08-07T18:27:05.500878+00:00",
+        "finished_at": "2026-08-07T18:27:07.914443+00:00",
+        "duration_seconds": 2.414
       },
       "location": {
         "type": "gcs",
@@ -663,12 +714,26 @@
       }
     },
     {
-      "slug": "eurostat_income_inequality_nuts2__mart_eurostat_income_inequality_nuts2",
+      "slug": "eurostat_income_inequality_nuts2__mart_geo_benchmark",
       "dataset": "eurostat_income_inequality_nuts2",
-      "table": "mart_eurostat_income_inequality_nuts2",
-      "description": "eurostat_income_inequality_nuts2 — mart mart_eurostat_income_inequality_nuts2",
+      "table": "mart_geo_benchmark",
+      "description": "eurostat_income_inequality_nuts2 — mart mart_geo_benchmark",
+      "primary_key": [
+        "year",
+        "geo",
+        "unit"
+      ],
+      "required_columns": [
+        "year",
+        "geo",
+        "geo_label_en",
+        "country",
+        "unit",
+        "value"
+      ],
+      "min_rows": 3000,
       "run": {
-        "run_id": "20260714T125923Z_5d79978b",
+        "run_id": "20260807T182717Z_21284b86",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -677,21 +742,112 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 8533,
           "clean": 8533,
-          "mart": 462
+          "mart": 5354
         },
         "output_bytes": {
-          "raw": 10709,
-          "clean": 24576,
-          "mart": 4447
+          "raw": 172249,
+          "clean": 30384,
+          "mart": 68339
         },
-        "started_at": "2026-07-14T12:59:23.631007+00:00",
-        "finished_at": "2026-07-14T12:59:24.936691+00:00",
-        "duration_seconds": 1.306
+        "started_at": "2026-08-07T18:27:17.038455+00:00",
+        "finished_at": "2026-08-07T18:27:18.758855+00:00",
+        "duration_seconds": 1.72
       },
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/mart_eurostat_income_inequality_nuts2.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/mart_geo_benchmark.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_income_inequality_nuts2__mart_sintesi",
+      "dataset": "eurostat_income_inequality_nuts2",
+      "table": "mart_sintesi",
+      "description": "eurostat_income_inequality_nuts2 — mart mart_sintesi",
+      "primary_key": [
+        "year",
+        "country"
+      ],
+      "required_columns": [
+        "year",
+        "country",
+        "s80s20_ratio",
+        "rank_procapite_eu"
+      ],
+      "min_rows": 30,
+      "run": {
+        "run_id": "20260807T182717Z_21284b86",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 8533,
+          "clean": 8533,
+          "mart": 5354
+        },
+        "output_bytes": {
+          "raw": 172249,
+          "clean": 30384,
+          "mart": 68339
+        },
+        "started_at": "2026-08-07T18:27:17.038455+00:00",
+        "finished_at": "2026-08-07T18:27:18.758855+00:00",
+        "duration_seconds": 1.72
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_income_inequality_nuts2__mart_trend",
+      "dataset": "eurostat_income_inequality_nuts2",
+      "table": "mart_trend",
+      "description": "eurostat_income_inequality_nuts2 — mart mart_trend",
+      "primary_key": [
+        "geo"
+      ],
+      "required_columns": [
+        "geo",
+        "geo_label_en",
+        "first_year",
+        "last_year",
+        "cagr_pct"
+      ],
+      "min_rows": 100,
+      "run": {
+        "run_id": "20260807T182717Z_21284b86",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 8533,
+          "clean": 8533,
+          "mart": 5354
+        },
+        "output_bytes": {
+          "raw": 172249,
+          "clean": 30384,
+          "mart": 68339
+        },
+        "started_at": "2026-08-07T18:27:17.038455+00:00",
+        "finished_at": "2026-08-07T18:27:18.758855+00:00",
+        "duration_seconds": 1.72
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -809,7 +965,7 @@
       ],
       "min_rows": 5000,
       "run": {
-        "run_id": "20260807T095224Z_85695b3a",
+        "run_id": "20260807T182709Z_3d8448aa",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -818,17 +974,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 28182,
           "clean": 28182,
           "mart": 14008
         },
         "output_bytes": {
-          "raw": 64435,
-          "clean": 61973,
-          "mart": 129748
+          "raw": 658236,
+          "clean": 79933,
+          "mart": 129875
         },
-        "started_at": "2026-08-07T09:52:24.860090+00:00",
-        "finished_at": "2026-08-07T09:52:26.496526+00:00",
-        "duration_seconds": 1.636
+        "started_at": "2026-08-07T18:27:09.571032+00:00",
+        "finished_at": "2026-08-07T18:27:11.939645+00:00",
+        "duration_seconds": 2.369
       },
       "location": {
         "type": "gcs",
@@ -853,7 +1010,7 @@
       ],
       "min_rows": 30,
       "run": {
-        "run_id": "20260807T095224Z_85695b3a",
+        "run_id": "20260807T182709Z_3d8448aa",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -862,17 +1019,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 28182,
           "clean": 28182,
           "mart": 14008
         },
         "output_bytes": {
-          "raw": 64435,
-          "clean": 61973,
-          "mart": 129748
+          "raw": 658236,
+          "clean": 79933,
+          "mart": 129875
         },
-        "started_at": "2026-08-07T09:52:24.860090+00:00",
-        "finished_at": "2026-08-07T09:52:26.496526+00:00",
-        "duration_seconds": 1.636
+        "started_at": "2026-08-07T18:27:09.571032+00:00",
+        "finished_at": "2026-08-07T18:27:11.939645+00:00",
+        "duration_seconds": 2.369
       },
       "location": {
         "type": "gcs",
@@ -897,7 +1055,7 @@
       ],
       "min_rows": 100,
       "run": {
-        "run_id": "20260807T095224Z_85695b3a",
+        "run_id": "20260807T182709Z_3d8448aa",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -906,17 +1064,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 28182,
           "clean": 28182,
           "mart": 14008
         },
         "output_bytes": {
-          "raw": 64435,
-          "clean": 61973,
-          "mart": 129748
+          "raw": 658236,
+          "clean": 79933,
+          "mart": 129875
         },
-        "started_at": "2026-08-07T09:52:24.860090+00:00",
-        "finished_at": "2026-08-07T09:52:26.496526+00:00",
-        "duration_seconds": 1.636
+        "started_at": "2026-08-07T18:27:09.571032+00:00",
+        "finished_at": "2026-08-07T18:27:11.939645+00:00",
+        "duration_seconds": 2.369
       },
       "location": {
         "type": "gcs",
@@ -1033,7 +1192,7 @@
       ],
       "min_rows": 3000,
       "run": {
-        "run_id": "20260807T095239Z_72a0fb5e",
+        "run_id": "20260807T182713Z_67878d2b",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1042,17 +1201,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 9706,
           "clean": 9706,
           "mart": 6281
         },
         "output_bytes": {
-          "raw": 14576,
-          "clean": 24715,
-          "mart": 82656
+          "raw": 191877,
+          "clean": 31516,
+          "mart": 82888
         },
-        "started_at": "2026-08-07T09:52:39.318469+00:00",
-        "finished_at": "2026-08-07T09:52:40.604569+00:00",
-        "duration_seconds": 1.286
+        "started_at": "2026-08-07T18:27:13.581503+00:00",
+        "finished_at": "2026-08-07T18:27:15.414522+00:00",
+        "duration_seconds": 1.833
       },
       "location": {
         "type": "gcs",
@@ -1077,7 +1237,7 @@
       ],
       "min_rows": 30,
       "run": {
-        "run_id": "20260807T095239Z_72a0fb5e",
+        "run_id": "20260807T182713Z_67878d2b",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1086,17 +1246,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 9706,
           "clean": 9706,
           "mart": 6281
         },
         "output_bytes": {
-          "raw": 14576,
-          "clean": 24715,
-          "mart": 82656
+          "raw": 191877,
+          "clean": 31516,
+          "mart": 82888
         },
-        "started_at": "2026-08-07T09:52:39.318469+00:00",
-        "finished_at": "2026-08-07T09:52:40.604569+00:00",
-        "duration_seconds": 1.286
+        "started_at": "2026-08-07T18:27:13.581503+00:00",
+        "finished_at": "2026-08-07T18:27:15.414522+00:00",
+        "duration_seconds": 1.833
       },
       "location": {
         "type": "gcs",
@@ -1121,7 +1282,7 @@
       ],
       "min_rows": 100,
       "run": {
-        "run_id": "20260807T095239Z_72a0fb5e",
+        "run_id": "20260807T182713Z_67878d2b",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1130,17 +1291,18 @@
           "mart": 100
         },
         "output_rows": {
+          "raw": 9706,
           "clean": 9706,
           "mart": 6281
         },
         "output_bytes": {
-          "raw": 14576,
-          "clean": 24715,
-          "mart": 82656
+          "raw": 191877,
+          "clean": 31516,
+          "mart": 82888
         },
-        "started_at": "2026-08-07T09:52:39.318469+00:00",
-        "finished_at": "2026-08-07T09:52:40.604569+00:00",
-        "duration_seconds": 1.286
+        "started_at": "2026-08-07T18:27:13.581503+00:00",
+        "finished_at": "2026-08-07T18:27:15.414522+00:00",
+        "duration_seconds": 1.833
       },
       "location": {
         "type": "gcs",
@@ -1273,27 +1435,140 @@
       }
     },
     {
-      "slug": "eurostat_tran_sf_roadnu__mart_eurostat_tran_sf_roadnu",
+      "slug": "eurostat_tran_sf_roadnu__mart_geo_benchmark",
       "dataset": "eurostat_tran_sf_roadnu",
-      "table": "mart_eurostat_tran_sf_roadnu",
-      "description": "eurostat_tran_sf_roadnu — mart mart_eurostat_tran_sf_roadnu",
+      "table": "mart_geo_benchmark",
+      "description": "eurostat_tran_sf_roadnu — mart mart_geo_benchmark",
+      "primary_key": [
+        "year",
+        "geo",
+        "unit"
+      ],
+      "required_columns": [
+        "year",
+        "geo",
+        "geo_label_en",
+        "country",
+        "unit",
+        "value"
+      ],
+      "min_rows": 1000,
       "run": {
-        "run_id": "20260619T175632Z_9b9208a2",
+        "run_id": "20260807T182720Z_41b903f7",
         "year": 2026,
         "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
         "output_rows": {
-          "mart": 2035
+          "raw": 108836,
+          "clean": 108836,
+          "mart": 41412
         },
         "output_bytes": {
-          "mart": 15480
+          "raw": 2520790,
+          "clean": 214177,
+          "mart": 397722
         },
-        "started_at": "2026-06-19T17:56:32.012243+00:00",
-        "finished_at": "2026-06-19T17:56:32.179686+00:00",
-        "duration_seconds": 0.167
+        "started_at": "2026-08-07T18:27:20.301800+00:00",
+        "finished_at": "2026-08-07T18:27:23.993862+00:00",
+        "duration_seconds": 3.692
       },
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/mart_eurostat_tran_sf_roadnu.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/mart_geo_benchmark.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_tran_sf_roadnu__mart_sintesi",
+      "dataset": "eurostat_tran_sf_roadnu",
+      "table": "mart_sintesi",
+      "description": "eurostat_tran_sf_roadnu — mart mart_sintesi",
+      "primary_key": [
+        "year",
+        "country"
+      ],
+      "required_columns": [
+        "year",
+        "country",
+        "incidenti_per_milione",
+        "rank_procapite_eu"
+      ],
+      "min_rows": 30,
+      "run": {
+        "run_id": "20260807T182720Z_41b903f7",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 108836,
+          "clean": 108836,
+          "mart": 41412
+        },
+        "output_bytes": {
+          "raw": 2520790,
+          "clean": 214177,
+          "mart": 397722
+        },
+        "started_at": "2026-08-07T18:27:20.301800+00:00",
+        "finished_at": "2026-08-07T18:27:23.993862+00:00",
+        "duration_seconds": 3.692
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_tran_sf_roadnu__mart_trend",
+      "dataset": "eurostat_tran_sf_roadnu",
+      "table": "mart_trend",
+      "description": "eurostat_tran_sf_roadnu — mart mart_trend",
+      "primary_key": [
+        "geo"
+      ],
+      "required_columns": [
+        "geo",
+        "geo_label_en",
+        "first_year",
+        "last_year",
+        "cagr_pct"
+      ],
+      "min_rows": 100,
+      "run": {
+        "run_id": "20260807T182720Z_41b903f7",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 108836,
+          "clean": 108836,
+          "mart": 41412
+        },
+        "output_bytes": {
+          "raw": 2520790,
+          "clean": 214177,
+          "mart": 397722
+        },
+        "started_at": "2026-08-07T18:27:20.301800+00:00",
+        "finished_at": "2026-08-07T18:27:23.993862+00:00",
+        "duration_seconds": 3.692
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/mart_trend.parquet",
         "multi_file": false
       }
     }
