@@ -22,7 +22,7 @@ If `clean.sql` has a `-- DIMENSION ... add codelist` comment:
 ### 3. Run & verify
 
 ```bash
-TOOLKIT_ALLOW_SCRIPT_SOURCE=1 toolkit run full --config datasets/{slug}/dataset.yml --years 2026
+TOOLKIT_ALLOW_SCRIPT_SOURCE=1 toolkit run -c datasets/{slug}/dataset.yml --years 2026
 ```
 
 Then **verify the output before committing**:

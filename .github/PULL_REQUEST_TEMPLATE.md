@@ -17,7 +17,7 @@ What changed and why. One paragraph is enough.
 ## Test plan
 
 - [ ] `pytest tests/ -v` passes
-- [ ] `toolkit run full --config datasets/{slug}/dataset.yml --years 2024` passes (for new/fixed datasets)
+- [ ] `toolkit run -c datasets/{slug}/dataset.yml --years 2024` passes (for new/fixed datasets)
 
 ## Downstream impact
 
