@@ -44,9 +44,9 @@ SELECT
     cv.gdp_totale_mio,
     nt.gdp_nuts3_sum_mio,
     -- Cross-country rank (EU27 only) by GDP per capita (1 = richest in the EU, same year)
-    CASE WHEN cv.is_eu THEN ROW_NUMBER() OVER (PARTITION BY cv.year, cv.is_eu ORDER BY cv.gdp_procapite DESC) ELSE NULL END AS rank_procapite_eu,
+    CASE WHEN cv.is_eu THEN RANK() OVER (PARTITION BY cv.year, cv.is_eu ORDER BY cv.gdp_procapite DESC) ELSE NULL END AS rank_procapite_eu,
     -- Cross-country rank (EU27 only) by total GDP
-    CASE WHEN cv.is_eu THEN ROW_NUMBER() OVER (PARTITION BY cv.year, cv.is_eu ORDER BY cv.gdp_totale_mio DESC) ELSE NULL END AS rank_totale_eu,
+    CASE WHEN cv.is_eu THEN RANK() OVER (PARTITION BY cv.year, cv.is_eu ORDER BY cv.gdp_totale_mio DESC) ELSE NULL END AS rank_totale_eu,
     -- % distance from the EU27 country average by GDP per capita
     ROUND(
         (cv.gdp_procapite - AVG(cv.gdp_procapite) FILTER (WHERE cv.is_eu) OVER (PARTITION BY cv.year))

@@ -15,11 +15,10 @@ raw:
   output_policy: overwrite
   sources:
     - name: "eurostat_ilc_li41"
-      type: "script"
+      type: "sdmx"
       args:
-        command: "../../connectors/tsv_normalize.py --flow ILC_LI41 --output ilc_li41_normalized.parquet"
-        output: "ilc_li41_normalized.parquet"
-        filename: "ilc_li41_normalized.parquet"
+        agency: "ESTAT"
+        flow: "ILC_LI41"
       primary: true
 
 clean:

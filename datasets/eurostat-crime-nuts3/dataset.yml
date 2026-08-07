@@ -15,11 +15,10 @@ raw:
   output_policy: overwrite
   sources:
     - name: "eurostat_crim_gen_reg"
-      type: "script"
+      type: "sdmx"
       args:
-        command: "../../connectors/tsv_normalize.py --flow CRIM_GEN_REG --output crim_gen_reg_normalized.parquet"
-        output: "crim_gen_reg_normalized.parquet"
-        filename: "crim_gen_reg_normalized.parquet"
+        agency: "ESTAT"
+        flow: "CRIM_GEN_REG"
       primary: true
 
 clean:

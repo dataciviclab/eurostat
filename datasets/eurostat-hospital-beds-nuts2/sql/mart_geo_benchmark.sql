@@ -70,7 +70,7 @@ SELECT
     END AS percentile_eu,
     -- National rank (1 = most beds per 100k in the country, same year/level/unit)
     CASE
-        WHEN b.unit = 'HAB_P' THEN ROW_NUMBER() OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit ORDER BY b.value DESC)
+        WHEN b.unit = 'HAB_P' THEN RANK() OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit ORDER BY b.value DESC)
         ELSE NULL
     END AS rank_nazionale,
     -- % distance from the EU27 average (same year, nuts_level, unit)

@@ -74,7 +74,7 @@ SELECT
     END AS percentile_eu,
     -- National rank (1 = highest offence rate in the country, same year/iccs/level/unit)
     CASE
-        WHEN b.unit = 'P_HTHAB' THEN ROW_NUMBER() OVER (PARTITION BY b.year, b.country, b.iccs, b.nuts_level, b.unit ORDER BY b.value DESC)
+        WHEN b.unit = 'P_HTHAB' THEN RANK() OVER (PARTITION BY b.year, b.country, b.iccs, b.nuts_level, b.unit ORDER BY b.value DESC)
         ELSE NULL
     END AS rank_nazionale,
     -- % distance from the EU average (same year, iccs, nuts_level, unit)

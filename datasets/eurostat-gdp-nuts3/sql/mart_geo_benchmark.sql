@@ -69,7 +69,7 @@ SELECT
     END AS percentile_eu,
     -- National rank (1 = highest GDP per capita in the country, same year/level/unit)
     CASE
-        WHEN b.unit = 'EUR_HAB' THEN ROW_NUMBER() OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit ORDER BY b.value DESC)
+        WHEN b.unit = 'EUR_HAB' THEN RANK() OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit ORDER BY b.value DESC)
         ELSE NULL
     END AS rank_nazionale,
     -- % distance from the EU27 average (same year, nuts_level, unit)

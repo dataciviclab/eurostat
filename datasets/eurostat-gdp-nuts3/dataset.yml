@@ -15,11 +15,10 @@ raw:
   output_policy: overwrite
   sources:
     - name: "eurostat_nama_10r_3gdp"
-      type: "script"
+      type: "sdmx"
       args:
-        command: "../../connectors/tsv_normalize.py --flow NAMA_10R_3GDP --output nama_10r_3gdp_normalized.parquet --format parquet"
-        output: "nama_10r_3gdp_normalized.parquet"
-        filename: "nama_10r_3gdp_normalized.parquet"
+        agency: "ESTAT"
+        flow: "NAMA_10R_3GDP"
       primary: true
 
 clean:
