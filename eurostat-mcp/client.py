@@ -23,6 +23,7 @@ from lab_connectors.mcp.cache import TtlCache
 # ── GCS paths (multi-year parquet, no year in path) ─────────────────────────
 
 GCS_BASE = "https://storage.googleapis.com/dataciviclab-clean/eurostat"
+GCS_MART_BASE = "https://storage.googleapis.com/dataciviclab-mart/eurostat"
 _FALLBACK_YEAR: str | None = None
 
 
@@ -77,11 +78,37 @@ for _entry in sorted(_DATASETS_DIR.iterdir()):
         "nuts_level": _reg.get("nuts_level", 3),
         "dimensions": list(_reg.get("dimensions", [])),
         "description": _reg.get("description", _slug),
+        "type": "clean",
     }
+    # Analytical marts: derive from mart.tables (same auto-discovery, no
+    # hardcoded list). Slug convention: {dataset}__{mart_name}; parquet lives
+    # on the mart bucket with the same no-year layout as clean files.
+    _marts = (_data or {}).get("mart", {}) or {}
+    for _mart in _marts.get("tables", []):
+        _mart_name = _mart.get("name", "")
+        if not _mart_name:
+            continue
+        _mart_slug = f"{_slug}__{_mart_name}"
+        DATASETS[_mart_slug] = {
+            "dataflow": _reg.get("dataflow", ""),
+            "theme": _reg.get("theme", ""),
+            "nuts_level": _reg.get("nuts_level", 3),
+            "dimensions": list(_reg.get("dimensions", [])),
+            "description": f"{_reg.get('description', _slug)} — analytical mart "
+            f"'{_mart_name}' (benchmark/sintesi/trend)",
+            "type": "mart",
+            "mart_table": _mart_name,
+        }
 
 # Add computed parquet_url to each dataset (can be overridden for tests)
 for _slug in list(DATASETS):
-    DATASETS[_slug]["parquet_url"] = _parquet_url(_slug)
+    if DATASETS[_slug]["type"] == "mart":
+        _mart_table = DATASETS[_slug]["mart_table"]
+        DATASETS[_slug]["parquet_url"] = (
+            f"{GCS_MART_BASE}/{_slug.split('__')[0]}/{_mart_table}.parquet"
+        )
+    else:
+        DATASETS[_slug]["parquet_url"] = _parquet_url(_slug)
 
 VALID_SLUGS: set[str] = set(DATASETS.keys())
 
@@ -224,10 +251,19 @@ def _query(sql: str, path: str) -> tuple[list[str], list[tuple]]:
 # ── Tool implementations ─────────────────────────────────────────────────────
 
 
-def list_datasets() -> list[dict[str, Any]]:
-    """Return the list of available datasets with metadata."""
+def list_datasets(dataset_type: str | None = None) -> list[dict[str, Any]]:
+    """Return the list of available datasets with metadata.
+
+    Args:
+        dataset_type: Optional filter — 'clean' (source parquets) or 'mart'
+            (analytical mart tables). None returns both.
+    """
+    if dataset_type not in (None, "clean", "mart"):
+        raise ValueError("dataset_type must be one of: None, 'clean', 'mart'")
     result = []
     for slug, meta in sorted(DATASETS.items()):
+        if dataset_type is not None and meta["type"] != dataset_type:
+            continue
         result.append(
             {
                 "slug": slug,
@@ -236,6 +272,7 @@ def list_datasets() -> list[dict[str, Any]]:
                 "nuts_level": meta["nuts_level"],
                 "dimensions": meta["dimensions"],
                 "description": meta["description"],
+                "type": meta["type"],
             }
         )
     return result

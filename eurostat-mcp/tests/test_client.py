@@ -126,6 +126,62 @@ class TestListDatasets:
         assert len(slugs) == len(set(slugs))
 
 
+# ── mart derivation ──────────────────────────────────────────────────────────
+
+
+class TestMartDerivation:
+    """Analytical marts are auto-discovered from dataset.yml mart.tables."""
+
+    @pytest.mark.contract
+    def test_marts_exist(self):
+        """At least the 5 migrated datasets expose analytical marts."""
+        marts = list_datasets("mart")
+        assert len(marts) > 0
+        # The migrated datasets expose the 3 analytical marts each.
+        for slug in ("eurostat_gdp_nuts3", "eurostat_crime_nuts3"):
+            mart_slugs = [m["slug"] for m in marts if m["slug"].startswith(f"{slug}__")]
+            assert len(mart_slugs) >= 3, f"{slug} should expose >= 3 marts"
+
+    @pytest.mark.policy
+    def test_mart_type_filter(self):
+        """type filter isolates clean from mart entries."""
+        cleans = list_datasets("clean")
+        marts = list_datasets("mart")
+        assert all(m["type"] == "mart" for m in marts)
+        assert all(c["type"] == "clean" for c in cleans)
+        # No overlap between clean and mart slugs.
+        clean_slugs = {c["slug"] for c in cleans}
+        mart_slugs = {m["slug"] for m in marts}
+        assert not (clean_slugs & mart_slugs)
+
+    @pytest.mark.policy
+    def test_invalid_type_rejected(self):
+        with pytest.raises(ValueError):
+            list_datasets("bogus")
+
+    @pytest.mark.contract
+    def test_mart_slug_convention(self):
+        """Mart slug is {dataset}__{mart_table}."""
+        marts = list_datasets("mart")
+        for m in marts:
+            dataset, _, table = m["slug"].partition("__")
+            assert dataset in DATASETS
+            assert table.startswith("mart_")
+            # The mart table is declared in the source dataset.yml.
+            assert DATASETS[m["slug"]]["mart_table"] == table
+
+    @pytest.mark.contract
+    def test_mart_parquet_url(self):
+        """Mart URL points to the mart bucket, no-year layout."""
+        for m in list_datasets("mart"):
+            url = DATASETS[m["slug"]]["parquet_url"]
+            assert "dataciviclab-mart" in url
+            assert url.endswith(".parquet")
+            # no-year layout: {slug}/{table}.parquet (matches publish rsync)
+            dataset, _, table = m["slug"].partition("__")
+            assert f"/{dataset}/{table}.parquet" in url
+
+
 # ── get_codelist ─────────────────────────────────────────────────────────────
 
 
