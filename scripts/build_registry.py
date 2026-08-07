@@ -1,7 +1,8 @@
 """Genera gli artifact registry del repo: clean_catalog, mart_catalog, pipeline_signals.
 
-Wrapper sottile sul builder condiviso ``lab_connectors.registry`` (il repo che
-ospita la logica di generazione): qui solo layout, path contract e scrittura.
+Wrapper sottile sul builder condiviso ``toolkit.registry`` (il toolkit ospita la
+logica di generazione, riusando config model/path resolver/run_state/parquet_schema):
+qui solo layout, path contract e scrittura.
 
 Layout eurostat:
 - dataset.yml in ``datasets/*/`` (chiave canonica: ``dataset.name``, underscore);
@@ -49,12 +50,12 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        from lab_connectors.registry import PathContract, RepoLayout
-        from lab_connectors.registry.builders import build_registry
+        from toolkit.registry import PathContract, RepoLayout
+        from toolkit.registry.builders import build_registry
     except ImportError as exc:  # pragma: no cover
         print(
-            f"ERRORE: lab_connectors.registry non disponibile ({exc}).\n"
-            "Serve lab-connectors con il modulo registry (branch feat/registry-schemas, "
+            f"ERRORE: toolkit.registry non disponibile ({exc}).\n"
+            "Serve toolkit con il modulo registry (branch feat/registry-builder, "
             "in attesa di merge su main).",
             file=sys.stderr,
         )
@@ -63,7 +64,6 @@ def main() -> int:
     layout = RepoLayout(
         repo_root=ROOT,
         dataset_dirs=("datasets",),
-        data_root=ROOT / "out",
         source_repo="dataciviclab/eurostat",
     )
     contract = PathContract(prefix="eurostat", clean_layout="flat", mart_layout="flat")
