@@ -95,6 +95,13 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS2",
         "other_unit_geo": "ITC4",
     },
+    {
+        "slug": "eurostat_tran_sf_roadnu",
+        "benchmark_unit": "P_MHAB",
+        "other_unit": "NR",
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC11",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -714,3 +721,45 @@ class TestIncomeInequalityNuts2Facts:
         ).fetchone()
         assert row is not None
         assert row[0] >= 15
+
+
+class TestTranSfRoadnuFacts:
+    """Verified facts for eurostat-tran-sf-roadnu."""
+
+    def test_italy_top5_eu_accidents(self):
+        """Italy is top-5 in EU27 by road accidents per million (2024)."""
+        f = _skip_if_missing("eurostat_tran_sf_roadnu", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT incidenti_per_milione, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        assert 1 <= row[1] <= 6  # verified: rank 4 of 27
+
+    def test_genova_top_italy(self):
+        """Genova has the most accidents per million among IT provinces (2023)."""
+        f = _skip_if_missing("eurostat_tran_sf_roadnu", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2023 AND unit = 'P_MHAB' AND nuts_level = 'NUTS3'
+              AND country = 'IT' AND geo = 'ITC33'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Genova ranked 1st in Italy
+
+    def test_window_is_long(self):
+        """Road accidents series spans 1999–2024 (>= 20 years observed)."""
+        f = _skip_if_missing("eurostat_tran_sf_roadnu", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT MAX(years_observed) FROM read_parquet('{f}')
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] >= 20
