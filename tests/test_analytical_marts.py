@@ -30,6 +30,12 @@ from pathlib import Path
 import duckdb
 import pytest
 
+# Lab test-policy: every test must declare the contract it protects.
+# This whole suite protects the analytical mart contract (benchmark
+# semantics, EU27 scope, verified data facts) — public interface of the
+# marts, so the module-level marker is `contract`.
+pytestmark = pytest.mark.contract
+
 REPO_ROOT = Path(__file__).parent.parent
 MART_BASE = REPO_ROOT / "out" / "data" / "mart"
 
@@ -85,6 +91,22 @@ ANALYTICAL_DATASETS = [
         "other_unit_is_absent": True,
         "nuts_level": "NUTS2",
         "other_unit_geo": "ITC4",
+    },
+    {
+        "slug": "eurostat_income_inequality_nuts2",
+        "benchmark_unit": "INX",
+        # Single-unit dataset: any other unit must carry NULL benchmark.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS2",
+        "other_unit_geo": "ITC4",
+    },
+    {
+        "slug": "eurostat_tran_sf_roadnu",
+        "benchmark_unit": "P_MHAB",
+        "other_unit": "NR",
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC11",
     },
 ]
 
@@ -189,31 +211,35 @@ class TestSharedBenchmarkContract:
 
     @pytest.mark.parametrize("ds", ANALYTICAL_DATASETS, ids=lambda d: d["slug"])
     def test_rank_is_1_for_top_region(self, ds):
-        """The top region of each country must have rank_nazionale = 1."""
+        """The top region of each country must have rank_nazionale = 1.
+
+        Uses RANK() (ties share the same rank — regions with equal value are
+        equally ranked, deterministic). Rows with rank_nazionale = 1 in the
+        mart must be the max-value rows of their (country, nuts_level, unit)
+        partition.
+        """
         f = _skip_if_missing(ds["slug"], "mart_geo_benchmark")
         dim_partition = f", {ds['dim']}" if "dim" in ds else ""
         dim_filter = f" AND {ds['dim']} = '{ds['dim_value']}'" if "dim" in ds else ""
         n_bad = duckdb.sql(
             f"""
             WITH ranked AS (
-                SELECT geo, country,
-                       ROW_NUMBER() OVER (PARTITION BY year, country, unit{dim_partition}
-                                          ORDER BY value DESC) AS rn
+                SELECT geo, country, value,
+                       RANK() OVER (PARTITION BY year, country, unit{dim_partition}
+                                    ORDER BY value DESC) AS rn
                 FROM read_parquet('{f}')
                 WHERE year = {CHECK_YEAR} AND unit = '{ds["benchmark_unit"]}'
                   AND nuts_level = '{ds["nuts_level"]}'{dim_filter}
-            ),
-            top AS (
-                SELECT geo FROM ranked WHERE rn = 1
             )
             SELECT COUNT(*)
             FROM read_parquet('{f}') b
-            JOIN top t ON b.geo = t.geo AND b.year = {CHECK_YEAR}
-                       AND b.unit = '{ds["benchmark_unit"]}'{dim_filter}
-            WHERE b.rank_nazionale != 1
+            JOIN ranked r ON b.geo = r.geo AND b.year = {CHECK_YEAR}
+                       AND b.unit = '{ds["benchmark_unit"]}'
+                       AND b.nuts_level = '{ds["nuts_level"]}'{dim_filter}
+            WHERE b.rank_nazionale = 1 AND r.rn != 1
             """
         ).fetchone()[0]
-        assert n_bad == 0, "a top-ranked region has rank_nazionale != 1"
+        assert n_bad == 0, "a rank-1 region is not the top value of its partition"
 
     @pytest.mark.parametrize("ds", ANALYTICAL_DATASETS, ids=lambda d: d["slug"])
     def test_benchmark_columns_complete(self, ds):
@@ -641,3 +667,105 @@ class TestPovertyRiskNuts2Facts:
         ).fetchone()
         assert row is not None
         assert row[0] >= 15
+
+
+class TestIncomeInequalityNuts2Facts:
+    """Verified facts for eurostat-income-inequality-nuts2."""
+
+    def test_calabria_highest_inequality_italy(self):
+        """Calabria has the highest S80/S20 ratio among Italian regions (2024)."""
+        f = _skip_if_missing("eurostat_income_inequality_nuts2", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND unit = 'INX' AND nuts_level = 'NUTS2'
+              AND country = 'IT' AND geo = 'ITF6'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Calabria ranked 1st (highest inequality) in Italy
+
+    def test_italy_above_eu_average(self):
+        """Italy is above the EU27 average in inequality (2024)."""
+        f = _skip_if_missing("eurostat_income_inequality_nuts2", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT s80s20_ratio, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 5.5 vs EU27 average ~4.4 — top-5 in inequality
+        assert row[0] > 5.0
+        assert 1 <= row[1] <= 6
+
+    def test_calabria_extreme_percentile(self):
+        """Calabria S80/S20 is in the top EU27 percentile (2024)."""
+        f = _skip_if_missing("eurostat_income_inequality_nuts2", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT percentile_eu, distanza_media_eu_pct
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND unit = 'INX' AND nuts_level = 'NUTS2'
+              AND geo = 'ITF6'
+            """
+        ).fetchone()
+        assert row is not None
+        percentile, dist = row
+        assert percentile > 0.95  # top 5% of EU27 regions
+        assert dist > 50  # >50% above EU27 average
+
+    def test_window_is_long(self):
+        """Inequality series spans 2003–2025 (>= 15 years observed)."""
+        f = _skip_if_missing("eurostat_income_inequality_nuts2", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT MAX(years_observed) FROM read_parquet('{f}')
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] >= 15
+
+
+class TestTranSfRoadnuFacts:
+    """Verified facts for eurostat-tran-sf-roadnu."""
+
+    def test_italy_top5_eu_accidents(self):
+        """Italy is top-5 in EU27 by road accidents per million (2024)."""
+        f = _skip_if_missing("eurostat_tran_sf_roadnu", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT incidenti_per_milione, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        assert 1 <= row[1] <= 6  # verified: rank 4 of 27
+
+    def test_genova_top_italy(self):
+        """Genova has the most accidents per million among IT provinces (2023)."""
+        f = _skip_if_missing("eurostat_tran_sf_roadnu", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2023 AND unit = 'P_MHAB' AND nuts_level = 'NUTS3'
+              AND country = 'IT' AND geo = 'ITC33'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Genova ranked 1st in Italy
+
+    def test_window_is_long(self):
+        """Road accidents series spans 1999–2024 (>= 20 years observed)."""
+        f = _skip_if_missing("eurostat_tran_sf_roadnu", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT MAX(years_observed) FROM read_parquet('{f}')
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] >= 20

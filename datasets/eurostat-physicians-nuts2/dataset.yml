@@ -15,12 +15,28 @@ raw:
   output_policy: overwrite
   sources:
     - name: "eurostat_hlth_rs_physreg"
-      type: "script"
+      type: "sdmx"
       args:
-        command: "../../connectors/tsv_normalize.py --flow HLTH_RS_PHYSREG --output hlth_rs_physreg_normalized.parquet"
-        output: "hlth_rs_physreg_normalized.parquet"
-        filename: "hlth_rs_physreg_normalized.parquet"
+        agency: "ESTAT"
+        flow: "HLTH_RS_PHYSREG"
       primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
 
 clean:
   sql: "sql/clean.sql"

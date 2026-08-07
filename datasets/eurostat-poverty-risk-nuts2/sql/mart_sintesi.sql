@@ -29,7 +29,7 @@ SELECT
     cv.country,
     cv.rischio_poverta_pct,
     -- Cross-country rank (EU27 only) by poverty share (1 = highest poverty, same year)
-    CASE WHEN cv.is_eu THEN ROW_NUMBER() OVER (PARTITION BY cv.year, cv.is_eu ORDER BY cv.rischio_poverta_pct DESC) ELSE NULL END AS rank_procapite_eu,
+    CASE WHEN cv.is_eu THEN RANK() OVER (PARTITION BY cv.year, cv.is_eu ORDER BY cv.rischio_poverta_pct DESC) ELSE NULL END AS rank_procapite_eu,
     -- % distance from the EU27 country average
     ROUND(
         (cv.rischio_poverta_pct - AVG(cv.rischio_poverta_pct) FILTER (WHERE cv.is_eu) OVER (PARTITION BY cv.year))

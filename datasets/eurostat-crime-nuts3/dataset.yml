@@ -15,12 +15,33 @@ raw:
   output_policy: overwrite
   sources:
     - name: "eurostat_crim_gen_reg"
-      type: "script"
+      type: "sdmx"
       args:
-        command: "../../connectors/tsv_normalize.py --flow CRIM_GEN_REG --output crim_gen_reg_normalized.parquet"
-        output: "crim_gen_reg_normalized.parquet"
-        filename: "crim_gen_reg_normalized.parquet"
+        agency: "ESTAT"
+        flow: "CRIM_GEN_REG"
       primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: iccs
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: ICCS
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
 
 clean:
   sql: "sql/clean.sql"

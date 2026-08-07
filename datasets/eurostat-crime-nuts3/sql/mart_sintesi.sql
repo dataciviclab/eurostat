@@ -34,7 +34,7 @@ SELECT
     cv.iccs_label_en,
     cv.reati_per_100k,
     -- Cross-country rank by offence rate (EU27 only, 1 = highest rate, same year/iccs)
-    CASE WHEN cv.is_eu THEN ROW_NUMBER() OVER (PARTITION BY cv.year, cv.iccs, cv.is_eu ORDER BY cv.reati_per_100k DESC) ELSE NULL END AS rank_procapite_eu,
+    CASE WHEN cv.is_eu THEN RANK() OVER (PARTITION BY cv.year, cv.iccs, cv.is_eu ORDER BY cv.reati_per_100k DESC) ELSE NULL END AS rank_procapite_eu,
     -- % distance from the EU27 country average (same year/iccs)
     ROUND(
         (cv.reati_per_100k - AVG(cv.reati_per_100k) FILTER (WHERE cv.is_eu) OVER (PARTITION BY cv.year, cv.iccs))

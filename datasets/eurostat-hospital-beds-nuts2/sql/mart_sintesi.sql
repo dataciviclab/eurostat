@@ -29,7 +29,7 @@ SELECT
     cv.country,
     cv.posti_letto_per_100k,
     -- Cross-country rank (EU27 only) by beds per 100k (1 = best staffed, same year)
-    CASE WHEN cv.is_eu THEN ROW_NUMBER() OVER (PARTITION BY cv.year, cv.is_eu ORDER BY cv.posti_letto_per_100k DESC) ELSE NULL END AS rank_procapite_eu,
+    CASE WHEN cv.is_eu THEN RANK() OVER (PARTITION BY cv.year, cv.is_eu ORDER BY cv.posti_letto_per_100k DESC) ELSE NULL END AS rank_procapite_eu,
     -- % distance from the EU27 country average
     ROUND(
         (cv.posti_letto_per_100k - AVG(cv.posti_letto_per_100k) FILTER (WHERE cv.is_eu) OVER (PARTITION BY cv.year))

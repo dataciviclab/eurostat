@@ -1,4 +1,4 @@
--- mart_geo_benchmark — At-risk-of-poverty rate by NUTS2 region: EU27-wide
+-- mart_geo_benchmark — Income inequality S80/S20 by NUTS2 region: EU27-wide
 -- benchmark analytics.
 --
 -- One row per (year, geo, unit). Replaces the old pass-through mart
@@ -14,11 +14,9 @@
 -- TR, RS, ME, MK, AL, ...) stay in the mart with NULL benchmark so they
 -- never distort EU averages/ranks/percentiles.
 --
--- Benchmark columns are computed for unit = 'PC' (share of population at risk
--- of poverty, %). NOTE: higher value = worse. rank/percentile describe the
--- distribution, so a top rank means the highest poverty share.
---
--- NR (absolute count) rows carry no benchmark so they never distort.
+-- Benchmark columns are computed for unit = 'INX' (S80/S20 quintile share
+-- ratio). NOTE: higher value = worse (wider inequality). rank/percentile
+-- describe the distribution, so a top rank means the highest inequality.
 
 WITH eu_countries AS (
     SELECT unnest(['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','EL',
@@ -55,29 +53,30 @@ SELECT
     b.unit,
     b.unit_label_en,
     b.value,
-    -- EU average for the same year, NUTS level and unit (PC only, meaningful benchmark)
+    -- EU27 average for the same year, NUTS level and unit (INX only)
     CASE
-        WHEN b.unit = 'PC' THEN ROUND(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit), 2)
+        WHEN b.unit = 'INX' THEN ROUND(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit), 2)
         ELSE NULL
     END AS media_eu_value,
     -- Country average for the same year, NUTS level and unit
     CASE
-        WHEN b.unit = 'PC' THEN ROUND(AVG(b.value) OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit), 2)
+        WHEN b.unit = 'INX' THEN ROUND(AVG(b.value) OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit), 2)
         ELSE NULL
     END AS media_paese_value,
-    -- Percentile within the EU (same year, nuts_level, unit)
+    -- Percentile within EU27 (same year, nuts_level, unit); NULL outside EU27
     CASE
-        WHEN b.unit = 'PC' AND b.is_eu THEN ROUND(PERCENT_RANK() OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.is_eu ORDER BY b.value), 4)
+        WHEN b.unit = 'INX' AND b.is_eu THEN ROUND(
+            PERCENT_RANK() OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.is_eu ORDER BY b.value), 4)
         ELSE NULL
     END AS percentile_eu,
-    -- National rank (1 = highest poverty share in the country, same year/level/unit)
+    -- National rank (1 = highest inequality in the country, same year/level/unit)
     CASE
-        WHEN b.unit = 'PC' THEN RANK() OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit ORDER BY b.value DESC)
+        WHEN b.unit = 'INX' THEN RANK() OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit ORDER BY b.value DESC)
         ELSE NULL
     END AS rank_nazionale,
-    -- % distance from the EU average (same year, nuts_level, unit)
+    -- % distance from the EU27 average (same year, nuts_level, unit)
     CASE
-        WHEN b.unit = 'PC' THEN ROUND(
+        WHEN b.unit = 'INX' THEN ROUND(
             (b.value - AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit))
             / NULLIF(ABS(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit)), 0) * 100, 1)
         ELSE NULL
