@@ -43,13 +43,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -178,13 +180,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -325,13 +329,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -367,7 +373,8 @@
           "name": "country",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "country_code"
         },
         {
           "name": "nuts_parent_code",
@@ -467,13 +474,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -587,7 +596,8 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "age",
@@ -599,7 +609,8 @@
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -727,7 +738,8 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "sex",
@@ -745,7 +757,8 @@
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -874,7 +887,8 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "sex",
@@ -892,7 +906,8 @@
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -1033,13 +1048,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -1185,13 +1202,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -1326,13 +1345,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -1362,7 +1383,8 @@
           "name": "country",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "country_code"
         },
         {
           "name": "nuts_parent_code",
@@ -1454,13 +1476,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -1590,13 +1614,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -1626,7 +1652,8 @@
           "name": "country",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "country_code"
         },
         {
           "name": "nuts_parent_code",
@@ -1726,13 +1753,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -1860,13 +1889,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -2000,13 +2031,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -2135,19 +2168,22 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "month",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "month"
         },
         {
           "name": "freq_label_en",
@@ -2287,13 +2323,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -2323,7 +2361,8 @@
           "name": "country",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "country_code"
         },
         {
           "name": "nuts_parent_code",
@@ -2423,13 +2462,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -2558,13 +2599,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -2693,13 +2736,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -2833,13 +2878,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -2869,7 +2916,8 @@
           "name": "country",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "country_code"
         },
         {
           "name": "nuts_parent_code",
@@ -2975,13 +3023,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -3121,13 +3171,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -3279,13 +3331,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -3437,13 +3491,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",
@@ -3569,13 +3625,15 @@
           "name": "geo",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "year",
           "type": "INTEGER",
           "role": "metric",
-          "description": ""
+          "description": "",
+          "semantic_type": "year"
         },
         {
           "name": "freq_label_en",

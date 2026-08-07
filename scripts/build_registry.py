@@ -24,15 +24,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUT = ROOT / "registry"
 
-# Errori di derive (attesi in checkout parziali) — non bloccano la scrittura.
-_DERIVE_WARNINGS = ("nessun parquet", "anno non risolvibile")
-
-
-def _classify_errors(errors: list[str]) -> tuple[list[str], list[str]]:
-    warnings = [e for e in errors if any(w in e for w in _DERIVE_WARNINGS)]
-    real = [e for e in errors if e not in warnings]
-    return warnings, real
-
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
@@ -81,12 +72,13 @@ def main() -> int:
 
     result = build_registry(layout, path_contract=contract, existing_catalog=existing)
 
+    # Errori già categorizzati dal builder: derive = warning (checkout
+    # parziali), validation = bloccanti (artifact non conforme allo schema).
     all_warnings: list[str] = []
     all_real: list[str] = []
     for artifact, errors in result["errors"].items():
-        warnings, real = _classify_errors(errors)
-        all_warnings.extend(f"{artifact}: {e}" for e in warnings)
-        all_real.extend(f"{artifact}: {e}" for e in real)
+        all_warnings.extend(f"{artifact}: {e}" for e in errors["derive"])
+        all_real.extend(f"{artifact}: {e}" for e in errors["validation"])
 
     for w in all_warnings:
         print(f"WARN: {w}", file=sys.stderr)
