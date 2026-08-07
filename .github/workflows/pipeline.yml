@@ -1,0 +1,206 @@
+# Pipeline — eurostat
+#
+# Workflow unico post-merge + refresh (sostituisce publish.yml e
+# post-merge-registry.yml). Fa tutto:
+#   1. run dei dataset (cambiati se PR merged, TUTTI se schedule/manuale)
+#   2. sync GCS (clean + mart)
+#   3. build_registry --write (toolkit.registry, #452)
+#   4. PR draft "chore(post-merge): aggiorna registry" se diff (pattern DI)
+#
+# Triggers:
+#   - pull_request closed (merged) su datasets/** → run + sync + registry dei
+#     dataset cambiati
+#   - schedule mensile (1° del mese 06:00 UTC) → run completo + sync + registry
+#     (refresh dati Eurostat anche senza PR — il ruolo che era del publish)
+#   - workflow_dispatch → manuale, slug opzionale
+
+name: Pipeline
+
+on:
+  pull_request:
+    types: [closed]
+    paths:
+      - "datasets/**"
+      - "scripts/build_registry.py"
+      - "connectors/**"
+  schedule:
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+    inputs:
+      datasets:
+        description: "Dataset slugs (comma-separated) o vuoto per tutti"
+        required: false
+        type: string
+      smoke:
+        description: "Smoke mode (--sample-rows 1000, skips GCS sync)"
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: eurostat-pipeline-${{ github.event.pull_request.number || github.ref || 'schedule' }}
+  cancel-in-progress: false
+
+env:
+  TOOLKIT_ALLOW_SCRIPT_SOURCE: "1"
+
+jobs:
+  pipeline:
+    if: github.event.pull_request.merged == true || github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha || github.ref }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install git+https://github.com/dataciviclab/toolkit.git@v1.48.1
+          pip install git+https://github.com/dataciviclab/lab-connectors.git
+          pip install -e ".[mcp]"
+          chmod +x connectors/*.py
+
+      # ── Fetch latest codelists from Eurostat SDMX ────────────────────
+      # Tutti i clean.sql fanno join con codelists/*.csv (geo, unit, freq,
+      # flag, ...) e build_registry produce codelists.json da quei file —
+      # vanno aggiornati prima di ogni run (specialmente geo: gerarchia NUTS).
+      - name: Update codelists
+        run: python scripts/update_codelists.py
+
+      # ── Determinare i dataset da processare ─────────────────────────
+      - name: Detect datasets to run
+        id: detect
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          INPUT_DATASETS: ${{ inputs.datasets }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = "pull_request" ]; then
+            # PR merged: solo i dataset cambiati
+            gh pr view "$PR_NUMBER" --json files --jq ".files[].path" | \
+              grep '^datasets/' | cut -d/ -f2 | sort -u > dirs.txt
+          elif [ -n "$INPUT_DATASETS" ]; then
+            # Manuale con slug espliciti
+            echo "$INPUT_DATASETS" | tr ',' '\n' > dirs.txt
+          else
+            # Schedule/manuale senza slug: tutti
+            find datasets -maxdepth 1 -mindepth 1 -type d -printf '%f\n' | sort > dirs.txt
+          fi
+          # Filtra solo dir con dataset.yml
+          DIRS=""
+          while read -r d; do
+            [ -n "$d" ] && [ -f "datasets/$d/dataset.yml" ] && DIRS="$DIRS datasets/$d"
+          done < dirs.txt
+          if [ -n "$DIRS" ]; then
+            echo "dirs=$DIRS" >> "$GITHUB_OUTPUT"
+          else
+            echo "dirs=" >> "$GITHUB_OUTPUT"
+          fi
+
+      # ── Run pipeline ─────────────────────────────────────────────────
+      - name: Run datasets
+        if: steps.detect.outputs.dirs != ''
+        env:
+          SMOKE: ${{ inputs.smoke && '--sample-rows 1000' || '' }}
+        run: |
+          YEAR=$(date +%Y)
+          for dir in ${{ steps.detect.outputs.dirs }}; do
+            echo "=== $dir ==="
+            toolkit run -c "$dir/dataset.yml" --years $YEAR $SMOKE
+          done
+
+      # ── GCS auth ─────────────────────────────────────────────────────
+      - name: Auth GCP
+        id: gcs
+        if: ${{ !inputs.smoke }}
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY_EUROSTAT }}
+        run: |
+          if [ -z "$GCP_SA_KEY" ]; then
+            echo "❌ GCP_SA_KEY_EUROSTAT secret non configurato — skip GCS sync"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if echo "$GCP_SA_KEY" | python3 -c "import json,sys; json.load(sys.stdin)" 2>/dev/null; then
+            printf '%s\n' "$GCP_SA_KEY" > /tmp/gcp-key.json
+          else
+            printf '%s\n' "$GCP_SA_KEY" | base64 -d > /tmp/gcp-key.json 2>/dev/null
+          fi
+          gcloud auth activate-service-account --key-file=/tmp/gcp-key.json
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+
+      # ── Sync to GCS ──────────────────────────────────────────────────
+      - name: Sync to GCS
+        if: ${{ !inputs.smoke && steps.gcs.outputs.ready == 'true' && steps.detect.outputs.dirs != '' }}
+        run: |
+          for slug_dir in ${{ steps.detect.outputs.dirs }}; do
+            slug=$(grep '^  name:' "$slug_dir/dataset.yml" | sed 's/.*: "//;s/"//')
+            year=$(ls "out/data/clean/$slug/" 2>/dev/null | sort -rn | head -1)
+            [ -z "$year" ] && echo "⚠️  No clean output for $slug" && continue
+            gsutil -m rsync -r "out/data/clean/$slug/$year/" "gs://dataciviclab-clean/eurostat/$slug/"
+            echo "✅ $slug clean synced"
+          done
+          for slug_dir in ${{ steps.detect.outputs.dirs }}; do
+            slug=$(grep '^  name:' "$slug_dir/dataset.yml" | sed 's/.*: "//;s/"//')
+            year=$(ls "out/data/mart/$slug/" 2>/dev/null | sort -rn | head -1)
+            [ -z "$year" ] && echo "⚠️  No mart output for $slug" && continue
+            gsutil -m rsync -r "out/data/mart/$slug/$year/" "gs://dataciviclab-mart/eurostat/$slug/"
+            echo "✅ $slug mart synced"
+          done
+
+      # ── Registry ─────────────────────────────────────────────────────
+      # Escluso in smoke: il builder vedrebbe parquet sample (1000 righe)
+      # e produrrebbe un catalog basato su dati parziali.
+      - name: Build registry
+        if: ${{ !inputs.smoke && steps.detect.outputs.dirs != '' }}
+        run: python scripts/build_registry.py --write
+
+      - name: Check registry diff
+        if: ${{ !inputs.smoke }}
+        id: diff
+        run: |
+          if git diff --quiet -- registry/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # ── PR draft registry (pattern DI) ───────────────────────────────
+      - name: Create draft registry PR
+        if: ${{ !inputs.smoke && steps.diff.outputs.changed == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number || 'schedule' }}
+        run: |
+          BRANCH="post-merge-registry/${PR_NUMBER}-registry"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add registry/
+          git commit -m "chore(post-merge): aggiorna registry ($PR_NUMBER)" || exit 0
+          git push --force-with-lease -u origin "$BRANCH"
+          EXISTING_PR=$(gh pr list --head "$BRANCH" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING_PR" ]; then
+            gh pr edit "$EXISTING_PR" \
+              --title "chore(post-merge): aggiorna registry ($PR_NUMBER)" \
+              --body "Registry artifacts updated after pipeline run." \
+              --add-label post-merge
+          else
+            gh pr create \
+              --base main \
+              --head "$BRANCH" \
+              --title "chore(post-merge): aggiorna registry ($PR_NUMBER)" \
+              --body "Registry artifacts updated after pipeline run." \
+              --label post-merge \
+              --draft
+          fi
