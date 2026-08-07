@@ -58,13 +58,18 @@ mcp = create_mcp_server(
 @mcp.tool(
     description=(
         "List all available Eurostat datasets with metadata: "
-        "slug, dataflow ID, theme, NUTS level, dimensions, description."
+        "slug, dataflow ID, theme, NUTS level, dimensions, description, type. "
+        "Pass dataset_type='mart' to list analytical mart tables (benchmark/"
+        "sintesi/trend), dataset_type='clean' for source parquets, or omit "
+        "for both."
     ),
     structured_output=True,
 )
-def eurostat_list_datasets() -> dict[str, Any]:
+def eurostat_list_datasets(dataset_type: str | None = None) -> dict[str, Any]:
     return _list_response(
-        guard_timed(list_datasets, "eurostat_list_datasets", logger_name=SERVER)
+        guard_timed(
+            list_datasets, "eurostat_list_datasets", dataset_type, logger_name=SERVER
+        )
     )
 
 
@@ -87,13 +92,17 @@ def eurostat_describe_dataset(slug: str) -> dict[str, Any]:
 
 @mcp.tool(
     description=(
-        "Run a SQL query on a specific Eurostat dataset. "
+        "Run a SQL query on a specific Eurostat dataset or analytical mart. "
         "The parquet data is aliased as 'data'. Always use FROM data in your SQL. "
         "Examples:\n"
         "  SELECT year, geo, value FROM data WHERE geo LIKE 'IT%' LIMIT 10\n"
         "  SELECT geo, AVG(value) AS media FROM data WHERE unit='EUR_HAB' GROUP BY geo\n\n"
+        "Mart slugs use the {dataset}__{mart} convention, e.g. "
+        "eurostat_gdp_nuts3__mart_geo_benchmark (EU27 benchmark analytics) or "
+        "eurostat_gdp_nuts3__mart_trend (multi-year CAGR). "
+        "Use eurostat_list_datasets(dataset_type='mart') to list them.\n\n"
         "Available slugs: eurostat_gdp_nuts3, eurostat_gva_nuts3, "
-        "eurostat_crime_nuts3, eurostat_pop_nuts3\n"
+        "eurostat_crime_nuts3, eurostat_pop_nuts3 + analytical marts\n"
         "Use eurostat_list_datasets for full metadata."
     ),
     structured_output=True,
