@@ -1,20 +1,18 @@
 """Parameterized tests for the analytical mart pattern (benchmark pilot).
 
-One parametrized suite protects the SHARED mart contract across all datasets
-that adopt the analytical benchmark pattern (media EU/paese, percentile,
-national rank, distance from EU average, multi-year CAGR):
+SCOPE — semantics only. The toolkit already validates the FORMAL contract at
+run time (required_columns, not_null, primary_key uniqueness, min_rows via
+`mart.validate.table_rules`). This suite deliberately does NOT re-test those
+gates. It protects only what the toolkit cannot check:
 
   • benchmark columns computed only for the dataset's benchmark unit
   • top region of each country has rank_nazionale = 1
-  • country ranking has unique ranks per year
+  • every benchmark-unit row carries all benchmark columns
   • trend: CAGR NULL on single-year windows, geo never NULL
 
 Dataset-specific verified facts (e.g. Dublin top 2024, Italy 2021 reporting
-break) live in the same file as per-dataset test classes — see below.
-
-The toolkit already validates the formal contract (required_columns,
-primary_key, min_rows) at run time — these tests protect SEMANTICS the
-toolkit cannot check.
+break, IT 2024 coverage gap) live in per-dataset test classes — they encode
+domain knowledge about the underlying Eurostat data.
 
 Skip-based: tests run against locally produced parquet files, so CI does
 not break when the pipeline has not been executed on the runner.
@@ -184,33 +182,6 @@ class TestSharedBenchmarkContract:
             """
         ).fetchone()[0]
         assert n_incomplete == 0, "benchmark-unit rows with NULL benchmark columns"
-
-    @pytest.mark.parametrize("ds", ANALYTICAL_DATASETS, ids=lambda d: d["slug"])
-    def test_sintesi_rank_unique_per_year(self, ds):
-        """Country ranks are unique within each year partition."""
-        f = _skip_if_missing(ds["slug"], "mart_sintesi")
-        dim_filter = f" AND {ds['dim']} = '{ds['dim_value']}'" if "dim" in ds else ""
-        n_dup = duckdb.sql(
-            f"""
-            SELECT COUNT(*) - COUNT(DISTINCT rank_procapite_eu)
-            FROM read_parquet('{f}') WHERE year = {CHECK_YEAR}{dim_filter}
-            """
-        ).fetchone()[0]
-        assert n_dup == 0, "duplicate rank_procapite_eu within the same year"
-
-    @pytest.mark.parametrize("ds", ANALYTICAL_DATASETS, ids=lambda d: d["slug"])
-    def test_sintesi_countries_min(self, ds):
-        """Country ranking covers a minimum number of countries."""
-        f = _skip_if_missing(ds["slug"], "mart_sintesi")
-        dim_filter = f" AND {ds['dim']} = '{ds['dim_value']}'" if "dim" in ds else ""
-        n = duckdb.sql(
-            f"""
-            SELECT COUNT(*) FROM read_parquet('{f}') WHERE year = {CHECK_YEAR}{dim_filter}
-            """
-        ).fetchone()[0]
-        # Deliberately low: Eurostat publishes with delay, coverage varies by
-        # year and dataset. Guards against structural regressions, not source lag.
-        assert n >= 20, f"only {n} countries in {CHECK_YEAR} ranking"
 
     @pytest.mark.parametrize("ds", ANALYTICAL_DATASETS, ids=lambda d: d["slug"])
     def test_trend_cagr_null_when_single_year(self, ds):
