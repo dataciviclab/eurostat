@@ -90,7 +90,7 @@ def main() -> int:
         return 1
 
     if not args.write:
-        for name in ("clean_catalog", "mart_catalog", "pipeline_signals"):
+        for name in ("clean_catalog", "mart_catalog", "pipeline_signals", "codelists"):
             payload = result[name]
             n = (
                 len(payload["datasets"])
@@ -98,7 +98,11 @@ def main() -> int:
                 else (
                     len(payload["marts"])
                     if name == "mart_catalog"
-                    else payload["summary"]["total"]
+                    else (
+                        payload["summary"]["total"]
+                        if name == "pipeline_signals"
+                        else len(payload["codelists"])
+                    )
                 )
             )
             print(f"[dry-run] {name}.json — {n} entries")
@@ -106,7 +110,7 @@ def main() -> int:
         return 0
 
     args.out.mkdir(parents=True, exist_ok=True)
-    for name in ("clean_catalog", "mart_catalog", "pipeline_signals"):
+    for name in ("clean_catalog", "mart_catalog", "pipeline_signals", "codelists"):
         payload = result[name]
         out_path = args.out / f"{name}.json"
         out_path.write_text(

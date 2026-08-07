@@ -8,7 +8,7 @@
     {
       "slug": "eurostat_area_nuts3",
       "name": "Eurostat Area Nuts3",
-      "description": "",
+      "description": "Area by NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -145,7 +145,7 @@
     {
       "slug": "eurostat_bd_hgnace2_r3_nuts3",
       "name": "Eurostat Bd Hgnace2 R3 Nuts3",
-      "description": "",
+      "description": "Business demography and high growth enterprise by NACE Rev. 2 and NUTS 3 region (2008-2020)",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -287,7 +287,7 @@
     {
       "slug": "eurostat_crime_nuts3",
       "name": "Eurostat Crime Nuts3",
-      "description": "",
+      "description": "Police-recorded offences by NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -445,7 +445,7 @@
     {
       "slug": "eurostat_demo_balance_nuts3",
       "name": "Eurostat Demo Balance Nuts3",
-      "description": "",
+      "description": "Population change - Demographic balance and crude rates at regional level (NUTS 3) ",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -567,7 +567,7 @@
     {
       "slug": "eurostat_demo_r_fagec3_nuts3",
       "name": "Eurostat Demo R Fagec3 Nuts3",
-      "description": "",
+      "description": "Live births by age group of the mothers and NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -709,7 +709,7 @@
     {
       "slug": "eurostat_demo_r_magec3_nuts3",
       "name": "Eurostat Demo R Magec3 Nuts3",
-      "description": "",
+      "description": "Deaths by age group, sex and NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -858,7 +858,7 @@
     {
       "slug": "eurostat_demo_r_pjangrp3_nuts3",
       "name": "Eurostat Demo R Pjangrp3 Nuts3",
-      "description": "",
+      "description": "Population on 1 January by age group, sex and NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -1007,7 +1007,7 @@
     {
       "slug": "eurostat_early_school_leavers_nuts2",
       "name": "Eurostat Early School Leavers Nuts2",
-      "description": "",
+      "description": "Early leavers from education and training by NUTS 2 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -1161,7 +1161,7 @@
     {
       "slug": "eurostat_emp_nuts3",
       "name": "Eurostat Emp Nuts3",
-      "description": "",
+      "description": "Employment by NUTS 3 region, NACE sector and working status",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -1310,7 +1310,7 @@
     {
       "slug": "eurostat_gdp_nuts3",
       "name": "Eurostat Gdp Nuts3",
-      "description": "",
+      "description": "GDP at current market prices by NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -1441,7 +1441,7 @@
     {
       "slug": "eurostat_gva_nuts3",
       "name": "Eurostat Gva Nuts3",
-      "description": "",
+      "description": "Gross Value Added by NUTS 3 region and NACE sector",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -1578,7 +1578,7 @@
     {
       "slug": "eurostat_hospital_beds_nuts2",
       "name": "Eurostat Hospital Beds Nuts2",
-      "description": "",
+      "description": "Available beds in hospitals by NUTS 2 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -1724,7 +1724,7 @@
     {
       "slug": "eurostat_income_inequality_nuts2",
       "name": "Eurostat Income Inequality Nuts2",
-      "description": "",
+      "description": "Income quintile share ratio S80/S20 by NUTS 2 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -1854,7 +1854,7 @@
     {
       "slug": "eurostat_labour_productivity_nuts3",
       "name": "Eurostat Labour Productivity Nuts3",
-      "description": "",
+      "description": "Nominal Labour productivity by NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -1996,7 +1996,7 @@
     {
       "slug": "eurostat_nrg_chddr2_a_nuts3",
       "name": "Eurostat Nrg Chddr2 A Nuts3",
-      "description": "",
+      "description": "Cooling and heating degree days by NUTS 3 region - annual data",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -2133,7 +2133,7 @@
     {
       "slug": "eurostat_nrg_chddr2_m_nuts3",
       "name": "Eurostat Nrg Chddr2 M Nuts3",
-      "description": "",
+      "description": "Cooling and heating degree days by NUTS 3 region - monthly data",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -2288,7 +2288,7 @@
     {
       "slug": "eurostat_physicians_nuts2",
       "name": "Eurostat Physicians Nuts2",
-      "description": "",
+      "description": "Physicians by NUTS 2 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -2433,7 +2433,7 @@
     {
       "slug": "eurostat_pop_density_nuts3",
       "name": "Eurostat Pop Density Nuts3",
-      "description": "",
+      "description": "Population density by NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -2558,7 +2558,7 @@
     {
       "slug": "eurostat_pop_nuts3",
       "name": "Eurostat Pop Nuts3",
-      "description": "",
+      "description": "Population on 1 January by NUTS 3 region, sex and age",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -2701,7 +2701,7 @@
     {
       "slug": "eurostat_pop_structure_nuts3",
       "name": "Eurostat Pop Structure Nuts3",
-      "description": "",
+      "description": "Population structure indicators by NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -2843,7 +2843,7 @@
     {
       "slug": "eurostat_poverty_risk_nuts2",
       "name": "Eurostat Poverty Risk Nuts2",
-      "description": "",
+      "description": "At-risk-of-poverty rate by NUTS 2 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -2988,7 +2988,7 @@
     {
       "slug": "eurostat_rd_expenditure_nuts2",
       "name": "Eurostat Rd Expenditure Nuts2",
-      "description": "",
+      "description": "GERD by sector of performance and NUTS 2 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -3130,7 +3130,7 @@
     {
       "slug": "eurostat_soil_erosion_nuts3",
       "name": "Eurostat Soil Erosion Nuts3",
-      "description": "",
+      "description": "Estimated soil erosion by water by NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -3284,7 +3284,7 @@
     {
       "slug": "eurostat_tertiary_education_nuts2",
       "name": "Eurostat Tertiary Education Nuts2",
-      "description": "",
+      "description": "Tertiary educational attainment by NUTS 2 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -3450,7 +3450,7 @@
     {
       "slug": "eurostat_tourism_nuts3",
       "name": "Eurostat Tourism Nuts3",
-      "description": "",
+      "description": "Nights spent at tourist accommodation establishments by NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
@@ -3596,7 +3596,7 @@
     {
       "slug": "eurostat_tran_sf_roadnu",
       "name": "Eurostat Tran Sf Roadnu",
-      "description": "",
+      "description": "Road accidents by NUTS 3 region",
       "source": "",
       "source_id": "eurostat",
       "period": {
