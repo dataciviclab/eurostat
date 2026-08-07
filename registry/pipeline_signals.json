@@ -1,0 +1,703 @@
+{
+  "schema_version": "1",
+  "generated_at": "2026-08-07",
+  "repo": "eurostat",
+  "topic": "pipeline_state",
+  "summary": {
+    "total": 28,
+    "by_status": {
+      "ok": 28,
+      "warn": 0,
+      "error": 0
+    }
+  },
+  "signals": [
+    {
+      "id": "eurostat_area_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_area_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260701T114029Z_dcdd74e0",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "mart": 100
+        },
+        "output_rows": {
+          "mart": 2916
+        },
+        "started_at": "2026-07-01T11:40:29.174432+00:00",
+        "finished_at": "2026-07-01T11:40:29.321765+00:00",
+        "duration_seconds": 0.147
+      }
+    },
+    {
+      "id": "eurostat_bd_hgnace2_r3_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_bd_hgnace2_r3_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260628T124435Z_415906b1",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 4391569,
+          "mart": 323550
+        },
+        "started_at": "2026-06-28T12:44:35.372957+00:00",
+        "finished_at": "2026-06-28T12:45:17.099146+00:00",
+        "duration_seconds": 41.726
+      }
+    },
+    {
+      "id": "eurostat_business_demography_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_business_demography_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_crime_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_crime_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260807T095231Z_4ee77acc",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 436118,
+          "mart": 306444
+        },
+        "started_at": "2026-08-07T09:52:31.452818+00:00",
+        "finished_at": "2026-08-07T09:52:37.641850+00:00",
+        "duration_seconds": 6.189
+      }
+    },
+    {
+      "id": "eurostat_demo_balance_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_demo_balance_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260619T104813Z_df37c27f",
+        "year": 2026,
+        "status": "SUCCESS",
+        "output_rows": {
+          "clean": 608088
+        },
+        "started_at": "2026-06-19T10:48:13.812127+00:00",
+        "finished_at": "2026-06-19T10:48:15.229847+00:00",
+        "duration_seconds": 1.418
+      }
+    },
+    {
+      "id": "eurostat_demo_r_fagec3_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_demo_r_fagec3_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260623T171327Z_0bef5241",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 95
+        },
+        "output_rows": {
+          "clean": 322968,
+          "mart": 16692
+        },
+        "started_at": "2026-06-23T17:13:27.330892+00:00",
+        "finished_at": "2026-06-23T17:13:31.844554+00:00",
+        "duration_seconds": 4.514
+      }
+    },
+    {
+      "id": "eurostat_demo_r_magec3_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_demo_r_magec3_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260620T091352Z_02ee114b",
+        "year": 2026,
+        "status": "SUCCESS",
+        "output_rows": {
+          "clean": 1618272,
+          "mart": 78045
+        },
+        "started_at": "2026-06-20T09:13:52.118123+00:00",
+        "finished_at": "2026-06-20T09:14:10.504621+00:00",
+        "duration_seconds": 18.386
+      }
+    },
+    {
+      "id": "eurostat_demo_r_pjangrp3_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_demo_r_pjangrp3_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260620T170845Z_6da23307",
+        "year": 2026,
+        "status": "SUCCESS",
+        "output_rows": {
+          "clean": 1686888,
+          "mart": 84744
+        },
+        "started_at": "2026-06-20T17:08:45.267526+00:00",
+        "finished_at": "2026-06-20T17:09:00.463194+00:00",
+        "duration_seconds": 15.196
+      }
+    },
+    {
+      "id": "eurostat_early_school_leavers_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_early_school_leavers_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260705T121452Z_24b51a9a",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 39936,
+          "mart": 1448
+        },
+        "started_at": "2026-07-05T12:14:52.329613+00:00",
+        "finished_at": "2026-07-05T12:14:53.274997+00:00",
+        "duration_seconds": 0.945
+      }
+    },
+    {
+      "id": "eurostat_emp_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_emp_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260618T220833Z_aaedb08d",
+        "year": 2026,
+        "status": "SUCCESS",
+        "output_rows": {
+          "clean": 1541975,
+          "mart": 148590
+        },
+        "started_at": "2026-06-18T22:08:33.904578+00:00",
+        "finished_at": "2026-06-18T22:08:50.759420+00:00",
+        "duration_seconds": 16.855
+      }
+    },
+    {
+      "id": "eurostat_fertility_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_fertility_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_gdp_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_gdp_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260807T102014Z_8d7a0f97",
+        "year": 2026,
+        "status": "FAILED",
+        "started_at": "2026-08-07T10:20:14.944552+00:00",
+        "finished_at": "2026-08-07T10:20:15.018093+00:00",
+        "duration_seconds": 0.074
+      }
+    },
+    {
+      "id": "eurostat_gva_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_gva_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260618T221214Z_d800d6ec",
+        "year": 2026,
+        "status": "SUCCESS",
+        "output_rows": {
+          "clean": 1339200,
+          "mart": 49530
+        },
+        "started_at": "2026-06-18T22:12:14.099613+00:00",
+        "finished_at": "2026-06-18T22:12:28.363329+00:00",
+        "duration_seconds": 14.264
+      }
+    },
+    {
+      "id": "eurostat_nrg_chddr2_m_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_nrg_chddr2_m_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260628T123044Z_e2f4854a",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 1987200,
+          "mart": 118128
+        },
+        "started_at": "2026-06-28T12:30:44.137562+00:00",
+        "finished_at": "2026-06-28T12:31:05.294182+00:00",
+        "duration_seconds": 21.157
+      }
+    },
+    {
+      "id": "eurostat_hospital_beds_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_hospital_beds_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260807T095228Z_25ae72b1",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 26829,
+          "mart": 15016
+        },
+        "started_at": "2026-08-07T09:52:28.140844+00:00",
+        "finished_at": "2026-08-07T09:52:29.766859+00:00",
+        "duration_seconds": 1.626
+      }
+    },
+    {
+      "id": "eurostat_income_inequality_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_income_inequality_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260714T125923Z_5d79978b",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 8533,
+          "mart": 462
+        },
+        "started_at": "2026-07-14T12:59:23.631007+00:00",
+        "finished_at": "2026-07-14T12:59:24.936691+00:00",
+        "duration_seconds": 1.306
+      }
+    },
+    {
+      "id": "eurostat_labour_productivity_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_labour_productivity_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260701T085955Z_501044a7",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 121725,
+          "mart": 7779
+        },
+        "started_at": "2026-07-01T08:59:55.853300+00:00",
+        "finished_at": "2026-07-01T08:59:58.687436+00:00",
+        "duration_seconds": 2.834
+      }
+    },
+    {
+      "id": "eurostat_nrg_chddr2_a_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_nrg_chddr2_a_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260628T092920Z_a9a8c98f",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "mart": 95
+        },
+        "output_rows": {
+          "mart": 9844
+        },
+        "started_at": "2026-06-28T09:29:20.005062+00:00",
+        "finished_at": "2026-06-28T09:29:20.204180+00:00",
+        "duration_seconds": 0.199
+      }
+    },
+    {
+      "id": "eurostat_physicians_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_physicians_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260807T095224Z_85695b3a",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 28182,
+          "mart": 14008
+        },
+        "started_at": "2026-08-07T09:52:24.860090+00:00",
+        "finished_at": "2026-08-07T09:52:26.496526+00:00",
+        "duration_seconds": 1.636
+      }
+    },
+    {
+      "id": "eurostat_pop_density_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_pop_density_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260619T100023Z_c9578f56",
+        "year": 2026,
+        "status": "SUCCESS",
+        "output_rows": {
+          "clean": 73010,
+          "mart": 4566
+        },
+        "started_at": "2026-06-19T10:00:23.855670+00:00",
+        "finished_at": "2026-06-19T10:00:26.099064+00:00",
+        "duration_seconds": 2.243
+      }
+    },
+    {
+      "id": "eurostat_pop_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_pop_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260618T220857Z_5fff636e",
+        "year": 2026,
+        "status": "SUCCESS",
+        "output_rows": {
+          "clean": 5788800,
+          "mart": 928
+        },
+        "started_at": "2026-06-18T22:08:57.049537+00:00",
+        "finished_at": "2026-06-18T22:09:46.495401+00:00",
+        "duration_seconds": 49.446
+      }
+    },
+    {
+      "id": "eurostat_pop_structure_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_pop_structure_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260629T190029Z_f766e2f5",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 1327452,
+          "mart": 66982
+        },
+        "started_at": "2026-06-29T19:00:29.769169+00:00",
+        "finished_at": "2026-06-29T19:00:58.025115+00:00",
+        "duration_seconds": 28.256
+      }
+    },
+    {
+      "id": "eurostat_poverty_risk_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_poverty_risk_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260807T095239Z_72a0fb5e",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 9706,
+          "mart": 6281
+        },
+        "started_at": "2026-08-07T09:52:39.318469+00:00",
+        "finished_at": "2026-08-07T09:52:40.604569+00:00",
+        "duration_seconds": 1.286
+      }
+    },
+    {
+      "id": "eurostat_rd_expenditure_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_rd_expenditure_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260709T101351Z_0f0d1d21",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 909090,
+          "mart": 17796
+        },
+        "started_at": "2026-07-09T10:13:51.602586+00:00",
+        "finished_at": "2026-07-09T10:14:39.378063+00:00",
+        "duration_seconds": 47.775
+      }
+    },
+    {
+      "id": "eurostat_soil_erosion_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_soil_erosion_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260701T103750Z_57c77d4f",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 523200,
+          "mart": 24480
+        },
+        "started_at": "2026-07-01T10:37:50.340504+00:00",
+        "finished_at": "2026-07-01T10:37:57.773278+00:00",
+        "duration_seconds": 7.433
+      }
+    },
+    {
+      "id": "eurostat_tertiary_education_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_tertiary_education_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260712T144910Z_147a4e62",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 12276,
+          "mart": 756
+        },
+        "started_at": "2026-07-12T14:49:10.208942+00:00",
+        "finished_at": "2026-07-12T14:49:11.588968+00:00",
+        "duration_seconds": 1.38
+      }
+    },
+    {
+      "id": "eurostat_tourism_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_tourism_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260619T150102Z_53c30e9c",
+        "year": 2026,
+        "status": "SUCCESS",
+        "output_rows": {
+          "mart": 1605
+        },
+        "started_at": "2026-06-19T15:01:02.978374+00:00",
+        "finished_at": "2026-06-19T15:01:03.187465+00:00",
+        "duration_seconds": 0.209
+      }
+    },
+    {
+      "id": "eurostat_tran_sf_roadnu",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_tran_sf_roadnu",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260619T175632Z_9b9208a2",
+        "year": 2026,
+        "status": "SUCCESS",
+        "output_rows": {
+          "mart": 2035
+        },
+        "started_at": "2026-06-19T17:56:32.012243+00:00",
+        "finished_at": "2026-06-19T17:56:32.179686+00:00",
+        "duration_seconds": 0.167
+      }
+    }
+  ]
+}
