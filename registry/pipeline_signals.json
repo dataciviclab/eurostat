@@ -1,0 +1,347 @@
+{
+  "schema_version": "1",
+  "generated_at": "2026-08-07",
+  "repo": "eurostat",
+  "topic": "pipeline_state",
+  "summary": {
+    "total": 28,
+    "by_status": {
+      "ok": 28,
+      "warn": 0,
+      "error": 0
+    }
+  },
+  "signals": [
+    {
+      "id": "eurostat_area_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_area_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_bd_hgnace2_r3_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_bd_hgnace2_r3_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_business_demography_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_business_demography_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_crime_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_crime_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_demo_balance_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_demo_balance_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_demo_r_fagec3_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_demo_r_fagec3_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_demo_r_magec3_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_demo_r_magec3_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_demo_r_pjangrp3_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_demo_r_pjangrp3_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_early_school_leavers_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_early_school_leavers_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_emp_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_emp_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_fertility_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_fertility_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_gdp_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_gdp_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ],
+      "run": {
+        "run_id": "20260807T211533Z_748afdaa",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 308950,
+          "clean": 308950,
+          "mart": 298689
+        },
+        "output_bytes": {
+          "raw": 10958722,
+          "clean": 1014606,
+          "mart": 1376151
+        },
+        "started_at": "2026-08-07T21:15:33.820545+00:00",
+        "finished_at": "2026-08-07T21:15:40.160868+00:00",
+        "duration_seconds": 6.34
+      }
+    },
+    {
+      "id": "eurostat_gva_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_gva_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_nrg_chddr2_m_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_nrg_chddr2_m_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_hospital_beds_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_hospital_beds_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_income_inequality_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_income_inequality_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_labour_productivity_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_labour_productivity_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_nrg_chddr2_a_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_nrg_chddr2_a_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_physicians_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_physicians_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_pop_density_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_pop_density_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_pop_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_pop_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_pop_structure_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_pop_structure_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_poverty_risk_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_poverty_risk_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_rd_expenditure_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_rd_expenditure_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_soil_erosion_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_soil_erosion_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_tertiary_education_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_tertiary_education_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_tourism_nuts3",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_tourism_nuts3",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "id": "eurostat_tran_sf_roadnu",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_tran_sf_roadnu",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "years": [
+        2026
+      ]
+    }
+  ]
+}
