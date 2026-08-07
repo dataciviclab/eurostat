@@ -64,10 +64,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install git+https://github.com/dataciviclab/toolkit.git
+          pip install git+https://github.com/dataciviclab/toolkit.git@v1.48.1
           pip install git+https://github.com/dataciviclab/lab-connectors.git
           pip install -e ".[mcp]"
           chmod +x connectors/*.py
+
+      # ── Fetch latest codelists from Eurostat SDMX ────────────────────
+      # Tutti i clean.sql fanno join con codelists/*.csv (geo, unit, freq,
+      # flag, ...) e build_registry produce codelists.json da quei file —
+      # vanno aggiornati prima di ogni run (specialmente geo: gerarchia NUTS).
+      - name: Update codelists
+        run: python scripts/update_codelists.py
 
       # ── Determinare i dataset da processare ─────────────────────────
       - name: Detect datasets to run
@@ -152,11 +159,14 @@ jobs:
           done
 
       # ── Registry ─────────────────────────────────────────────────────
+      # Escluso in smoke: il builder vedrebbe parquet sample (1000 righe)
+      # e produrrebbe un catalog basato su dati parziali.
       - name: Build registry
-        if: steps.detect.outputs.dirs != ''
+        if: ${{ !inputs.smoke && steps.detect.outputs.dirs != '' }}
         run: python scripts/build_registry.py --write
 
       - name: Check registry diff
+        if: ${{ !inputs.smoke }}
         id: diff
         run: |
           if git diff --quiet -- registry/; then
@@ -167,7 +177,7 @@ jobs:
 
       # ── PR draft registry (pattern DI) ───────────────────────────────
       - name: Create draft registry PR
-        if: steps.diff.outputs.changed == 'true'
+        if: ${{ !inputs.smoke && steps.diff.outputs.changed == 'true' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number || 'schedule' }}

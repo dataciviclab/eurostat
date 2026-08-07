@@ -46,8 +46,7 @@ def main() -> int:
     except ImportError as exc:  # pragma: no cover
         print(
             f"ERRORE: toolkit.registry non disponibile ({exc}).\n"
-            "Serve toolkit con il modulo registry (branch feat/registry-builder, "
-            "in attesa di merge su main).",
+            "Serve toolkit >= v1.48.1 (modulo registry su main).",
             file=sys.stderr,
         )
         return 1
