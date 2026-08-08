@@ -470,6 +470,507 @@
       }
     },
     {
+      "slug": "eurostat_demo_r_fagec3_nuts3",
+      "name": "Eurostat Demo R Fagec3 Nuts3",
+      "description": "Live births by age group of the mothers and NUTS 3 region",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2014,
+        "end": 2025
+      },
+      "years": [
+        2026
+      ],
+      "tags": [
+        "welfare-lavoro",
+        "nascite",
+        "nascite",
+        "eurostat",
+        "benchmark",
+        "nuts3"
+      ],
+      "category": "welfare-lavoro",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_demo_r_fagec3_nuts3/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "registry_source": "derive_auto",
+      "mart_refs": [
+        "eurostat_demo_r_fagec3_nuts3__mart_geo_benchmark",
+        "eurostat_demo_r_fagec3_nuts3__mart_sintesi",
+        "eurostat_demo_r_fagec3_nuts3__mart_trend"
+      ],
+      "run": {
+        "run_id": "20260808T133016Z_19af5ef6",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 322968,
+          "clean": 322968,
+          "mart": 250716
+        },
+        "output_bytes": {
+          "raw": 9419779,
+          "clean": 718947,
+          "mart": 791116
+        },
+        "started_at": "2026-08-08T13:30:16.265684+00:00",
+        "finished_at": "2026-08-08T13:30:21.851893+00:00",
+        "duration_seconds": 5.586
+      }
+    },
+    {
+      "slug": "eurostat_demo_r_magec3_nuts3",
+      "name": "Eurostat Demo R Magec3 Nuts3",
+      "description": "Deaths by age group, sex and NUTS 3 region",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2014,
+        "end": 2025
+      },
+      "years": [
+        2026
+      ],
+      "tags": [
+        "welfare-lavoro",
+        "decessi",
+        "decessi",
+        "eurostat",
+        "benchmark",
+        "nuts3"
+      ],
+      "category": "welfare-lavoro",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_demo_r_magec3_nuts3/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "registry_source": "derive_auto",
+      "mart_refs": [
+        "eurostat_demo_r_magec3_nuts3__mart_geo_benchmark",
+        "eurostat_demo_r_magec3_nuts3__mart_sintesi",
+        "eurostat_demo_r_magec3_nuts3__mart_trend"
+      ],
+      "run": {
+        "run_id": "20260808T133022Z_754d6bda",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1618596,
+          "clean": 1618596,
+          "mart": 1210101
+        },
+        "output_bytes": {
+          "raw": 49977183,
+          "clean": 4368485,
+          "mart": 2631296
+        },
+        "started_at": "2026-08-08T13:30:22.519874+00:00",
+        "finished_at": "2026-08-08T13:30:43.228870+00:00",
+        "duration_seconds": 20.709
+      }
+    },
+    {
+      "slug": "eurostat_demo_r_pjangrp3_nuts3",
+      "name": "Eurostat Demo R Pjangrp3 Nuts3",
+      "description": "Population on 1 January by age group, sex and NUTS 3 region",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2014,
+        "end": 2025
+      },
+      "years": [
+        2026
+      ],
+      "tags": [
+        "welfare-lavoro",
+        "popolazione",
+        "struttura-eta",
+        "eurostat",
+        "benchmark",
+        "nuts3"
+      ],
+      "category": "welfare-lavoro",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_demo_r_pjangrp3_nuts3/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "registry_source": "derive_auto",
+      "mart_refs": [
+        "eurostat_demo_r_pjangrp3_nuts3__mart_geo_benchmark",
+        "eurostat_demo_r_pjangrp3_nuts3__mart_sintesi",
+        "eurostat_demo_r_pjangrp3_nuts3__mart_trend"
+      ],
+      "run": {
+        "run_id": "20260808T133043Z_29fee5c4",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1686888,
+          "clean": 1686888,
+          "mart": 1385139
+        },
+        "output_bytes": {
+          "raw": 56125787,
+          "clean": 6849173,
+          "mart": 4810926
+        },
+        "started_at": "2026-08-08T13:30:43.910496+00:00",
+        "finished_at": "2026-08-08T13:31:08.330981+00:00",
+        "duration_seconds": 24.42
+      }
+    },
+    {
       "slug": "eurostat_early_school_leavers_nuts2",
       "name": "Eurostat Early School Leavers Nuts2",
       "description": "Early leavers from education and training by NUTS 2 region",
@@ -637,6 +1138,177 @@
         "started_at": "2026-08-08T12:06:03.949194+00:00",
         "finished_at": "2026-08-08T12:06:06.430381+00:00",
         "duration_seconds": 2.481
+      }
+    },
+    {
+      "slug": "eurostat_emp_nuts3",
+      "name": "Eurostat Emp Nuts3",
+      "description": "Employment by NUTS 3 region, NACE sector and working status",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2000,
+        "end": 2024
+      },
+      "years": [
+        2026
+      ],
+      "tags": [
+        "economia",
+        "occupazione",
+        "lavoro",
+        "eurostat",
+        "benchmark",
+        "nuts3"
+      ],
+      "category": "economia",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "wstatus",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nace_r2",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "wstatus_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nace_r2_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_emp_nuts3/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "registry_source": "derive_auto",
+      "mart_refs": [
+        "eurostat_emp_nuts3__mart_geo_benchmark",
+        "eurostat_emp_nuts3__mart_sintesi",
+        "eurostat_emp_nuts3__mart_trend"
+      ],
+      "run": {
+        "run_id": "20260808T133109Z_4d4ea657",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1541975,
+          "clean": 1541975,
+          "mart": 1486856
+        },
+        "output_bytes": {
+          "raw": 48279499,
+          "clean": 4859918,
+          "mart": 4915349
+        },
+        "started_at": "2026-08-08T13:31:09.948065+00:00",
+        "finished_at": "2026-08-08T13:31:31.554762+00:00",
+        "duration_seconds": 21.607
       }
     },
     {
@@ -942,6 +1614,164 @@
         "started_at": "2026-08-07T21:15:33.820545+00:00",
         "finished_at": "2026-08-07T21:15:40.160868+00:00",
         "duration_seconds": 6.34
+      }
+    },
+    {
+      "slug": "eurostat_gva_nuts3",
+      "name": "Eurostat Gva Nuts3",
+      "description": "Gross Value Added by NUTS 3 region and NACE sector",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2000,
+        "end": 2024
+      },
+      "years": [
+        2026
+      ],
+      "tags": [
+        "economia",
+        "valore-aggiunto",
+        "eurostat",
+        "benchmark",
+        "nuts3"
+      ],
+      "category": "economia",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nace_r2",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nace_r2_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_gva_nuts3/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "registry_source": "derive_auto",
+      "mart_refs": [
+        "eurostat_gva_nuts3__mart_geo_benchmark",
+        "eurostat_gva_nuts3__mart_sintesi",
+        "eurostat_gva_nuts3__mart_trend"
+      ],
+      "run": {
+        "run_id": "20260808T133132Z_9f387dfc",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1339200,
+          "clean": 1339200,
+          "mart": 1280848
+        },
+        "output_bytes": {
+          "raw": 44111167,
+          "clean": 5778933,
+          "mart": 4294906
+        },
+        "started_at": "2026-08-08T13:31:32.263825+00:00",
+        "finished_at": "2026-08-08T13:31:51.729480+00:00",
+        "duration_seconds": 19.466
       }
     },
     {
@@ -1395,6 +2225,165 @@
         "started_at": "2026-08-08T10:54:11.253849+00:00",
         "finished_at": "2026-08-08T10:54:14.831071+00:00",
         "duration_seconds": 3.577
+      }
+    },
+    {
+      "slug": "eurostat_nrg_chddr2_a_nuts3",
+      "name": "Eurostat Nrg Chddr2 A Nuts3",
+      "description": "Cooling and heating degree days by NUTS 3 region - annual data",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 1980,
+        "end": 2025
+      },
+      "years": [
+        2026
+      ],
+      "tags": [
+        "ambiente",
+        "clima",
+        "grado-giorni",
+        "eurostat",
+        "benchmark",
+        "nuts3"
+      ],
+      "category": "ambiente",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "indic_nrg",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "indic_nrg_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_nrg_chddr2_a_nuts3/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "registry_source": "derive_auto",
+      "mart_refs": [
+        "eurostat_nrg_chddr2_a_nuts3__mart_geo_benchmark",
+        "eurostat_nrg_chddr2_a_nuts3__mart_sintesi",
+        "eurostat_nrg_chddr2_a_nuts3__mart_trend"
+      ],
+      "run": {
+        "run_id": "20260808T133152Z_e09da7db",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 165600,
+          "clean": 165600,
+          "mart": 147018
+        },
+        "output_bytes": {
+          "raw": 4693876,
+          "clean": 596278,
+          "mart": 992125
+        },
+        "started_at": "2026-08-08T13:31:52.723743+00:00",
+        "finished_at": "2026-08-08T13:31:56.620643+00:00",
+        "duration_seconds": 3.897
       }
     },
     {
@@ -2598,29 +3587,6 @@
         "value"
       ],
       "min_rows": 10000,
-      "run": {
-        "run_id": "20260808T120554Z_50010709",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 436118,
-          "clean": 436118,
-          "mart": 306444
-        },
-        "output_bytes": {
-          "raw": 14922768,
-          "clean": 1068741,
-          "mart": 2348193
-        },
-        "started_at": "2026-08-08T12:05:54.180897+00:00",
-        "finished_at": "2026-08-08T12:06:03.210000+00:00",
-        "duration_seconds": 9.029
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_crime_nuts3/mart_geo_benchmark.parquet",
@@ -2645,29 +3611,6 @@
         "rank_procapite_eu"
       ],
       "min_rows": 100,
-      "run": {
-        "run_id": "20260808T120554Z_50010709",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 436118,
-          "clean": 436118,
-          "mart": 306444
-        },
-        "output_bytes": {
-          "raw": 14922768,
-          "clean": 1068741,
-          "mart": 2348193
-        },
-        "started_at": "2026-08-08T12:05:54.180897+00:00",
-        "finished_at": "2026-08-08T12:06:03.210000+00:00",
-        "duration_seconds": 9.029
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_crime_nuts3/mart_sintesi.parquet",
@@ -2692,29 +3635,6 @@
         "cagr_pct"
       ],
       "min_rows": 1000,
-      "run": {
-        "run_id": "20260808T120554Z_50010709",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 436118,
-          "clean": 436118,
-          "mart": 306444
-        },
-        "output_bytes": {
-          "raw": 14922768,
-          "clean": 1068741,
-          "mart": 2348193
-        },
-        "started_at": "2026-08-08T12:05:54.180897+00:00",
-        "finished_at": "2026-08-08T12:06:03.210000+00:00",
-        "duration_seconds": 9.029
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_crime_nuts3/mart_trend.parquet",
@@ -2790,35 +3710,421 @@
       }
     },
     {
-      "slug": "eurostat_demo_r_fagec3_nuts3__mart_eurostat_demo_r_fagec3_nuts3",
+      "slug": "eurostat_demo_r_fagec3_nuts3__mart_geo_benchmark",
       "dataset": "eurostat_demo_r_fagec3_nuts3",
-      "table": "mart_eurostat_demo_r_fagec3_nuts3",
-      "description": "eurostat_demo_r_fagec3_nuts3 — mart mart_eurostat_demo_r_fagec3_nuts3",
+      "table": "mart_geo_benchmark",
+      "description": "eurostat_demo_r_fagec3_nuts3 — mart mart_geo_benchmark",
+      "primary_key": [
+        "year",
+        "geo",
+        "unit",
+        "age"
+      ],
+      "required_columns": [
+        "year",
+        "geo",
+        "geo_label_en",
+        "country",
+        "unit",
+        "value"
+      ],
+      "min_rows": 1000,
+      "run": {
+        "run_id": "20260808T133016Z_19af5ef6",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 322968,
+          "clean": 322968,
+          "mart": 250716
+        },
+        "output_bytes": {
+          "raw": 9419779,
+          "clean": 718947,
+          "mart": 791116
+        },
+        "started_at": "2026-08-08T13:30:16.265684+00:00",
+        "finished_at": "2026-08-08T13:30:21.851893+00:00",
+        "duration_seconds": 5.586
+      },
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_fagec3_nuts3/mart_eurostat_demo_r_fagec3_nuts3.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_fagec3_nuts3/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
     {
-      "slug": "eurostat_demo_r_magec3_nuts3__mart_eurostat_demo_r_magec3_nuts3",
+      "slug": "eurostat_demo_r_fagec3_nuts3__mart_sintesi",
+      "dataset": "eurostat_demo_r_fagec3_nuts3",
+      "table": "mart_sintesi",
+      "description": "eurostat_demo_r_fagec3_nuts3 — mart mart_sintesi",
+      "primary_key": [
+        "year",
+        "country"
+      ],
+      "required_columns": [
+        "year",
+        "country",
+        "nascite",
+        "rank_procapite_eu"
+      ],
+      "min_rows": 30,
+      "run": {
+        "run_id": "20260808T133016Z_19af5ef6",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 322968,
+          "clean": 322968,
+          "mart": 250716
+        },
+        "output_bytes": {
+          "raw": 9419779,
+          "clean": 718947,
+          "mart": 791116
+        },
+        "started_at": "2026-08-08T13:30:16.265684+00:00",
+        "finished_at": "2026-08-08T13:30:21.851893+00:00",
+        "duration_seconds": 5.586
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_fagec3_nuts3/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_demo_r_fagec3_nuts3__mart_trend",
+      "dataset": "eurostat_demo_r_fagec3_nuts3",
+      "table": "mart_trend",
+      "description": "eurostat_demo_r_fagec3_nuts3 — mart mart_trend",
+      "primary_key": [
+        "geo"
+      ],
+      "required_columns": [
+        "geo",
+        "geo_label_en",
+        "first_year",
+        "last_year",
+        "cagr_pct"
+      ],
+      "min_rows": 100,
+      "run": {
+        "run_id": "20260808T133016Z_19af5ef6",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 322968,
+          "clean": 322968,
+          "mart": 250716
+        },
+        "output_bytes": {
+          "raw": 9419779,
+          "clean": 718947,
+          "mart": 791116
+        },
+        "started_at": "2026-08-08T13:30:16.265684+00:00",
+        "finished_at": "2026-08-08T13:30:21.851893+00:00",
+        "duration_seconds": 5.586
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_fagec3_nuts3/mart_trend.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_demo_r_magec3_nuts3__mart_geo_benchmark",
       "dataset": "eurostat_demo_r_magec3_nuts3",
-      "table": "mart_eurostat_demo_r_magec3_nuts3",
-      "description": "eurostat_demo_r_magec3_nuts3 — mart mart_eurostat_demo_r_magec3_nuts3",
+      "table": "mart_geo_benchmark",
+      "description": "eurostat_demo_r_magec3_nuts3 — mart mart_geo_benchmark",
+      "primary_key": [
+        "year",
+        "geo",
+        "unit",
+        "sex",
+        "age"
+      ],
+      "required_columns": [
+        "year",
+        "geo",
+        "geo_label_en",
+        "country",
+        "unit",
+        "value"
+      ],
+      "min_rows": 1000,
+      "run": {
+        "run_id": "20260808T133022Z_754d6bda",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1618596,
+          "clean": 1618596,
+          "mart": 1210101
+        },
+        "output_bytes": {
+          "raw": 49977183,
+          "clean": 4368485,
+          "mart": 2631296
+        },
+        "started_at": "2026-08-08T13:30:22.519874+00:00",
+        "finished_at": "2026-08-08T13:30:43.228870+00:00",
+        "duration_seconds": 20.709
+      },
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_magec3_nuts3/mart_eurostat_demo_r_magec3_nuts3.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_magec3_nuts3/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
     {
-      "slug": "eurostat_demo_r_pjangrp3_nuts3__mart_eurostat_demo_r_pjangrp3_nuts3",
-      "dataset": "eurostat_demo_r_pjangrp3_nuts3",
-      "table": "mart_eurostat_demo_r_pjangrp3_nuts3",
-      "description": "eurostat_demo_r_pjangrp3_nuts3 — mart mart_eurostat_demo_r_pjangrp3_nuts3",
+      "slug": "eurostat_demo_r_magec3_nuts3__mart_sintesi",
+      "dataset": "eurostat_demo_r_magec3_nuts3",
+      "table": "mart_sintesi",
+      "description": "eurostat_demo_r_magec3_nuts3 — mart mart_sintesi",
+      "primary_key": [
+        "year",
+        "country"
+      ],
+      "required_columns": [
+        "year",
+        "country",
+        "decessi",
+        "rank_procapite_eu"
+      ],
+      "min_rows": 30,
+      "run": {
+        "run_id": "20260808T133022Z_754d6bda",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1618596,
+          "clean": 1618596,
+          "mart": 1210101
+        },
+        "output_bytes": {
+          "raw": 49977183,
+          "clean": 4368485,
+          "mart": 2631296
+        },
+        "started_at": "2026-08-08T13:30:22.519874+00:00",
+        "finished_at": "2026-08-08T13:30:43.228870+00:00",
+        "duration_seconds": 20.709
+      },
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_pjangrp3_nuts3/mart_eurostat_demo_r_pjangrp3_nuts3.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_magec3_nuts3/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_demo_r_magec3_nuts3__mart_trend",
+      "dataset": "eurostat_demo_r_magec3_nuts3",
+      "table": "mart_trend",
+      "description": "eurostat_demo_r_magec3_nuts3 — mart mart_trend",
+      "primary_key": [
+        "geo"
+      ],
+      "required_columns": [
+        "geo",
+        "geo_label_en",
+        "first_year",
+        "last_year",
+        "cagr_pct"
+      ],
+      "min_rows": 100,
+      "run": {
+        "run_id": "20260808T133022Z_754d6bda",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1618596,
+          "clean": 1618596,
+          "mart": 1210101
+        },
+        "output_bytes": {
+          "raw": 49977183,
+          "clean": 4368485,
+          "mart": 2631296
+        },
+        "started_at": "2026-08-08T13:30:22.519874+00:00",
+        "finished_at": "2026-08-08T13:30:43.228870+00:00",
+        "duration_seconds": 20.709
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_magec3_nuts3/mart_trend.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_demo_r_pjangrp3_nuts3__mart_geo_benchmark",
+      "dataset": "eurostat_demo_r_pjangrp3_nuts3",
+      "table": "mart_geo_benchmark",
+      "description": "eurostat_demo_r_pjangrp3_nuts3 — mart mart_geo_benchmark",
+      "primary_key": [
+        "year",
+        "geo",
+        "unit",
+        "sex",
+        "age"
+      ],
+      "required_columns": [
+        "year",
+        "geo",
+        "geo_label_en",
+        "country",
+        "unit",
+        "value"
+      ],
+      "min_rows": 1000,
+      "run": {
+        "run_id": "20260808T133043Z_29fee5c4",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1686888,
+          "clean": 1686888,
+          "mart": 1385139
+        },
+        "output_bytes": {
+          "raw": 56125787,
+          "clean": 6849173,
+          "mart": 4810926
+        },
+        "started_at": "2026-08-08T13:30:43.910496+00:00",
+        "finished_at": "2026-08-08T13:31:08.330981+00:00",
+        "duration_seconds": 24.42
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_pjangrp3_nuts3/mart_geo_benchmark.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_demo_r_pjangrp3_nuts3__mart_sintesi",
+      "dataset": "eurostat_demo_r_pjangrp3_nuts3",
+      "table": "mart_sintesi",
+      "description": "eurostat_demo_r_pjangrp3_nuts3 — mart mart_sintesi",
+      "primary_key": [
+        "year",
+        "country"
+      ],
+      "required_columns": [
+        "year",
+        "country",
+        "popolazione",
+        "rank_procapite_eu"
+      ],
+      "min_rows": 30,
+      "run": {
+        "run_id": "20260808T133043Z_29fee5c4",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1686888,
+          "clean": 1686888,
+          "mart": 1385139
+        },
+        "output_bytes": {
+          "raw": 56125787,
+          "clean": 6849173,
+          "mart": 4810926
+        },
+        "started_at": "2026-08-08T13:30:43.910496+00:00",
+        "finished_at": "2026-08-08T13:31:08.330981+00:00",
+        "duration_seconds": 24.42
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_pjangrp3_nuts3/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_demo_r_pjangrp3_nuts3__mart_trend",
+      "dataset": "eurostat_demo_r_pjangrp3_nuts3",
+      "table": "mart_trend",
+      "description": "eurostat_demo_r_pjangrp3_nuts3 — mart mart_trend",
+      "primary_key": [
+        "geo"
+      ],
+      "required_columns": [
+        "geo",
+        "geo_label_en",
+        "first_year",
+        "last_year",
+        "cagr_pct"
+      ],
+      "min_rows": 100,
+      "run": {
+        "run_id": "20260808T133043Z_29fee5c4",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1686888,
+          "clean": 1686888,
+          "mart": 1385139
+        },
+        "output_bytes": {
+          "raw": 56125787,
+          "clean": 6849173,
+          "mart": 4810926
+        },
+        "started_at": "2026-08-08T13:30:43.910496+00:00",
+        "finished_at": "2026-08-08T13:31:08.330981+00:00",
+        "duration_seconds": 24.42
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_pjangrp3_nuts3/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -2843,29 +4149,6 @@
         "value"
       ],
       "min_rows": 1000,
-      "run": {
-        "run_id": "20260808T120603Z_3cfc2355",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 39936,
-          "clean": 39936,
-          "mart": 26269
-        },
-        "output_bytes": {
-          "raw": 1180307,
-          "clean": 125823,
-          "mart": 188067
-        },
-        "started_at": "2026-08-08T12:06:03.949194+00:00",
-        "finished_at": "2026-08-08T12:06:06.430381+00:00",
-        "duration_seconds": 2.481
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_early_school_leavers_nuts2/mart_geo_benchmark.parquet",
@@ -2888,29 +4171,6 @@
         "rank_procapite_eu"
       ],
       "min_rows": 30,
-      "run": {
-        "run_id": "20260808T120603Z_3cfc2355",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 39936,
-          "clean": 39936,
-          "mart": 26269
-        },
-        "output_bytes": {
-          "raw": 1180307,
-          "clean": 125823,
-          "mart": 188067
-        },
-        "started_at": "2026-08-08T12:06:03.949194+00:00",
-        "finished_at": "2026-08-08T12:06:06.430381+00:00",
-        "duration_seconds": 2.481
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_early_school_leavers_nuts2/mart_sintesi.parquet",
@@ -2933,8 +4193,35 @@
         "cagr_pct"
       ],
       "min_rows": 100,
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_early_school_leavers_nuts2/mart_trend.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_emp_nuts3__mart_geo_benchmark",
+      "dataset": "eurostat_emp_nuts3",
+      "table": "mart_geo_benchmark",
+      "description": "eurostat_emp_nuts3 — mart mart_geo_benchmark",
+      "primary_key": [
+        "year",
+        "geo",
+        "unit",
+        "wstatus",
+        "nace_r2"
+      ],
+      "required_columns": [
+        "year",
+        "geo",
+        "geo_label_en",
+        "country",
+        "unit",
+        "value"
+      ],
+      "min_rows": 1000,
       "run": {
-        "run_id": "20260808T120603Z_3cfc2355",
+        "run_id": "20260808T133109Z_4d4ea657",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -2943,34 +4230,112 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 39936,
-          "clean": 39936,
-          "mart": 26269
+          "raw": 1541975,
+          "clean": 1541975,
+          "mart": 1486856
         },
         "output_bytes": {
-          "raw": 1180307,
-          "clean": 125823,
-          "mart": 188067
+          "raw": 48279499,
+          "clean": 4859918,
+          "mart": 4915349
         },
-        "started_at": "2026-08-08T12:06:03.949194+00:00",
-        "finished_at": "2026-08-08T12:06:06.430381+00:00",
-        "duration_seconds": 2.481
+        "started_at": "2026-08-08T13:31:09.948065+00:00",
+        "finished_at": "2026-08-08T13:31:31.554762+00:00",
+        "duration_seconds": 21.607
       },
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_early_school_leavers_nuts2/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_emp_nuts3/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
     {
-      "slug": "eurostat_emp_nuts3__mart_emp_nuts3",
+      "slug": "eurostat_emp_nuts3__mart_sintesi",
       "dataset": "eurostat_emp_nuts3",
-      "table": "mart_emp_nuts3",
-      "description": "eurostat_emp_nuts3 — mart mart_emp_nuts3",
-      "min_rows": 100,
+      "table": "mart_sintesi",
+      "description": "eurostat_emp_nuts3 — mart mart_sintesi",
+      "primary_key": [
+        "year",
+        "country"
+      ],
+      "required_columns": [
+        "year",
+        "country",
+        "occupati_migliaia",
+        "rank_procapite_eu"
+      ],
+      "min_rows": 30,
+      "run": {
+        "run_id": "20260808T133109Z_4d4ea657",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1541975,
+          "clean": 1541975,
+          "mart": 1486856
+        },
+        "output_bytes": {
+          "raw": 48279499,
+          "clean": 4859918,
+          "mart": 4915349
+        },
+        "started_at": "2026-08-08T13:31:09.948065+00:00",
+        "finished_at": "2026-08-08T13:31:31.554762+00:00",
+        "duration_seconds": 21.607
+      },
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_emp_nuts3/mart_emp_nuts3.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_emp_nuts3/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_emp_nuts3__mart_trend",
+      "dataset": "eurostat_emp_nuts3",
+      "table": "mart_trend",
+      "description": "eurostat_emp_nuts3 — mart mart_trend",
+      "primary_key": [
+        "geo"
+      ],
+      "required_columns": [
+        "geo",
+        "geo_label_en",
+        "first_year",
+        "last_year",
+        "cagr_pct"
+      ],
+      "min_rows": 100,
+      "run": {
+        "run_id": "20260808T133109Z_4d4ea657",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1541975,
+          "clean": 1541975,
+          "mart": 1486856
+        },
+        "output_bytes": {
+          "raw": 48279499,
+          "clean": 4859918,
+          "mart": 4915349
+        },
+        "started_at": "2026-08-08T13:31:09.948065+00:00",
+        "finished_at": "2026-08-08T13:31:31.554762+00:00",
+        "duration_seconds": 21.607
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_emp_nuts3/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -3115,13 +4480,141 @@
       }
     },
     {
-      "slug": "eurostat_gva_nuts3__mart_gva_nuts3",
+      "slug": "eurostat_gva_nuts3__mart_geo_benchmark",
       "dataset": "eurostat_gva_nuts3",
-      "table": "mart_gva_nuts3",
-      "description": "eurostat_gva_nuts3 — mart mart_gva_nuts3",
+      "table": "mart_geo_benchmark",
+      "description": "eurostat_gva_nuts3 — mart mart_geo_benchmark",
+      "primary_key": [
+        "year",
+        "geo",
+        "unit",
+        "nace_r2"
+      ],
+      "required_columns": [
+        "year",
+        "geo",
+        "geo_label_en",
+        "country",
+        "unit",
+        "value"
+      ],
+      "min_rows": 1000,
+      "run": {
+        "run_id": "20260808T133132Z_9f387dfc",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1339200,
+          "clean": 1339200,
+          "mart": 1280848
+        },
+        "output_bytes": {
+          "raw": 44111167,
+          "clean": 5778933,
+          "mart": 4294906
+        },
+        "started_at": "2026-08-08T13:31:32.263825+00:00",
+        "finished_at": "2026-08-08T13:31:51.729480+00:00",
+        "duration_seconds": 19.466
+      },
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_gva_nuts3/mart_gva_nuts3.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gva_nuts3/mart_geo_benchmark.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_gva_nuts3__mart_sintesi",
+      "dataset": "eurostat_gva_nuts3",
+      "table": "mart_sintesi",
+      "description": "eurostat_gva_nuts3 — mart mart_sintesi",
+      "primary_key": [
+        "year",
+        "country"
+      ],
+      "required_columns": [
+        "year",
+        "country",
+        "gva_mio_eur",
+        "rank_procapite_eu"
+      ],
+      "min_rows": 30,
+      "run": {
+        "run_id": "20260808T133132Z_9f387dfc",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1339200,
+          "clean": 1339200,
+          "mart": 1280848
+        },
+        "output_bytes": {
+          "raw": 44111167,
+          "clean": 5778933,
+          "mart": 4294906
+        },
+        "started_at": "2026-08-08T13:31:32.263825+00:00",
+        "finished_at": "2026-08-08T13:31:51.729480+00:00",
+        "duration_seconds": 19.466
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gva_nuts3/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_gva_nuts3__mart_trend",
+      "dataset": "eurostat_gva_nuts3",
+      "table": "mart_trend",
+      "description": "eurostat_gva_nuts3 — mart mart_trend",
+      "primary_key": [
+        "geo"
+      ],
+      "required_columns": [
+        "geo",
+        "geo_label_en",
+        "first_year",
+        "last_year",
+        "cagr_pct"
+      ],
+      "min_rows": 100,
+      "run": {
+        "run_id": "20260808T133132Z_9f387dfc",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1339200,
+          "clean": 1339200,
+          "mart": 1280848
+        },
+        "output_bytes": {
+          "raw": 44111167,
+          "clean": 5778933,
+          "mart": 4294906
+        },
+        "started_at": "2026-08-08T13:31:32.263825+00:00",
+        "finished_at": "2026-08-08T13:31:51.729480+00:00",
+        "duration_seconds": 19.466
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gva_nuts3/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -3144,29 +4637,6 @@
         "value"
       ],
       "min_rows": 5000,
-      "run": {
-        "run_id": "20260808T120607Z_f2231a40",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 26829,
-          "clean": 26829,
-          "mart": 15016
-        },
-        "output_bytes": {
-          "raw": 635846,
-          "clean": 76018,
-          "mart": 130473
-        },
-        "started_at": "2026-08-08T12:06:07.160936+00:00",
-        "finished_at": "2026-08-08T12:06:09.605294+00:00",
-        "duration_seconds": 2.444
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_hospital_beds_nuts2/mart_geo_benchmark.parquet",
@@ -3189,29 +4659,6 @@
         "rank_procapite_eu"
       ],
       "min_rows": 30,
-      "run": {
-        "run_id": "20260808T120607Z_f2231a40",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 26829,
-          "clean": 26829,
-          "mart": 15016
-        },
-        "output_bytes": {
-          "raw": 635846,
-          "clean": 76018,
-          "mart": 130473
-        },
-        "started_at": "2026-08-08T12:06:07.160936+00:00",
-        "finished_at": "2026-08-08T12:06:09.605294+00:00",
-        "duration_seconds": 2.444
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_hospital_beds_nuts2/mart_sintesi.parquet",
@@ -3234,29 +4681,6 @@
         "cagr_pct"
       ],
       "min_rows": 100,
-      "run": {
-        "run_id": "20260808T120607Z_f2231a40",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 26829,
-          "clean": 26829,
-          "mart": 15016
-        },
-        "output_bytes": {
-          "raw": 635846,
-          "clean": 76018,
-          "mart": 130473
-        },
-        "started_at": "2026-08-08T12:06:07.160936+00:00",
-        "finished_at": "2026-08-08T12:06:09.605294+00:00",
-        "duration_seconds": 2.444
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_hospital_beds_nuts2/mart_trend.parquet",
@@ -3282,29 +4706,6 @@
         "value"
       ],
       "min_rows": 3000,
-      "run": {
-        "run_id": "20260808T120610Z_728e4ea8",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 8533,
-          "clean": 8533,
-          "mart": 5354
-        },
-        "output_bytes": {
-          "raw": 172249,
-          "clean": 30384,
-          "mart": 68350
-        },
-        "started_at": "2026-08-08T12:06:10.333577+00:00",
-        "finished_at": "2026-08-08T12:06:12.210073+00:00",
-        "duration_seconds": 1.876
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/mart_geo_benchmark.parquet",
@@ -3327,29 +4728,6 @@
         "rank_procapite_eu"
       ],
       "min_rows": 30,
-      "run": {
-        "run_id": "20260808T120610Z_728e4ea8",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 8533,
-          "clean": 8533,
-          "mart": 5354
-        },
-        "output_bytes": {
-          "raw": 172249,
-          "clean": 30384,
-          "mart": 68350
-        },
-        "started_at": "2026-08-08T12:06:10.333577+00:00",
-        "finished_at": "2026-08-08T12:06:12.210073+00:00",
-        "duration_seconds": 1.876
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/mart_sintesi.parquet",
@@ -3372,29 +4750,6 @@
         "cagr_pct"
       ],
       "min_rows": 100,
-      "run": {
-        "run_id": "20260808T120610Z_728e4ea8",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 8533,
-          "clean": 8533,
-          "mart": 5354
-        },
-        "output_bytes": {
-          "raw": 172249,
-          "clean": 30384,
-          "mart": 68350
-        },
-        "started_at": "2026-08-08T12:06:10.333577+00:00",
-        "finished_at": "2026-08-08T12:06:12.210073+00:00",
-        "duration_seconds": 1.876
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/mart_trend.parquet",
@@ -3472,13 +4827,141 @@
       }
     },
     {
-      "slug": "eurostat_nrg_chddr2_a_nuts3__mart_eurostat_nrg_chddr2_a_nuts3",
+      "slug": "eurostat_nrg_chddr2_a_nuts3__mart_geo_benchmark",
       "dataset": "eurostat_nrg_chddr2_a_nuts3",
-      "table": "mart_eurostat_nrg_chddr2_a_nuts3",
-      "description": "eurostat_nrg_chddr2_a_nuts3 — mart mart_eurostat_nrg_chddr2_a_nuts3",
+      "table": "mart_geo_benchmark",
+      "description": "eurostat_nrg_chddr2_a_nuts3 — mart mart_geo_benchmark",
+      "primary_key": [
+        "year",
+        "geo",
+        "unit",
+        "indic_nrg"
+      ],
+      "required_columns": [
+        "year",
+        "geo",
+        "geo_label_en",
+        "country",
+        "unit",
+        "value"
+      ],
+      "min_rows": 1000,
+      "run": {
+        "run_id": "20260808T133152Z_e09da7db",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 165600,
+          "clean": 165600,
+          "mart": 147018
+        },
+        "output_bytes": {
+          "raw": 4693876,
+          "clean": 596278,
+          "mart": 992125
+        },
+        "started_at": "2026-08-08T13:31:52.723743+00:00",
+        "finished_at": "2026-08-08T13:31:56.620643+00:00",
+        "duration_seconds": 3.897
+      },
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_a_nuts3/mart_eurostat_nrg_chddr2_a_nuts3.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_a_nuts3/mart_geo_benchmark.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_nrg_chddr2_a_nuts3__mart_sintesi",
+      "dataset": "eurostat_nrg_chddr2_a_nuts3",
+      "table": "mart_sintesi",
+      "description": "eurostat_nrg_chddr2_a_nuts3 — mart mart_sintesi",
+      "primary_key": [
+        "year",
+        "country"
+      ],
+      "required_columns": [
+        "year",
+        "country",
+        "hdd_nr",
+        "rank_procapite_eu"
+      ],
+      "min_rows": 30,
+      "run": {
+        "run_id": "20260808T133152Z_e09da7db",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 165600,
+          "clean": 165600,
+          "mart": 147018
+        },
+        "output_bytes": {
+          "raw": 4693876,
+          "clean": 596278,
+          "mart": 992125
+        },
+        "started_at": "2026-08-08T13:31:52.723743+00:00",
+        "finished_at": "2026-08-08T13:31:56.620643+00:00",
+        "duration_seconds": 3.897
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_a_nuts3/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_nrg_chddr2_a_nuts3__mart_trend",
+      "dataset": "eurostat_nrg_chddr2_a_nuts3",
+      "table": "mart_trend",
+      "description": "eurostat_nrg_chddr2_a_nuts3 — mart mart_trend",
+      "primary_key": [
+        "geo"
+      ],
+      "required_columns": [
+        "geo",
+        "geo_label_en",
+        "first_year",
+        "last_year",
+        "cagr_pct"
+      ],
+      "min_rows": 100,
+      "run": {
+        "run_id": "20260808T133152Z_e09da7db",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 165600,
+          "clean": 165600,
+          "mart": 147018
+        },
+        "output_bytes": {
+          "raw": 4693876,
+          "clean": 596278,
+          "mart": 992125
+        },
+        "started_at": "2026-08-08T13:31:52.723743+00:00",
+        "finished_at": "2026-08-08T13:31:56.620643+00:00",
+        "duration_seconds": 3.897
+      },
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_a_nuts3/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -3512,29 +4995,6 @@
         "value"
       ],
       "min_rows": 5000,
-      "run": {
-        "run_id": "20260808T120612Z_ea62a19f",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 28182,
-          "clean": 28182,
-          "mart": 14008
-        },
-        "output_bytes": {
-          "raw": 658236,
-          "clean": 79933,
-          "mart": 129838
-        },
-        "started_at": "2026-08-08T12:06:12.931580+00:00",
-        "finished_at": "2026-08-08T12:06:15.405003+00:00",
-        "duration_seconds": 2.473
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_physicians_nuts2/mart_geo_benchmark.parquet",
@@ -3557,29 +5017,6 @@
         "rank_procapite_eu"
       ],
       "min_rows": 30,
-      "run": {
-        "run_id": "20260808T120612Z_ea62a19f",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 28182,
-          "clean": 28182,
-          "mart": 14008
-        },
-        "output_bytes": {
-          "raw": 658236,
-          "clean": 79933,
-          "mart": 129838
-        },
-        "started_at": "2026-08-08T12:06:12.931580+00:00",
-        "finished_at": "2026-08-08T12:06:15.405003+00:00",
-        "duration_seconds": 2.473
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_physicians_nuts2/mart_sintesi.parquet",
@@ -3602,29 +5039,6 @@
         "cagr_pct"
       ],
       "min_rows": 100,
-      "run": {
-        "run_id": "20260808T120612Z_ea62a19f",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 28182,
-          "clean": 28182,
-          "mart": 14008
-        },
-        "output_bytes": {
-          "raw": 658236,
-          "clean": 79933,
-          "mart": 129838
-        },
-        "started_at": "2026-08-08T12:06:12.931580+00:00",
-        "finished_at": "2026-08-08T12:06:15.405003+00:00",
-        "duration_seconds": 2.473
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_physicians_nuts2/mart_trend.parquet",
@@ -3800,29 +5214,6 @@
         "value"
       ],
       "min_rows": 3000,
-      "run": {
-        "run_id": "20260808T120616Z_752bcfc8",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 9706,
-          "clean": 9706,
-          "mart": 6281
-        },
-        "output_bytes": {
-          "raw": 191877,
-          "clean": 31516,
-          "mart": 82911
-        },
-        "started_at": "2026-08-08T12:06:16.134694+00:00",
-        "finished_at": "2026-08-08T12:06:18.052530+00:00",
-        "duration_seconds": 1.918
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_poverty_risk_nuts2/mart_geo_benchmark.parquet",
@@ -3845,29 +5236,6 @@
         "rank_procapite_eu"
       ],
       "min_rows": 30,
-      "run": {
-        "run_id": "20260808T120616Z_752bcfc8",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 9706,
-          "clean": 9706,
-          "mart": 6281
-        },
-        "output_bytes": {
-          "raw": 191877,
-          "clean": 31516,
-          "mart": 82911
-        },
-        "started_at": "2026-08-08T12:06:16.134694+00:00",
-        "finished_at": "2026-08-08T12:06:18.052530+00:00",
-        "duration_seconds": 1.918
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_poverty_risk_nuts2/mart_sintesi.parquet",
@@ -3890,29 +5258,6 @@
         "cagr_pct"
       ],
       "min_rows": 100,
-      "run": {
-        "run_id": "20260808T120616Z_752bcfc8",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 9706,
-          "clean": 9706,
-          "mart": 6281
-        },
-        "output_bytes": {
-          "raw": 191877,
-          "clean": 31516,
-          "mart": 82911
-        },
-        "started_at": "2026-08-08T12:06:16.134694+00:00",
-        "finished_at": "2026-08-08T12:06:18.052530+00:00",
-        "duration_seconds": 1.918
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_poverty_risk_nuts2/mart_trend.parquet",
@@ -4022,29 +5367,6 @@
         "value"
       ],
       "min_rows": 1000,
-      "run": {
-        "run_id": "20260808T120618Z_5d86ddf8",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 12276,
-          "clean": 12276,
-          "mart": 10921
-        },
-        "output_bytes": {
-          "raw": 451832,
-          "clean": 44664,
-          "mart": 87671
-        },
-        "started_at": "2026-08-08T12:06:18.778569+00:00",
-        "finished_at": "2026-08-08T12:06:20.990906+00:00",
-        "duration_seconds": 2.212
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_tertiary_education_nuts2/mart_geo_benchmark.parquet",
@@ -4067,29 +5389,6 @@
         "rank_procapite_eu"
       ],
       "min_rows": 30,
-      "run": {
-        "run_id": "20260808T120618Z_5d86ddf8",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 12276,
-          "clean": 12276,
-          "mart": 10921
-        },
-        "output_bytes": {
-          "raw": 451832,
-          "clean": 44664,
-          "mart": 87671
-        },
-        "started_at": "2026-08-08T12:06:18.778569+00:00",
-        "finished_at": "2026-08-08T12:06:20.990906+00:00",
-        "duration_seconds": 2.212
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_tertiary_education_nuts2/mart_sintesi.parquet",
@@ -4112,29 +5411,6 @@
         "cagr_pct"
       ],
       "min_rows": 100,
-      "run": {
-        "run_id": "20260808T120618Z_5d86ddf8",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 12276,
-          "clean": 12276,
-          "mart": 10921
-        },
-        "output_bytes": {
-          "raw": 451832,
-          "clean": 44664,
-          "mart": 87671
-        },
-        "started_at": "2026-08-08T12:06:18.778569+00:00",
-        "finished_at": "2026-08-08T12:06:20.990906+00:00",
-        "duration_seconds": 2.212
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_tertiary_education_nuts2/mart_trend.parquet",
@@ -4171,29 +5447,6 @@
         "value"
       ],
       "min_rows": 1000,
-      "run": {
-        "run_id": "20260808T120621Z_c8253320",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 108836,
-          "clean": 108836,
-          "mart": 41412
-        },
-        "output_bytes": {
-          "raw": 2520790,
-          "clean": 214177,
-          "mart": 397733
-        },
-        "started_at": "2026-08-08T12:06:21.720794+00:00",
-        "finished_at": "2026-08-08T12:06:25.148383+00:00",
-        "duration_seconds": 3.428
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/mart_geo_benchmark.parquet",
@@ -4216,29 +5469,6 @@
         "rank_procapite_eu"
       ],
       "min_rows": 30,
-      "run": {
-        "run_id": "20260808T120621Z_c8253320",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 108836,
-          "clean": 108836,
-          "mart": 41412
-        },
-        "output_bytes": {
-          "raw": 2520790,
-          "clean": 214177,
-          "mart": 397733
-        },
-        "started_at": "2026-08-08T12:06:21.720794+00:00",
-        "finished_at": "2026-08-08T12:06:25.148383+00:00",
-        "duration_seconds": 3.428
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/mart_sintesi.parquet",
@@ -4261,29 +5491,6 @@
         "cagr_pct"
       ],
       "min_rows": 100,
-      "run": {
-        "run_id": "20260808T120621Z_c8253320",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 108836,
-          "clean": 108836,
-          "mart": 41412
-        },
-        "output_bytes": {
-          "raw": 2520790,
-          "clean": 214177,
-          "mart": 397733
-        },
-        "started_at": "2026-08-08T12:06:21.720794+00:00",
-        "finished_at": "2026-08-08T12:06:25.148383+00:00",
-        "duration_seconds": 3.428
-      },
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/mart_trend.parquet",
@@ -4425,7 +5632,30 @@
       "action": "",
       "years": [
         2026
-      ]
+      ],
+      "run": {
+        "run_id": "20260808T133016Z_19af5ef6",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 322968,
+          "clean": 322968,
+          "mart": 250716
+        },
+        "output_bytes": {
+          "raw": 9419779,
+          "clean": 718947,
+          "mart": 791116
+        },
+        "started_at": "2026-08-08T13:30:16.265684+00:00",
+        "finished_at": "2026-08-08T13:30:21.851893+00:00",
+        "duration_seconds": 5.586
+      }
     },
     {
       "id": "eurostat_demo_r_magec3_nuts3",
@@ -4436,7 +5666,30 @@
       "action": "",
       "years": [
         2026
-      ]
+      ],
+      "run": {
+        "run_id": "20260808T133022Z_754d6bda",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1618596,
+          "clean": 1618596,
+          "mart": 1210101
+        },
+        "output_bytes": {
+          "raw": 49977183,
+          "clean": 4368485,
+          "mart": 2631296
+        },
+        "started_at": "2026-08-08T13:30:22.519874+00:00",
+        "finished_at": "2026-08-08T13:30:43.228870+00:00",
+        "duration_seconds": 20.709
+      }
     },
     {
       "id": "eurostat_demo_r_pjangrp3_nuts3",
@@ -4447,7 +5700,30 @@
       "action": "",
       "years": [
         2026
-      ]
+      ],
+      "run": {
+        "run_id": "20260808T133043Z_29fee5c4",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1686888,
+          "clean": 1686888,
+          "mart": 1385139
+        },
+        "output_bytes": {
+          "raw": 56125787,
+          "clean": 6849173,
+          "mart": 4810926
+        },
+        "started_at": "2026-08-08T13:30:43.910496+00:00",
+        "finished_at": "2026-08-08T13:31:08.330981+00:00",
+        "duration_seconds": 24.42
+      }
     },
     {
       "id": "eurostat_early_school_leavers_nuts2",
@@ -4492,7 +5768,30 @@
       "action": "",
       "years": [
         2026
-      ]
+      ],
+      "run": {
+        "run_id": "20260808T133109Z_4d4ea657",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1541975,
+          "clean": 1541975,
+          "mart": 1486856
+        },
+        "output_bytes": {
+          "raw": 48279499,
+          "clean": 4859918,
+          "mart": 4915349
+        },
+        "started_at": "2026-08-08T13:31:09.948065+00:00",
+        "finished_at": "2026-08-08T13:31:31.554762+00:00",
+        "duration_seconds": 21.607
+      }
     },
     {
       "id": "eurostat_fertility_nuts3",
@@ -4548,7 +5847,30 @@
       "action": "",
       "years": [
         2026
-      ]
+      ],
+      "run": {
+        "run_id": "20260808T133132Z_9f387dfc",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1339200,
+          "clean": 1339200,
+          "mart": 1280848
+        },
+        "output_bytes": {
+          "raw": 44111167,
+          "clean": 5778933,
+          "mart": 4294906
+        },
+        "started_at": "2026-08-08T13:31:32.263825+00:00",
+        "finished_at": "2026-08-08T13:31:51.729480+00:00",
+        "duration_seconds": 19.466
+      }
     },
     {
       "id": "eurostat_nrg_chddr2_m_nuts3",
@@ -4672,7 +5994,30 @@
       "action": "",
       "years": [
         2026
-      ]
+      ],
+      "run": {
+        "run_id": "20260808T133152Z_e09da7db",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 165600,
+          "clean": 165600,
+          "mart": 147018
+        },
+        "output_bytes": {
+          "raw": 4693876,
+          "clean": 596278,
+          "mart": 992125
+        },
+        "started_at": "2026-08-08T13:31:52.723743+00:00",
+        "finished_at": "2026-08-08T13:31:56.620643+00:00",
+        "duration_seconds": 3.897
+      }
     },
     {
       "id": "eurostat_physicians_nuts2",
@@ -14597,8 +15942,32 @@
             "semantic_type": "country_code"
           },
           {
+            "slug": "eurostat_demo_r_fagec3_nuts3",
+            "name": "Eurostat Demo R Fagec3 Nuts3",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_demo_r_magec3_nuts3",
+            "name": "Eurostat Demo R Magec3 Nuts3",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_demo_r_pjangrp3_nuts3",
+            "name": "Eurostat Demo R Pjangrp3 Nuts3",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
             "slug": "eurostat_early_school_leavers_nuts2",
             "name": "Eurostat Early School Leavers Nuts2",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_emp_nuts3",
+            "name": "Eurostat Emp Nuts3",
             "column": "country",
             "semantic_type": "country_code"
           },
@@ -14611,6 +15980,12 @@
           {
             "slug": "eurostat_gdp_nuts3",
             "name": "Eurostat Gdp Nuts3",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_gva_nuts3",
+            "name": "Eurostat Gva Nuts3",
             "column": "country",
             "semantic_type": "country_code"
           },
@@ -14629,6 +16004,12 @@
           {
             "slug": "eurostat_labour_productivity_nuts3",
             "name": "Eurostat Labour Productivity Nuts3",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_nrg_chddr2_a_nuts3",
+            "name": "Eurostat Nrg Chddr2 A Nuts3",
             "column": "country",
             "semantic_type": "country_code"
           },
@@ -14676,7 +16057,7 @@
           }
         ],
         "types": {
-          "country_code": 16
+          "country_code": 22
         }
       },
       "Provincia (tramite NUTS3)": {
@@ -14702,8 +16083,32 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_demo_r_fagec3_nuts3",
+            "name": "Eurostat Demo R Fagec3 Nuts3",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_demo_r_magec3_nuts3",
+            "name": "Eurostat Demo R Magec3 Nuts3",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_demo_r_pjangrp3_nuts3",
+            "name": "Eurostat Demo R Pjangrp3 Nuts3",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_early_school_leavers_nuts2",
             "name": "Eurostat Early School Leavers Nuts2",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_emp_nuts3",
+            "name": "Eurostat Emp Nuts3",
             "column": "geo",
             "semantic_type": "nuts_code"
           },
@@ -14716,6 +16121,12 @@
           {
             "slug": "eurostat_gdp_nuts3",
             "name": "Eurostat Gdp Nuts3",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_gva_nuts3",
+            "name": "Eurostat Gva Nuts3",
             "column": "geo",
             "semantic_type": "nuts_code"
           },
@@ -14734,6 +16145,12 @@
           {
             "slug": "eurostat_labour_productivity_nuts3",
             "name": "Eurostat Labour Productivity Nuts3",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_nrg_chddr2_a_nuts3",
+            "name": "Eurostat Nrg Chddr2 A Nuts3",
             "column": "geo",
             "semantic_type": "nuts_code"
           },
@@ -14781,7 +16198,7 @@
           }
         ],
         "types": {
-          "nuts_code": 16
+          "nuts_code": 22
         }
       },
       "Tempo": {
@@ -14807,8 +16224,32 @@
             "semantic_type": "year"
           },
           {
+            "slug": "eurostat_demo_r_fagec3_nuts3",
+            "name": "Eurostat Demo R Fagec3 Nuts3",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_demo_r_magec3_nuts3",
+            "name": "Eurostat Demo R Magec3 Nuts3",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_demo_r_pjangrp3_nuts3",
+            "name": "Eurostat Demo R Pjangrp3 Nuts3",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
             "slug": "eurostat_early_school_leavers_nuts2",
             "name": "Eurostat Early School Leavers Nuts2",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_emp_nuts3",
+            "name": "Eurostat Emp Nuts3",
             "column": "year",
             "semantic_type": "year"
           },
@@ -14821,6 +16262,12 @@
           {
             "slug": "eurostat_gdp_nuts3",
             "name": "Eurostat Gdp Nuts3",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_gva_nuts3",
+            "name": "Eurostat Gva Nuts3",
             "column": "year",
             "semantic_type": "year"
           },
@@ -14839,6 +16286,12 @@
           {
             "slug": "eurostat_labour_productivity_nuts3",
             "name": "Eurostat Labour Productivity Nuts3",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_nrg_chddr2_a_nuts3",
+            "name": "Eurostat Nrg Chddr2 A Nuts3",
             "column": "year",
             "semantic_type": "year"
           },
@@ -14886,7 +16339,7 @@
           }
         ],
         "types": {
-          "year": 16
+          "year": 22
         }
       }
     },
@@ -14897,8 +16350,8 @@
     }
   },
   "summary": {
-    "datasets": 16,
-    "marts": 60,
+    "datasets": 22,
+    "marts": 72,
     "signals": 28
   }
 }
