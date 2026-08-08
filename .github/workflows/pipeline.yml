@@ -90,8 +90,9 @@ jobs:
             gh pr view "$PR_NUMBER" --json files --jq ".files[].path" | \
               grep '^datasets/' | cut -d/ -f2 | sort -u > dirs.txt
           elif [ -n "$INPUT_DATASETS" ]; then
-            # Manuale con slug espliciti
-            echo "$INPUT_DATASETS" | tr ',' '\n' > dirs.txt
+            # Manuale con slug espliciti — accetta sia trattini (cartella)
+            # sia underscore (dataset.name, come nel registry/catalogo).
+            echo "$INPUT_DATASETS" | tr ',' '\n' | sed 's/_/-/g' > dirs.txt
           else
             # Schedule/manuale senza slug: tutti
             find datasets -maxdepth 1 -mindepth 1 -type d -printf '%f\n' | sort > dirs.txt
