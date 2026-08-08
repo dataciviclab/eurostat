@@ -4,6 +4,8 @@ schema_version: 1
 dataset:
   name: "eurostat_soil_erosion_nuts3"
   source_id: "eurostat"
+  tags: [ambiente, erosione-suolo, territorio, eurostat, benchmark, nuts3]
+  category: ambiente
   years: [2026]
   time_coverage:
     start_year: 2000
@@ -13,12 +15,38 @@ raw:
   output_policy: overwrite
   sources:
     - name: "eurostat_aei_pr_soiler"
-      type: "script"
+      type: "sdmx"
       args:
-        command: "../../connectors/tsv_normalize.py --flow AEI_PR_SOILER --output aei_pr_soiler_normalized.parquet"
-        output: "aei_pr_soiler_normalized.parquet"
-        filename: "aei_pr_soiler_normalized.parquet"
+        agency: "ESTAT"
+        flow: "AEI_PR_SOILER"
       primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: levels
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: LEVELS
+  - name: clc18
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: CLC18
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
 
 clean:
   sql: "sql/clean.sql"
@@ -28,15 +56,66 @@ clean:
     delim: ","
     encoding: utf-8
     header: true
+    # Ordine colonne = header CSV del source sdmx (freq,levels,clc18,unit,geo)
+    columns:
+      freq: VARCHAR
+      levels: VARCHAR
+      clc18: VARCHAR
+      unit: VARCHAR
+      geo: VARCHAR
+      year: INTEGER
+      value: DOUBLE
+      flag: VARCHAR
+  required_columns:
+    - freq
+    - unit
+    - levels
+    - clc18
+    - geo
+    - year
+    - freq_label_en
+    - unit_label_en
+    - levels_label_en
+    - clc18_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
   validate:
     min_rows: 100
+    # NOTE: `value` is NOT in not_null — Eurostat has legitimate coverage gaps.
+    not_null:
+      - geo
+      - year
 
 mart:
   tables:
-    - name: "mart_eurostat_soil_erosion_nuts3"
-      sql: "sql/mart.sql"
+    - name: "mart_geo_benchmark"
+      sql: "sql/mart_geo_benchmark.sql"
+    - name: "mart_sintesi"
+      sql: "sql/mart_sintesi.sql"
+    - name: "mart_trend"
+      sql: "sql/mart_trend.sql"
   required_tables:
-    - "mart_eurostat_soil_erosion_nuts3"
+    - "mart_geo_benchmark"
+    - "mart_sintesi"
+    - "mart_trend"
+  validate:
+    table_rules:
+      mart_geo_benchmark:
+        required_columns: [year, geo, geo_label_en, country, unit, value]
+        primary_key: [year, geo, unit, levels, clc18]
+        min_rows: 100
+      mart_sintesi:
+        required_columns: [year, country, erosione_tonn, rank_procapite_eu]
+        primary_key: [year, country]
+        min_rows: 30
+      mart_trend:
+        required_columns: [geo, geo_label_en, first_year, last_year, cagr_pct]
+        primary_key: [geo]
+        min_rows: 100
 
 validation:
   fail_on_error: true

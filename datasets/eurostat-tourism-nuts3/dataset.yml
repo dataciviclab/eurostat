@@ -4,21 +4,49 @@ schema_version: 1
 dataset:
   name: "eurostat_tourism_nuts3"
   source_id: "eurostat"
+  tags: [economia, turismo, pernottamenti, eurostat, benchmark, nuts3]
+  category: economia
   years: [2026]
   time_coverage:
-    start_year: 1990
-    end_year: 2025
+    start_year: 2000
+    end_year: 2024
 
 raw:
   output_policy: overwrite
   sources:
     - name: "eurostat_tour_occ_nin2"
-      type: "script"
+      type: "sdmx"
       args:
-        command: "../../connectors/tsv_normalize.py --flow TOUR_OCC_NIN2 --output tour_occ_nin2_normalized.parquet"
-        output: "tour_occ_nin2_normalized.parquet"
-        filename: "tour_occ_nin2_normalized.parquet"
+        agency: "ESTAT"
+        flow: "TOUR_OCC_NIN2"
       primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: c_resid
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: C_RESID
+  - name: nace_r2
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: NACE_R2
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
 
 clean:
   sql: "sql/clean.sql"
@@ -28,15 +56,66 @@ clean:
     delim: ","
     encoding: utf-8
     header: true
+    # Ordine colonne = header CSV del source sdmx (freq,c_resid,unit,nace_r2,geo)
+    columns:
+      freq: VARCHAR
+      c_resid: VARCHAR
+      unit: VARCHAR
+      nace_r2: VARCHAR
+      geo: VARCHAR
+      year: INTEGER
+      value: DOUBLE
+      flag: VARCHAR
+  required_columns:
+    - freq
+    - unit
+    - c_resid
+    - nace_r2
+    - geo
+    - year
+    - freq_label_en
+    - unit_label_en
+    - c_resid_label_en
+    - nace_r2_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
   validate:
     min_rows: 100
+    # NOTE: `value` is NOT in not_null — Eurostat has legitimate coverage gaps.
+    not_null:
+      - geo
+      - year
 
 mart:
   tables:
-    - name: "mart_eurostat_tourism_nuts3"
-      sql: "sql/mart.sql"
+    - name: "mart_geo_benchmark"
+      sql: "sql/mart_geo_benchmark.sql"
+    - name: "mart_sintesi"
+      sql: "sql/mart_sintesi.sql"
+    - name: "mart_trend"
+      sql: "sql/mart_trend.sql"
   required_tables:
-    - "mart_eurostat_tourism_nuts3"
+    - "mart_geo_benchmark"
+    - "mart_sintesi"
+    - "mart_trend"
+  validate:
+    table_rules:
+      mart_geo_benchmark:
+        required_columns: [year, geo, geo_label_en, country, unit, value]
+        primary_key: [year, geo, unit, c_resid, nace_r2]
+        min_rows: 1000
+      mart_sintesi:
+        required_columns: [year, country, pernottamenti, rank_procapite_eu]
+        primary_key: [year, country]
+        min_rows: 30
+      mart_trend:
+        required_columns: [geo, geo_label_en, first_year, last_year, cagr_pct]
+        primary_key: [geo]
+        min_rows: 100
 
 validation:
   fail_on_error: true

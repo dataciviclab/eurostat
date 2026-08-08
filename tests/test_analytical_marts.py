@@ -295,10 +295,79 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_business_demography_nuts3",
+        "benchmark_unit": "V11920",
+        # No `unit` column: dimensions are freq/indic_sb/sizeclas/nace_r2/geo.
+        "no_unit": True,
+        # Extra dimensions: indicator + size class + sector, slice V11920 +
+        # TOTAL + B-S_X_K642.
+        "dim": "sizeclas",
+        "dim_value": "TOTAL",
+        "dim2": "nace_r2",
+        "dim2_value": "B-S_X_K642",
+        "dim3": "indic_sb",
+        "dim3_value": "V11920",
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
+    {
+        "slug": "eurostat_soil_erosion_nuts3",
+        "benchmark_unit": "T",
+        # Series ends 2023 (not 2024) — per-dataset cross-check year.
+        "check_year": 2016,
+        # Extra dimensions: severity class + land cover, slice TOTAL +
+        # CLC2_3X331_332_335. (unit PC is constant 100 — T discriminates.)
+        "dim": "levels",
+        "dim_value": "TOTAL",
+        "dim2": "clc18",
+        "dim2_value": "CLC2_3X331_332_335",
+        # Other units (PC, T_HA, ...) carry no benchmark. FRB02: has 5 units
+        # in the slice for 2016 (ITC4C only has HA).
+        "other_unit": "PC",
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "FRB02",
+    },
+    {
+        "slug": "eurostat_tourism_nuts3",
+        "benchmark_unit": "NR",
+        # Extra dimensions: residency + accommodation, slice TOTAL +
+        # I551-I553.
+        "dim": "c_resid",
+        "dim_value": "TOTAL",
+        "dim2": "nace_r2",
+        "dim2_value": "I551-I553",
+        # Other units (PC_TOT) carry no benchmark.
+        "other_unit": "PC_TOT",
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
+    {
+        "slug": "eurostat_nrg_chddr2_m_nuts3",
+        "benchmark_unit": "NR",
+        # Monthly dataset: extra dimensions indic_nrg (HDD) + month (1).
+        "dim": "indic_nrg",
+        "dim_value": "HDD",
+        "dim2": "month",
+        "dim2_value": "1",
+        # Other indicator (CDD) carries no benchmark.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
 CHECK_YEAR = 2024
+
+
+def _check_year(ds: dict) -> int:
+    """Cross-check year for a dataset — per-dataset override when the
+    series does not reach CHECK_YEAR (e.g. soil-erosion ends 2023)."""
+    return int(ds.get("check_year", CHECK_YEAR))
 
 
 def _skip_if_missing(slug: str, mart: str) -> Path:
@@ -310,12 +379,12 @@ def _skip_if_missing(slug: str, mart: str) -> Path:
 
 def _dim_filter(ds: dict) -> str:
     """SQL filter for the optional extra benchmark dimensions (e.g. crime iccs,
-    or tertiary isced11 + sex)."""
+    tertiary isced11 + sex, or business demography indic_sb + sizeclas +
+    nace_r2)."""
     parts = []
-    if "dim" in ds:
-        parts.append(f"{ds['dim']} = '{ds['dim_value']}'")
-    if "dim2" in ds:
-        parts.append(f"{ds['dim2']} = '{ds['dim2_value']}'")
+    for key in ("dim", "dim2", "dim3"):
+        if key in ds:
+            parts.append(f"{ds[key]} = '{ds[key + '_value']}'")
     if parts:
         return " AND " + " AND ".join(parts)
     return ""
@@ -396,7 +465,7 @@ class TestSharedBenchmarkContract:
                 f"""
                 SELECT COUNT(*)
                 FROM read_parquet('{f}')
-                WHERE year = {CHECK_YEAR} AND {outside}
+                WHERE year = {_check_year(ds)} AND {outside}
                   AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL
                        OR rank_nazionale IS NOT NULL)
                 """
@@ -426,7 +495,7 @@ class TestSharedBenchmarkContract:
             SELECT media_eu_value, media_paese_value, percentile_eu, rank_nazionale,
                    distanza_media_eu_pct
             FROM read_parquet('{f}')
-            WHERE year = {CHECK_YEAR} AND unit = '{ds["other_unit"]}'
+            WHERE year = {_check_year(ds)} AND unit = '{ds["other_unit"]}'
               AND geo = '{ds["other_unit_geo"]}'
             """
         ).fetchone()
@@ -445,7 +514,7 @@ class TestSharedBenchmarkContract:
         partition.
         """
         f = _skip_if_missing(ds["slug"], "mart_geo_benchmark")
-        dims = [ds.get("dim"), ds.get("dim2")]
+        dims = [ds.get("dim"), ds.get("dim2"), ds.get("dim3")]
         dim_partition = "".join(f", {d}" for d in dims if d)
         if not ds.get("no_unit"):
             dim_partition += ", unit"
@@ -458,11 +527,11 @@ class TestSharedBenchmarkContract:
                        RANK() OVER (PARTITION BY year, country{dim_partition}
                                     ORDER BY value DESC) AS rn
                 FROM read_parquet('{f}')
-                WHERE year = {CHECK_YEAR} AND nuts_level = '{ds["nuts_level"]}'{dim_filter}{unit_filter}
+                WHERE year = {_check_year(ds)} AND nuts_level = '{ds["nuts_level"]}'{dim_filter}{unit_filter}
             )
             SELECT COUNT(*)
             FROM read_parquet('{f}') b
-            JOIN ranked r ON b.geo = r.geo AND b.year = {CHECK_YEAR}
+            JOIN ranked r ON b.geo = r.geo AND b.year = {_check_year(ds)}
                        AND b.nuts_level = '{ds["nuts_level"]}'{dim_filter}{unit_filter}
             WHERE b.rank_nazionale = 1 AND r.rn != 1
             """
@@ -485,7 +554,7 @@ class TestSharedBenchmarkContract:
             f"""
             SELECT COUNT(*)
             FROM read_parquet('{f}')
-            WHERE year = {CHECK_YEAR} AND nuts_level = '{ds["nuts_level"]}'{dim}{unit_filter}{eu_filter}
+            WHERE year = {_check_year(ds)} AND nuts_level = '{ds["nuts_level"]}'{dim}{unit_filter}{eu_filter}
               AND (media_eu_value IS NULL OR media_paese_value IS NULL
                    OR percentile_eu IS NULL OR rank_nazionale IS NULL
                    OR distanza_media_eu_pct IS NULL)
@@ -503,7 +572,7 @@ class TestSharedBenchmarkContract:
             f"""
             SELECT COUNT(*)
             FROM read_parquet('{f}')
-            WHERE year = {CHECK_YEAR} AND nuts_level = '{ds["nuts_level"]}'{dim}{unit_filter}
+            WHERE year = {_check_year(ds)} AND nuts_level = '{ds["nuts_level"]}'{dim}{unit_filter}
               AND NOT ({_eu27_body()})
               AND percentile_eu IS NOT NULL
             """
@@ -1774,3 +1843,215 @@ class TestEmpNuts3Facts:
             """
         ).fetchone()[0]
         assert n_bad == 0
+
+
+class TestBusinessDemographyNuts3Facts:
+    """Verified facts for eurostat-business-demography-nuts3."""
+
+    def test_italy_rank2_births(self):
+        """Italy is 2nd of 27 EU27 by enterprise births (2020)."""
+        f = _skip_if_missing("eurostat_business_demography_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT nascite_imprese, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2020 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 302k enterprise births — 2nd after FR (644k)
+        assert 200_000 <= row[0] <= 400_000
+        assert 1 <= row[1] <= 3
+
+    def test_births_sum_from_nuts2(self):
+        """Sintesi births is the SUM of NUTS2 rows (not the mean)."""
+        f = _skip_if_missing("eurostat_business_demography_nuts3", "mart_sintesi")
+        births = duckdb.sql(
+            f"""
+            SELECT nascite_imprese FROM read_parquet('{f}')
+            WHERE year = 2020 AND country = 'IT'
+            """
+        ).fetchone()[0]
+        clean_f = (
+            "out/data/clean/eurostat_business_demography_nuts3/2026/"
+            "eurostat_business_demography_nuts3_2026_clean.parquet"
+        )
+        expected = duckdb.sql(
+            f"""
+            SELECT SUM(value) FROM read_parquet('{clean_f}')
+            WHERE year = 2020 AND indic_sb = 'V11920' AND sizeclas = 'TOTAL'
+              AND nace_r2 = 'B-S_X_K642' AND country = 'IT' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()[0]
+        assert abs(births - expected) < 1  # exact sum
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the V11920 + TOTAL + B-S slice."""
+        f = _skip_if_missing("eurostat_business_demography_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2020
+              AND NOT (indic_sb = 'V11920' AND sizeclas = 'TOTAL'
+                       AND nace_r2 = 'B-S_X_K642')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestSoilErosionNuts3Facts:
+    """Verified facts for eurostat-soil-erosion-nuts3."""
+
+    def test_italy_top_eu_erosion(self):
+        """Italy is 1st of 27 EU27 by soil erosion tonnes (2016)."""
+        f = _skip_if_missing("eurostat_soil_erosion_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT erosione_tonn, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2016 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 235.6M tonnes — 1st, most erosion in the EU27
+        assert 150_000_000 <= row[0] <= 300_000_000
+        assert row[1] == 1
+
+    def test_pc_constant_not_benchmark(self):
+        """unit PC is constant (100) — T is the discriminating benchmark.
+
+        Regression guard: PC = % of agricultural land at risk is 100
+        everywhere for the TOTAL+CLC slice; the benchmark uses unit T
+        (tonnes) which varies and ranks Italy 1st.
+        """
+        f = _skip_if_missing("eurostat_soil_erosion_nuts3", "mart_geo_benchmark")
+        pc_vals = duckdb.sql(
+            f"""
+            SELECT COUNT(DISTINCT value)
+            FROM read_parquet('{f}')
+            WHERE year = 2016 AND unit = 'PC' AND levels = 'TOTAL'
+              AND clc18 = 'CLC2_3X331_332_335' AND country = 'IT'
+            """
+        ).fetchone()[0]
+        assert pc_vals == 1  # PC is constant
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the T + TOTAL + CLC slice."""
+        f = _skip_if_missing("eurostat_soil_erosion_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2016
+              AND NOT (unit = 'T' AND levels = 'TOTAL'
+                       AND clc18 = 'CLC2_3X331_332_335')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestTourismNuts3Facts:
+    """Verified facts for eurostat-tourism-nuts3."""
+
+    def test_italy_rank2_nights(self):
+        """Italy is 2nd of 27 EU27 by tourism nights (2024)."""
+        f = _skip_if_missing("eurostat_tourism_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT pernottamenti, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 466M nights — 2nd after ES (505M)
+        assert 350_000_000 <= row[0] <= 550_000_000
+        assert 1 <= row[1] <= 3
+
+    def test_nights_sum_from_nuts2(self):
+        """Sintesi nights is the SUM of NUTS2 rows (not the mean)."""
+        f = _skip_if_missing("eurostat_tourism_nuts3", "mart_sintesi")
+        nights = duckdb.sql(
+            f"""
+            SELECT pernottamenti FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()[0]
+        clean_f = (
+            "out/data/clean/eurostat_tourism_nuts3/2026/"
+            "eurostat_tourism_nuts3_2026_clean.parquet"
+        )
+        expected = duckdb.sql(
+            f"""
+            SELECT SUM(value) FROM read_parquet('{clean_f}')
+            WHERE year = 2024 AND unit = 'NR' AND c_resid = 'TOTAL'
+              AND nace_r2 = 'I551-I553' AND country = 'IT' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()[0]
+        assert abs(nights - expected) < 1  # exact sum
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the NR + TOTAL + I551 slice."""
+        f = _skip_if_missing("eurostat_tourism_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024
+              AND NOT (unit = 'NR' AND c_resid = 'TOTAL'
+                       AND nace_r2 = 'I551-I553')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestNrgChddr2MNuts3Facts:
+    """Verified facts for eurostat-nrg-chddr2-m-nuts3 (monthly)."""
+
+    def test_italy_warm_january(self):
+        """Italy is among the warmest EU27 in January HDD (2024)."""
+        f = _skip_if_missing("eurostat_nrg_chddr2_m_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT hdd_mensile, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND month = 1 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 340 HDD vs FI 969 top — bottom third (warm)
+        assert row[0] < 600
+        assert 18 <= row[1] <= 27
+
+    def test_milan_heating_declining(self):
+        """Milan heating demand is declining (climate warming).
+
+        CAGR Jan 1980-2025 negative — less heating needed over 45 years.
+        """
+        f = _skip_if_missing("eurostat_nrg_chddr2_m_nuts3", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT first_value, last_value, cagr_pct
+            FROM read_parquet('{f}')
+            WHERE geo = 'ITC4C' AND month = 1
+            """
+        ).fetchone()
+        assert row is not None
+        first_val, last_val, cagr = row
+        assert last_val < first_val  # less heating demand
+        assert cagr < 0  # declining
+
+    def test_trend_per_month(self):
+        """Trend is decomposed per calendar month (12 per geo)."""
+        f = _skip_if_missing("eurostat_nrg_chddr2_m_nuts3", "mart_trend")
+        n = duckdb.sql(
+            f"""
+            SELECT COUNT(DISTINCT month) FROM read_parquet('{f}')
+            WHERE geo = 'ITC4C'
+            """
+        ).fetchone()[0]
+        assert n == 12

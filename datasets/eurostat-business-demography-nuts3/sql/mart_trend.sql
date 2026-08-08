@@ -1,7 +1,8 @@
--- mart_trend — Population structure: multi-year trend and CAGR per region.
+-- mart_trend — Business demography: multi-year trend and CAGR per region.
 --
--- One row per (geo, unit). Reference slice only (unit NR, indic_de
--- TOTFERRT). NOTE: a negative CAGR means fertility is DECLINING.
+-- One row per (geo, indic_sb). Reference slice only (indic_sb V11920,
+-- sizeclas TOTAL, nace_r2 B-S_X_K642). Series 2008–2020.
+-- NOTE: a positive CAGR means enterprise births are RISING.
 
 WITH yearly AS (
     SELECT
@@ -12,8 +13,9 @@ WITH yearly AS (
         year,
         value
     FROM clean_input
-    WHERE unit = 'PC'
-      AND indic_de = 'OLDDEP2'
+    WHERE indic_sb = 'V11920'
+      AND sizeclas = 'TOTAL'
+      AND nace_r2 = 'B-S_X_K642'
       AND value IS NOT NULL
       AND country IS NOT NULL
 ),
@@ -40,7 +42,7 @@ SELECT
     (SELECT y.value FROM yearly y WHERE y.geo = pg.geo AND y.year = pg.last_year) AS last_value,
     ROUND(
         (SELECT y.value FROM yearly y WHERE y.geo = pg.geo AND y.year = pg.last_year)
-        - (SELECT y.value FROM yearly y WHERE y.geo = pg.geo AND y.year = pg.first_year), 2
+        - (SELECT y.value FROM yearly y WHERE y.geo = pg.geo AND y.year = pg.first_year), 1
     ) AS delta_abs,
     ROUND(
         ((SELECT y.value FROM yearly y WHERE y.geo = pg.geo AND y.year = pg.last_year)

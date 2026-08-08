@@ -1,7 +1,8 @@
--- mart_trend — Population structure: multi-year trend and CAGR per region.
+-- mart_trend — Soil erosion: multi-year trend and CAGR per region.
 --
--- One row per (geo, unit). Reference slice only (unit NR, indic_de
--- TOTFERRT). NOTE: a negative CAGR means fertility is DECLINING.
+-- One row per (geo, unit). Reference slice only (unit PC, levels TOTAL,
+-- clc18 CLC2_3X331_332_335). NOTE: a positive CAGR means more land at
+-- erosion risk (worse).
 
 WITH yearly AS (
     SELECT
@@ -12,8 +13,9 @@ WITH yearly AS (
         year,
         value
     FROM clean_input
-    WHERE unit = 'PC'
-      AND indic_de = 'OLDDEP2'
+    WHERE unit = 'T'
+      AND levels = 'TOTAL'
+      AND clc18 = 'CLC2_3X331_332_335'
       AND value IS NOT NULL
       AND country IS NOT NULL
 ),
