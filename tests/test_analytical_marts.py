@@ -330,6 +330,20 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "FRB02",
     },
+    {
+        "slug": "eurostat_tourism_nuts3",
+        "benchmark_unit": "NR",
+        # Extra dimensions: residency + accommodation, slice TOTAL +
+        # I551-I553.
+        "dim": "c_resid",
+        "dim_value": "TOTAL",
+        "dim2": "nace_r2",
+        "dim2_value": "I551-I553",
+        # Other units (PC_TOT) carry no benchmark.
+        "other_unit": "PC_TOT",
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -1919,6 +1933,62 @@ class TestSoilErosionNuts3Facts:
             WHERE year = 2016
               AND NOT (unit = 'T' AND levels = 'TOTAL'
                        AND clc18 = 'CLC2_3X331_332_335')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestTourismNuts3Facts:
+    """Verified facts for eurostat-tourism-nuts3."""
+
+    def test_italy_rank2_nights(self):
+        """Italy is 2nd of 27 EU27 by tourism nights (2024)."""
+        f = _skip_if_missing("eurostat_tourism_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT pernottamenti, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 466M nights — 2nd after ES (505M)
+        assert 350_000_000 <= row[0] <= 550_000_000
+        assert 1 <= row[1] <= 3
+
+    def test_nights_sum_from_nuts2(self):
+        """Sintesi nights is the SUM of NUTS2 rows (not the mean)."""
+        f = _skip_if_missing("eurostat_tourism_nuts3", "mart_sintesi")
+        nights = duckdb.sql(
+            f"""
+            SELECT pernottamenti FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()[0]
+        clean_f = (
+            "out/data/clean/eurostat_tourism_nuts3/2026/"
+            "eurostat_tourism_nuts3_2026_clean.parquet"
+        )
+        expected = duckdb.sql(
+            f"""
+            SELECT SUM(value) FROM read_parquet('{clean_f}')
+            WHERE year = 2024 AND unit = 'NR' AND c_resid = 'TOTAL'
+              AND nace_r2 = 'I551-I553' AND country = 'IT' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()[0]
+        assert abs(nights - expected) < 1  # exact sum
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the NR + TOTAL + I551 slice."""
+        f = _skip_if_missing("eurostat_tourism_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024
+              AND NOT (unit = 'NR' AND c_resid = 'TOTAL'
+                       AND nace_r2 = 'I551-I553')
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
