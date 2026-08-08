@@ -269,6 +269,18 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_gva_nuts3",
+        "benchmark_unit": "CP_MEUR",
+        # Extra dimension: NACE sector, slice is TOTAL.
+        "dim": "nace_r2",
+        "dim_value": "TOTAL",
+        # Other units (CP_MNAC, ...) carry no benchmark. FRK26: IT NUTS3
+        # 2024 coverage is partial — FR has both CP units for 2024.
+        "other_unit": "CP_MNAC",
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "FRK26",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -1635,6 +1647,60 @@ class TestDemoRFagec3Nuts3Facts:
             SELECT COUNT(*)
             FROM read_parquet('{f}')
             WHERE year = 2024 AND NOT (unit = 'NR' AND age = 'TOTAL')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestGvaNuts3Facts:
+    """Verified facts for eurostat-gva-nuts3."""
+
+    def test_italy_rank3_gva(self):
+        """Italy is 3rd of 27 EU27 by gross value added (2024)."""
+        f = _skip_if_missing("eurostat_gva_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT gva_mio_eur, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy ~1.97 trillion EUR GVA — 3rd after DE and FR
+        assert 1_500_000 <= row[0] <= 2_500_000
+        assert 1 <= row[1] <= 4
+
+    def test_gva_sum_from_nuts2(self):
+        """Sintesi GVA is the SUM of NUTS2 rows (not the mean)."""
+        f = _skip_if_missing("eurostat_gva_nuts3", "mart_sintesi")
+        gva = duckdb.sql(
+            f"""
+            SELECT gva_mio_eur FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()[0]
+        clean_f = (
+            "out/data/clean/eurostat_gva_nuts3/2026/"
+            "eurostat_gva_nuts3_2026_clean.parquet"
+        )
+        expected = duckdb.sql(
+            f"""
+            SELECT SUM(value) FROM read_parquet('{clean_f}')
+            WHERE year = 2024 AND unit = 'CP_MEUR' AND nace_r2 = 'TOTAL'
+              AND country = 'IT' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()[0]
+        assert abs(gva - expected) < 1  # exact sum
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the CP_MEUR + TOTAL slice."""
+        f = _skip_if_missing("eurostat_gva_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND NOT (unit = 'CP_MEUR' AND nace_r2 = 'TOTAL')
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
