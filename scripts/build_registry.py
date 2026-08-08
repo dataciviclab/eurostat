@@ -58,18 +58,37 @@ def main() -> int:
     )
     contract = PathContract(prefix="eurostat", clean_layout="flat", mart_layout="flat")
 
-    existing = None
-    existing_path = args.out / "clean_catalog.json"
+    existing_catalog = None
+    existing_signals = None
+    existing_path = args.out / "registry.json"
     if existing_path.is_file():
         try:
             existing = json.loads(existing_path.read_text(encoding="utf-8"))
+            existing_catalog = {"datasets": existing.get("datasets", [])}
+            existing_signals = {"signals": existing.get("signals", [])}
         except json.JSONDecodeError:
             print(
-                "WARN: clean_catalog.json esistente illeggibile — riparto da zero",
+                "WARN: registry.json esistente illeggibile — riparto da zero",
                 file=sys.stderr,
             )
+    # Fallback legacy: il vecchio clean_catalog.json (repo non ancora migrati)
+    if existing_catalog is None:
+        legacy_path = args.out / "clean_catalog.json"
+        if legacy_path.is_file():
+            try:
+                existing_catalog = json.loads(legacy_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                print(
+                    "WARN: clean_catalog.json esistente illeggibile — riparto da zero",
+                    file=sys.stderr,
+                )
 
-    result = build_registry(layout, path_contract=contract, existing_catalog=existing)
+    result = build_registry(
+        layout,
+        path_contract=contract,
+        existing_catalog=existing_catalog,
+        existing_signals=existing_signals,
+    )
 
     # Errori già categorizzati dal builder: derive = warning (checkout
     # parziali), validation = bloccanti (artifact non conforme allo schema).
@@ -88,34 +107,22 @@ def main() -> int:
         print("Artifact NON scritti: errori di validazione.", file=sys.stderr)
         return 1
 
+    registry = result["registry"]
     if not args.write:
-        for name in ("clean_catalog", "mart_catalog", "pipeline_signals", "codelists"):
-            payload = result[name]
-            n = (
-                len(payload["datasets"])
-                if name == "clean_catalog"
-                else (
-                    len(payload["marts"])
-                    if name == "mart_catalog"
-                    else (
-                        payload["summary"]["total"]
-                        if name == "pipeline_signals"
-                        else len(payload["codelists"])
-                    )
-                )
-            )
-            print(f"[dry-run] {name}.json — {n} entries")
-        print("Usa --write per scrivere i file.")
+        s = registry["summary"]
+        print(
+            f"[dry-run] registry.json — datasets {s['datasets']}, "
+            f"marts {s['marts']}, signals {s['signals']}"
+        )
+        print("Usa --write per scrivere il file.")
         return 0
 
     args.out.mkdir(parents=True, exist_ok=True)
-    for name in ("clean_catalog", "mart_catalog", "pipeline_signals", "codelists"):
-        payload = result[name]
-        out_path = args.out / f"{name}.json"
-        out_path.write_text(
-            json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
-        )
-        print(f"scritto {out_path}")
+    out_path = args.out / "registry.json"
+    out_path.write_text(
+        json.dumps(registry, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    print(f"scritto {out_path}")
 
     return 0
 

@@ -134,6 +134,31 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS2",
         "other_unit_geo": "ITC4",
     },
+    {
+        "slug": "eurostat_rd_expenditure_nuts2",
+        "benchmark_unit": "PC_GDP",
+        # Extra dimension: sector of performance, slice is TOTAL.
+        "dim": "sectperf",
+        "dim_value": "TOTAL",
+        # Single-unit reference: PC_GDP only carries the benchmark.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS2",
+        "other_unit_geo": "ITC4",
+    },
+    {
+        "slug": "eurostat_labour_productivity_nuts3",
+        "benchmark_unit": "EUR",
+        # Extra dimension: national accounts item, slice is NLPR_PER.
+        "dim": "na_item",
+        "dim_value": "NLPR_PER",
+        # Other units (NAC, PC_EU27_2020_MEUR_CP) carry no benchmark.
+        # FRB03: IT NUTS3 2024 coverage is partial (source gap) — FR has both
+        # EUR and NAC rows for 2024.
+        "other_unit": "NAC",
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "FRB03",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -928,3 +953,103 @@ class TestTertiaryEducationNuts2Facts:
             """
         ).fetchone()[0]
         assert n_bad == 0
+
+
+class TestRdExpenditureNuts2Facts:
+    """Verified facts for eurostat-rd-expenditure-nuts2."""
+
+    def test_italy_bottom_half_eu(self):
+        """Italy is in the bottom half of EU27 by R&D as % GDP (2024)."""
+        f = _skip_if_missing("eurostat_rd_expenditure_nuts2", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT rd_pct_pil, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 1.38% vs SE 3.56% top — bottom half of the 27
+        assert row[0] < 1.8
+        assert 12 <= row[1] <= 20
+
+    def test_piemonte_top_italy(self):
+        """Piemonte and Emilia-Romagna lead Italian regions by R&D (2023)."""
+        f = _skip_if_missing("eurostat_rd_expenditure_nuts2", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2023 AND unit = 'PC_GDP' AND sectperf = 'TOTAL'
+              AND nuts_level = 'NUTS2' AND country = 'IT' AND geo = 'ITC1'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Piemonte ranked 1st (tied with Emilia) in Italy
+
+    def test_long_series(self):
+        """R&D series spans 1980–2024 (>= 40 years observed)."""
+        f = _skip_if_missing("eurostat_rd_expenditure_nuts2", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT MAX(years_observed) FROM read_parquet('{f}')
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] >= 40
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the PC_GDP + TOTAL slice."""
+        f = _skip_if_missing("eurostat_rd_expenditure_nuts2", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND NOT (unit = 'PC_GDP' AND sectperf = 'TOTAL')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestLabourProductivityNuts3Facts:
+    """Verified facts for eurostat-labour-productivity-nuts3."""
+
+    def test_italy_midtable_eu(self):
+        """Italy is mid-table in EU27 by labour productivity (2024)."""
+        f = _skip_if_missing("eurostat_labour_productivity_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT produttivita_eur, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 83k EUR vs IE 204k top — mid-table
+        assert 8 <= row[1] <= 14
+
+    def test_milano_top_province(self):
+        """Milano is the top Italian province by productivity (2023)."""
+        f = _skip_if_missing("eurostat_labour_productivity_nuts3", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2023 AND unit = 'EUR' AND na_item = 'NLPR_PER'
+              AND nuts_level = 'NUTS3' AND country = 'IT' AND geo = 'ITC4C'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] <= 2  # Milano ranked 2nd (after Extra-Regio) in Italy
+
+    def test_long_series(self):
+        """Productivity series spans 2000–2024 (>= 20 years observed)."""
+        f = _skip_if_missing("eurostat_labour_productivity_nuts3", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT MAX(years_observed) FROM read_parquet('{f}')
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] >= 20
