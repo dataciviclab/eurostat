@@ -10,7 +10,7 @@ SQL-queryable.
 
 | | |
 |---|---|
-| **Published datasets** | **18 NUTS3 + 7 NUTS2 + 1 regional** (26 total) |
+| **Published datasets** | **21 NUTS3 + 7 NUTS2** (28 total) |
 | **Period** | 1980 — 2025 (varies by dataset) |
 | **Coverage** | All EU + EFTA + candidate countries |
 | **Format** | Parquet on public GCS |
@@ -33,6 +33,10 @@ SQL-queryable.
 | 🔬 Innovation | R&D expenditure |
 
 Full list: [docs/dataset-registry.md](docs/dataset-registry.md)
+
+> **Migration note**: 26 of the 28 datasets use the declarative SDMX pipeline;
+> `eurostat-bd-hgnace2-r3-nuts3` and `eurostat-pop-nuts3` still run on the
+> legacy script connector (`tsv_normalize.py`) and are being migrated to SDMX.
 
 ## Questions you can answer
 
