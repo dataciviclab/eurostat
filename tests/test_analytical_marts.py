@@ -313,10 +313,33 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_soil_erosion_nuts3",
+        "benchmark_unit": "T",
+        # Series ends 2023 (not 2024) — per-dataset cross-check year.
+        "check_year": 2016,
+        # Extra dimensions: severity class + land cover, slice TOTAL +
+        # CLC2_3X331_332_335. (unit PC is constant 100 — T discriminates.)
+        "dim": "levels",
+        "dim_value": "TOTAL",
+        "dim2": "clc18",
+        "dim2_value": "CLC2_3X331_332_335",
+        # Other units (PC, T_HA, ...) carry no benchmark. FRB02: has 5 units
+        # in the slice for 2016 (ITC4C only has HA).
+        "other_unit": "PC",
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "FRB02",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
 CHECK_YEAR = 2024
+
+
+def _check_year(ds: dict) -> int:
+    """Cross-check year for a dataset — per-dataset override when the
+    series does not reach CHECK_YEAR (e.g. soil-erosion ends 2023)."""
+    return int(ds.get("check_year", CHECK_YEAR))
 
 
 def _skip_if_missing(slug: str, mart: str) -> Path:
@@ -414,7 +437,7 @@ class TestSharedBenchmarkContract:
                 f"""
                 SELECT COUNT(*)
                 FROM read_parquet('{f}')
-                WHERE year = {CHECK_YEAR} AND {outside}
+                WHERE year = {_check_year(ds)} AND {outside}
                   AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL
                        OR rank_nazionale IS NOT NULL)
                 """
@@ -444,7 +467,7 @@ class TestSharedBenchmarkContract:
             SELECT media_eu_value, media_paese_value, percentile_eu, rank_nazionale,
                    distanza_media_eu_pct
             FROM read_parquet('{f}')
-            WHERE year = {CHECK_YEAR} AND unit = '{ds["other_unit"]}'
+            WHERE year = {_check_year(ds)} AND unit = '{ds["other_unit"]}'
               AND geo = '{ds["other_unit_geo"]}'
             """
         ).fetchone()
@@ -476,11 +499,11 @@ class TestSharedBenchmarkContract:
                        RANK() OVER (PARTITION BY year, country{dim_partition}
                                     ORDER BY value DESC) AS rn
                 FROM read_parquet('{f}')
-                WHERE year = {CHECK_YEAR} AND nuts_level = '{ds["nuts_level"]}'{dim_filter}{unit_filter}
+                WHERE year = {_check_year(ds)} AND nuts_level = '{ds["nuts_level"]}'{dim_filter}{unit_filter}
             )
             SELECT COUNT(*)
             FROM read_parquet('{f}') b
-            JOIN ranked r ON b.geo = r.geo AND b.year = {CHECK_YEAR}
+            JOIN ranked r ON b.geo = r.geo AND b.year = {_check_year(ds)}
                        AND b.nuts_level = '{ds["nuts_level"]}'{dim_filter}{unit_filter}
             WHERE b.rank_nazionale = 1 AND r.rn != 1
             """
@@ -503,7 +526,7 @@ class TestSharedBenchmarkContract:
             f"""
             SELECT COUNT(*)
             FROM read_parquet('{f}')
-            WHERE year = {CHECK_YEAR} AND nuts_level = '{ds["nuts_level"]}'{dim}{unit_filter}{eu_filter}
+            WHERE year = {_check_year(ds)} AND nuts_level = '{ds["nuts_level"]}'{dim}{unit_filter}{eu_filter}
               AND (media_eu_value IS NULL OR media_paese_value IS NULL
                    OR percentile_eu IS NULL OR rank_nazionale IS NULL
                    OR distanza_media_eu_pct IS NULL)
@@ -521,7 +544,7 @@ class TestSharedBenchmarkContract:
             f"""
             SELECT COUNT(*)
             FROM read_parquet('{f}')
-            WHERE year = {CHECK_YEAR} AND nuts_level = '{ds["nuts_level"]}'{dim}{unit_filter}
+            WHERE year = {_check_year(ds)} AND nuts_level = '{ds["nuts_level"]}'{dim}{unit_filter}
               AND NOT ({_eu27_body()})
               AND percentile_eu IS NOT NULL
             """
@@ -1844,6 +1867,58 @@ class TestBusinessDemographyNuts3Facts:
             WHERE year = 2020
               AND NOT (indic_sb = 'V11920' AND sizeclas = 'TOTAL'
                        AND nace_r2 = 'B-S_X_K642')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestSoilErosionNuts3Facts:
+    """Verified facts for eurostat-soil-erosion-nuts3."""
+
+    def test_italy_top_eu_erosion(self):
+        """Italy is 1st of 27 EU27 by soil erosion tonnes (2016)."""
+        f = _skip_if_missing("eurostat_soil_erosion_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT erosione_tonn, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2016 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 235.6M tonnes — 1st, most erosion in the EU27
+        assert 150_000_000 <= row[0] <= 300_000_000
+        assert row[1] == 1
+
+    def test_pc_constant_not_benchmark(self):
+        """unit PC is constant (100) — T is the discriminating benchmark.
+
+        Regression guard: PC = % of agricultural land at risk is 100
+        everywhere for the TOTAL+CLC slice; the benchmark uses unit T
+        (tonnes) which varies and ranks Italy 1st.
+        """
+        f = _skip_if_missing("eurostat_soil_erosion_nuts3", "mart_geo_benchmark")
+        pc_vals = duckdb.sql(
+            f"""
+            SELECT COUNT(DISTINCT value)
+            FROM read_parquet('{f}')
+            WHERE year = 2016 AND unit = 'PC' AND levels = 'TOTAL'
+              AND clc18 = 'CLC2_3X331_332_335' AND country = 'IT'
+            """
+        ).fetchone()[0]
+        assert pc_vals == 1  # PC is constant
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the T + TOTAL + CLC slice."""
+        f = _skip_if_missing("eurostat_soil_erosion_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2016
+              AND NOT (unit = 'T' AND levels = 'TOTAL'
+                       AND clc18 = 'CLC2_3X331_332_335')
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
