@@ -134,6 +134,18 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS2",
         "other_unit_geo": "ITC4",
     },
+    {
+        "slug": "eurostat_rd_expenditure_nuts2",
+        "benchmark_unit": "PC_GDP",
+        # Extra dimension: sector of performance, slice is TOTAL.
+        "dim": "sectperf",
+        "dim_value": "TOTAL",
+        # Single-unit reference: PC_GDP only carries the benchmark.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS2",
+        "other_unit_geo": "ITC4",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -924,6 +936,63 @@ class TestTertiaryEducationNuts2Facts:
             FROM read_parquet('{f}')
             WHERE year = 2024 AND unit = 'PC'
               AND NOT (isced11 = 'ED5-8' AND age = 'Y25-64' AND sex = 'T')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestRdExpenditureNuts2Facts:
+    """Verified facts for eurostat-rd-expenditure-nuts2."""
+
+    def test_italy_bottom_half_eu(self):
+        """Italy is in the bottom half of EU27 by R&D as % GDP (2024)."""
+        f = _skip_if_missing("eurostat_rd_expenditure_nuts2", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT rd_pct_pil, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 1.38% vs SE 3.56% top — bottom half of the 27
+        assert row[0] < 1.8
+        assert 12 <= row[1] <= 20
+
+    def test_piemonte_top_italy(self):
+        """Piemonte and Emilia-Romagna lead Italian regions by R&D (2023)."""
+        f = _skip_if_missing("eurostat_rd_expenditure_nuts2", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2023 AND unit = 'PC_GDP' AND sectperf = 'TOTAL'
+              AND nuts_level = 'NUTS2' AND country = 'IT' AND geo = 'ITC1'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Piemonte ranked 1st (tied with Emilia) in Italy
+
+    def test_long_series(self):
+        """R&D series spans 1980–2024 (>= 40 years observed)."""
+        f = _skip_if_missing("eurostat_rd_expenditure_nuts2", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT MAX(years_observed) FROM read_parquet('{f}')
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] >= 40
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the PC_GDP + TOTAL slice."""
+        f = _skip_if_missing("eurostat_rd_expenditure_nuts2", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND NOT (unit = 'PC_GDP' AND sectperf = 'TOTAL')
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
