@@ -10,9 +10,8 @@
 --   • % distance from the EU27 average
 --
 -- Benchmark columns are computed ONLY for the reference slice:
--- unit = 'KM2' AND landuse = 'TOTAL' (old-age dependency ratio — the
--- standard ageing measure). Other indicator rows (YOUNGDEP1, MMEDAGEPOP,
--- ...) carry no benchmark.
+-- unit = 'KM2' AND landuse = 'TOTAL' (total area in square kilometres).
+-- Other landuse rows (L0008) carry no benchmark.
 --
 -- SCOPE: benchmark ONLY for EU27 countries (Greece = 'EL'). Non-EU rows
 -- keep media_eu/distanza as reference but percentile/rank are NULL.
