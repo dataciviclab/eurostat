@@ -168,6 +168,21 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_demo_balance_nuts3",
+        "benchmark_unit": "GROWRT",
+        # No `unit` column: dimensions are freq/indic_de/geo — the benchmark
+        # slice is the indic_de dim (GROWRT), not a unit.
+        "no_unit": True,
+        # Extra dimension: demographic indicator, slice is GROWRT.
+        "dim": "indic_de",
+        "dim_value": "GROWRT",
+        # No other unit dimension (freq, indic_de, geo only).
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -192,6 +207,18 @@ def _dim_filter(ds: dict) -> str:
     if parts:
         return " AND " + " AND ".join(parts)
     return ""
+
+
+def _unit_filter(ds: dict) -> str:
+    """SQL filter on the benchmark unit column, when the dataset has one.
+
+    Datasets without a `unit` column (e.g. demo-balance: dimensions are
+    freq/indic_de/geo) set `no_unit: True` — the benchmark slice is fully
+    expressed by the `dim` filter instead.
+    """
+    if ds.get("no_unit"):
+        return ""
+    return f" AND unit = '{ds['benchmark_unit']}'"
 
 
 # EU27 post-2020 composition in Eurostat geo codes (Greece = 'EL', not 'GR').
@@ -245,6 +272,27 @@ class TestSharedBenchmarkContract:
         """media/percentile/rank columns are NULL outside the benchmark unit."""
         f = _skip_if_missing(ds["slug"], "mart_geo_benchmark")
         dim = _dim_filter(ds)
+        if ds.get("no_unit"):
+            # No `unit` column: benchmark slice is the dim (e.g. indic_de
+            # GROWRT) — rows outside the dim slice must carry NULL benchmark.
+            dim2 = ds.get("dim2")
+            outside = f"NOT ({ds['dim']} = '{ds['dim_value']}'"
+            if dim2:
+                outside += f" AND {dim2} = '{ds['dim2_value']}'"
+            outside += ")"
+            n_bad = duckdb.sql(
+                f"""
+                SELECT COUNT(*)
+                FROM read_parquet('{f}')
+                WHERE year = {CHECK_YEAR} AND {outside}
+                  AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL
+                       OR rank_nazionale IS NOT NULL)
+                """
+            ).fetchone()[0]
+            assert n_bad == 0, (
+                f"benchmark columns computed outside slice for {ds['slug']}"
+            )
+            return
         if ds.get("other_unit_is_absent"):
             # Single-unit dataset: no row may carry benchmark columns outside
             # the benchmark unit (there are no other units at all).
@@ -287,22 +335,23 @@ class TestSharedBenchmarkContract:
         f = _skip_if_missing(ds["slug"], "mart_geo_benchmark")
         dims = [ds.get("dim"), ds.get("dim2")]
         dim_partition = "".join(f", {d}" for d in dims if d)
+        if not ds.get("no_unit"):
+            dim_partition += ", unit"
         dim_filter = _dim_filter(ds)
+        unit_filter = _unit_filter(ds)
         n_bad = duckdb.sql(
             f"""
             WITH ranked AS (
                 SELECT geo, country, value,
-                       RANK() OVER (PARTITION BY year, country, unit{dim_partition}
+                       RANK() OVER (PARTITION BY year, country{dim_partition}
                                     ORDER BY value DESC) AS rn
                 FROM read_parquet('{f}')
-                WHERE year = {CHECK_YEAR} AND unit = '{ds["benchmark_unit"]}'
-                  AND nuts_level = '{ds["nuts_level"]}'{dim_filter}
+                WHERE year = {CHECK_YEAR} AND nuts_level = '{ds["nuts_level"]}'{dim_filter}{unit_filter}
             )
             SELECT COUNT(*)
             FROM read_parquet('{f}') b
             JOIN ranked r ON b.geo = r.geo AND b.year = {CHECK_YEAR}
-                       AND b.unit = '{ds["benchmark_unit"]}'
-                       AND b.nuts_level = '{ds["nuts_level"]}'{dim_filter}
+                       AND b.nuts_level = '{ds["nuts_level"]}'{dim_filter}{unit_filter}
             WHERE b.rank_nazionale = 1 AND r.rn != 1
             """
         ).fetchone()[0]
@@ -319,12 +368,12 @@ class TestSharedBenchmarkContract:
         f = _skip_if_missing(ds["slug"], "mart_geo_benchmark")
         dim = _dim_filter(ds)
         eu_filter = _eu27_filter()
+        unit_filter = _unit_filter(ds)
         n_incomplete = duckdb.sql(
             f"""
             SELECT COUNT(*)
             FROM read_parquet('{f}')
-            WHERE year = {CHECK_YEAR} AND unit = '{ds["benchmark_unit"]}'
-              AND nuts_level = '{ds["nuts_level"]}'{dim}{eu_filter}
+            WHERE year = {CHECK_YEAR} AND nuts_level = '{ds["nuts_level"]}'{dim}{unit_filter}{eu_filter}
               AND (media_eu_value IS NULL OR media_paese_value IS NULL
                    OR percentile_eu IS NULL OR rank_nazionale IS NULL
                    OR distanza_media_eu_pct IS NULL)
@@ -337,12 +386,12 @@ class TestSharedBenchmarkContract:
         """Non-EU rows have percentile_eu NULL (not ranked within EU27)."""
         f = _skip_if_missing(ds["slug"], "mart_geo_benchmark")
         dim = _dim_filter(ds)
+        unit_filter = _unit_filter(ds)
         n_bad = duckdb.sql(
             f"""
             SELECT COUNT(*)
             FROM read_parquet('{f}')
-            WHERE year = {CHECK_YEAR} AND unit = '{ds["benchmark_unit"]}'
-              AND nuts_level = '{ds["nuts_level"]}'{dim}
+            WHERE year = {CHECK_YEAR} AND nuts_level = '{ds["nuts_level"]}'{dim}{unit_filter}
               AND NOT ({_eu27_body()})
               AND percentile_eu IS NOT NULL
             """
@@ -1105,3 +1154,53 @@ class TestPopDensityNuts3Facts:
         ).fetchone()
         assert row is not None
         assert row[0] >= 30
+
+
+class TestDemoBalanceNuts3Facts:
+    """Verified facts for eurostat-demo-balance-nuts3."""
+
+    def test_italy_population_decline(self):
+        """Italy has negative population growth in EU27 (2024)."""
+        f = _skip_if_missing("eurostat_demo_balance_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT crescita_per_1000, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy -0.5 per 1000 — declining, bottom third of EU27
+        assert row[0] < 0
+        assert 15 <= row[1] <= 27
+
+    def test_bolzano_growing_sud_declining(self):
+        """Bolzano grows while southern provinces decline (2023)."""
+        f = _skip_if_missing("eurostat_demo_balance_nuts3", "mart_geo_benchmark")
+        bolzano, potenza = duckdb.sql(
+            f"""
+            SELECT
+                (SELECT value FROM read_parquet('{f}')
+                 WHERE year = 2023 AND indic_de = 'GROWRT'
+                   AND country = 'IT' AND nuts_level = 'NUTS3' AND geo = 'ITH10'),
+                (SELECT value FROM read_parquet('{f}')
+                 WHERE year = 2023 AND indic_de = 'GROWRT'
+                   AND country = 'IT' AND nuts_level = 'NUTS3' AND geo = 'ITF51')
+            """
+        ).fetchone()
+        assert bolzano is not None and potenza is not None
+        assert bolzano > 0  # +6.3 per 1000
+        assert potenza < 0  # -9.3 per 1000
+
+    def test_benchmark_only_growrt(self):
+        """Benchmark columns exist only for the GROWRT slice."""
+        f = _skip_if_missing("eurostat_demo_balance_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND indic_de != 'GROWRT'
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
