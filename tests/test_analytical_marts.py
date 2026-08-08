@@ -159,6 +159,15 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "FRB03",
     },
+    {
+        "slug": "eurostat_pop_density_nuts3",
+        "benchmark_unit": "PER_KM2",
+        # Single-unit dataset: only PER_KM2 exists, no other unit to compare.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -1053,3 +1062,46 @@ class TestLabourProductivityNuts3Facts:
         ).fetchone()
         assert row is not None
         assert row[0] >= 20
+
+
+class TestPopDensityNuts3Facts:
+    """Verified facts for eurostat-pop-density-nuts3."""
+
+    def test_italy_top10_eu_density(self):
+        """Italy is top-10 in EU27 by population density (2024)."""
+        f = _skip_if_missing("eurostat_pop_density_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT densita_km2, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 198/km2 vs MT 1817 top — top-10
+        assert 1 <= row[1] <= 10
+
+    def test_napoli_top_italy(self):
+        """Napoli is the densest Italian province (2023)."""
+        f = _skip_if_missing("eurostat_pop_density_nuts3", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2023 AND unit = 'PER_KM2'
+              AND nuts_level = 'NUTS3' AND country = 'IT' AND geo = 'ITF33'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Napoli ranked 1st in Italy
+
+    def test_long_series(self):
+        """Density series spans 1990–2024 (>= 30 years observed)."""
+        f = _skip_if_missing("eurostat_pop_density_nuts3", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT MAX(years_observed) FROM read_parquet('{f}')
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] >= 30
