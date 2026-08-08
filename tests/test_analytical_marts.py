@@ -257,6 +257,18 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_demo_r_fagec3_nuts3",
+        "benchmark_unit": "NR",
+        # Extra dimension: age (mother age group), slice is TOTAL.
+        "dim": "age",
+        "dim_value": "TOTAL",
+        # Single-unit: only NR exists.
+        "other_unit": "PC",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -1569,6 +1581,60 @@ class TestDemoRMagec3Nuts3Facts:
             SELECT COUNT(*)
             FROM read_parquet('{f}')
             WHERE year = 2024 AND NOT (unit = 'NR' AND age = 'TOTAL' AND sex = 'T')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestDemoRFagec3Nuts3Facts:
+    """Verified facts for eurostat-demo-r-fagec3-nuts3."""
+
+    def test_italy_rank3_births(self):
+        """Italy is 3rd of 27 EU27 by births (2024)."""
+        f = _skip_if_missing("eurostat_demo_r_fagec3_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT nascite, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 370k births — 3rd after DE and FR
+        assert 300_000 <= row[0] <= 450_000
+        assert 1 <= row[1] <= 4
+
+    def test_births_less_than_deaths(self):
+        """Italy births < deaths in 2024 — negative natural balance.
+
+        Cross-dataset check: births 370k (fagec3) vs deaths 653k (magec3)
+        → natural decline of ~283k/year.
+        """
+        f_b = _skip_if_missing("eurostat_demo_r_fagec3_nuts3", "mart_sintesi")
+        births = duckdb.sql(
+            f"""
+            SELECT nascite FROM read_parquet('{f_b}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()[0]
+        f_d = _skip_if_missing("eurostat_demo_r_magec3_nuts3", "mart_sintesi")
+        deaths = duckdb.sql(
+            f"""
+            SELECT decessi FROM read_parquet('{f_d}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()[0]
+        assert births < deaths
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the NR + TOTAL slice."""
+        f = _skip_if_missing("eurostat_demo_r_fagec3_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND NOT (unit = 'NR' AND age = 'TOTAL')
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
