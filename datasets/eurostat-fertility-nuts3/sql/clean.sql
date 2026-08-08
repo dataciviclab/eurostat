@@ -1,24 +1,39 @@
--- clean.sql: auto-generated for freq, indic_de, unit, geo
+-- clean.sql: DEMO_R_FIND3 — fertility indicators by NUTS3 region, enriched.
+--
+-- Extra dimension vs the base pattern: indic_de (fertility indicator),
+-- enriched with label from the support codelist.
+--
+-- Contract note: `country` is derived from the 2-letter ISO prefix of the
+-- geo code, but ONLY for real NUTS geographies. Aggregated geographies get
+-- NULL so they never pollute benchmarks.
+--
+-- NOTE: TOTFERRT with unit NR = total fertility rate (children per woman).
+
 SELECT
     r.freq,
     r.indic_de,
     r.unit,
     r.geo,
-    CAST(r.year AS INTEGER) AS year,
+    r.year,
     f.label_en AS freq_label_en,
-    in_d.label_en AS indic_de_label_en,
+    d.label_en AS indic_de_label_en,
     u.label_en AS unit_label_en,
     g.label_en AS geo_label_en,
     g.nuts_level,
+    -- Derived country: ISO2 prefix for real geographies only
+    CASE
+        WHEN g.nuts_level IS NOT NULL AND g.nuts_level != '' THEN LEFT(r.geo, 2)
+        ELSE NULL
+    END AS country,
     g.parent_code AS nuts_parent_code,
     gp.label_en AS nuts_parent_label_en,
-    CAST(r.value AS DOUBLE) AS value,
+    r.value,
     r.flag,
-    fl.description_en AS flag_desc_en
+    fl.label_en AS flag_desc_en
 FROM raw_input r
-LEFT JOIN read_csv('codelists/freq.csv', auto_detect=true, delim=',', header=true) f ON r.freq = f.freq
-LEFT JOIN read_csv('codelists/indic_de.csv', auto_detect=true, delim=',', header=true) in_d ON r.indic_de = in_d.code
-LEFT JOIN read_csv('codelists/units.csv', auto_detect=true, delim=',', header=true) u ON r.unit = u.unit
+LEFT JOIN read_parquet('{support.freq.path}') f ON r.freq = f.code
+LEFT JOIN read_parquet('{support.indic_de.path}') d ON r.indic_de = d.code
+LEFT JOIN read_parquet('{support.unit.path}') u ON r.unit = u.code
 LEFT JOIN read_csv('codelists/geo.csv', auto_detect=true, delim=',', header=true) g ON r.geo = g.code
-LEFT JOIN read_csv('codelists/flags.csv', auto_detect=true, delim=',', header=true) fl ON r.flag = fl.flag
 LEFT JOIN read_csv('codelists/geo.csv', auto_detect=true, delim=',', header=true) gp ON g.parent_code = gp.code
+LEFT JOIN read_parquet('{support.flag.path}') fl ON r.flag = fl.code
