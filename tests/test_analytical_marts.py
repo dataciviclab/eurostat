@@ -194,6 +194,17 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_pop_structure_nuts3",
+        "benchmark_unit": "PC",
+        # Extra dimension: structure indicator, slice is OLDDEP2.
+        "dim": "indic_de",
+        "dim_value": "OLDDEP2",
+        # Other units (YR) carry no benchmark.
+        "other_unit": "YR",
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -1257,6 +1268,52 @@ class TestFertilityNuts3Facts:
             SELECT COUNT(*)
             FROM read_parquet('{f}')
             WHERE year = 2024 AND NOT (unit = 'NR' AND indic_de = 'TOTFERRT')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestPopStructureNuts3Facts:
+    """Verified facts for eurostat-pop-structure-nuts3."""
+
+    def test_italy_top_eu_oldage(self):
+        """Italy is 1st of 27 EU27 by old-age dependency ratio (2024)."""
+        f = _skip_if_missing("eurostat_pop_structure_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT dipendenza_anziani_pct, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 61.7% — the oldest population in the EU27
+        assert row[0] > 55.0
+        assert row[1] == 1
+
+    def test_savona_top_italy(self):
+        """Savona is the most aged Italian province (2023)."""
+        f = _skip_if_missing("eurostat_pop_structure_nuts3", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2023 AND unit = 'PC' AND indic_de = 'OLDDEP2'
+              AND nuts_level = 'NUTS3' AND country = 'IT' AND geo = 'ITC32'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Savona ranked 1st in Italy
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the PC + OLDDEP2 slice."""
+        f = _skip_if_missing("eurostat_pop_structure_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND NOT (unit = 'PC' AND indic_de = 'OLDDEP2')
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
