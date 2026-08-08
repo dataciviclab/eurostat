@@ -344,6 +344,20 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_nrg_chddr2_m_nuts3",
+        "benchmark_unit": "NR",
+        # Monthly dataset: extra dimensions indic_nrg (HDD) + month (1).
+        "dim": "indic_nrg",
+        "dim_value": "HDD",
+        "dim2": "month",
+        "dim2_value": "1",
+        # Other indicator (CDD) carries no benchmark.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -1993,3 +2007,51 @@ class TestTourismNuts3Facts:
             """
         ).fetchone()[0]
         assert n_bad == 0
+
+
+class TestNrgChddr2MNuts3Facts:
+    """Verified facts for eurostat-nrg-chddr2-m-nuts3 (monthly)."""
+
+    def test_italy_warm_january(self):
+        """Italy is among the warmest EU27 in January HDD (2024)."""
+        f = _skip_if_missing("eurostat_nrg_chddr2_m_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT hdd_mensile, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND month = 1 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 340 HDD vs FI 969 top — bottom third (warm)
+        assert row[0] < 600
+        assert 18 <= row[1] <= 27
+
+    def test_milan_heating_declining(self):
+        """Milan heating demand is declining (climate warming).
+
+        CAGR Jan 1980-2025 negative — less heating needed over 45 years.
+        """
+        f = _skip_if_missing("eurostat_nrg_chddr2_m_nuts3", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT first_value, last_value, cagr_pct
+            FROM read_parquet('{f}')
+            WHERE geo = 'ITC4C' AND month = 1
+            """
+        ).fetchone()
+        assert row is not None
+        first_val, last_val, cagr = row
+        assert last_val < first_val  # less heating demand
+        assert cagr < 0  # declining
+
+    def test_trend_per_month(self):
+        """Trend is decomposed per calendar month (12 per geo)."""
+        f = _skip_if_missing("eurostat_nrg_chddr2_m_nuts3", "mart_trend")
+        n = duckdb.sql(
+            f"""
+            SELECT COUNT(DISTINCT month) FROM read_parquet('{f}')
+            WHERE geo = 'ITC4C'
+            """
+        ).fetchone()[0]
+        assert n == 12
