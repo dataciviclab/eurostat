@@ -1,12 +1,12 @@
 -- mart_sintesi — Population by country: national aggregates and ranking.
 --
--- One row per (country, year). Reference slice only (unit PC, age TOTAL,
+-- One row per (country, year). Reference slice only (unit NR, age TOTAL,
 -- sex T).
 --
--- NOTE: this dataflow (TGS00109) publishes NUTS2 only — there is no
+-- NOTE: this dataflow (this dataflow) publishes NUTS2 only — there is no
 -- country-level geo in the source (verified: nuts_level='country' has zero
 -- rows). Country values are therefore aggregated from NUTS2 rows (simple
--- mean of the regional attainment shares).
+-- mean of the regional values).
 
 WITH eu_countries AS (
     SELECT unnest(['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','EL',
@@ -40,7 +40,7 @@ SELECT
     cv.year,
     cv.country,
     cv.popolazione,
-    -- Cross-country rank (EU27 only, 1 = highest attainment)
+    -- Cross-country rank (EU27 only, 1 = highest value)
     CASE WHEN cv.is_eu THEN RANK() OVER (PARTITION BY cv.year, cv.is_eu ORDER BY cv.popolazione DESC) ELSE NULL END AS rank_procapite_eu,
     -- % distance from the EU27 country average
     ROUND(

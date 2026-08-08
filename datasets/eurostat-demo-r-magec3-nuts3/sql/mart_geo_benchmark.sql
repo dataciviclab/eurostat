@@ -11,7 +11,7 @@
 --
 -- Benchmark columns are computed ONLY for the reference slice:
 -- unit = 'NR' AND age = 'TOTAL'  AND sex = 'T'
--- (the standard tertiary attainment measure). Other breakdown rows
+-- (the standard comparable measure). Other breakdown rows
 -- (sex M/F, other age) carry no benchmark.
 --
 -- SCOPE: benchmark ONLY for EU27 countries (Greece = 'EL'). Non-EU rows
@@ -69,37 +69,37 @@ SELECT
     -- EU27 average for the same year, NUTS level, unit and dims (reference slice)
     CASE
         WHEN b.unit = 'NR' AND b.age = 'TOTAL' AND b.sex = 'T'
-        THEN ROUND(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.age, b.age, b.sex), 2)
+        THEN ROUND(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.age, b.sex), 2)
         ELSE NULL
     END AS media_eu_value,
     -- Country average for the same year, NUTS level, unit and dims
     CASE
         WHEN b.unit = 'NR' AND b.age = 'TOTAL' AND b.sex = 'T'
-        THEN ROUND(AVG(b.value) OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit, b.age, b.age, b.sex), 2)
+        THEN ROUND(AVG(b.value) OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit, b.age, b.sex), 2)
         ELSE NULL
     END AS media_paese_value,
     -- Percentile within EU27 (same year, nuts_level, unit, dims); NULL outside
     CASE
         WHEN b.unit = 'NR' AND b.age = 'TOTAL' AND b.sex = 'T' AND b.is_eu
         THEN ROUND(
-            PERCENT_RANK() OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.age, b.age, b.sex, b.is_eu ORDER BY b.value), 4)
+            PERCENT_RANK() OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.age, b.sex, b.is_eu ORDER BY b.value), 4)
         ELSE NULL
     END AS percentile_eu,
-    -- National rank (1 = highest attainment in the country, same year/level/unit/dims)
+    -- National rank (1 = highest value in the country, same year/level/unit/dims)
     CASE
         WHEN b.unit = 'NR' AND b.age = 'TOTAL' AND b.sex = 'T'
-        THEN RANK() OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit, b.age, b.age, b.sex ORDER BY b.value DESC)
+        THEN RANK() OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit, b.age, b.sex ORDER BY b.value DESC)
         ELSE NULL
     END AS rank_nazionale,
     -- % distance from the EU27 average (same year, nuts_level, unit, dims)
     CASE
         WHEN b.unit = 'NR' AND b.age = 'TOTAL' AND b.sex = 'T'
         THEN ROUND(
-            (b.value - AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.age, b.age, b.sex))
-            / NULLIF(ABS(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.age, b.age, b.sex)), 0) * 100, 1)
+            (b.value - AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.age, b.sex))
+            / NULLIF(ABS(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.age, b.sex)), 0) * 100, 1)
         ELSE NULL
     END AS distanza_media_eu_pct,
     b.flag,
     b.flag_desc_en
 FROM base b
-ORDER BY b.year DESC, b.nuts_level, b.country, b.geo, b.unit, b.age, b.age, b.sex
+ORDER BY b.year DESC, b.nuts_level, b.country, b.geo, b.unit, b.age, b.sex

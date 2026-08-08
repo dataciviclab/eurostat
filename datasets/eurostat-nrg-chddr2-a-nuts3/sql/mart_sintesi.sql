@@ -1,7 +1,7 @@
--- mart_sintesi — Fertility by country: national aggregates and ranking.
+-- mart_sintesi — Heating degree days by country: national aggregates and ranking.
 --
 -- One row per (country, year). Reference slice only (unit NR, indic_nrg
--- TOTFERRT):
+-- TOTAL):
 --   • heating degree days (country-level value)
 --   • rank among EU27 countries
 --   • % distance from the EU27 country average

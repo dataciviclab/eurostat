@@ -1,7 +1,7 @@
--- mart_trend — Fertility rate: multi-year trend and CAGR per region.
+-- mart_trend — Gross value added: multi-year trend and CAGR per region.
 --
 -- One row per (geo, unit). Reference slice only (unit NR, nace_r2
--- TOTFERRT). NOTE: a negative CAGR means fertility is DECLINING.
+-- TOTAL). NOTE: a negative CAGR means fertility is DECLINING.
 
 WITH yearly AS (
     SELECT

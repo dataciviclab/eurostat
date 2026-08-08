@@ -1,8 +1,8 @@
 -- mart_trend — Population: multi-year trend and CAGR per region.
 --
--- One row per (geo, unit). Reference slice only (unit PC, age TOTAL,
+-- One row per (geo, unit). Reference slice only (unit NR, age TOTAL,
 -- sex T).
--- NOTE: a positive CAGR means attainment is RISING (good) — read the sign
+-- NOTE: a positive CAGR means the value is RISING
 -- accordingly.
 
 WITH yearly AS (

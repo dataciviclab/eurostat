@@ -1,7 +1,7 @@
--- mart_sintesi — Fertility by country: national aggregates and ranking.
+-- mart_sintesi — Gross value added by country: national aggregates and ranking.
 --
 -- One row per (country, year). Reference slice only (unit NR, nace_r2
--- TOTFERRT):
+-- TOTAL):
 --   • total gross value added (country-level, million EUR)
 --   • rank among EU27 countries
 --   • % distance from the EU27 country average
