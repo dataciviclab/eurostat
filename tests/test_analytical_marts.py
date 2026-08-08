@@ -217,6 +217,18 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_nrg_chddr2_a_nuts3",
+        "benchmark_unit": "NR",
+        # Extra dimension: climate indicator, slice is HDD (heating).
+        "dim": "indic_nrg",
+        "dim_value": "HDD",
+        # Other indicator (CDD) carries no benchmark.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -1371,6 +1383,52 @@ class TestAreaNuts3Facts:
             SELECT COUNT(*)
             FROM read_parquet('{f}')
             WHERE year = 2024 AND NOT (unit = 'KM2' AND landuse = 'TOTAL')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestNrgChddr2ANuts3Facts:
+    """Verified facts for eurostat-nrg-chddr2-a-nuts3."""
+
+    def test_italy_warm_climate(self):
+        """Italy is among the warmest EU27 by heating degree days (2024)."""
+        f = _skip_if_missing("eurostat_nrg_chddr2_a_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT hdd_nr, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 1678 HDD vs FI 5151 top — bottom third (warm)
+        assert row[0] < 2500
+        assert 18 <= row[1] <= 27
+
+    def test_valle_aosta_coldest_italy(self):
+        """Valle d'Aosta is the coldest Italian province (2023)."""
+        f = _skip_if_missing("eurostat_nrg_chddr2_a_nuts3", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2023 AND unit = 'NR' AND indic_nrg = 'HDD'
+              AND nuts_level = 'NUTS3' AND country = 'IT' AND geo = 'ITC20'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Valle d'Aosta ranked 1st (coldest) in Italy
+
+    def test_benchmark_only_hdd(self):
+        """Benchmark columns exist only for the HDD slice."""
+        f = _skip_if_missing("eurostat_nrg_chddr2_a_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND indic_nrg != 'HDD'
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
