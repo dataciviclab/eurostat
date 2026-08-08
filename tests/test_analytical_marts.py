@@ -229,6 +229,20 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_demo_r_pjangrp3_nuts3",
+        "benchmark_unit": "NR",
+        # Extra dimensions: sex + age, slice is T + TOTAL.
+        "dim": "age",
+        "dim_value": "TOTAL",
+        "dim2": "sex",
+        "dim2_value": "T",
+        # Single-unit: only NR exists.
+        "other_unit": "PC",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -1429,6 +1443,64 @@ class TestNrgChddr2ANuts3Facts:
             SELECT COUNT(*)
             FROM read_parquet('{f}')
             WHERE year = 2024 AND indic_nrg != 'HDD'
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestDemoRPjangrp3Nuts3Facts:
+    """Verified facts for eurostat-demo-r-pjangrp3-nuts3."""
+
+    def test_italy_rank3_population(self):
+        """Italy is 3rd of 27 EU27 by total population (2024)."""
+        f = _skip_if_missing("eurostat_demo_r_pjangrp3_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT popolazione, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 58.97M (real value) — not the erroneous AVG (2.8M)
+        assert 50_000_000 <= row[0] <= 65_000_000
+        assert 1 <= row[1] <= 4
+
+    def test_population_is_sum_not_avg(self):
+        """Sintesi population is the SUM of NUTS2 rows, not the mean.
+
+        Regression guard: AVG gave 2.8M for Italy (21 NUTS2 mean of 58.9M);
+        SUM gives the real 58.97M.
+        """
+        f = _skip_if_missing("eurostat_demo_r_pjangrp3_nuts3", "mart_sintesi")
+        pop = duckdb.sql(
+            f"""
+            SELECT popolazione FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()[0]
+        clean_f = (
+            "out/data/clean/eurostat_demo_r_pjangrp3_nuts3/2026/"
+            "eurostat_demo_r_pjangrp3_nuts3_2026_clean.parquet"
+        )
+        expected = duckdb.sql(
+            f"""
+            SELECT SUM(value) FROM read_parquet('{clean_f}')
+            WHERE year = 2024 AND sex = 'T' AND age = 'TOTAL'
+              AND unit = 'NR' AND country = 'IT' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()[0]
+        assert abs(pop - expected) < 1  # exact sum
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the NR + T + TOTAL slice."""
+        f = _skip_if_missing("eurostat_demo_r_pjangrp3_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND NOT (unit = 'NR' AND age = 'TOTAL' AND sex = 'T')
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
