@@ -183,6 +183,17 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_fertility_nuts3",
+        "benchmark_unit": "NR",
+        # Extra dimension: fertility indicator, slice is TOTFERRT.
+        "dim": "indic_de",
+        "dim_value": "TOTFERRT",
+        # Other units (YR) carry no benchmark.
+        "other_unit": "YR",
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -315,7 +326,7 @@ class TestSharedBenchmarkContract:
                    distanza_media_eu_pct
             FROM read_parquet('{f}')
             WHERE year = {CHECK_YEAR} AND unit = '{ds["other_unit"]}'
-              AND geo = '{ds["other_unit_geo"]}'{dim}
+              AND geo = '{ds["other_unit_geo"]}'
             """
         ).fetchone()
         assert row is not None, "non-benchmark unit row missing"
@@ -1200,6 +1211,52 @@ class TestDemoBalanceNuts3Facts:
             SELECT COUNT(*)
             FROM read_parquet('{f}')
             WHERE year = 2024 AND indic_de != 'GROWRT'
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestFertilityNuts3Facts:
+    """Verified facts for eurostat-fertility-nuts3."""
+
+    def test_italy_bottom_eu_fertility(self):
+        """Italy is near-bottom of EU27 by total fertility rate (2024)."""
+        f = _skip_if_missing("eurostat_fertility_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT tasso_fertilita, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 1.18 vs BG 1.71 top — bottom third of the 27
+        assert row[0] < 1.3
+        assert 18 <= row[1] <= 27
+
+    def test_bolzano_top_italy(self):
+        """Bolzano-Bozen is the most fertile Italian province (2023)."""
+        f = _skip_if_missing("eurostat_fertility_nuts3", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2023 AND unit = 'NR' AND indic_de = 'TOTFERRT'
+              AND nuts_level = 'NUTS3' AND country = 'IT' AND geo = 'ITH10'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Bolzano ranked 1st in Italy
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the NR + TOTFERRT slice."""
+        f = _skip_if_missing("eurostat_fertility_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND NOT (unit = 'NR' AND indic_de = 'TOTFERRT')
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
