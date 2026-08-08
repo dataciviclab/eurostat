@@ -205,6 +205,18 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_area_nuts3",
+        "benchmark_unit": "KM2",
+        # Extra dimension: landuse, slice is TOTAL (total area).
+        "dim": "landuse",
+        "dim_value": "TOTAL",
+        # Single-unit: KM2 only.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -1314,6 +1326,51 @@ class TestPopStructureNuts3Facts:
             SELECT COUNT(*)
             FROM read_parquet('{f}')
             WHERE year = 2024 AND NOT (unit = 'PC' AND indic_de = 'OLDDEP2')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestAreaNuts3Facts:
+    """Verified facts for eurostat-area-nuts3."""
+
+    def test_italy_rank7_eu(self):
+        """Italy ranks 7th of 27 EU27 by total area (2024)."""
+        f = _skip_if_missing("eurostat_area_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT superficie_km2, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 302k km2 vs FR 638k top
+        assert 250000 <= row[0] <= 320000
+        assert 1 <= row[1] <= 10
+
+    def test_area_stable_over_time(self):
+        """Area is stable across years (static geography, few distinct values)."""
+        f = _skip_if_missing("eurostat_area_nuts3", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE ABS(delta_abs) > 100
+            """
+        ).fetchone()[0]
+        # Area barely changes — most deltas are 0 or tiny
+        assert row < 50
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the KM2 + TOTAL slice."""
+        f = _skip_if_missing("eurostat_area_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND NOT (unit = 'KM2' AND landuse = 'TOTAL')
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
