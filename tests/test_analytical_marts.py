@@ -281,6 +281,20 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "FRK26",
     },
+    {
+        "slug": "eurostat_emp_nuts3",
+        "benchmark_unit": "THS",
+        # Extra dimensions: working status + NACE sector, slice EMP + TOTAL.
+        "dim": "nace_r2",
+        "dim_value": "TOTAL",
+        "dim2": "wstatus",
+        "dim2_value": "EMP",
+        # Single-unit: only THS exists.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -1701,6 +1715,61 @@ class TestGvaNuts3Facts:
             SELECT COUNT(*)
             FROM read_parquet('{f}')
             WHERE year = 2024 AND NOT (unit = 'CP_MEUR' AND nace_r2 = 'TOTAL')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestEmpNuts3Facts:
+    """Verified facts for eurostat-emp-nuts3."""
+
+    def test_italy_rank3_employment(self):
+        """Italy is 3rd of 27 EU27 by employment (2024)."""
+        f = _skip_if_missing("eurostat_emp_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT occupati_migliaia, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 26.5M employed — 3rd after DE and FR
+        assert 20_000 <= row[0] <= 32_000
+        assert 1 <= row[1] <= 4
+
+    def test_emp_sum_from_nuts2(self):
+        """Sintesi employment is the SUM of NUTS2 rows (not the mean)."""
+        f = _skip_if_missing("eurostat_emp_nuts3", "mart_sintesi")
+        emp = duckdb.sql(
+            f"""
+            SELECT occupati_migliaia FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()[0]
+        clean_f = (
+            "out/data/clean/eurostat_emp_nuts3/2026/"
+            "eurostat_emp_nuts3_2026_clean.parquet"
+        )
+        expected = duckdb.sql(
+            f"""
+            SELECT SUM(value) FROM read_parquet('{clean_f}')
+            WHERE year = 2024 AND unit = 'THS' AND wstatus = 'EMP'
+              AND nace_r2 = 'TOTAL' AND country = 'IT' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()[0]
+        assert abs(emp - expected) < 1  # exact sum
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the THS + EMP + TOTAL slice."""
+        f = _skip_if_missing("eurostat_emp_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024
+              AND NOT (unit = 'THS' AND wstatus = 'EMP' AND nace_r2 = 'TOTAL')
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
