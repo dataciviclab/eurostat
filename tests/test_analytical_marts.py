@@ -295,6 +295,24 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_business_demography_nuts3",
+        "benchmark_unit": "V11920",
+        # No `unit` column: dimensions are freq/indic_sb/sizeclas/nace_r2/geo.
+        "no_unit": True,
+        # Extra dimensions: indicator + size class + sector, slice V11920 +
+        # TOTAL + B-S_X_K642.
+        "dim": "sizeclas",
+        "dim_value": "TOTAL",
+        "dim2": "nace_r2",
+        "dim2_value": "B-S_X_K642",
+        "dim3": "indic_sb",
+        "dim3_value": "V11920",
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -310,12 +328,12 @@ def _skip_if_missing(slug: str, mart: str) -> Path:
 
 def _dim_filter(ds: dict) -> str:
     """SQL filter for the optional extra benchmark dimensions (e.g. crime iccs,
-    or tertiary isced11 + sex)."""
+    tertiary isced11 + sex, or business demography indic_sb + sizeclas +
+    nace_r2)."""
     parts = []
-    if "dim" in ds:
-        parts.append(f"{ds['dim']} = '{ds['dim_value']}'")
-    if "dim2" in ds:
-        parts.append(f"{ds['dim2']} = '{ds['dim2_value']}'")
+    for key in ("dim", "dim2", "dim3"):
+        if key in ds:
+            parts.append(f"{ds[key]} = '{ds[key + '_value']}'")
     if parts:
         return " AND " + " AND ".join(parts)
     return ""
@@ -445,7 +463,7 @@ class TestSharedBenchmarkContract:
         partition.
         """
         f = _skip_if_missing(ds["slug"], "mart_geo_benchmark")
-        dims = [ds.get("dim"), ds.get("dim2")]
+        dims = [ds.get("dim"), ds.get("dim2"), ds.get("dim3")]
         dim_partition = "".join(f", {d}" for d in dims if d)
         if not ds.get("no_unit"):
             dim_partition += ", unit"
@@ -1770,6 +1788,62 @@ class TestEmpNuts3Facts:
             FROM read_parquet('{f}')
             WHERE year = 2024
               AND NOT (unit = 'THS' AND wstatus = 'EMP' AND nace_r2 = 'TOTAL')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestBusinessDemographyNuts3Facts:
+    """Verified facts for eurostat-business-demography-nuts3."""
+
+    def test_italy_rank2_births(self):
+        """Italy is 2nd of 27 EU27 by enterprise births (2020)."""
+        f = _skip_if_missing("eurostat_business_demography_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT nascite_imprese, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2020 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy 302k enterprise births — 2nd after FR (644k)
+        assert 200_000 <= row[0] <= 400_000
+        assert 1 <= row[1] <= 3
+
+    def test_births_sum_from_nuts2(self):
+        """Sintesi births is the SUM of NUTS2 rows (not the mean)."""
+        f = _skip_if_missing("eurostat_business_demography_nuts3", "mart_sintesi")
+        births = duckdb.sql(
+            f"""
+            SELECT nascite_imprese FROM read_parquet('{f}')
+            WHERE year = 2020 AND country = 'IT'
+            """
+        ).fetchone()[0]
+        clean_f = (
+            "out/data/clean/eurostat_business_demography_nuts3/2026/"
+            "eurostat_business_demography_nuts3_2026_clean.parquet"
+        )
+        expected = duckdb.sql(
+            f"""
+            SELECT SUM(value) FROM read_parquet('{clean_f}')
+            WHERE year = 2020 AND indic_sb = 'V11920' AND sizeclas = 'TOTAL'
+              AND nace_r2 = 'B-S_X_K642' AND country = 'IT' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()[0]
+        assert abs(births - expected) < 1  # exact sum
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the V11920 + TOTAL + B-S slice."""
+        f = _skip_if_missing("eurostat_business_demography_nuts3", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2020
+              AND NOT (indic_sb = 'V11920' AND sizeclas = 'TOTAL'
+                       AND nace_r2 = 'B-S_X_K642')
               AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
             """
         ).fetchone()[0]
