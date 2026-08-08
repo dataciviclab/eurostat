@@ -3,8 +3,178 @@
   "name": "Lab Clean Registry",
   "description": "Catalogo canonico dei clean parquet pubblici del Lab.",
   "source_repo": "dataciviclab/eurostat",
-  "updated_at": "2026-08-07",
+  "updated_at": "2026-08-08",
   "datasets": [
+    {
+      "slug": "eurostat_early_school_leavers_nuts2",
+      "name": "Eurostat Early School Leavers Nuts2",
+      "description": "Early leavers from education and training by NUTS 2 region",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2000,
+        "end": 2025
+      },
+      "years": [
+        2026
+      ],
+      "tags": [
+        "istruzione",
+        "abbandono-scolastico",
+        "eurostat",
+        "benchmark",
+        "nuts2"
+      ],
+      "category": "istruzione",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_early_school_leavers_nuts2/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "registry_source": "derive_auto",
+      "mart_refs": [
+        "eurostat_early_school_leavers_nuts2__mart_geo_benchmark",
+        "eurostat_early_school_leavers_nuts2__mart_sintesi",
+        "eurostat_early_school_leavers_nuts2__mart_trend"
+      ],
+      "run": {
+        "run_id": "20260808T090424Z_676bec50",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 39936,
+          "clean": 39936,
+          "mart": 26269
+        },
+        "output_bytes": {
+          "raw": 1180307,
+          "clean": 125823,
+          "mart": 188093
+        },
+        "started_at": "2026-08-08T09:04:24.955557+00:00",
+        "finished_at": "2026-08-08T09:04:27.457395+00:00",
+        "duration_seconds": 2.502
+      }
+    },
     {
       "slug": "eurostat_gdp_nuts3",
       "name": "Eurostat Gdp Nuts3",
@@ -149,6 +319,188 @@
         "started_at": "2026-08-07T21:15:33.820545+00:00",
         "finished_at": "2026-08-07T21:15:40.160868+00:00",
         "duration_seconds": 6.34
+      }
+    },
+    {
+      "slug": "eurostat_tertiary_education_nuts2",
+      "name": "Eurostat Tertiary Education Nuts2",
+      "description": "Tertiary educational attainment by NUTS 2 region",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2014,
+        "end": 2025
+      },
+      "years": [
+        2026
+      ],
+      "tags": [
+        "istruzione",
+        "istruzione-terziaria",
+        "eurostat",
+        "benchmark",
+        "nuts2"
+      ],
+      "category": "istruzione",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "isced11",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "isced11_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_tertiary_education_nuts2/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "registry_source": "derive_auto",
+      "mart_refs": [
+        "eurostat_tertiary_education_nuts2__mart_geo_benchmark",
+        "eurostat_tertiary_education_nuts2__mart_sintesi",
+        "eurostat_tertiary_education_nuts2__mart_trend"
+      ],
+      "run": {
+        "run_id": "20260808T090428Z_c3515a23",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 12276,
+          "clean": 12276,
+          "mart": 10921
+        },
+        "output_bytes": {
+          "raw": 451832,
+          "clean": 44664,
+          "mart": 87662
+        },
+        "started_at": "2026-08-08T09:04:28.002411+00:00",
+        "finished_at": "2026-08-08T09:04:29.862067+00:00",
+        "duration_seconds": 1.86
       }
     }
   ]
