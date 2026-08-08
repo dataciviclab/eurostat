@@ -1,4 +1,4 @@
--- mart_trend — Fertility rate: multi-year trend and CAGR per region.
+-- mart_trend — Population structure: multi-year trend and CAGR per region.
 --
 -- One row per (geo, unit). Reference slice only (unit NR, indic_de
 -- TOTFERRT). NOTE: a negative CAGR means fertility is DECLINING.

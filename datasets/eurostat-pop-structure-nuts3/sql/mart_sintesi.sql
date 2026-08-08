@@ -1,4 +1,4 @@
--- mart_sintesi — Fertility by country: national aggregates and ranking.
+-- mart_sintesi — Population structure by country: national aggregates and ranking.
 --
 -- One row per (country, year). Reference slice only (unit NR, indic_de
 -- TOTFERRT):

@@ -1,4 +1,4 @@
--- mart_sintesi — Soil erosion by country: national aggregates and ranking.
+-- mart_sintesi — Tourism nights by country: national aggregates and ranking.
 --
 -- One row per (country, year). Reference slice only (unit NR, c_resid
 -- TOTAL, nace_r2 I551-I553):

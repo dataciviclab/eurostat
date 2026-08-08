@@ -1,4 +1,4 @@
--- mart_trend — Soil erosion: multi-year trend and CAGR per region.
+-- mart_trend — Tourism nights: multi-year trend and CAGR per region.
 --
 -- One row per (geo, unit). Reference slice only (unit NR, c_resid TOTAL,
 -- nace_r2 I551-I553). NOTE: a positive CAGR means more land at

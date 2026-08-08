@@ -1,6 +1,6 @@
 -- mart_sintesi — Soil erosion by country: national aggregates and ranking.
 --
--- One row per (country, year). Reference slice only (unit PC, levels
+-- One row per (country, year). Reference slice only (unit T, levels
 -- TOTAL, clc18 CLC2_3X331_332_335):
 --   • total soil erosion (country-level, tonnes)
 --   • rank among EU27 countries
