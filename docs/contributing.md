@@ -117,5 +117,5 @@ debt: the SDMX codelist annotation set carries LEVEL (0-3) but not the
 
 ```bash
 pytest tests/ -v
-ruff check connectors/ tests/ eurostat-mcp/
+ruff check connectors/ tests/
 ```

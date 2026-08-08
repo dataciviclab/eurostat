@@ -1,2 +1,0 @@
-lab-connectors[mcp]>=0.15.1
-duckdb>=1.5.3,<2

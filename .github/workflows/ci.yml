@@ -1,4 +1,4 @@
-# CI for eurostat repo: lint, test, validate configs, MCP tests
+# CI for eurostat repo: lint, test, validate configs
 
 name: CI
 
@@ -27,16 +27,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install git+https://github.com/dataciviclab/lab-connectors.git
-          pip install -e ".[dev,mcp]"
+          pip install -e ".[dev,pipeline]"
 
       - name: Lint with ruff
-        run: ruff check connectors/ tests/ eurostat-mcp/
+        run: ruff check connectors/ tests/
 
-      - name: Test connectors
+      - name: Test
         run: python -m pytest tests/ -v --tb=short
-
-      - name: Test eurostat-mcp (unit)
-        run: python -m pytest eurostat-mcp/tests/ -v --tb=short -k "not test_query"
 
   validate-config:
     runs-on: ubuntu-latest

@@ -10,7 +10,7 @@ SQL-queryable.
 
 | | |
 |---|---|
-| **Published datasets** | **19 NUTS3 + 8 NUTS2** (27 total) |
+| **Published datasets** | **21 NUTS3 + 7 NUTS2** (28 total) |
 | **Period** | 1980 — 2025 (varies by dataset) |
 | **Coverage** | All EU + EFTA + candidate countries |
 | **Format** | Parquet on public GCS |
@@ -34,6 +34,10 @@ SQL-queryable.
 
 Full list: [docs/dataset-registry.md](docs/dataset-registry.md)
 
+> **Migration note**: 26 of the 28 datasets use the declarative SDMX pipeline;
+> `eurostat-bd-hgnace2-r3-nuts3` and `eurostat-pop-nuts3` still run on the
+> legacy script connector (`tsv_normalize.py`) and are being migrated to SDMX.
+
 ## Questions you can answer
 
 - **Which Italian province has the highest GDP per capita?** And the lowest?
@@ -44,19 +48,22 @@ Full list: [docs/dataset-registry.md](docs/dataset-registry.md)
 
 ## Three ways to access
 
-### 1. Via MCP
+### 1. Via MCP (toolkit)
 
-All datasets are accessible via an MCP server. Connect it to your AI client:
+All datasets are accessible via the DataCivicLab **toolkit MCP server** — the
+single MCP entry point for every Lab dataset. Connect it to your AI client:
 
 ```sql
 -- GDP per capita of Italian provinces (2024)
 SELECT geo_label_en, ROUND(value) AS gdp_pc
-FROM data WHERE geo LIKE 'IT%' AND unit='EUR_HAB' AND year=2024
+FROM eurostat_gdp_nuts3
+WHERE geo LIKE 'IT%' AND unit='EUR_HAB' AND year=2024
 ORDER BY value DESC;
 ```
 
-**Available tools**: `eurostat_list_datasets`, `eurostat_describe_dataset`,
-`eurostat_query`, `eurostat_get_codelist`.
+**Available tools**: `toolkit_find`, `toolkit_dataset_overview`,
+`toolkit_layer` (SQL query; mart tables via `table=mart_sintesi|mart_trend|
+mart_geo_benchmark`), `toolkit_registry_show` (codelists).
 
 ### 2. Via DuckDB directly
 
