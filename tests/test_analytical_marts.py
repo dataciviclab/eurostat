@@ -108,6 +108,32 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC11",
     },
+    {
+        "slug": "eurostat_early_school_leavers_nuts2",
+        "benchmark_unit": "PC",
+        # Extra breakdown dimension: benchmark slice is sex='T' (total).
+        "dim": "sex",
+        "dim_value": "T",
+        # Single-unit dataset: any other unit must carry NULL benchmark.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS2",
+        "other_unit_geo": "ITC4",
+    },
+    {
+        "slug": "eurostat_tertiary_education_nuts2",
+        "benchmark_unit": "PC",
+        # Extra breakdown dimensions: slice is isced11='ED5-8' + sex='T'.
+        "dim": "sex",
+        "dim_value": "T",
+        "dim2": "isced11",
+        "dim2_value": "ED5-8",
+        # Single-unit dataset.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS2",
+        "other_unit_geo": "ITC4",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -122,9 +148,15 @@ def _skip_if_missing(slug: str, mart: str) -> Path:
 
 
 def _dim_filter(ds: dict) -> str:
-    """SQL filter for the optional extra benchmark dimension (e.g. crime iccs)."""
+    """SQL filter for the optional extra benchmark dimensions (e.g. crime iccs,
+    or tertiary isced11 + sex)."""
+    parts = []
     if "dim" in ds:
-        return f" AND {ds['dim']} = '{ds['dim_value']}'"
+        parts.append(f"{ds['dim']} = '{ds['dim_value']}'")
+    if "dim2" in ds:
+        parts.append(f"{ds['dim2']} = '{ds['dim2_value']}'")
+    if parts:
+        return " AND " + " AND ".join(parts)
     return ""
 
 
@@ -219,8 +251,9 @@ class TestSharedBenchmarkContract:
         partition.
         """
         f = _skip_if_missing(ds["slug"], "mart_geo_benchmark")
-        dim_partition = f", {ds['dim']}" if "dim" in ds else ""
-        dim_filter = f" AND {ds['dim']} = '{ds['dim_value']}'" if "dim" in ds else ""
+        dims = [ds.get("dim"), ds.get("dim2")]
+        dim_partition = "".join(f", {d}" for d in dims if d)
+        dim_filter = _dim_filter(ds)
         n_bad = duckdb.sql(
             f"""
             WITH ranked AS (
@@ -769,3 +802,129 @@ class TestTranSfRoadnuFacts:
         ).fetchone()
         assert row is not None
         assert row[0] >= 20
+
+
+class TestEarlySchoolLeaversNuts2Facts:
+    """Verified facts for eurostat-early-school-leavers-nuts2."""
+
+    def test_italy_rank8_eu(self):
+        """Italy ranks 8th of 27 EU27 by early school leaving (2024)."""
+        f = _skip_if_missing("eurostat_early_school_leavers_nuts2", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT abbandono_pct, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        assert 5 <= row[1] <= 10  # verified: rank 8 of 27
+
+    def test_sicilia_top_italy(self):
+        """Sicilia has the highest early leaving share among IT regions (2024)."""
+        f = _skip_if_missing(
+            "eurostat_early_school_leavers_nuts2", "mart_geo_benchmark"
+        )
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND unit = 'PC' AND sex = 'T'
+              AND nuts_level = 'NUTS2' AND country = 'IT' AND geo = 'ITG1'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Sicilia ranked 1st (highest) in Italy
+
+    def test_calabria_halved(self):
+        """Calabria early leaving roughly halved over the observed window."""
+        f = _skip_if_missing("eurostat_early_school_leavers_nuts2", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT first_value, last_value, cagr_pct
+            FROM read_parquet('{f}')
+            WHERE geo = 'ITF6' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()
+        assert row is not None
+        first_val, last_val, cagr = row
+        assert last_val < first_val * 0.5  # verified: 24.4 -> 6.5
+        assert cagr < -4.0  # verified: -5.15
+
+    def test_benchmark_only_total_sex(self):
+        """Benchmark columns exist only for sex='T' rows (reference slice)."""
+        f = _skip_if_missing(
+            "eurostat_early_school_leavers_nuts2", "mart_geo_benchmark"
+        )
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND unit = 'PC' AND sex != 'T'
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+
+class TestTertiaryEducationNuts2Facts:
+    """Verified facts for eurostat-tertiary-education-nuts2."""
+
+    def test_italy_bottom_half_eu(self):
+        """Italy is in the bottom half of EU27 by tertiary attainment (2024)."""
+        f = _skip_if_missing("eurostat_tertiary_education_nuts2", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT istruzione_terziaria_pct, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy ~21% vs IE 55.6% top — bottom half of the 27
+        assert row[0] < 30.0
+        assert row[1] >= 15
+
+    def test_lazio_top_italy(self):
+        """Lazio has the highest tertiary attainment among IT regions (2024)."""
+        f = _skip_if_missing("eurostat_tertiary_education_nuts2", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT rank_nazionale
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND unit = 'PC' AND isced11 = 'ED5-8'
+              AND age = 'Y25-64' AND sex = 'T'
+              AND nuts_level = 'NUTS2' AND country = 'IT' AND geo = 'ITI4'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1  # Lazio ranked 1st in Italy
+
+    def test_countries_aggregated_from_nuts2(self):
+        """Sintesi is built from NUTS2 aggregation (no country-level in source).
+
+        The TGS00109 dataflow publishes NUTS2 only — verified:
+        nuts_level='country' has zero rows. Country values are the mean of
+        their NUTS2 shares.
+        """
+        f = _skip_if_missing("eurostat_tertiary_education_nuts2", "mart_sintesi")
+        n = duckdb.sql(
+            f"""
+            SELECT COUNT(*) FROM read_parquet('{f}') WHERE year = 2024
+            """
+        ).fetchone()[0]
+        assert n >= 25  # most EU27 countries present via NUTS2 aggregation
+
+    def test_benchmark_only_reference_slice(self):
+        """Benchmark columns exist only for the reference slice rows."""
+        f = _skip_if_missing("eurostat_tertiary_education_nuts2", "mart_geo_benchmark")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*)
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND unit = 'PC'
+              AND NOT (isced11 = 'ED5-8' AND age = 'Y25-64' AND sex = 'T')
+              AND (media_eu_value IS NOT NULL OR percentile_eu IS NOT NULL)
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
