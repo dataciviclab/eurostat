@@ -4,7 +4,7 @@
 # post-merge-registry.yml). Fa tutto:
 #   1. run dei dataset (cambiati se PR merged, TUTTI se schedule/manuale)
 #   2. sync GCS (clean + mart)
-#   3. build_registry --write (toolkit.registry, #452)
+#   3. `toolkit registry build --prefix eurostat --flat --write`
 #   4. PR draft "chore(post-merge): aggiorna registry" se diff (pattern DI)
 #
 # Triggers:
@@ -21,7 +21,6 @@ on:
     types: [closed]
     paths:
       - "datasets/**"
-      - "scripts/build_registry.py"
       - "connectors/**"
   schedule:
     - cron: '0 6 1 * *'
@@ -64,15 +63,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install git+https://github.com/dataciviclab/toolkit.git@v1.49.1
+          pip install git+https://github.com/dataciviclab/toolkit.git@v1.49.4
           pip install git+https://github.com/dataciviclab/lab-connectors.git
           pip install -e ".[pipeline]"
           chmod +x connectors/*.py
 
       # ── Fetch latest codelists from Eurostat SDMX ────────────────────
       # Tutti i clean.sql fanno join con codelists/*.csv (geo, unit, freq,
-      # flag, ...) e build_registry produce registry.json da quei file —
-      # vanno aggiornati prima di ogni run (specialmente geo: gerarchia NUTS).
+      # flag, ...) e `toolkit registry build` produce registry.json da quei
+      # file — vanno aggiornati prima di ogni run (specialmente geo: gerarchia NUTS).
       - name: Update codelists
         run: python scripts/update_codelists.py
 
@@ -164,24 +163,13 @@ jobs:
       # e produrrebbe un catalog basato su dati parziali.
       - name: Build registry
         if: ${{ !inputs.smoke && steps.detect.outputs.dirs != '' }}
-        run: python scripts/build_registry.py --write
-
-      # Fusion (toolkit v1.49): rimuove i 4 artifact legacy (clean_catalog,
-      # codelists, mart_catalog, pipeline_signals) — sostituiti dal singolo
-      # registry.json. Il commit della PR draft cattura sia l'aggiunta del
-      # nuovo sia la rimozione dei vecchi.
-      - name: Remove legacy registry artifacts
-        if: ${{ !inputs.smoke && steps.detect.outputs.dirs != '' }}
-        run: |
-          rm -f registry/clean_catalog.json registry/codelists.json \
-                registry/mart_catalog.json registry/pipeline_signals.json
-          echo "Legacy registry artifacts removed (superseded by registry.json)"
+        run: toolkit registry build --prefix eurostat --flat --write
 
       - name: Check registry diff
         if: ${{ !inputs.smoke }}
         id: diff
         run: |
-          # registry/ è untracked su main (generato da build_registry) —
+          # registry/ è untracked su main (generato dal builder) —
           # git diff ignora gli untracked, quindi usiamo git status.
           if git status --porcelain -- registry/ | grep -q .; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
