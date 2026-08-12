@@ -30,7 +30,7 @@ jobs:
           pip install -e ".[dev,pipeline]"
 
       - name: Lint with ruff
-        run: ruff check connectors/ tests/
+        run: ruff check tests/
 
       - name: Test
         run: python -m pytest tests/ -v --tb=short

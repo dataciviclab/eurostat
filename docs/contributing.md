@@ -19,7 +19,8 @@ Edit `dataset.yml`:
   (declarative fetch via the toolkit ESTAT profile; no ad-hoc scripts)
 - `tags`/`category` — from the closed vocabulary (see dataset-incubator
   `docs/candidate-standard.md` Appendice A)
-- `support:` — codelists used by clean.sql (freq/unit/flag; iccs for crime)
+- `support:` — codelists materialized at run-time by the toolkit (freq/unit/
+  flag; iccs for crime) via `provider: sdmx`
 - `mart.tables` — the 3 analytical marts (benchmark/sintesi/trend) with
   `table_rules` (`primary_key` from the mart GROUP BY / grain)
 
@@ -30,10 +31,10 @@ Edit `dataset.yml`:
   iccs...)
 - **geo** stays a repo CSV (`codelists/geo.csv`) — the SDMX annotation set
   (LEVEL only) does not carry `nuts_level` text / `parent_code`; it is
-  refreshed by `scripts/update_codelists.py`
-- If `clean.sql` needs a new codelist: add `update_XXX()` to
-  `scripts/update_codelists.py` (for geo-style CSVs) or a `support:` entry
-  with `id` (for SDMX codelists)
+  refreshed by `scripts/update_codelists.py` (geo-only)
+- If `clean.sql` needs a new codelist: add a `support:` entry with `id`
+  (SDMX codelists are materialized at run-time; no repo CSV needed unless
+  the codelist needs NUTS-style hierarchy not in the SDMX annotations)
 - Never write codelists by hand
 
 ### 3. Analytical marts

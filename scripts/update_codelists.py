@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-Fetch Eurostat SDMX codelists and regenerate codelists/*.csv.
+Fetch the Eurostat GEO codelist and regenerate codelists/geo.csv.
 
-Fetches ALL codelists from the Eurostat JSON API (GEO, NACE_R2, FREQ,
-UNIT, OBS_FLAG). GEO includes NUTS hierarchy (nuts_level, parent_code)
-deduced from code length. All CSVs are written with canonical columns.
+GEO is the only codelist kept as a repo CSV: the clean.sql files join
+it directly for the NUTS hierarchy (nuts_level, parent_code), which the
+SDMX codelist annotation set does not carry. All other codelists are
+materialized at run-time by the toolkit support (provider: sdmx).
 
 Uso:  python scripts/update_codelists.py
 
@@ -35,12 +36,6 @@ def _fetch_raw(url: str) -> dict[str, Any]:
     req = urllib.request.Request(url)
     resp = urllib.request.urlopen(req, timeout=TIMEOUT)
     return json.loads(resp.read())  # type: ignore[no-any-return]
-
-
-def _fetch_codelist(codelist_id: str) -> dict[str, str]:
-    """Fetch a codelist from Eurostat JSON API, return {code: label_en}."""
-    data = _fetch_raw(f"{API_BASE}/{codelist_id}?format=json")
-    return data.get("category", {}).get("label", {}) or {}
 
 
 def _write_csv(filename: str, header: list[str], rows: list[tuple]) -> Path:
@@ -126,165 +121,10 @@ def update_geo() -> int:
     return len(rows)
 
 
-def update_nace() -> int:
-    """Fetch NACE_R2 codelist and write nace_r2.csv (all codes)."""
-    labels = _fetch_codelist("NACE_R2")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("nace_r2.csv", ["code", "label_en"], rows)
-    print(f"  ✅ nace_r2.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_freq() -> int:
-    """Fetch FREQ codelist and write freq.csv."""
-    labels = _fetch_codelist("FREQ")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("freq.csv", ["freq", "label_en"], rows)
-    print(f"  ✅ freq.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_units() -> int:
-    """Fetch UNIT codelist and write units.csv."""
-    labels = _fetch_codelist("UNIT")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("units.csv", ["unit", "label_en"], rows)
-    print(f"  ✅ units.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_indic_de() -> int:
-    """Fetch INDIC_DE codelist and write indic_de.csv."""
-    labels = _fetch_codelist("INDIC_DE")
-    # Filter to codes that actually appear in demo-balance data
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("indic_de.csv", ["code", "label_en"], rows)
-    print(f"  ✅ indic_de.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_c_resid() -> int:
-    """Fetch C_RESID codelist and write c_resid.csv."""
-    labels = _fetch_codelist("C_RESID")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("c_resid.csv", ["code", "label_en"], rows)
-    print(f"  ✅ c_resid.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_indic_nrg() -> int:
-    """Fetch INDIC_NRG codelist and write indic_nrg.csv."""
-    labels = _fetch_codelist("INDIC_NRG")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("indic_nrg.csv", ["code", "label_en"], rows)
-    print(f"  ✅ indic_nrg.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_indic_sb() -> int:
-    """Fetch INDIC_SB codelist and write indic_sb.csv."""
-    labels = _fetch_codelist("INDIC_SB")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("indic_sb.csv", ["code", "label_en"], rows)
-    print(f"  ✅ indic_sb.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_levels() -> int:
-    """Fetch LEVELS codelist and write levels.csv."""
-    labels = _fetch_codelist("LEVELS")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("levels.csv", ["code", "label_en"], rows)
-    print(f"  ✅ levels.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_clc18() -> int:
-    """Fetch CLC18 codelist and write clc18.csv."""
-    labels = _fetch_codelist("CLC18")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("clc18.csv", ["code", "label_en"], rows)
-    print(f"  ✅ clc18.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_sectperf() -> int:
-    """Fetch SECTPERF codelist and write sectperf.csv."""
-    labels = _fetch_codelist("SECTPERF")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("sectperf.csv", ["code", "label_en"], rows)
-    print(f"  ✅ sectperf.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_landuse() -> int:
-    """Fetch LANDUSE codelist and write landuse.csv."""
-    labels = _fetch_codelist("LANDUSE")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("landuse.csv", ["code", "label_en"], rows)
-    print(f"  ✅ landuse.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_na_item() -> int:
-    """Fetch NA_ITEM codelist and write na_item.csv."""
-    labels = _fetch_codelist("NA_ITEM")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("na_item.csv", ["code", "label_en"], rows)
-    print(f"  ✅ na_item.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_sizeclas() -> int:
-    """Fetch SIZECLAS codelist and write sizeclas.csv."""
-    labels = _fetch_codelist("SIZECLAS")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("sizeclas.csv", ["code", "label_en"], rows)
-    print(f"  ✅ sizeclas.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_flags() -> int:
-    """Fetch OBS_FLAG codelist and write flags.csv."""
-    labels = _fetch_codelist("OBS_FLAG")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("flags.csv", ["flag", "description_en"], rows)
-    print(f"  ✅ flags.csv: {len(rows)} entries")
-    return len(rows)
-
-
-def update_iccs() -> int:
-    """Fetch ICCS codelist (crime categories) and write iccs.csv."""
-    labels = _fetch_codelist("ICCS")
-    rows = [(code, labels[code]) for code in sorted(labels)]
-    _write_csv("iccs.csv", ["code", "label_en"], rows)
-    print(f"  ✅ iccs.csv: {len(rows)} entries")
-    return len(rows)
-
-
-# ── Main ──────────────────────────────────────────────────────────────────────
-
-
 def main():
     print("Updating Eurostat codelists from SDMX API...")
-    total = 0
-    total += update_geo()
-    total += update_nace()
-    total += update_freq()
-    total += update_units()
-    total += update_indic_de()
-    total += update_c_resid()
-    total += update_indic_nrg()
-    total += update_indic_sb()
-    total += update_levels()
-    total += update_clc18()
-    total += update_sectperf()
-    total += update_landuse()
-    total += update_na_item()
-    total += update_sizeclas()
-    total += update_flags()
-    total += update_iccs()
-    print(f"✔ Done: {total} total entries across 13 codelists")
+    total = update_geo()
+    print(f"✔ Done: {total} entries in geo.csv")
 
 
 if __name__ == "__main__":
