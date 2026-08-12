@@ -1,8 +1,7 @@
 -- mart_geo_benchmark — Energy poverty (inability to heat home) by NUTS2 region: EU27-wide
 -- benchmark analytics.
 --
--- One row per (year, geo, unit). Replaces the old pass-through mart
--- (Italy only) with EU27-wide comparative analytics:
+-- One row per (year, geo, unit). EU27-wide comparative analytics:
 --   • EU27 average per year (same nuts_level and unit comparison)
 --   • country average per year
 --   • percentile within EU27 (same year, nuts_level, unit)
