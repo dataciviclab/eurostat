@@ -1,7 +1,7 @@
 -- mart_geo_benchmark — Population by age group by NUTS2 region:
 -- EU27-wide benchmark analytics.
 --
--- One row per (year, geo, unit, age, age, sex). Replaces the old
+-- One row per (year, geo, unit, age, sex). Replaces the old
 -- EU27-wide comparative analytics:
 --   • EU27 average per year (same nuts_level and unit comparison)
 --   • country average per year
@@ -38,8 +38,6 @@ base AS (
         unit_label_en,
         age,
         age_label_en,
-        age,
-        age_label_en,
         sex,
         sex_label_en,
         value,
@@ -59,8 +57,6 @@ SELECT
     b.country,
     b.unit,
     b.unit_label_en,
-    b.age,
-    b.age_label_en,
     b.age,
     b.age_label_en,
     b.sex,
