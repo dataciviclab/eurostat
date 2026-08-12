@@ -1370,6 +1370,126 @@
       ]
     },
     {
+      "slug": "eurostat_energy_poverty_nuts2",
+      "name": "Eurostat Energy Poverty Nuts2",
+      "description": "Inability to keep home adequately warm by NUTS 2 region",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2021,
+        "end": 2025
+      },
+      "tags": [
+        "welfare-lavoro",
+        "poverta-energetica",
+        "energia",
+        "eurostat",
+        "benchmark",
+        "nuts2"
+      ],
+      "category": "welfare-lavoro",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "BIGINT",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_energy_poverty_nuts2/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_energy_poverty_nuts2__mart_geo_benchmark",
+        "eurostat_energy_poverty_nuts2__mart_sintesi",
+        "eurostat_energy_poverty_nuts2__mart_trend"
+      ]
+    },
+    {
       "slug": "eurostat_fertility_nuts3",
       "name": "Eurostat Fertility Nuts3",
       "description": "Fertility indicators by NUTS 3 region",
@@ -4033,6 +4153,36 @@
       }
     },
     {
+      "slug": "eurostat_energy_poverty_nuts2__mart_geo_benchmark",
+      "dataset": "eurostat_energy_poverty_nuts2",
+      "table": "mart_geo_benchmark",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_energy_poverty_nuts2/mart_geo_benchmark.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_energy_poverty_nuts2__mart_sintesi",
+      "dataset": "eurostat_energy_poverty_nuts2",
+      "table": "mart_sintesi",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_energy_poverty_nuts2/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_energy_poverty_nuts2__mart_trend",
+      "dataset": "eurostat_energy_poverty_nuts2",
+      "table": "mart_trend",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_energy_poverty_nuts2/mart_trend.parquet",
+        "multi_file": false
+      }
+    },
+    {
       "slug": "eurostat_fertility_nuts3__mart_geo_benchmark",
       "dataset": "eurostat_fertility_nuts3",
       "table": "mart_geo_benchmark",
@@ -4885,6 +5035,37 @@
       }
     },
     {
+      "id": "eurostat_energy_poverty_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_energy_poverty_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20260812T193831Z_5d1fa578",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1840,
+          "clean": 1840,
+          "mart": 2273
+        },
+        "output_bytes": {
+          "raw": 38272,
+          "clean": 20767,
+          "mart": 44891
+        },
+        "started_at": "2026-08-12T19:38:31.284434+00:00",
+        "finished_at": "2026-08-12T19:38:32.333309+00:00",
+        "duration_seconds": 1.049
+      }
+    },
+    {
       "id": "eurostat_fertility_nuts3",
       "source_id": "eurostat",
       "status": "ok",
@@ -5505,6 +5686,12 @@
             "semantic_type": "country_code"
           },
           {
+            "slug": "eurostat_energy_poverty_nuts2",
+            "name": "Eurostat Energy Poverty Nuts2",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
             "slug": "eurostat_fertility_nuts3",
             "name": "Eurostat Fertility Nuts3",
             "column": "country",
@@ -5614,7 +5801,7 @@
           }
         ],
         "types": {
-          "country_code": 28
+          "country_code": 29
         }
       },
       "Provincia (tramite NUTS3)": {
@@ -5682,6 +5869,12 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_energy_poverty_nuts2",
+            "name": "Eurostat Energy Poverty Nuts2",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_fertility_nuts3",
             "name": "Eurostat Fertility Nuts3",
             "column": "geo",
@@ -5791,7 +5984,7 @@
           }
         ],
         "types": {
-          "nuts_code": 28
+          "nuts_code": 29
         }
       },
       "Tempo": {
@@ -5855,6 +6048,12 @@
           {
             "slug": "eurostat_emp_nuts3",
             "name": "Eurostat Emp Nuts3",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_energy_poverty_nuts2",
+            "name": "Eurostat Energy Poverty Nuts2",
             "column": "year",
             "semantic_type": "year"
           },
@@ -5974,7 +6173,7 @@
           }
         ],
         "types": {
-          "year": 28,
+          "year": 29,
           "month": 1
         }
       }
