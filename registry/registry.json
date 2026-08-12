@@ -146,8 +146,15 @@
         "start": 2008,
         "end": 2020
       },
-      "tags": [],
-      "category": "",
+      "tags": [
+        "economia",
+        "demografia-imprese",
+        "imprese-high-growth",
+        "eurostat",
+        "benchmark",
+        "nuts3"
+      ],
+      "category": "economia",
       "columns": [
         {
           "name": "freq",
@@ -212,6 +219,13 @@
           "description": ""
         },
         {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
@@ -249,7 +263,9 @@
       },
       "stage": "incubating",
       "mart_refs": [
-        "eurostat_bd_hgnace2_r3_nuts3__mart_eurostat_bd_hgnace2_r3_nuts3"
+        "eurostat_bd_hgnace2_r3_nuts3__mart_geo_benchmark",
+        "eurostat_bd_hgnace2_r3_nuts3__mart_sintesi",
+        "eurostat_bd_hgnace2_r3_nuts3__mart_trend"
       ]
     },
     {
@@ -2625,6 +2641,150 @@
       ]
     },
     {
+      "slug": "eurostat_pop_nuts3",
+      "name": "Eurostat Pop Nuts3",
+      "description": "Population on 1 January by age, sex and NUTS 3 region",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 1990,
+        "end": 2025
+      },
+      "tags": [
+        "welfare-lavoro",
+        "popolazione",
+        "residenti",
+        "eurostat",
+        "benchmark",
+        "nuts3"
+      ],
+      "category": "welfare-lavoro",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_pop_nuts3/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_pop_nuts3__mart_geo_benchmark",
+        "eurostat_pop_nuts3__mart_sintesi",
+        "eurostat_pop_nuts3__mart_trend"
+      ]
+    },
+    {
       "slug": "eurostat_pop_structure_nuts3",
       "name": "Eurostat Pop Structure Nuts3",
       "description": "Population structure indicators by NUTS 3 region",
@@ -3603,12 +3763,32 @@
       }
     },
     {
-      "slug": "eurostat_bd_hgnace2_r3_nuts3__mart_eurostat_bd_hgnace2_r3_nuts3",
+      "slug": "eurostat_bd_hgnace2_r3_nuts3__mart_geo_benchmark",
       "dataset": "eurostat_bd_hgnace2_r3_nuts3",
-      "table": "mart_eurostat_bd_hgnace2_r3_nuts3",
+      "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_bd_hgnace2_r3_nuts3/mart_eurostat_bd_hgnace2_r3_nuts3.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_bd_hgnace2_r3_nuts3/mart_geo_benchmark.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_bd_hgnace2_r3_nuts3__mart_sintesi",
+      "dataset": "eurostat_bd_hgnace2_r3_nuts3",
+      "table": "mart_sintesi",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_bd_hgnace2_r3_nuts3/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_bd_hgnace2_r3_nuts3__mart_trend",
+      "dataset": "eurostat_bd_hgnace2_r3_nuts3",
+      "table": "mart_trend",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_bd_hgnace2_r3_nuts3/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4153,12 +4333,32 @@
       }
     },
     {
-      "slug": "eurostat_pop_nuts3__mart_pop_nuts3",
+      "slug": "eurostat_pop_nuts3__mart_geo_benchmark",
       "dataset": "eurostat_pop_nuts3",
-      "table": "mart_pop_nuts3",
+      "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/mart_pop_nuts3.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/mart_geo_benchmark.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_pop_nuts3__mart_sintesi",
+      "dataset": "eurostat_pop_nuts3",
+      "table": "mart_sintesi",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_pop_nuts3__mart_trend",
+      "dataset": "eurostat_pop_nuts3",
+      "table": "mart_trend",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4411,7 +4611,30 @@
       "status": "ok",
       "label": "eurostat_bd_hgnace2_r3_nuts3",
       "detail": "anno 2026 — mart: si",
-      "action": ""
+      "action": "",
+      "run": {
+        "run_id": "20260812T175509Z_9c30a452",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 4391569,
+          "clean": 4391569,
+          "mart": 2180109
+        },
+        "output_bytes": {
+          "raw": 131138881,
+          "clean": 20081509,
+          "mart": 6500825
+        },
+        "started_at": "2026-08-12T17:55:09.029162+00:00",
+        "finished_at": "2026-08-12T17:56:15.231858+00:00",
+        "duration_seconds": 66.203
+      }
     },
     {
       "id": "eurostat_business_demography_nuts3",
@@ -4954,7 +5177,30 @@
       "status": "ok",
       "label": "eurostat_pop_nuts3",
       "detail": "anno 2026 — mart: si",
-      "action": ""
+      "action": "",
+      "run": {
+        "run_id": "20260812T175616Z_ba22d6c5",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 5911164,
+          "clean": 5911164,
+          "mart": 4153132
+        },
+        "output_bytes": {
+          "raw": 169658358,
+          "clean": 21774005,
+          "mart": 12059303
+        },
+        "started_at": "2026-08-12T17:56:16.755680+00:00",
+        "finished_at": "2026-08-12T17:57:41.526027+00:00",
+        "duration_seconds": 84.77
+      }
     },
     {
       "id": "eurostat_pop_structure_nuts3",
@@ -5205,6 +5451,12 @@
             "semantic_type": "country_code"
           },
           {
+            "slug": "eurostat_bd_hgnace2_r3_nuts3",
+            "name": "Eurostat Bd Hgnace2 R3 Nuts3",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
             "slug": "eurostat_business_demography_nuts3",
             "name": "Eurostat Business Demography Nuts3",
             "column": "country",
@@ -5313,6 +5565,12 @@
             "semantic_type": "country_code"
           },
           {
+            "slug": "eurostat_pop_nuts3",
+            "name": "Eurostat Pop Nuts3",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
             "slug": "eurostat_pop_structure_nuts3",
             "name": "Eurostat Pop Structure Nuts3",
             "column": "country",
@@ -5356,7 +5614,7 @@
           }
         ],
         "types": {
-          "country_code": 26
+          "country_code": 28
         }
       },
       "Provincia (tramite NUTS3)": {
@@ -5484,6 +5742,12 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_pop_nuts3",
+            "name": "Eurostat Pop Nuts3",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_pop_structure_nuts3",
             "name": "Eurostat Pop Structure Nuts3",
             "column": "geo",
@@ -5527,7 +5791,7 @@
           }
         ],
         "types": {
-          "nuts_code": 27
+          "nuts_code": 28
         }
       },
       "Tempo": {
@@ -5661,6 +5925,12 @@
             "semantic_type": "year"
           },
           {
+            "slug": "eurostat_pop_nuts3",
+            "name": "Eurostat Pop Nuts3",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
             "slug": "eurostat_pop_structure_nuts3",
             "name": "Eurostat Pop Structure Nuts3",
             "column": "year",
@@ -5704,7 +5974,7 @@
           }
         ],
         "types": {
-          "year": 27,
+          "year": 28,
           "month": 1
         }
       }
