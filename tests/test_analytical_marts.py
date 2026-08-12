@@ -387,6 +387,15 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_energy_poverty_nuts2",
+        "benchmark_unit": "PC",
+        # Single-unit dataset (PC only): any other unit must carry NULL.
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS2",
+        "other_unit_geo": "ITC4",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -2200,3 +2209,55 @@ class TestPopNuts3Facts:
         # Basilicata lost residents over 35 years (southern depopulation)
         assert row[2] is not None
         assert row[2] < -0.3
+
+
+class TestEnergyPovertyNuts2Facts:
+    """Verified facts for eurostat-energy-poverty-nuts2 (ILC_MDES01_R)."""
+
+    def test_italy_mid_rank_energy_poverty(self):
+        """Italy ranks ~8-9th of EU27 by energy poverty (2024)."""
+        f = _skip_if_missing("eurostat_energy_poverty_nuts2", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT energy_poverty_pct, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy ~8.6% unable to heat home — mid EU (BG/GR/PT higher)
+        assert 5.0 <= row[0] <= 15.0
+        assert 5 <= row[1] <= 15
+
+    def test_south_worse_than_north(self):
+        """Puglia (ITF4) has much higher energy poverty than Trento (ITH2)."""
+        f = _skip_if_missing("eurostat_energy_poverty_nuts2", "mart_geo_benchmark")
+        puglia = duckdb.sql(
+            f"""
+            SELECT value FROM read_parquet('{f}')
+            WHERE year = 2024 AND geo = 'ITF4' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()
+        trento = duckdb.sql(
+            f"""
+            SELECT value FROM read_parquet('{f}')
+            WHERE year = 2024 AND geo = 'ITH2' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()
+        assert puglia is not None and trento is not None
+        assert puglia[0] > 15  # Puglia ~20.5%
+        assert trento[0] < 5  # Trento ~1.9%
+        assert puglia[0] > trento[0] * 5
+
+    def test_short_series_2021_2025(self):
+        """Trend spans exactly the 5 available years (2021-2025)."""
+        f = _skip_if_missing("eurostat_energy_poverty_nuts2", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT first_year, last_year FROM read_parquet('{f}')
+            WHERE geo = 'ITC4' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 2021
+        assert row[1] == 2025

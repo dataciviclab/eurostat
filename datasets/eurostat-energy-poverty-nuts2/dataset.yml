@@ -1,0 +1,106 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_energy_poverty_nuts2"
+  source_id: "eurostat"
+  tags: [welfare-lavoro, poverta-energetica, energia, eurostat, benchmark, nuts2]
+  category: welfare-lavoro
+  years: [2026]
+  time_coverage:
+    start_year: 2021
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_ilc_mdes01_r"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "ILC_MDES01_R"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  required_columns:
+    - freq
+    - unit
+    - geo
+    - year
+    - freq_label_en
+    - unit_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 100
+    # NOTE: `value` is NOT in not_null — Eurostat has legitimate coverage gaps
+    # (NaN flag, esp. recent years and small regions).
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_geo_benchmark"
+      sql: "sql/mart_geo_benchmark.sql"
+    - name: "mart_sintesi"
+      sql: "sql/mart_sintesi.sql"
+    - name: "mart_trend"
+      sql: "sql/mart_trend.sql"
+  required_tables:
+    - "mart_geo_benchmark"
+    - "mart_sintesi"
+    - "mart_trend"
+  validate:
+    table_rules:
+      mart_geo_benchmark:
+        required_columns: [year, geo, geo_label_en, country, unit, value]
+        primary_key: [year, geo, unit]
+        # Serie breve (2021-2025): ~236 NUTS2 + 92 NUTS1 + 36 country per anno
+        min_rows: 1000
+      mart_sintesi:
+        required_columns: [year, country, energy_poverty_pct, rank_procapite_eu]
+        primary_key: [year, country]
+        min_rows: 30
+      mart_trend:
+        required_columns: [geo, geo_label_en, first_year, last_year, cagr_pct]
+        primary_key: [geo]
+        min_rows: 100
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "ILC_MDES01_R"
+  theme: "Inability to keep home adequately warm by NUTS 2 region"
+  nuts_level: 2
+  dimensions: ["freq", "unit", "geo"]
+  description: "Inability to keep home adequately warm by NUTS 2 region"

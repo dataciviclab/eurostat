@@ -46,6 +46,7 @@ SUBJECT_OWNER: dict[str, set[str]] = {
     "population structure": {"eurostat-pop-structure-nuts3"},
     "income inequality": {"eurostat-income-inequality-nuts2"},
     "poverty": {"eurostat-poverty-risk-nuts2"},
+    "energy poverty": {"eurostat-energy-poverty-nuts2"},
     "rd expenditure": {"eurostat-rd-expenditure-nuts2"},
     "physicians": {"eurostat-physicians-nuts2"},
     "hospital beds": {"eurostat-hospital-beds-nuts2"},
