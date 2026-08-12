@@ -63,7 +63,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install git+https://github.com/dataciviclab/toolkit.git@v1.49.4
+          pip install git+https://github.com/dataciviclab/toolkit.git@v1.50.0
           pip install git+https://github.com/dataciviclab/lab-connectors.git
           pip install -e ".[pipeline]"
           chmod +x connectors/*.py
