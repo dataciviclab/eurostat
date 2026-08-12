@@ -34,9 +34,10 @@ SQL-queryable.
 
 Full list: [docs/dataset-registry.md](docs/dataset-registry.md)
 
-> **Migration note**: 26 of the 28 datasets use the declarative SDMX pipeline;
-> `eurostat-bd-hgnace2-r3-nuts3` and `eurostat-pop-nuts3` still run on the
-> legacy script connector (`tsv_normalize.py`) and are being migrated to SDMX.
+> **Note**: all 28 datasets use the declarative SDMX pipeline (`type: sdmx`,
+> agency ESTAT). The two historical script-based connectors
+> (`eurostat-bd-hgnace2-r3-nuts3`, `eurostat-pop-nuts3`) were migrated to SDMX
+> and now produce the same analytical marts as the rest of the catalog.
 
 ## Questions you can answer
 
