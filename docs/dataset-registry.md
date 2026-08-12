@@ -32,6 +32,7 @@
 | `eurostat-income-inequality-nuts2` | `ILC_DI11_R` | Social / Income inequality S80/S20 by NUTS2 region | 3 (freq, unit, geo) | 8,533 | ✅ |
 | `eurostat-fertility-nuts3` | `DEMO_R_FIND3` | Demography / Fertility indicators | 4 (freq, indic_de, unit, geo) | 76,392 | ✅ |
 | `eurostat-business-demography-nuts3` | `BD_SIZE_R3` | Business / Business demography by size class | 5 (freq, indic_sb, sizeclas, nace_r2, geo) | 120,955 | ✅ |
+| `eurostat-energy-poverty-nuts2` | `ILC_MDES01_R` | Social / Inability to keep home warm (energy poverty) | 3 (freq, unit, geo) | 1,840 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
