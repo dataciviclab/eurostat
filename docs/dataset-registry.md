@@ -7,7 +7,7 @@
 | `eurostat-gdp-nuts3` | `NAMA_10R_3GDP` | Economy / GDP per capita | 3 (freq, unit, geo) | 308,950 | ✅ |
 | `eurostat-gva-nuts3` | `NAMA_10R_3GVA` | Economy / Gross Value Added by NACE | 4 (freq, nace_r2, unit, geo) | 1,339,200 | ✅ |
 | `eurostat-crime-nuts3` | `CRIM_GEN_REG` | Crime / Police-recorded offences by NUTS3 | 4 (freq, iccs, unit, geo) | 436,118 | ✅ |
-| `eurostat-pop-nuts3` | `DEMO_R_D2JAN` | Demography / Population on 1 Jan | 5 (freq, unit, sex, age, geo) | 300,348 | ✅ |
+| `eurostat-pop-nuts3` | `DEMO_R_D2JAN` | Demography / Population on 1 Jan | 5 (freq, unit, sex, age, geo) | 5,911,164 | ✅ |
 | `eurostat-emp-nuts3` | `NAMA_10R_3EMPERS` | Economy / Employment by NACE | 5 (freq, unit, wstatus, nace_r2, geo) | 1,541,975 | ✅ |
 | `eurostat-pop-density-nuts3` | `DEMO_R_D3DENS` | Demography / Population density | 3 (freq, unit, geo) | 73,010 | ✅ |
 | `eurostat-demo-balance-nuts3` | `DEMO_R_GIND3` | Demography / Demographic balance | 3 (freq, indic_de, geo) | 608,088 | ✅ |

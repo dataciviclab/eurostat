@@ -358,6 +358,35 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS3",
         "other_unit_geo": "ITC4C",
     },
+    {
+        "slug": "eurostat_bd_hgnace2_r3_nuts3",
+        "benchmark_unit": "V11920",
+        # No unit dimension: benchmark slice is the indic_sb dim (V11920 =
+        # enterprise births) + nace_r2 all-sectors slice (B-S_X_K642).
+        "no_unit": True,
+        "dim": "indic_sb",
+        "dim_value": "V11920",
+        "dim2": "nace_r2",
+        "dim2_value": "B-S_X_K642",
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
+    {
+        "slug": "eurostat_pop_nuts3",
+        "benchmark_unit": "NR",
+        # Extra dimensions: sex + age, slice is T + TOTAL.
+        "dim": "age",
+        "dim_value": "TOTAL",
+        "dim2": "sex",
+        "dim2_value": "T",
+        # Single-unit: only NR exists.
+        "other_unit": "PC",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS3",
+        "other_unit_geo": "ITC4C",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -1901,6 +1930,62 @@ class TestBusinessDemographyNuts3Facts:
         assert n_bad == 0
 
 
+class TestBdHgnace2R3Nuts3Facts:
+    """Verified facts for eurostat-bd-hgnace2-r3-nuts3."""
+
+    def test_italy_rank2_births(self):
+        """Italy is 2nd of EU27 by enterprise births (2020)."""
+        f = _skip_if_missing("eurostat_bd_hgnace2_r3_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT nascite_imprese, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2020 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy ~302k enterprise births (country-level) — 2nd after FR
+        assert 250_000 <= row[0] <= 350_000
+        assert 1 <= row[1] <= 3
+
+    def test_sintesi_is_country_level(self):
+        """Sintesi births is the country-level value (not NUTS2 sum)."""
+        f = _skip_if_missing("eurostat_bd_hgnace2_r3_nuts3", "mart_sintesi")
+        births = duckdb.sql(
+            f"""
+            SELECT nascite_imprese FROM read_parquet('{f}')
+            WHERE year = 2020 AND country = 'IT'
+            """
+        ).fetchone()[0]
+        clean_f = (
+            "out/data/clean/eurostat_bd_hgnace2_r3_nuts3/2026/"
+            "eurostat_bd_hgnace2_r3_nuts3_2026_clean.parquet"
+        )
+        expected = duckdb.sql(
+            f"""
+            SELECT value FROM read_parquet('{clean_f}')
+            WHERE year = 2020 AND indic_sb = 'V11920'
+              AND nace_r2 = 'B-S_X_K642' AND nuts_level = 'country'
+              AND geo = 'IT'
+            """
+        ).fetchone()[0]
+        assert abs(births - expected) < 1
+
+    def test_aquila_recovery_cagr(self):
+        """L'Aquila (ITF11) shows the strongest births recovery (post-2009)."""
+        f = _skip_if_missing("eurostat_bd_hgnace2_r3_nuts3", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT first_year, last_year, cagr_pct
+            FROM read_parquet('{f}')
+            WHERE geo = 'ITF11' AND nuts_level = 'NUTS3'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[2] is not None
+        assert row[2] > 2.0  # top-tier recovery CAGR
+
+
 class TestSoilErosionNuts3Facts:
     """Verified facts for eurostat-soil-erosion-nuts3."""
 
@@ -2055,3 +2140,63 @@ class TestNrgChddr2MNuts3Facts:
             """
         ).fetchone()[0]
         assert n == 12
+
+
+class TestPopNuts3Facts:
+    """Verified facts for eurostat-pop-nuts3 (DEMO_R_D2JAN)."""
+
+    def test_italy_rank3_population(self):
+        """Italy is 3rd of EU27 by population (2024)."""
+        f = _skip_if_missing("eurostat_pop_nuts3", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT popolazione, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy ~58.97M inhabitants (country-level, verified == NUTS2 sum)
+        assert 58_000_000 <= row[0] <= 60_000_000
+        assert row[1] == 3  # after DE (83M) and FR (68M)
+
+    def test_sintesi_is_country_level(self):
+        """Sintesi population is the country-level value (not NUTS2 sum)."""
+        f = _skip_if_missing("eurostat_pop_nuts3", "mart_sintesi")
+        pop = duckdb.sql(
+            f"""
+            SELECT popolazione FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()[0]
+        clean_f = (
+            "out/data/clean/eurostat_pop_nuts3/2026/"
+            "eurostat_pop_nuts3_2026_clean.parquet"
+        )
+        expected = duckdb.sql(
+            f"""
+            SELECT value FROM read_parquet('{clean_f}')
+            WHERE year = 2024 AND unit = 'NR' AND sex = 'T'
+              AND age = 'TOTAL' AND nuts_level = 'country' AND geo = 'IT'
+            """
+        ).fetchone()[0]
+        assert abs(pop - expected) < 1
+
+    def test_basilicata_population_declining(self):
+        """Basilicata (ITF5) has the strongest population decline (1990-2025).
+
+        DEMO_R_D2JAN publishes NUTS2 as finest geo for the population slice
+        (no NUTS3 rows) — verified.
+        """
+        f = _skip_if_missing("eurostat_pop_nuts3", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT first_year, last_year, cagr_pct
+            FROM read_parquet('{f}')
+            WHERE geo = 'ITF5' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()
+        assert row is not None
+        # Basilicata lost residents over 35 years (southern depopulation)
+        assert row[2] is not None
+        assert row[2] < -0.3
