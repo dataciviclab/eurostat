@@ -10,8 +10,11 @@ readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 
-[tool.setuptools.packages.find]
-include = ["connectors*"]
+# Nessun package Python: il repo è dati + SQL + scripts (l'unico package,
+# connectors/, è stato rimosso). Esplicito per evitare il flat-layout
+# discovery di setuptools (datasets/registry/codelists come package).
+[tool.setuptools]
+packages = []
 
 [project.optional-dependencies]
 dev = [

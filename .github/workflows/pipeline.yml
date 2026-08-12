@@ -21,7 +21,6 @@ on:
     types: [closed]
     paths:
       - "datasets/**"
-      - "connectors/**"
   schedule:
     - cron: '0 6 1 * *'
   workflow_dispatch:
@@ -66,11 +65,11 @@ jobs:
           pip install git+https://github.com/dataciviclab/toolkit.git@v1.50.0
           pip install git+https://github.com/dataciviclab/lab-connectors.git
           pip install -e ".[pipeline]"
-          chmod +x connectors/*.py
 
       # ── Fetch latest codelists from Eurostat SDMX ────────────────────
-      # Tutti i clean.sql fanno join con codelists/*.csv (geo, unit, freq,
-      # flag, ...) e `toolkit registry build` produce registry.json da quei
+      # I clean.sql fanno join con codelists/geo.csv (gerarchia NUTS, non
+      # nel SDMX annotation set) e i support SDMX materializzano i parquet
+      # a run-time — geo va aggiornato prima di ogni run.
       # file — vanno aggiornati prima di ogni run (specialmente geo: gerarchia NUTS).
       - name: Update codelists
         run: python scripts/update_codelists.py
