@@ -33,6 +33,7 @@
 | `eurostat-fertility-nuts3` | `DEMO_R_FIND3` | Demography / Fertility indicators | 4 (freq, indic_de, unit, geo) | 76,392 | ✅ |
 | `eurostat-business-demography-nuts3` | `BD_SIZE_R3` | Business / Business demography by size class | 5 (freq, indic_sb, sizeclas, nace_r2, geo) | 120,955 | ✅ |
 | `eurostat-energy-poverty-nuts2` | `ILC_MDES01_R` | Social / Inability to keep home warm (energy poverty) | 3 (freq, unit, geo) | 1,840 | ✅ |
+| `eurostat-employment-sex-age-nuts2` | `LFST_R_LFE2EMPRT` | Labour / Employment rate by sex and age | 5 (freq, unit, sex, age, geo) | 497,664 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
