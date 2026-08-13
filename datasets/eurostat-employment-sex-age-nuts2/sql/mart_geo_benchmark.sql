@@ -16,7 +16,7 @@
 -- SCOPE: benchmark ONLY for EU27 countries (Greece = 'EL'). Non-EU rows
 -- keep media_eu/distanza as reference but percentile/rank are NULL.
 --
--- NOTE: value = population count.
+-- NOTE: value = employment rate (PC).
 
 WITH eu_countries AS (
     SELECT unnest(['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','EL',
@@ -35,8 +35,6 @@ base AS (
         country IN (SELECT code FROM eu_countries) AS is_eu,
         unit,
         unit_label_en,
-        age,
-        age_label_en,
         age,
         age_label_en,
         sex,
@@ -58,8 +56,6 @@ SELECT
     b.country,
     b.unit,
     b.unit_label_en,
-    b.age,
-    b.age_label_en,
     b.age,
     b.age_label_en,
     b.sex,
