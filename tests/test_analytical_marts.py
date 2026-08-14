@@ -396,6 +396,20 @@ ANALYTICAL_DATASETS = [
         "nuts_level": "NUTS2",
         "other_unit_geo": "ITC4",
     },
+    {
+        "slug": "eurostat_employment_sex_age_nuts2",
+        "benchmark_unit": "PC",
+        # Extra dimensions: sex + age, benchmark slice is T + Y15-64.
+        "dim": "sex",
+        "dim_value": "T",
+        "dim2": "age",
+        "dim2_value": "Y15-64",
+        # Single-unit dataset (PC only).
+        "other_unit": "NR",
+        "other_unit_is_absent": True,
+        "nuts_level": "NUTS2",
+        "other_unit_geo": "ITC4",
+    },
 ]
 
 # Year with widest coverage for cross-checks (same across datasets).
@@ -2260,4 +2274,74 @@ class TestEnergyPovertyNuts2Facts:
         ).fetchone()
         assert row is not None
         assert row[0] == 2021
+        assert row[1] == 2025
+
+
+class TestEmploymentSexAgeNuts2Facts:
+    """Verified facts for eurostat-employment-sex-age-nuts2 (LFST_R_LFE2EMPRT)."""
+
+    def test_italy_low_rank_employment(self):
+        """Italy ranks bottom-third of EU27 by working-age employment (2024)."""
+        f = _skip_if_missing("eurostat_employment_sex_age_nuts2", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT employment_rate_pct, rank_procapite_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        # Italy ~62.2% employment rate (Y15-64, total) — bottom EU27
+        assert 55.0 <= row[0] <= 70.0
+        assert 20 <= row[1] <= 27
+
+    def test_south_below_eu_average(self):
+        """Calabria (ITF6) employment is far below the EU27 average (2024)."""
+        f = _skip_if_missing("eurostat_employment_sex_age_nuts2", "mart_geo_benchmark")
+        calabria = duckdb.sql(
+            f"""
+            SELECT value, media_eu_value FROM read_parquet('{f}')
+            WHERE year = 2024 AND geo = 'ITF6' AND nuts_level = 'NUTS2'
+              AND sex = 'T' AND age = 'Y15-64'
+            """
+        ).fetchone()
+        assert calabria is not None
+        assert calabria[0] < 50  # Calabria ~44.8%
+        assert calabria[1] > 60  # EU27 avg ~71.6%
+        assert calabria[0] < calabria[1]
+
+    def test_gender_gap_italy(self):
+        """Italy gender gap in employment is large: M >> F (2024)."""
+        f = _skip_if_missing("eurostat_employment_sex_age_nuts2", "mart_geo_benchmark")
+        m = duckdb.sql(
+            f"""
+            SELECT AVG(value) FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT' AND nuts_level = 'NUTS2'
+              AND sex = 'M' AND age = 'Y15-64' AND value IS NOT NULL
+            """
+        ).fetchone()[0]
+        fem = duckdb.sql(
+            f"""
+            SELECT AVG(value) FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT' AND nuts_level = 'NUTS2'
+              AND sex = 'F' AND age = 'Y15-64' AND value IS NOT NULL
+            """
+        ).fetchone()[0]
+        assert m is not None and fem is not None
+        # ~71.4% vs ~54.8% — a 15+ point gap (one of the widest in EU27)
+        assert m > 65
+        assert fem < 60
+        assert m - fem > 15
+
+    def test_long_series_1999_2025(self):
+        """Trend spans the full available series (1999-2025)."""
+        f = _skip_if_missing("eurostat_employment_sex_age_nuts2", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT first_year, last_year FROM read_parquet('{f}')
+            WHERE geo = 'ITC4' AND nuts_level = 'NUTS2'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 1999
         assert row[1] == 2025

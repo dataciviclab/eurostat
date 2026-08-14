@@ -10,7 +10,7 @@ SQL-queryable.
 
 | | |
 |---|---|
-| **Published datasets** | **21 NUTS3 + 8 NUTS2** (29 total) |
+| **Published datasets** | **21 NUTS3 + 9 NUTS2** (30 total) |
 | **Period** | 1980 — 2025 (varies by dataset) |
 | **Coverage** | All EU + EFTA + candidate countries |
 | **Format** | Parquet on public GCS |

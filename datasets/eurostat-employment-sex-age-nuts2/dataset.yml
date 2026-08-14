@@ -1,0 +1,120 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_employment_sex_age_nuts2"
+  source_id: "eurostat"
+  tags: [welfare-lavoro, occupazione, genere, eta, eurostat, benchmark, nuts2]
+  category: economia
+  years: [2026]
+  time_coverage:
+    start_year: 1999
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_lfst_r_lfe2emprt"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "LFST_R_LFE2EMPRT"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+    # Tipi espliciti: DuckDB sniffa 'sex' (M/F/T) come BOOLEAN con
+    # auto_detect — qui i tipi sono dichiarati per evitare la conversione
+    # errata (l'opzione auto_detect=false richiederebbe comunque columns).
+    columns:
+      freq: VARCHAR
+      unit: VARCHAR
+      sex: VARCHAR
+      age: VARCHAR
+      geo: VARCHAR
+      year: INTEGER
+      value: DOUBLE
+      flag: VARCHAR
+  required_columns:
+    - freq
+    - unit
+    - sex
+    - age
+    - geo
+    - year
+    - freq_label_en
+    - unit_label_en
+    - sex_label_en
+    - age_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 100
+    # NOTE: `value` is NOT in not_null — Eurostat has legitimate coverage gaps.
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_geo_benchmark"
+      sql: "sql/mart_geo_benchmark.sql"
+    - name: "mart_sintesi"
+      sql: "sql/mart_sintesi.sql"
+    - name: "mart_trend"
+      sql: "sql/mart_trend.sql"
+  required_tables:
+    - "mart_geo_benchmark"
+    - "mart_sintesi"
+    - "mart_trend"
+  validate:
+    table_rules:
+      mart_geo_benchmark:
+        required_columns: [year, geo, geo_label_en, country, unit, value]
+        primary_key: [year, geo, unit, sex, age]
+        min_rows: 500
+      mart_sintesi:
+        required_columns: [year, country, employment_rate_pct, rank_procapite_eu]
+        primary_key: [year, country]
+        min_rows: 30
+      mart_trend:
+        required_columns: [geo, geo_label_en, first_year, last_year, cagr_pct]
+        primary_key: [geo]
+        min_rows: 100
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "LFST_R_LFE2EMPRT"
+  theme: "Employment rate by sex, age and NUTS 2 region"
+  nuts_level: 2
+  dimensions: ["freq", "sex", "unit", "age", "geo"]
+  description: "Employment rate by sex, age and NUTS 2 region"

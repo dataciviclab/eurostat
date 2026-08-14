@@ -38,6 +38,7 @@ SUBJECT_OWNER: dict[str, set[str]] = {
     },
     "early school leavers": {"eurostat-early-school-leavers-nuts2"},
     "employment": {"eurostat-emp-nuts3"},
+    "employment rate": {"eurostat-employment-sex-age-nuts2"},
     "fertility": {"eurostat-fertility-nuts3"},
     "gdp": {"eurostat-gdp-nuts3"},
     "gross value added": {"eurostat-gva-nuts3"},
