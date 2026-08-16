@@ -132,6 +132,5 @@ jobs:
         with:
           prefix: "eurostat"
           flat: "true"
-          toolkit-install: "pip install git+https://github.com/dataciviclab/toolkit.git@v1.50.0"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
