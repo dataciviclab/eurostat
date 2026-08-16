@@ -21,7 +21,7 @@ jobs:
       - uses: dataciviclab/.github/actions/python-setup@main
         with:
           python-version: ${{ matrix.python-version }}
-          extra-packages: git+https://github.com/dataciviclab/lab-connectors.git -e ".[dev,pipeline]"
+          extra-packages: -e ".[dev]"
 
       - uses: dataciviclab/.github/actions/python-ci@main
         with:

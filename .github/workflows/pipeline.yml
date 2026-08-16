@@ -50,7 +50,7 @@ jobs:
 
       - uses: dataciviclab/.github/actions/python-setup@main
         with:
-          extra-packages: git+https://github.com/dataciviclab/toolkit.git@v1.50.0 git+https://github.com/dataciviclab/lab-connectors.git -e ".[pipeline]"
+          extra-packages: -e ".[pipeline]"
 
       # ── Fetch latest codelists from Eurostat SDMX ────────────────────
       # I clean.sql fanno join con codelists/geo.csv (gerarchia NUTS, non
