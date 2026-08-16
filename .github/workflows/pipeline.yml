@@ -2,6 +2,7 @@
 #
 # Workflow unico post-merge + refresh. Fa tutto:
 #   1. run dei dataset (cambiati se PR merged, TUTTI se schedule/manuale)
+#      — toolkit usa gli anni dichiarati nel dataset.yml (nessun override)
 #   2. sync GCS (clean + mart)
 #   3. registry → PR draft (via reusable `registry-update-pr-reusable`)
 #
@@ -27,11 +28,6 @@ on:
         description: "Dataset slugs (comma-separated) o vuoto per tutti"
         required: false
         type: string
-      smoke:
-        description: "Smoke mode (--sample-rows 1000, skips GCS sync)"
-        required: false
-        default: false
-        type: boolean
 
 concurrency:
   group: eurostat-pipeline-${{ github.event.pull_request.number || github.ref || 'schedule' }}
@@ -94,27 +90,24 @@ jobs:
           fi
 
       # ── Run pipeline ─────────────────────────────────────────────────
+      # toolkit usa gli anni dichiarati nel dataset.yml (nessun --years).
       - name: Run datasets
         if: steps.detect.outputs.dirs != ''
-        env:
-          SMOKE: ${{ inputs.smoke && '--sample-rows 1000' || '' }}
         run: |
-          YEAR=$(date +%Y)
           for dir in ${{ steps.detect.outputs.dirs }}; do
             echo "=== $dir ==="
-            toolkit run -c "$dir/dataset.yml" --years $YEAR $SMOKE
+            toolkit run -c "$dir/dataset.yml"
           done
 
       # ── GCS auth + sync ─────────────────────────────────────────────
       - name: Auth GCP
         id: gcs
-        if: ${{ !inputs.smoke }}
         uses: dataciviclab/.github/actions/gcs-auth@main
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY_EUROSTAT }}
 
       - name: Sync to GCS
-        if: ${{ !inputs.smoke && steps.gcs.outputs.ready == 'true' && steps.detect.outputs.dirs != '' }}
+        if: steps.gcs.outputs.ready == 'true' && steps.detect.outputs.dirs != ''
         run: |
           for slug_dir in ${{ steps.detect.outputs.dirs }}; do
             slug=$(grep '^  name:' "$slug_dir/dataset.yml" | sed 's/.*: "//;s/"//')
@@ -132,9 +125,7 @@ jobs:
           done
 
   # ── Registry → draft PR (componente condiviso) ──────────────────────
-  # Escluso in smoke: il builder vedrebbe parquet sample (1000 righe).
   registry:
-    if: ${{ !inputs.smoke }}
     needs: pipeline
     uses: dataciviclab/.github/.github/workflows/registry-update-pr-reusable.yml@main
     with:
