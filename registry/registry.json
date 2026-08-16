@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repo": "eurostat",
   "source_repo": "dataciviclab/eurostat",
-  "updated_at": "2026-08-14",
+  "updated_at": "2026-08-16",
   "datasets": [
     {
       "slug": "eurostat_area_nuts3",
@@ -5380,7 +5380,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260808T120607Z_f2231a40",
+        "run_id": "20260816T165408Z_a0086ed7",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5396,11 +5396,11 @@
         "output_bytes": {
           "raw": 635846,
           "clean": 76018,
-          "mart": 130473
+          "mart": 130499
         },
-        "started_at": "2026-08-08T12:06:07.160936+00:00",
-        "finished_at": "2026-08-08T12:06:09.605294+00:00",
-        "duration_seconds": 2.444
+        "started_at": "2026-08-16T16:54:08.193275+00:00",
+        "finished_at": "2026-08-16T16:54:10.385063+00:00",
+        "duration_seconds": 2.192
       }
     },
     {
