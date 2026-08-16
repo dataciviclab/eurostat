@@ -1,17 +1,15 @@
 # Pipeline — eurostat
 #
-# Workflow unico post-merge + refresh (sostituisce publish.yml e
-# post-merge-registry.yml). Fa tutto:
+# Workflow unico post-merge + refresh. Fa tutto:
 #   1. run dei dataset (cambiati se PR merged, TUTTI se schedule/manuale)
 #   2. sync GCS (clean + mart)
-#   3. `toolkit registry build --prefix eurostat --flat --write`
-#   4. PR draft "chore(post-merge): aggiorna registry" se diff (pattern DI)
+#   3. registry → PR draft (via reusable `registry-update-pr-reusable`)
 #
 # Triggers:
-#   - pull_request closed (merged) su datasets/** → run + sync + registry dei
-#     dataset cambiati
-#   - schedule mensile (1° del mese 06:00 UTC) → run completo + sync + registry
-#     (refresh dati Eurostat anche senza PR — il ruolo che era del publish)
+#   - pull_request closed (merged) su datasets/** → run + sync dei dataset
+#     cambiati
+#   - schedule mensile (1° del mese 06:00 UTC) → run completo + sync
+#     (refresh dati Eurostat anche senza PR)
 #   - workflow_dispatch → manuale, slug opzionale
 
 name: Pipeline
@@ -39,16 +37,12 @@ concurrency:
   group: eurostat-pipeline-${{ github.event.pull_request.number || github.ref || 'schedule' }}
   cancel-in-progress: false
 
-env:
-  TOOLKIT_ALLOW_SCRIPT_SOURCE: "1"
-
 jobs:
   pipeline:
     if: github.event.pull_request.merged == true || github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
 
     steps:
       - uses: actions/checkout@v7
@@ -56,21 +50,14 @@ jobs:
           ref: ${{ github.event.pull_request.merge_commit_sha || github.ref }}
           fetch-depth: 0
 
-      - uses: actions/setup-python@v7
+      - uses: dataciviclab/.github/actions/python-setup@main
         with:
-          python-version: "3.12"
-
-      - name: Install dependencies
-        run: |
-          pip install git+https://github.com/dataciviclab/toolkit.git@v1.50.0
-          pip install git+https://github.com/dataciviclab/lab-connectors.git
-          pip install -e ".[pipeline]"
+          extra-packages: git+https://github.com/dataciviclab/toolkit.git@v1.50.0 git+https://github.com/dataciviclab/lab-connectors.git -e ".[pipeline]"
 
       # ── Fetch latest codelists from Eurostat SDMX ────────────────────
       # I clean.sql fanno join con codelists/geo.csv (gerarchia NUTS, non
       # nel SDMX annotation set) e i support SDMX materializzano i parquet
       # a run-time — geo va aggiornato prima di ogni run.
-      # file — vanno aggiornati prima di ogni run (specialmente geo: gerarchia NUTS).
       - name: Update codelists
         run: python scripts/update_codelists.py
 
@@ -118,27 +105,14 @@ jobs:
             toolkit run -c "$dir/dataset.yml" --years $YEAR $SMOKE
           done
 
-      # ── GCS auth ─────────────────────────────────────────────────────
+      # ── GCS auth + sync ─────────────────────────────────────────────
       - name: Auth GCP
         id: gcs
         if: ${{ !inputs.smoke }}
+        uses: dataciviclab/.github/actions/gcs-auth@main
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY_EUROSTAT }}
-        run: |
-          if [ -z "$GCP_SA_KEY" ]; then
-            echo "❌ GCP_SA_KEY_EUROSTAT secret non configurato — skip GCS sync"
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          if echo "$GCP_SA_KEY" | python3 -c "import json,sys; json.load(sys.stdin)" 2>/dev/null; then
-            printf '%s\n' "$GCP_SA_KEY" > /tmp/gcp-key.json
-          else
-            printf '%s\n' "$GCP_SA_KEY" | base64 -d > /tmp/gcp-key.json 2>/dev/null
-          fi
-          gcloud auth activate-service-account --key-file=/tmp/gcp-key.json
-          echo "ready=true" >> "$GITHUB_OUTPUT"
 
-      # ── Sync to GCS ──────────────────────────────────────────────────
       - name: Sync to GCS
         if: ${{ !inputs.smoke && steps.gcs.outputs.ready == 'true' && steps.detect.outputs.dirs != '' }}
         run: |
@@ -157,51 +131,13 @@ jobs:
             echo "✅ $slug mart synced"
           done
 
-      # ── Registry ─────────────────────────────────────────────────────
-      # Escluso in smoke: il builder vedrebbe parquet sample (1000 righe)
-      # e produrrebbe un catalog basato su dati parziali.
-      - name: Build registry
-        if: ${{ !inputs.smoke && steps.detect.outputs.dirs != '' }}
-        run: toolkit registry build --prefix eurostat --flat --write
-
-      - name: Check registry diff
-        if: ${{ !inputs.smoke }}
-        id: diff
-        run: |
-          # registry/ è untracked su main (generato dal builder) —
-          # git diff ignora gli untracked, quindi usiamo git status.
-          if git status --porcelain -- registry/ | grep -q .; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      # ── PR draft registry (pattern DI) ───────────────────────────────
-      - name: Create draft registry PR
-        if: ${{ !inputs.smoke && steps.diff.outputs.changed == 'true' }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.pull_request.number || 'schedule' }}
-        run: |
-          BRANCH="post-merge-registry/${PR_NUMBER}-registry"
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -B "$BRANCH"
-          git add registry/
-          git commit -m "chore(post-merge): aggiorna registry ($PR_NUMBER)" || exit 0
-          git push --force-with-lease -u origin "$BRANCH"
-          EXISTING_PR=$(gh pr list --head "$BRANCH" --json number --jq '.[0].number // empty')
-          if [ -n "$EXISTING_PR" ]; then
-            gh pr edit "$EXISTING_PR" \
-              --title "chore(post-merge): aggiorna registry ($PR_NUMBER)" \
-              --body "Registry artifacts updated after pipeline run." \
-              --add-label post-merge
-          else
-            gh pr create \
-              --base main \
-              --head "$BRANCH" \
-              --title "chore(post-merge): aggiorna registry ($PR_NUMBER)" \
-              --body "Registry artifacts updated after pipeline run." \
-              --label post-merge \
-              --draft
-          fi
+  # ── Registry → draft PR (componente condiviso) ──────────────────────
+  # Escluso in smoke: il builder vedrebbe parquet sample (1000 righe).
+  registry:
+    if: ${{ !inputs.smoke }}
+    needs: pipeline
+    uses: dataciviclab/.github/.github/workflows/registry-update-pr-reusable.yml@main
+    with:
+      prefix: "eurostat"
+      flat: true
+      toolkit-install: "pip install git+https://github.com/dataciviclab/toolkit.git@v1.50.0"
