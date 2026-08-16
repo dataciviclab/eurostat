@@ -38,7 +38,8 @@ jobs:
     if: github.event.pull_request.merged == true || github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v7
@@ -123,11 +124,14 @@ jobs:
             echo "✅ $slug mart synced"
           done
 
-  # ── Registry → draft PR (componente condiviso) ──────────────────────
-  registry:
-    needs: pipeline
-    uses: dataciviclab/.github/.github/workflows/registry-update-pr-reusable.yml@main
-    with:
-      prefix: "eurostat"
-      flat: true
-      toolkit-install: "pip install git+https://github.com/dataciviclab/toolkit.git@v1.50.0"
+      # ── Registry → draft PR (componente condiviso) ──────────────────
+      # Nello STESSO job del run: il registry deriva le entry dai parquet
+      # locali in out/ (in un job separato produrrebbe un catalogo vuoto).
+      - name: Registry update PR
+        uses: dataciviclab/.github/actions/registry-update-pr@main
+        with:
+          prefix: "eurostat"
+          flat: "true"
+          toolkit-install: "pip install git+https://github.com/dataciviclab/toolkit.git@v1.50.0"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
