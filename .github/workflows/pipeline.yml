@@ -4,7 +4,8 @@
 #   1. run dei dataset (cambiati se PR merged, TUTTI se schedule/manuale)
 #      — toolkit usa gli anni dichiarati nel dataset.yml (nessun override)
 #   2. sync GCS (clean + mart)
-#   3. registry → PR draft (via reusable `registry-update-pr-reusable`)
+#   3. registry → PR draft (composite action `registry-update-pr`, nello
+#      stesso job del run — il registry deriva le entry dai parquet locali)
 #
 # Triggers:
 #   - pull_request closed (merged) su datasets/** → run + sync dei dataset
