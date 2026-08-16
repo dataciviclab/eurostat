@@ -10,6 +10,13 @@ readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 
+# duckdb: dipendenza runtime (usata dai test SQL e dal motore). toolkit non è
+# importato (CLI esterno) → vive nell'extra `pipeline`; lab-connectors arriva
+# transitivamente da toolkit (non si dichiara).
+dependencies = [
+    "duckdb>=1.5.3,<2",
+]
+
 # Nessun package Python: il repo è dati + SQL + scripts (l'unico package,
 # connectors/, è stato rimosso). Esplicito per evitare il flat-layout
 # discovery di setuptools (datasets/registry/codelists come package).
@@ -23,7 +30,7 @@ dev = [
     "ruff>=0.5",
 ]
 pipeline = [
-    "duckdb>=1.5.3,<2",
+    "dataciviclab-toolkit @ git+https://github.com/dataciviclab/toolkit.git@v1.50.0",
 ]
 
 [project.urls]

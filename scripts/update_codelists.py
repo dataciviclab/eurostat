@@ -17,10 +17,10 @@ datasets, so codelists are always fresh on GCS pushes.
 from __future__ import annotations
 
 import csv
-import urllib.request
-import json
 from pathlib import Path
 from typing import Any
+
+from lab_connectors.http import HttpClient
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CODELISTS_DIR = REPO_ROOT / "codelists"
@@ -33,9 +33,11 @@ TIMEOUT = 30
 
 def _fetch_raw(url: str) -> dict[str, Any]:
     """Fetch a URL and return parsed JSON."""
-    req = urllib.request.Request(url)
-    resp = urllib.request.urlopen(req, timeout=TIMEOUT)
-    return json.loads(resp.read())  # type: ignore[no-any-return]
+    with HttpClient(timeout=TIMEOUT) as client:
+        result = client.get(url)
+        if not result.is_ok or result.response is None:
+            raise RuntimeError(f"GET {url} failed: {result.err}")
+        return result.response.json()
 
 
 def _write_csv(filename: str, header: list[str], rows: list[tuple]) -> Path:
