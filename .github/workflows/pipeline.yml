@@ -34,6 +34,10 @@ concurrency:
   group: eurostat-pipeline-${{ github.event.pull_request.number || github.ref || 'schedule' }}
   cancel-in-progress: false
 
+env:
+  GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
 jobs:
   pipeline:
     if: github.event.pull_request.merged == true || github.event_name != 'pull_request'
@@ -99,27 +103,28 @@ jobs:
 
       # ── GCS auth + sync ─────────────────────────────────────────────
       # WIF: google-github-actions/auth@v3 scambia il token OIDC con le
-      # credenziali GCP; setup-gcloud rende gsutil/gcloud disponibili.
-      - name: Auth GCP (WIF)
-        if: steps.detect.outputs.count != '0'
+      # credenziali GCP; setup-gcloud rende gsutil disponibile.
+      # Pattern identico a dataset-incubator (testato e funzionante).
+      - name: GCP Auth (for GCS push)
+        if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && env.GCP_SERVICE_ACCOUNT != '' && steps.detect.outputs.count != '0'
         uses: google-github-actions/auth@v3
         with:
-          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          workload_identity_provider: ${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
 
-      - name: Setup gcloud
-        if: steps.detect.outputs.count != '0'
+      - name: Set up gcloud
+        if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && env.GCP_SERVICE_ACCOUNT != '' && steps.detect.outputs.count != '0'
         uses: google-github-actions/setup-gcloud@v3
 
       - name: Sync to GCS
-        if: steps.detect.outputs.count != '0'
+        if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && steps.detect.outputs.count != '0'
         run: |
           for slug_dir in out/data/clean/*/; do
             [ -d "$slug_dir" ] || continue
             slug=$(basename "$slug_dir")
             year=$(ls "$slug_dir" 2>/dev/null | sort -rn | head -1)
             [ -z "$year" ] && echo "⚠️  No clean output for $slug" && continue
-            gcloud storage rsync -r "${slug_dir}${year}/" "gs://dataciviclab-clean/eurostat/$slug/"
+            gsutil -m rsync -r "${slug_dir}${year}/" "gs://dataciviclab-clean/eurostat/$slug/"
             echo "✅ $slug clean synced"
           done
           for slug_dir in out/data/mart/*/; do
@@ -127,7 +132,7 @@ jobs:
             slug=$(basename "$slug_dir")
             year=$(ls "$slug_dir" 2>/dev/null | sort -rn | head -1)
             [ -z "$year" ] && echo "⚠️  No mart output for $slug" && continue
-            gcloud storage rsync -r "${slug_dir}${year}/" "gs://dataciviclab-mart/eurostat/$slug/"
+            gsutil -m rsync -r "${slug_dir}${year}/" "gs://dataciviclab-mart/eurostat/$slug/"
             echo "✅ $slug mart synced"
           done
 
