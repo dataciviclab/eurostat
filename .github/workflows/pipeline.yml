@@ -34,6 +34,10 @@ concurrency:
   group: eurostat-pipeline-${{ github.event.pull_request.number || github.ref || 'schedule' }}
   cancel-in-progress: false
 
+env:
+  GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
 jobs:
   pipeline:
     if: github.event.pull_request.merged == true || github.event_name != 'pull_request'
@@ -41,6 +45,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      id-token: write
 
     steps:
       - uses: actions/checkout@v7
@@ -85,7 +90,7 @@ jobs:
           fi
           # Filtra solo config esistenti
           while IFS= read -r line; do
-            [ -f "$line" ] || sed -i "\|^$line\$|d" batch.txt
+            [ -f "$line" ] || sed -i "\|^$line$|d" batch.txt
           done < batch.txt
           echo "count=$(wc -l < batch.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
 
@@ -97,16 +102,21 @@ jobs:
         run: toolkit run --batch batch.txt
 
       # ── GCS auth + sync ─────────────────────────────────────────────
-      # Il sync itera le directory di output: solo ciò che è stato prodotto
-      # (niente parsing dei config per estrarre lo slug).
-      - name: Auth GCP
-        id: gcs
-        uses: dataciviclab/.github/actions/gcs-auth@main
-        env:
-          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY_EUROSTAT }}
+      # WIF: google-github-actions/auth@v3 + setup-gcloud@v3
+      # Pattern identico a dataset-incubator (testato e funzionante).
+      - name: GCP Auth (for GCS push)
+        if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && env.GCP_SERVICE_ACCOUNT != '' && steps.detect.outputs.count != '0'
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+
+      - name: Set up gcloud
+        if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && env.GCP_SERVICE_ACCOUNT != '' && steps.detect.outputs.count != '0'
+        uses: google-github-actions/setup-gcloud@v3
 
       - name: Sync to GCS
-        if: steps.gcs.outputs.ready == 'true' && steps.detect.outputs.count != '0'
+        if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && steps.detect.outputs.count != '0'
         run: |
           for slug_dir in out/data/clean/*/; do
             [ -d "$slug_dir" ] || continue
