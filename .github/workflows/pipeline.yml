@@ -58,10 +58,14 @@ jobs:
           extra-packages: -e ".[pipeline]"
 
       # ── Fetch latest codelists from Eurostat SDMX ────────────────────
+      # I clean.sql fanno join con codelists/geo.csv (gerarchia NUTS, non
+      # nel SDMX annotation set) e i support SDMX materializzano i parquet
+      # a run-time — geo va aggiornato prima di ogni run.
       - name: Update codelists
         run: python scripts/update_codelists.py
 
       # ── Determinare i dataset da processare ─────────────────────────
+      # Produce batch.txt (lista di dataset.yml) per `toolkit run --batch`.
       - name: Detect datasets to run
         id: detect
         env:
@@ -71,26 +75,35 @@ jobs:
           EVENT: ${{ github.event_name }}
         run: |
           if [ "$EVENT" = "pull_request" ]; then
+            # PR merged: solo i dataset cambiati
             gh pr view "$PR_NUMBER" --json files --jq ".files[].path" | \
               grep '^datasets/' | cut -d/ -f2 | sort -u | \
               sed 's#^#datasets/#' | sed 's#$#/dataset.yml#' > batch.txt
           elif [ -n "$INPUT_DATASETS" ]; then
+            # Manuale con slug espliciti — accetta sia trattini (cartella)
+            # sia underscore (dataset.name, come nel registry/catalogo).
             echo "$INPUT_DATASETS" | tr ',' '\n' | sed 's/_/-/g' | \
               sed 's#^#datasets/#' | sed 's#$#/dataset.yml#' > batch.txt
           else
+            # Schedule/manuale senza slug: tutti
             find datasets -maxdepth 2 -name dataset.yml | sort > batch.txt
           fi
+          # Filtra solo config esistenti
           while IFS= read -r line; do
             [ -f "$line" ] || sed -i "\|^$line$|d" batch.txt
           done < batch.txt
           echo "count=$(wc -l < batch.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
 
       # ── Run pipeline ─────────────────────────────────────────────────
+      # `toolkit run --batch` esegue i dataset in sequenza usando gli anni
+      # dichiarati nel dataset.yml e fallisce se uno fallisce.
       - name: Run datasets
         if: steps.detect.outputs.count != '0'
         run: toolkit run --batch batch.txt
 
-      # ── GCS auth ─────────────────────────────────────────────────────
+      # ── GCS auth + sync ─────────────────────────────────────────────
+      # WIF: google-github-actions/auth@v3 + setup-gcloud@v3
+      # Pattern identico a dataset-incubator (testato e funzionante).
       - name: GCP Auth (for GCS push)
         if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && env.GCP_SERVICE_ACCOUNT != '' && steps.detect.outputs.count != '0'
         uses: google-github-actions/auth@v3
@@ -102,24 +115,6 @@ jobs:
         if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && env.GCP_SERVICE_ACCOUNT != '' && steps.detect.outputs.count != '0'
         uses: google-github-actions/setup-gcloud@v3
 
-      # ── Diagnostic ───────────────────────────────────────────────────
-      - name: Debug GCS auth
-        if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && steps.detect.outputs.count != '0'
-        run: |
-          echo "=== Active account ==="
-          gcloud auth list
-          echo ""
-          echo "=== Credential file ==="
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS"
-          cat "$GOOGLE_APPLICATION_CREDENTIALS" 2>/dev/null | python3 -c "import json,sys; d=json.load(sys.stdin); print(f'type: {d.get(\"type\")}, client_email: {d.get(\"client_email\",\"N/A\")}')" 2>/dev/null || echo "Cannot read creds"
-          echo ""
-          echo "=== Test: gsutil ls (read) ==="
-          gsutil ls gs://dataciviclab-clean/ 2>&1 | head -3
-          echo ""
-          echo "=== Test: gcloud storage ls (read) ==="
-          gcloud storage ls gs://dataciviclab-clean/ 2>&1 | head -3
-
-      # ── Sync to GCS ──────────────────────────────────────────────────
       - name: Sync to GCS
         if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && steps.detect.outputs.count != '0'
         run: |
@@ -140,7 +135,9 @@ jobs:
             echo "✅ $slug mart synced"
           done
 
-      # ── Registry → draft PR ──────────────────────────────────────────
+      # ── Registry → draft PR (componente condiviso) ──────────────────
+      # Nello STESSO job del run: il registry deriva le entry dai parquet
+      # locali in out/ (in un job separato produrrebbe un catalogo vuoto).
       - name: Registry update PR
         uses: dataciviclab/.github/actions/registry-update-pr@main
         with:
