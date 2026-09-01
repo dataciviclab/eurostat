@@ -14,7 +14,7 @@ dataset:
 raw:
   output_policy: overwrite
   sources:
-    - name: "eurostat_demo_r_pjangrp3"
+    - name: "eurostat_demo_r_magec3"
       type: "sdmx"
       args:
         agency: "ESTAT"
