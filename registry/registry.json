@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repo": "eurostat",
   "source_repo": "dataciviclab/eurostat",
-  "updated_at": "2026-09-01",
+  "updated_at": "2026-09-06",
   "datasets": [
     {
       "slug": "eurostat_area_nuts3",
@@ -1886,6 +1886,137 @@
       ]
     },
     {
+      "slug": "eurostat_gfcf_nuts2",
+      "name": "Eurostat Gfcf Nuts2",
+      "description": "Gross fixed capital formation (investimenti fissi lordi) by NUTS 2 region",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2000,
+        "end": 2024
+      },
+      "tags": [
+        "economia",
+        "gfcf",
+        "investimenti",
+        "eurostat",
+        "benchmark",
+        "nuts2"
+      ],
+      "category": "economia",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sector",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "currency",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nace_r2",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "BIGINT",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nace_r2_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_gfcf_nuts2/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_gfcf_nuts2__mart_geo_benchmark",
+        "eurostat_gfcf_nuts2__mart_sintesi"
+      ]
+    },
+    {
       "slug": "eurostat_gva_nuts3",
       "name": "Eurostat Gva Nuts3",
       "description": "Gross Value Added by NUTS 3 region and NACE sector",
@@ -2386,6 +2517,278 @@
         "eurostat_labour_productivity_nuts3__mart_geo_benchmark",
         "eurostat_labour_productivity_nuts3__mart_sintesi",
         "eurostat_labour_productivity_nuts3__mart_trend"
+      ]
+    },
+    {
+      "slug": "eurostat_nama10_gdp",
+      "name": "Eurostat Nama10 Gdp",
+      "description": "GDP and main components by expenditure approach (national level)",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 1975,
+        "end": 2025
+      },
+      "tags": [
+        "economia",
+        "pil",
+        "gdp",
+        "domanda",
+        "eurostat",
+        "nazionale"
+      ],
+      "category": "economia",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "na_item",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "BIGINT",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "na_item_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_nama10_gdp/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_nama10_gdp__mart_expenditure"
+      ]
+    },
+    {
+      "slug": "eurostat_namq10_gdp",
+      "name": "Eurostat Namq10 Gdp",
+      "description": "Quarterly GDP by NUTS 2 region",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 1995,
+        "end": 2026
+      },
+      "tags": [
+        "economia",
+        "pil",
+        "gdp",
+        "trimestrale",
+        "eurostat",
+        "nuts2"
+      ],
+      "category": "economia",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "s_adj",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "na_item",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "quarter",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "na_item_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_namq10_gdp/",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_namq10_gdp__mart_quarterly"
       ]
     },
     {
@@ -4418,6 +4821,26 @@
       }
     },
     {
+      "slug": "eurostat_gfcf_nuts2__mart_geo_benchmark",
+      "dataset": "eurostat_gfcf_nuts2",
+      "table": "mart_geo_benchmark",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gfcf_nuts2/mart_geo_benchmark.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_gfcf_nuts2__mart_sintesi",
+      "dataset": "eurostat_gfcf_nuts2",
+      "table": "mart_sintesi",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gfcf_nuts2/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
       "slug": "eurostat_gva_nuts3__mart_geo_benchmark",
       "dataset": "eurostat_gva_nuts3",
       "table": "mart_geo_benchmark",
@@ -4534,6 +4957,26 @@
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/eurostat/eurostat_labour_productivity_nuts3/mart_trend.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_nama10_gdp__mart_expenditure",
+      "dataset": "eurostat_nama10_gdp",
+      "table": "mart_expenditure",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_nama10_gdp/mart_expenditure.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_namq10_gdp__mart_quarterly",
+      "dataset": "eurostat_namq10_gdp",
+      "table": "mart_quarterly",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_namq10_gdp/mart_quarterly.parquet",
         "multi_file": false
       }
     },
@@ -5334,6 +5777,37 @@
       }
     },
     {
+      "id": "eurostat_gfcf_nuts2",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_gfcf_nuts2",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20260906T140647Z_30bd7e61",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 311800,
+          "clean": 311800,
+          "mart": 11050
+        },
+        "output_bytes": {
+          "raw": 10813493,
+          "clean": 1455267,
+          "mart": 128950
+        },
+        "started_at": "2026-09-06T14:06:47.462536+00:00",
+        "finished_at": "2026-09-06T14:06:55.229697+00:00",
+        "duration_seconds": 7.767
+      }
+    },
+    {
       "id": "eurostat_gva_nuts3",
       "source_id": "eurostat",
       "status": "ok",
@@ -5486,6 +5960,68 @@
         "started_at": "2026-09-01T20:32:24.335390+00:00",
         "finished_at": "2026-09-01T20:32:27.243337+00:00",
         "duration_seconds": 2.908
+      }
+    },
+    {
+      "id": "eurostat_nama10_gdp",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_nama10_gdp",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20260906T140655Z_9fb312c8",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 1804533,
+          "clean": 1804533,
+          "mart": 6018
+        },
+        "output_bytes": {
+          "raw": 60134786,
+          "clean": 9818340,
+          "mart": 116951
+        },
+        "started_at": "2026-09-06T14:06:55.645263+00:00",
+        "finished_at": "2026-09-06T14:07:36.118732+00:00",
+        "duration_seconds": 40.473
+      }
+    },
+    {
+      "id": "eurostat_namq10_gdp",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_namq10_gdp",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20260906T140736Z_8bc6f8c7",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 12698464,
+          "clean": 12698464,
+          "mart": 27936
+        },
+        "output_bytes": {
+          "raw": 499623915,
+          "clean": 43911246,
+          "mart": 24979
+        },
+        "started_at": "2026-09-06T14:07:36.194095+00:00",
+        "finished_at": "2026-09-06T14:12:19.803335+00:00",
+        "duration_seconds": 283.609
       }
     },
     {
@@ -5939,6 +6475,12 @@
             "semantic_type": "country_code"
           },
           {
+            "slug": "eurostat_gfcf_nuts2",
+            "name": "Eurostat Gfcf Nuts2",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
             "slug": "eurostat_gva_nuts3",
             "name": "Eurostat Gva Nuts3",
             "column": "country",
@@ -5959,6 +6501,18 @@
           {
             "slug": "eurostat_labour_productivity_nuts3",
             "name": "Eurostat Labour Productivity Nuts3",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_nama10_gdp",
+            "name": "Eurostat Nama10 Gdp",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_namq10_gdp",
+            "name": "Eurostat Namq10 Gdp",
             "column": "country",
             "semantic_type": "country_code"
           },
@@ -6036,7 +6590,7 @@
           }
         ],
         "types": {
-          "country_code": 30
+          "country_code": 33
         }
       },
       "Provincia (tramite NUTS3)": {
@@ -6128,6 +6682,12 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_gfcf_nuts2",
+            "name": "Eurostat Gfcf Nuts2",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_gva_nuts3",
             "name": "Eurostat Gva Nuts3",
             "column": "geo",
@@ -6148,6 +6708,18 @@
           {
             "slug": "eurostat_labour_productivity_nuts3",
             "name": "Eurostat Labour Productivity Nuts3",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_nama10_gdp",
+            "name": "Eurostat Nama10 Gdp",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_namq10_gdp",
+            "name": "Eurostat Namq10 Gdp",
             "column": "geo",
             "semantic_type": "nuts_code"
           },
@@ -6225,7 +6797,7 @@
           }
         ],
         "types": {
-          "nuts_code": 30
+          "nuts_code": 33
         }
       },
       "Tempo": {
@@ -6317,6 +6889,12 @@
             "semantic_type": "year"
           },
           {
+            "slug": "eurostat_gfcf_nuts2",
+            "name": "Eurostat Gfcf Nuts2",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
             "slug": "eurostat_gva_nuts3",
             "name": "Eurostat Gva Nuts3",
             "column": "year",
@@ -6337,6 +6915,18 @@
           {
             "slug": "eurostat_labour_productivity_nuts3",
             "name": "Eurostat Labour Productivity Nuts3",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_nama10_gdp",
+            "name": "Eurostat Nama10 Gdp",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_namq10_gdp",
+            "name": "Eurostat Namq10 Gdp",
             "column": "year",
             "semantic_type": "year"
           },
@@ -6420,7 +7010,7 @@
           }
         ],
         "types": {
-          "year": 30,
+          "year": 33,
           "month": 1
         }
       }
