@@ -85,8 +85,8 @@ mart:
   validate:
     table_rules:
       mart_expenditure:
-        required_columns: [year, country, na_item, na_item_label_en, value]
-        primary_key: [year, country, na_item]
+        required_columns: [year, country, unit, pil, export, import]
+        primary_key: [year, country, unit]
         min_rows: 1000
 
 validation:
