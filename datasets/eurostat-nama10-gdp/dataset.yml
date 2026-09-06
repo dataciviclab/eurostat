@@ -1,0 +1,100 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_nama10_gdp"
+  source_id: "eurostat"
+  tags: [economia, pil, gdp, domanda, eurostat, nazionale]
+  category: economia
+  description: "GDP and main components by expenditure approach (national level)"
+  years: [2026]
+  time_coverage:
+    start_year: 1975
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_nama_10_gdp"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "NAMA_10_GDP"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: na_item
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: NA_ITEM
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  required_columns:
+    - freq
+    - unit
+    - na_item
+    - geo
+    - year
+    - freq_label_en
+    - unit_label_en
+    - na_item_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 1000
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_expenditure"
+      sql: "sql/mart_expenditure.sql"
+  required_tables:
+    - "mart_expenditure"
+  validate:
+    table_rules:
+      mart_expenditure:
+        required_columns: [year, country, na_item, na_item_label_en, value]
+        primary_key: [year, country, na_item]
+        min_rows: 1000
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "NAMA_10_GDP"
+  theme: "Economy / GDP expenditure"
+  nuts_level: 0
+  dimensions: ["freq", "unit", "na_item", "geo"]
+  description: "GDP and main components by expenditure approach"

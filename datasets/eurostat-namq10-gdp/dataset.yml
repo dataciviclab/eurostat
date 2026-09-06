@@ -1,0 +1,102 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_namq10_gdp"
+  source_id: "eurostat"
+  tags: [economia, pil, gdp, trimestrale, eurostat, nuts2]
+  category: economia
+  description: "Quarterly GDP by NUTS 2 region"
+  years: [2026]
+  time_coverage:
+    start_year: 1995
+    end_year: 2026
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_namq_10_gdp"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "NAMQ_10_GDP"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: na_item
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: NA_ITEM
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  required_columns:
+    - freq
+    - unit
+    - s_adj
+    - na_item
+    - geo
+    - year
+    - quarter
+    - freq_label_en
+    - unit_label_en
+    - na_item_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 10000
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_quarterly"
+      sql: "sql/mart_quarterly.sql"
+  required_tables:
+    - "mart_quarterly"
+  validate:
+    table_rules:
+      mart_quarterly:
+        required_columns: [year, quarter, country, geo, na_item, value]
+        primary_key: [year, quarter, country, geo, na_item]
+        min_rows: 5000
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "NAMQ_10_GDP"
+  theme: "Economy / GDP quarterly"
+  nuts_level: 2
+  dimensions: ["freq", "unit", "s_adj", "na_item", "geo"]
+  description: "Quarterly GDP by NUTS 2 region"

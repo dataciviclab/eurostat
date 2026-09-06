@@ -1,0 +1,105 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_gfcf_nuts2"
+  source_id: "eurostat"
+  tags: [economia, gfcf, investimenti, eurostat, benchmark, nuts2]
+  category: economia
+  description: "Gross fixed capital formation (investimenti fissi lordi) by NUTS 2 region"
+  years: [2026]
+  time_coverage:
+    start_year: 2000
+    end_year: 2024
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_nama_10r_2gfcf"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "NAMA_10R_2GFCF"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+  - name: nace_r2
+    type: file
+    path: "../../codelists/nace_r2.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  required_columns:
+    - freq
+    - sector
+    - currency
+    - nace_r2
+    - geo
+    - year
+    - freq_label_en
+    - nace_r2_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 100
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_geo_benchmark"
+      sql: "sql/mart_geo_benchmark.sql"
+    - name: "mart_sintesi"
+      sql: "sql/mart_sintesi.sql"
+  required_tables:
+    - "mart_geo_benchmark"
+    - "mart_sintesi"
+  validate:
+    table_rules:
+      mart_geo_benchmark:
+        required_columns: [year, geo, geo_label_en, country, value, media_eu_value]
+        primary_key: [year, geo]
+        min_rows: 1000
+      mart_sintesi:
+        required_columns: [year, country, gfcf_totale_mio, rank_totale_eu]
+        primary_key: [year, country]
+        min_rows: 30
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "NAMA_10R_2GFCF"
+  theme: "Economy / Investment"
+  nuts_level: 2
+  dimensions: ["freq", "unit", "geo"]
+  description: "Gross fixed capital formation by NUTS 2 region"
