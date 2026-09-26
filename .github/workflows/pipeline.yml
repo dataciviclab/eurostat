@@ -1,19 +1,3 @@
-# Pipeline — eurostat
-#
-# Workflow unico post-merge + refresh. Fa tutto:
-#   1. run dei dataset (cambiati se PR merged, TUTTI se schedule/manuale)
-#      — toolkit usa gli anni dichiarati nel dataset.yml (nessun override)
-#   2. sync GCS (clean + mart)
-#   3. registry → PR draft (composite action `registry-update-pr`, nello
-#      stesso job del run — il registry deriva le entry dai parquet locali)
-#
-# Triggers:
-#   - pull_request closed (merged) su datasets/** → run + sync dei dataset
-#     cambiati
-#   - schedule mensile (1° del mese 06:00 UTC) → run completo + sync
-#     (refresh dati Eurostat anche senza PR)
-#   - workflow_dispatch → manuale, slug opzionale
-
 name: Pipeline
 
 on:
@@ -22,126 +6,20 @@ on:
     paths:
       - "datasets/**"
   schedule:
-    - cron: '0 6 1 * *'
+    - cron: "0 6 1 * *"
   workflow_dispatch:
-    inputs:
-      datasets:
-        description: "Dataset slugs (comma-separated) o vuoto per tutti"
-        required: false
-        type: string
 
 concurrency:
   group: eurostat-pipeline-${{ github.event.pull_request.number || github.ref || 'schedule' }}
   cancel-in-progress: false
 
-env:
-  GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-
 jobs:
   pipeline:
     if: github.event.pull_request.merged == true || github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      id-token: write
-
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: ${{ github.event.pull_request.merge_commit_sha || github.ref }}
-          fetch-depth: 0
-
-      - uses: dataciviclab/.github/actions/python-setup@main
-        with:
-          extra-packages: -e ".[pipeline]"
-
-      # ── Fetch latest codelists from Eurostat SDMX ────────────────────
-      # I clean.sql fanno join con codelists/geo.csv (gerarchia NUTS, non
-      # nel SDMX annotation set) e i support SDMX materializzano i parquet
-      # a run-time — geo va aggiornato prima di ogni run.
-      - name: Update codelists
-        run: python scripts/update_codelists.py
-
-      # ── Determinare i dataset da processare ─────────────────────────
-      # Produce batch.txt (lista di dataset.yml) per `toolkit run --batch`.
-      - name: Detect datasets to run
-        id: detect
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          INPUT_DATASETS: ${{ inputs.datasets }}
-          EVENT: ${{ github.event_name }}
-        run: |
-          if [ "$EVENT" = "pull_request" ]; then
-            # PR merged: solo i dataset cambiati
-            gh pr view "$PR_NUMBER" --json files --jq ".files[].path" | \
-              grep '^datasets/' | cut -d/ -f2 | sort -u | \
-              sed 's#^#datasets/#' | sed 's#$#/dataset.yml#' > batch.txt
-          elif [ -n "$INPUT_DATASETS" ]; then
-            # Manuale con slug espliciti — accetta sia trattini (cartella)
-            # sia underscore (dataset.name, come nel registry/catalogo).
-            echo "$INPUT_DATASETS" | tr ',' '\n' | sed 's/_/-/g' | \
-              sed 's#^#datasets/#' | sed 's#$#/dataset.yml#' > batch.txt
-          else
-            # Schedule/manuale senza slug: tutti
-            find datasets -maxdepth 2 -name dataset.yml | sort > batch.txt
-          fi
-          # Filtra solo config esistenti
-          while IFS= read -r line; do
-            [ -f "$line" ] || sed -i "\|^$line$|d" batch.txt
-          done < batch.txt
-          echo "count=$(wc -l < batch.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
-
-      # ── Run pipeline ─────────────────────────────────────────────────
-      # `toolkit run --batch` esegue i dataset in sequenza usando gli anni
-      # dichiarati nel dataset.yml e fallisce se uno fallisce.
-      - name: Run datasets
-        if: steps.detect.outputs.count != '0'
-        run: toolkit run --batch batch.txt
-
-      # ── GCS auth + sync ─────────────────────────────────────────────
-      # WIF: google-github-actions/auth@v3 + setup-gcloud@v3
-      # Pattern identico a dataset-incubator (testato e funzionante).
-      - name: GCP Auth (for GCS push)
-        if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && env.GCP_SERVICE_ACCOUNT != '' && steps.detect.outputs.count != '0'
-        uses: google-github-actions/auth@v3
-        with:
-          workload_identity_provider: ${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
-
-      - name: Set up gcloud
-        if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && env.GCP_SERVICE_ACCOUNT != '' && steps.detect.outputs.count != '0'
-        uses: google-github-actions/setup-gcloud@v3
-
-      - name: Sync to GCS
-        if: env.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && steps.detect.outputs.count != '0'
-        run: |
-          for slug_dir in out/data/clean/*/; do
-            [ -d "$slug_dir" ] || continue
-            slug=$(basename "$slug_dir")
-            year=$(ls "$slug_dir" 2>/dev/null | sort -rn | head -1)
-            [ -z "$year" ] && echo "⚠️  No clean output for $slug" && continue
-            gsutil -m rsync -r "${slug_dir}${year}/" "gs://dataciviclab-clean/eurostat/$slug/"
-            echo "✅ $slug clean synced"
-          done
-          for slug_dir in out/data/mart/*/; do
-            [ -d "$slug_dir" ] || continue
-            slug=$(basename "$slug_dir")
-            year=$(ls "$slug_dir" 2>/dev/null | sort -rn | head -1)
-            [ -z "$year" ] && echo "⚠️  No mart output for $slug" && continue
-            gsutil -m rsync -r "${slug_dir}${year}/" "gs://dataciviclab-mart/eurostat/$slug/"
-            echo "✅ $slug mart synced"
-          done
-
-      # ── Registry → draft PR (componente condiviso) ──────────────────
-      # Nello STESSO job del run: il registry deriva le entry dai parquet
-      # locali in out/ (in un job separato produrrebbe un catalogo vuoto).
-      - name: Registry update PR
-        uses: dataciviclab/.github/actions/registry-update-pr@main
-        with:
-          prefix: "eurostat"
-          flat: "true"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    uses: dataciviclab/.github/.github/workflows/pipeline-reusable.yml@main
+    with:
+      repo-slug: "eurostat"
+      run-command: "toolkit run --batch batch.txt"
+      detect-paths: "datasets"
+      pre-run-command: "python scripts/update_codelists.py"
+    secrets: inherit

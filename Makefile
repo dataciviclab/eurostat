@@ -51,10 +51,10 @@ clean-runs:
 
 .PHONY: registry registry-write
 registry:
-	$(TOOLKIT) registry build --prefix eurostat --flat
+	$(TOOLKIT) registry build --prefix eurostat
 
 registry-write:
-	$(TOOLKIT) registry build --prefix eurostat --flat --write
+	$(TOOLKIT) registry build --prefix eurostat --write
 
 .PHONY: help
 help:
