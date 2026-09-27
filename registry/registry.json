@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repo": "eurostat",
   "source_repo": "dataciviclab/eurostat",
-  "updated_at": "2026-09-06",
+  "updated_at": "2026-09-27",
   "datasets": [
     {
       "slug": "eurostat_area_nuts3",
@@ -126,7 +126,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_area_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_area_nuts3/2026/eurostat_area_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -258,7 +258,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_bd_hgnace2_r3_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_bd_hgnace2_r3_nuts3/2026/eurostat_bd_hgnace2_r3_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -402,7 +402,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_business_demography_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_business_demography_nuts3/2026/eurostat_business_demography_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -534,7 +534,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_crime_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_crime_nuts3/2026/eurostat_crime_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -654,7 +654,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_demo_balance_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_demo_balance_nuts3/2026/eurostat_demo_balance_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -785,7 +785,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_demo_r_fagec3_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_demo_r_fagec3_nuts3/2026/eurostat_demo_r_fagec3_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -928,7 +928,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_demo_r_magec3_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_demo_r_magec3_nuts3/2026/eurostat_demo_r_magec3_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -1072,7 +1072,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_demo_r_pjangrp3_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_demo_r_pjangrp3_nuts3/2026/eurostat_demo_r_pjangrp3_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -1215,7 +1215,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_early_school_leavers_nuts2/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_early_school_leavers_nuts2/2026/eurostat_early_school_leavers_nuts2_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -1359,7 +1359,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_emp_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_emp_nuts3/2026/eurostat_emp_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -1504,7 +1504,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_employment_sex_age_nuts2/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_employment_sex_age_nuts2/2026/eurostat_employment_sex_age_nuts2_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -1624,7 +1624,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_energy_poverty_nuts2/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_energy_poverty_nuts2/2026/eurostat_energy_poverty_nuts2_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -1756,7 +1756,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_fertility_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_fertility_nuts3/2026/eurostat_fertility_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -1875,7 +1875,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_gdp_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_gdp_nuts3/2026/eurostat_gdp_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -2007,7 +2007,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_gfcf_nuts2/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_gfcf_nuts2/2026/eurostat_gfcf_nuts2_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -2137,7 +2137,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_gva_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_gva_nuts3/2026/eurostat_gva_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -2257,7 +2257,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_hospital_beds_nuts2/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_hospital_beds_nuts2/2026/eurostat_hospital_beds_nuts2_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -2377,7 +2377,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_income_inequality_nuts2/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_income_inequality_nuts2/2026/eurostat_income_inequality_nuts2_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -2509,7 +2509,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_labour_productivity_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_labour_productivity_nuts3/2026/eurostat_labour_productivity_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -2641,7 +2641,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_nama10_gdp/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_nama10_gdp/2026/eurostat_nama10_gdp_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -2783,7 +2783,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_namq10_gdp/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_namq10_gdp/2026/eurostat_namq10_gdp_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -2913,7 +2913,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_nrg_chddr2_a_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_nrg_chddr2_a_nuts3/2026/eurostat_nrg_chddr2_a_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -3059,7 +3059,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_nrg_chddr2_m_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_nrg_chddr2_m_nuts3/2026/eurostat_nrg_chddr2_m_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -3178,7 +3178,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_physicians_nuts2/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_physicians_nuts2/2026/eurostat_physicians_nuts2_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -3298,7 +3298,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_pop_density_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_pop_density_nuts3/2026/eurostat_pop_density_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -3442,7 +3442,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_pop_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_pop_nuts3/2026/eurostat_pop_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -3574,7 +3574,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_pop_structure_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_pop_structure_nuts3/2026/eurostat_pop_structure_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -3693,7 +3693,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_poverty_risk_nuts2/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_poverty_risk_nuts2/2026/eurostat_poverty_risk_nuts2_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -3825,7 +3825,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_rd_expenditure_nuts2/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_rd_expenditure_nuts2/2026/eurostat_rd_expenditure_nuts2_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -3969,7 +3969,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_soil_erosion_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_soil_erosion_nuts3/2026/eurostat_soil_erosion_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -4124,7 +4124,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_tertiary_education_nuts2/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_tertiary_education_nuts2/2026/eurostat_tertiary_education_nuts2_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -4268,7 +4268,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_tourism_nuts3/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_tourism_nuts3/2026/eurostat_tourism_nuts3_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -4388,7 +4388,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/eurostat/eurostat_tran_sf_roadnu/",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_tran_sf_roadnu/2026/eurostat_tran_sf_roadnu_2026_clean.parquet",
         "multi_file": false
       },
       "stage": "incubating",
@@ -4406,7 +4406,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_area_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_area_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4416,7 +4416,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_area_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_area_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4426,7 +4426,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_area_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_area_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4436,7 +4436,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_bd_hgnace2_r3_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_bd_hgnace2_r3_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4446,7 +4446,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_bd_hgnace2_r3_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_bd_hgnace2_r3_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4456,7 +4456,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_bd_hgnace2_r3_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_bd_hgnace2_r3_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4466,7 +4466,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_business_demography_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_business_demography_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4476,7 +4476,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_business_demography_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_business_demography_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4486,7 +4486,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_business_demography_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_business_demography_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4496,7 +4496,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_crime_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_crime_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4506,7 +4506,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_crime_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_crime_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4516,7 +4516,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_crime_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_crime_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4526,7 +4526,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_balance_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_balance_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4536,7 +4536,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_balance_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_balance_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4546,7 +4546,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_balance_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_balance_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4556,7 +4556,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_fagec3_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_fagec3_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4566,7 +4566,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_fagec3_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_fagec3_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4576,7 +4576,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_fagec3_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_fagec3_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4586,7 +4586,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_magec3_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_magec3_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4596,7 +4596,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_magec3_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_magec3_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4606,7 +4606,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_magec3_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_magec3_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4616,7 +4616,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_pjangrp3_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_pjangrp3_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4626,7 +4626,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_pjangrp3_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_pjangrp3_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4636,7 +4636,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_pjangrp3_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_demo_r_pjangrp3_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4646,7 +4646,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_early_school_leavers_nuts2/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_early_school_leavers_nuts2/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4656,7 +4656,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_early_school_leavers_nuts2/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_early_school_leavers_nuts2/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4666,7 +4666,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_early_school_leavers_nuts2/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_early_school_leavers_nuts2/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4676,7 +4676,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_emp_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_emp_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4686,7 +4686,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_emp_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_emp_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4696,7 +4696,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_emp_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_emp_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4706,7 +4706,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_employment_sex_age_nuts2/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_employment_sex_age_nuts2/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4716,7 +4716,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_employment_sex_age_nuts2/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_employment_sex_age_nuts2/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4726,7 +4726,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_employment_sex_age_nuts2/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_employment_sex_age_nuts2/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4736,7 +4736,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_energy_poverty_nuts2/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_energy_poverty_nuts2/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4746,7 +4746,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_energy_poverty_nuts2/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_energy_poverty_nuts2/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4756,7 +4756,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_energy_poverty_nuts2/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_energy_poverty_nuts2/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4766,7 +4766,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_fertility_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_fertility_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4776,7 +4776,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_fertility_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_fertility_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4786,7 +4786,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_fertility_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_fertility_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4796,7 +4796,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_gdp_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gdp_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4806,7 +4806,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_gdp_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gdp_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4816,7 +4816,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_gdp_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gdp_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4826,7 +4826,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_gfcf_nuts2/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gfcf_nuts2/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4836,7 +4836,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_gfcf_nuts2/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gfcf_nuts2/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4846,7 +4846,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_gva_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gva_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4856,7 +4856,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_gva_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gva_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4866,7 +4866,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_gva_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_gva_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4876,7 +4876,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_hospital_beds_nuts2/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_hospital_beds_nuts2/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4886,7 +4886,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_hospital_beds_nuts2/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_hospital_beds_nuts2/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4896,7 +4896,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_hospital_beds_nuts2/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_hospital_beds_nuts2/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4906,7 +4906,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4916,7 +4916,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4926,7 +4926,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_income_inequality_nuts2/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4936,7 +4936,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_labour_productivity_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_labour_productivity_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4946,7 +4946,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_labour_productivity_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_labour_productivity_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -4956,7 +4956,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_labour_productivity_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_labour_productivity_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -4966,7 +4966,7 @@
       "table": "mart_expenditure",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_nama10_gdp/mart_expenditure.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_nama10_gdp/2026/mart_expenditure.parquet",
         "multi_file": false
       }
     },
@@ -4976,7 +4976,7 @@
       "table": "mart_quarterly",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_namq10_gdp/mart_quarterly.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_namq10_gdp/2026/mart_quarterly.parquet",
         "multi_file": false
       }
     },
@@ -4986,7 +4986,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_a_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_a_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -4996,7 +4996,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_a_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_a_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5006,7 +5006,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_a_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_a_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -5016,7 +5016,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_m_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_m_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -5026,7 +5026,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_m_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_m_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5036,7 +5036,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_m_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_nrg_chddr2_m_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -5046,7 +5046,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_physicians_nuts2/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_physicians_nuts2/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -5056,7 +5056,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_physicians_nuts2/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_physicians_nuts2/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5066,7 +5066,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_physicians_nuts2/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_physicians_nuts2/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -5076,7 +5076,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_density_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_density_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -5086,7 +5086,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_density_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_density_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5096,7 +5096,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_density_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_density_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -5106,7 +5106,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -5116,7 +5116,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5126,7 +5126,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -5136,7 +5136,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_structure_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_structure_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -5146,7 +5146,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_structure_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_structure_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5156,7 +5156,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_structure_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_pop_structure_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -5166,7 +5166,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_poverty_risk_nuts2/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_poverty_risk_nuts2/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -5176,7 +5176,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_poverty_risk_nuts2/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_poverty_risk_nuts2/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5186,7 +5186,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_poverty_risk_nuts2/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_poverty_risk_nuts2/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -5196,7 +5196,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_rd_expenditure_nuts2/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_rd_expenditure_nuts2/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -5206,7 +5206,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_rd_expenditure_nuts2/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_rd_expenditure_nuts2/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5216,7 +5216,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_rd_expenditure_nuts2/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_rd_expenditure_nuts2/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -5226,7 +5226,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_soil_erosion_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_soil_erosion_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -5236,7 +5236,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_soil_erosion_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_soil_erosion_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5246,7 +5246,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_soil_erosion_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_soil_erosion_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -5256,7 +5256,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_tertiary_education_nuts2/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tertiary_education_nuts2/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -5266,7 +5266,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_tertiary_education_nuts2/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tertiary_education_nuts2/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5276,7 +5276,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_tertiary_education_nuts2/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tertiary_education_nuts2/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -5286,7 +5286,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_tourism_nuts3/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tourism_nuts3/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -5296,7 +5296,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_tourism_nuts3/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tourism_nuts3/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5306,7 +5306,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_tourism_nuts3/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tourism_nuts3/2026/mart_trend.parquet",
         "multi_file": false
       }
     },
@@ -5316,7 +5316,7 @@
       "table": "mart_geo_benchmark",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/mart_geo_benchmark.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/2026/mart_geo_benchmark.parquet",
         "multi_file": false
       }
     },
@@ -5326,7 +5326,7 @@
       "table": "mart_sintesi",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/mart_sintesi.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/2026/mart_sintesi.parquet",
         "multi_file": false
       }
     },
@@ -5336,7 +5336,7 @@
       "table": "mart_trend",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/mart_trend.parquet",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_tran_sf_roadnu/2026/mart_trend.parquet",
         "multi_file": false
       }
     }
@@ -5350,7 +5350,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T202859Z_3740a084",
+        "run_id": "20260927T150258Z_7743776d",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5366,11 +5366,11 @@
         "output_bytes": {
           "raw": 2007029,
           "clean": 131435,
-          "mart": 230447
+          "mart": 230445
         },
-        "started_at": "2026-09-01T20:28:59.058824+00:00",
-        "finished_at": "2026-09-01T20:29:01.777571+00:00",
-        "duration_seconds": 2.719
+        "started_at": "2026-09-27T15:02:58.728155+00:00",
+        "finished_at": "2026-09-27T15:03:01.561177+00:00",
+        "duration_seconds": 2.833
       }
     },
     {
@@ -5381,7 +5381,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T202902Z_ddf5043a",
+        "run_id": "20260927T150302Z_a4c13da5",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5396,12 +5396,12 @@
         },
         "output_bytes": {
           "raw": 131138881,
-          "clean": 20251267,
+          "clean": 20340080,
           "mart": 6500825
         },
-        "started_at": "2026-09-01T20:29:02.960638+00:00",
-        "finished_at": "2026-09-01T20:29:48.276825+00:00",
-        "duration_seconds": 45.316
+        "started_at": "2026-09-27T15:03:02.821734+00:00",
+        "finished_at": "2026-09-27T15:03:56.794433+00:00",
+        "duration_seconds": 53.973
       }
     },
     {
@@ -5412,7 +5412,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T202948Z_3afff8de",
+        "run_id": "20260927T150357Z_42966fba",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5427,12 +5427,12 @@
         },
         "output_bytes": {
           "raw": 69016536,
-          "clean": 7141600,
+          "clean": 7341618,
           "mart": 2645310
         },
-        "started_at": "2026-09-01T20:29:48.671863+00:00",
-        "finished_at": "2026-09-01T20:30:08.931063+00:00",
-        "duration_seconds": 20.259
+        "started_at": "2026-09-27T15:03:57.265462+00:00",
+        "finished_at": "2026-09-27T15:04:22.573506+00:00",
+        "duration_seconds": 25.308
       }
     },
     {
@@ -5443,7 +5443,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203009Z_cab2d33d",
+        "run_id": "20260927T150423Z_38ac39c0",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5459,11 +5459,11 @@
         "output_bytes": {
           "raw": 14922768,
           "clean": 1068741,
-          "mart": 2348192
+          "mart": 2348210
         },
-        "started_at": "2026-09-01T20:30:09.324495+00:00",
-        "finished_at": "2026-09-01T20:30:15.241762+00:00",
-        "duration_seconds": 5.917
+        "started_at": "2026-09-27T15:04:23.035791+00:00",
+        "finished_at": "2026-09-27T15:04:30.255349+00:00",
+        "duration_seconds": 7.22
       }
     },
     {
@@ -5474,7 +5474,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203015Z_81e0bbb3",
+        "run_id": "20260927T150430Z_630d0be2",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5489,12 +5489,12 @@
         },
         "output_bytes": {
           "raw": 17319217,
-          "clean": 1643285,
-          "mart": 1726438
+          "clean": 1655759,
+          "mart": 1726433
         },
-        "started_at": "2026-09-01T20:30:15.627856+00:00",
-        "finished_at": "2026-09-01T20:30:22.419792+00:00",
-        "duration_seconds": 6.792
+        "started_at": "2026-09-27T15:04:30.710967+00:00",
+        "finished_at": "2026-09-27T15:04:39.289098+00:00",
+        "duration_seconds": 8.578
       }
     },
     {
@@ -5505,7 +5505,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203022Z_2718ece3",
+        "run_id": "20260927T150439Z_22f58e73",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5520,12 +5520,12 @@
         },
         "output_bytes": {
           "raw": 9414690,
-          "clean": 709401,
-          "mart": 791143
+          "clean": 709169,
+          "mart": 791080
         },
-        "started_at": "2026-09-01T20:30:22.493232+00:00",
-        "finished_at": "2026-09-01T20:30:27.081356+00:00",
-        "duration_seconds": 4.588
+        "started_at": "2026-09-27T15:04:39.392229+00:00",
+        "finished_at": "2026-09-27T15:04:45.049840+00:00",
+        "duration_seconds": 5.658
       }
     },
     {
@@ -5536,7 +5536,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203027Z_6f92362f",
+        "run_id": "20260927T150445Z_5be2cdeb",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5547,16 +5547,16 @@
         "output_rows": {
           "raw": 1618596,
           "clean": 1618596,
-          "mart": 1210101
+          "mart": 1225983
         },
         "output_bytes": {
-          "raw": 49952866,
-          "clean": 4117834,
-          "mart": 2631288
+          "raw": 50025267,
+          "clean": 4242939,
+          "mart": 2647226
         },
-        "started_at": "2026-09-01T20:30:27.156218+00:00",
-        "finished_at": "2026-09-01T20:30:44.287738+00:00",
-        "duration_seconds": 17.132
+        "started_at": "2026-09-27T15:04:45.156809+00:00",
+        "finished_at": "2026-09-27T15:05:06.255460+00:00",
+        "duration_seconds": 21.099
       }
     },
     {
@@ -5567,7 +5567,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203044Z_2f4b6861",
+        "run_id": "20260927T150506Z_bb13e246",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5582,12 +5582,12 @@
         },
         "output_bytes": {
           "raw": 56029638,
-          "clean": 6863897,
-          "mart": 4810902
+          "clean": 6855001,
+          "mart": 4810904
         },
-        "started_at": "2026-09-01T20:30:44.364590+00:00",
-        "finished_at": "2026-09-01T20:31:04.961086+00:00",
-        "duration_seconds": 20.596
+        "started_at": "2026-09-27T15:05:06.361159+00:00",
+        "finished_at": "2026-09-27T15:05:31.896308+00:00",
+        "duration_seconds": 25.535
       }
     },
     {
@@ -5598,7 +5598,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203105Z_3bc9101c",
+        "run_id": "20260927T150531Z_9388a0b6",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5614,11 +5614,11 @@
         "output_bytes": {
           "raw": 1180307,
           "clean": 125823,
-          "mart": 188034
+          "mart": 188065
         },
-        "started_at": "2026-09-01T20:31:05.035904+00:00",
-        "finished_at": "2026-09-01T20:31:06.688699+00:00",
-        "duration_seconds": 1.653
+        "started_at": "2026-09-27T15:05:31.998587+00:00",
+        "finished_at": "2026-09-27T15:05:34.042212+00:00",
+        "duration_seconds": 2.044
       }
     },
     {
@@ -5629,7 +5629,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203107Z_1bba1b1f",
+        "run_id": "20260927T150534Z_66f69c59",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5644,12 +5644,12 @@
         },
         "output_bytes": {
           "raw": 48279499,
-          "clean": 4849908,
-          "mart": 4910110
+          "clean": 4853160,
+          "mart": 4911909
         },
-        "started_at": "2026-09-01T20:31:07.087213+00:00",
-        "finished_at": "2026-09-01T20:31:25.220221+00:00",
-        "duration_seconds": 18.133
+        "started_at": "2026-09-27T15:05:34.512351+00:00",
+        "finished_at": "2026-09-27T15:05:57.433432+00:00",
+        "duration_seconds": 22.921
       }
     },
     {
@@ -5660,7 +5660,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203125Z_ab67106d",
+        "run_id": "20260927T150557Z_50208e8a",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5676,11 +5676,11 @@
         "output_bytes": {
           "raw": 15010982,
           "clean": 973064,
-          "mart": 754892
+          "mart": 754945
         },
-        "started_at": "2026-09-01T20:31:25.299088+00:00",
-        "finished_at": "2026-09-01T20:31:31.766704+00:00",
-        "duration_seconds": 6.468
+        "started_at": "2026-09-27T15:05:57.548792+00:00",
+        "finished_at": "2026-09-27T15:06:05.786137+00:00",
+        "duration_seconds": 8.237
       }
     },
     {
@@ -5691,7 +5691,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203131Z_c5ff2e0d",
+        "run_id": "20260927T150605Z_a22dbf17",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5707,11 +5707,11 @@
         "output_bytes": {
           "raw": 38272,
           "clean": 20767,
-          "mart": 44891
+          "mart": 44913
         },
-        "started_at": "2026-09-01T20:31:31.841269+00:00",
-        "finished_at": "2026-09-01T20:31:32.812638+00:00",
-        "duration_seconds": 0.971
+        "started_at": "2026-09-27T15:06:05.891332+00:00",
+        "finished_at": "2026-09-27T15:06:07.001011+00:00",
+        "duration_seconds": 1.11
       }
     },
     {
@@ -5722,7 +5722,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203132Z_26be26b5",
+        "run_id": "20260927T150607Z_00063396",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5737,12 +5737,12 @@
         },
         "output_bytes": {
           "raw": 2398857,
-          "clean": 179318,
-          "mart": 350810
+          "clean": 179315,
+          "mart": 350866
         },
-        "started_at": "2026-09-01T20:31:32.886904+00:00",
-        "finished_at": "2026-09-01T20:31:35.205344+00:00",
-        "duration_seconds": 2.318
+        "started_at": "2026-09-27T15:06:07.102179+00:00",
+        "finished_at": "2026-09-27T15:06:09.938024+00:00",
+        "duration_seconds": 2.836
       }
     },
     {
@@ -5753,7 +5753,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203135Z_03d87e2f",
+        "run_id": "20260927T150610Z_cf398a86",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5769,11 +5769,11 @@
         "output_bytes": {
           "raw": 10958722,
           "clean": 1014606,
-          "mart": 1376124
+          "mart": 1376141
         },
-        "started_at": "2026-09-01T20:31:35.277281+00:00",
-        "finished_at": "2026-09-01T20:31:39.955865+00:00",
-        "duration_seconds": 4.679
+        "started_at": "2026-09-27T15:06:10.037507+00:00",
+        "finished_at": "2026-09-27T15:06:16.143246+00:00",
+        "duration_seconds": 6.106
       }
     },
     {
@@ -5784,7 +5784,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260906T140647Z_30bd7e61",
+        "run_id": "20260927T150616Z_c3d79b01",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5800,11 +5800,11 @@
         "output_bytes": {
           "raw": 10813493,
           "clean": 1455267,
-          "mart": 128950
+          "mart": 128941
         },
-        "started_at": "2026-09-06T14:06:47.462536+00:00",
-        "finished_at": "2026-09-06T14:06:55.229697+00:00",
-        "duration_seconds": 7.767
+        "started_at": "2026-09-27T15:06:16.244735+00:00",
+        "finished_at": "2026-09-27T15:06:21.988196+00:00",
+        "duration_seconds": 5.743
       }
     },
     {
@@ -5815,7 +5815,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203140Z_e0fc46af",
+        "run_id": "20260927T150622Z_43e6fe75",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5830,12 +5830,12 @@
         },
         "output_bytes": {
           "raw": 44111167,
-          "clean": 5667824,
-          "mart": 4294895
+          "clean": 6088883,
+          "mart": 4294883
         },
-        "started_at": "2026-09-01T20:31:40.032163+00:00",
-        "finished_at": "2026-09-01T20:31:57.743131+00:00",
-        "duration_seconds": 17.711
+        "started_at": "2026-09-27T15:06:22.080956+00:00",
+        "finished_at": "2026-09-27T15:06:47.082029+00:00",
+        "duration_seconds": 25.001
       }
     },
     {
@@ -5846,7 +5846,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203158Z_44cf1928",
+        "run_id": "20260927T150647Z_33f2c60f",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5861,12 +5861,12 @@
         },
         "output_bytes": {
           "raw": 58170672,
-          "clean": 5173382,
-          "mart": 9044851
+          "clean": 5200751,
+          "mart": 9044825
         },
-        "started_at": "2026-09-01T20:31:58.141814+00:00",
-        "finished_at": "2026-09-01T20:32:21.289830+00:00",
-        "duration_seconds": 23.148
+        "started_at": "2026-09-27T15:06:47.543262+00:00",
+        "finished_at": "2026-09-27T15:07:16.430922+00:00",
+        "duration_seconds": 28.888
       }
     },
     {
@@ -5877,7 +5877,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203221Z_64fd07b7",
+        "run_id": "20260927T150716Z_fed55ee3",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5893,11 +5893,11 @@
         "output_bytes": {
           "raw": 635846,
           "clean": 76018,
-          "mart": 130490
+          "mart": 130493
         },
-        "started_at": "2026-09-01T20:32:21.367120+00:00",
-        "finished_at": "2026-09-01T20:32:22.725474+00:00",
-        "duration_seconds": 1.358
+        "started_at": "2026-09-27T15:07:16.535152+00:00",
+        "finished_at": "2026-09-27T15:07:18.237296+00:00",
+        "duration_seconds": 1.702
       }
     },
     {
@@ -5908,7 +5908,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203222Z_d20df78e",
+        "run_id": "20260927T150718Z_c8103268",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5924,11 +5924,11 @@
         "output_bytes": {
           "raw": 172249,
           "clean": 30384,
-          "mart": 68354
+          "mart": 68424
         },
-        "started_at": "2026-09-01T20:32:22.797913+00:00",
-        "finished_at": "2026-09-01T20:32:23.914619+00:00",
-        "duration_seconds": 1.117
+        "started_at": "2026-09-27T15:07:18.335908+00:00",
+        "finished_at": "2026-09-27T15:07:19.692037+00:00",
+        "duration_seconds": 1.356
       }
     },
     {
@@ -5939,7 +5939,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203224Z_b31aa051",
+        "run_id": "20260927T150720Z_f15a8fa6",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5955,11 +5955,11 @@
         "output_bytes": {
           "raw": 4922138,
           "clean": 274777,
-          "mart": 562397
+          "mart": 562409
         },
-        "started_at": "2026-09-01T20:32:24.335390+00:00",
-        "finished_at": "2026-09-01T20:32:27.243337+00:00",
-        "duration_seconds": 2.908
+        "started_at": "2026-09-27T15:07:20.170803+00:00",
+        "finished_at": "2026-09-27T15:07:23.814735+00:00",
+        "duration_seconds": 3.644
       }
     },
     {
@@ -5970,7 +5970,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260906T140655Z_9fb312c8",
+        "run_id": "20260927T150723Z_9f1dc946",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5979,18 +5979,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 1804533,
-          "clean": 1804533,
-          "mart": 6018
+          "raw": 1833756,
+          "clean": 1833756,
+          "mart": 6171
         },
         "output_bytes": {
-          "raw": 60134786,
-          "clean": 9818340,
-          "mart": 116951
+          "raw": 61081730,
+          "clean": 9832096,
+          "mart": 120004
         },
-        "started_at": "2026-09-06T14:06:55.645263+00:00",
-        "finished_at": "2026-09-06T14:07:36.118732+00:00",
-        "duration_seconds": 40.473
+        "started_at": "2026-09-27T15:07:23.916653+00:00",
+        "finished_at": "2026-09-27T15:07:44.788494+00:00",
+        "duration_seconds": 20.872
       }
     },
     {
@@ -6001,7 +6001,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260906T140736Z_8bc6f8c7",
+        "run_id": "20260927T150744Z_0f90fbdd",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6010,18 +6010,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 12698464,
-          "clean": 12698464,
+          "raw": 12730086,
+          "clean": 12730086,
           "mart": 27936
         },
         "output_bytes": {
-          "raw": 499623915,
-          "clean": 43911246,
-          "mart": 24979
+          "raw": 500901748,
+          "clean": 43619876,
+          "mart": 24899
         },
-        "started_at": "2026-09-06T14:07:36.194095+00:00",
-        "finished_at": "2026-09-06T14:12:19.803335+00:00",
-        "duration_seconds": 283.609
+        "started_at": "2026-09-27T15:07:44.867791+00:00",
+        "finished_at": "2026-09-27T15:10:09.367332+00:00",
+        "duration_seconds": 144.5
       }
     },
     {
@@ -6032,7 +6032,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203227Z_0dc990bd",
+        "run_id": "20260927T151009Z_c5fab2ac",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6048,11 +6048,11 @@
         "output_bytes": {
           "raw": 4693876,
           "clean": 596278,
-          "mart": 992146
+          "mart": 992198
         },
-        "started_at": "2026-09-01T20:32:27.318807+00:00",
-        "finished_at": "2026-09-01T20:32:30.568545+00:00",
-        "duration_seconds": 3.25
+        "started_at": "2026-09-27T15:10:09.451545+00:00",
+        "finished_at": "2026-09-27T15:10:13.738596+00:00",
+        "duration_seconds": 4.287
       }
     },
     {
@@ -6063,7 +6063,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203230Z_d631dae6",
+        "run_id": "20260927T151013Z_561ec241",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6079,11 +6079,11 @@
         "output_bytes": {
           "raw": 658236,
           "clean": 79933,
-          "mart": 129880
+          "mart": 129877
         },
-        "started_at": "2026-09-01T20:32:30.640774+00:00",
-        "finished_at": "2026-09-01T20:32:32.096760+00:00",
-        "duration_seconds": 1.456
+        "started_at": "2026-09-27T15:10:13.839099+00:00",
+        "finished_at": "2026-09-27T15:10:15.655725+00:00",
+        "duration_seconds": 1.817
       }
     },
     {
@@ -6094,7 +6094,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203232Z_400590d1",
+        "run_id": "20260927T151015Z_40f983d4",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6110,11 +6110,11 @@
         "output_bytes": {
           "raw": 1998269,
           "clean": 255379,
-          "mart": 568411
+          "mart": 568405
         },
-        "started_at": "2026-09-01T20:32:32.168182+00:00",
-        "finished_at": "2026-09-01T20:32:34.216533+00:00",
-        "duration_seconds": 2.048
+        "started_at": "2026-09-27T15:10:15.752742+00:00",
+        "finished_at": "2026-09-27T15:10:18.311673+00:00",
+        "duration_seconds": 2.559
       }
     },
     {
@@ -6125,7 +6125,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203234Z_9e40f334",
+        "run_id": "20260927T151018Z_6e270e05",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6140,12 +6140,12 @@
         },
         "output_bytes": {
           "raw": 169619953,
-          "clean": 21788237,
-          "mart": 12059374
+          "clean": 21678608,
+          "mart": 12059265
         },
-        "started_at": "2026-09-01T20:32:34.291084+00:00",
-        "finished_at": "2026-09-01T20:33:35.512476+00:00",
-        "duration_seconds": 61.221
+        "started_at": "2026-09-27T15:10:18.413668+00:00",
+        "finished_at": "2026-09-27T15:11:34.183030+00:00",
+        "duration_seconds": 75.769
       }
     },
     {
@@ -6156,7 +6156,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203335Z_eddf2c0a",
+        "run_id": "20260927T151134Z_be37ffd6",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6171,12 +6171,12 @@
         },
         "output_bytes": {
           "raw": 42114392,
-          "clean": 4511091,
-          "mart": 2178319
+          "clean": 4157805,
+          "mart": 2178329
         },
-        "started_at": "2026-09-01T20:33:35.589889+00:00",
-        "finished_at": "2026-09-01T20:33:51.292333+00:00",
-        "duration_seconds": 15.702
+        "started_at": "2026-09-27T15:11:34.291624+00:00",
+        "finished_at": "2026-09-27T15:11:53.733063+00:00",
+        "duration_seconds": 19.441
       }
     },
     {
@@ -6187,7 +6187,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203351Z_a1834222",
+        "run_id": "20260927T151153Z_4d535e73",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6203,11 +6203,11 @@
         "output_bytes": {
           "raw": 191877,
           "clean": 31516,
-          "mart": 82902
+          "mart": 82897
         },
-        "started_at": "2026-09-01T20:33:51.365197+00:00",
-        "finished_at": "2026-09-01T20:33:52.492700+00:00",
-        "duration_seconds": 1.128
+        "started_at": "2026-09-27T15:11:53.835765+00:00",
+        "finished_at": "2026-09-27T15:11:55.267134+00:00",
+        "duration_seconds": 1.431
       }
     },
     {
@@ -6218,7 +6218,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203352Z_40c3973b",
+        "run_id": "20260927T151155Z_b7dc5e2f",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6233,12 +6233,12 @@
         },
         "output_bytes": {
           "raw": 27550488,
-          "clean": 1849475,
-          "mart": 955229
+          "clean": 2070591,
+          "mart": 955205
         },
-        "started_at": "2026-09-01T20:33:52.887954+00:00",
-        "finished_at": "2026-09-01T20:34:01.471818+00:00",
-        "duration_seconds": 8.584
+        "started_at": "2026-09-27T15:11:55.734998+00:00",
+        "finished_at": "2026-09-27T15:12:06.175691+00:00",
+        "duration_seconds": 10.441
       }
     },
     {
@@ -6249,7 +6249,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203402Z_13c91d67",
+        "run_id": "20260927T151207Z_d7126559",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6265,11 +6265,11 @@
         "output_bytes": {
           "raw": 20860158,
           "clean": 1164823,
-          "mart": 1021240
+          "mart": 1021242
         },
-        "started_at": "2026-09-01T20:34:02.302520+00:00",
-        "finished_at": "2026-09-01T20:34:11.328398+00:00",
-        "duration_seconds": 9.026
+        "started_at": "2026-09-27T15:12:07.053905+00:00",
+        "finished_at": "2026-09-27T15:12:18.281750+00:00",
+        "duration_seconds": 11.228
       }
     },
     {
@@ -6280,7 +6280,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203411Z_4abc9e55",
+        "run_id": "20260927T151218Z_2eba73d5",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6295,12 +6295,12 @@
         },
         "output_bytes": {
           "raw": 451832,
-          "clean": 44664,
-          "mart": 87679
+          "clean": 44663,
+          "mart": 87670
         },
-        "started_at": "2026-09-01T20:34:11.405202+00:00",
-        "finished_at": "2026-09-01T20:34:12.689726+00:00",
-        "duration_seconds": 1.285
+        "started_at": "2026-09-27T15:12:18.386265+00:00",
+        "finished_at": "2026-09-27T15:12:19.973881+00:00",
+        "duration_seconds": 1.588
       }
     },
     {
@@ -6311,7 +6311,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203413Z_006c2015",
+        "run_id": "20260927T151221Z_9fc21020",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6320,18 +6320,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 1163592,
-          "clean": 1163592,
-          "mart": 354022
+          "raw": 1208556,
+          "clean": 1208556,
+          "mart": 371259
         },
         "output_bytes": {
-          "raw": 42428035,
-          "clean": 3331025,
-          "mart": 1590515
+          "raw": 44286892,
+          "clean": 3527671,
+          "mart": 1672508
         },
-        "started_at": "2026-09-01T20:34:13.774167+00:00",
-        "finished_at": "2026-09-01T20:34:25.354767+00:00",
-        "duration_seconds": 11.581
+        "started_at": "2026-09-27T15:12:21.246893+00:00",
+        "finished_at": "2026-09-27T15:12:36.123157+00:00",
+        "duration_seconds": 14.876
       }
     },
     {
@@ -6342,7 +6342,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260901T203425Z_653b17b8",
+        "run_id": "20260927T151236Z_2214ea1f",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6358,11 +6358,11 @@
         "output_bytes": {
           "raw": 2575454,
           "clean": 212963,
-          "mart": 409931
+          "mart": 409925
         },
-        "started_at": "2026-09-01T20:34:25.446926+00:00",
-        "finished_at": "2026-09-01T20:34:27.706273+00:00",
-        "duration_seconds": 2.259
+        "started_at": "2026-09-27T15:12:36.227469+00:00",
+        "finished_at": "2026-09-27T15:12:39.016167+00:00",
+        "duration_seconds": 2.789
       }
     }
   ],
