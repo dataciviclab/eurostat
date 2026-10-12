@@ -1,0 +1,102 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_jvs_nace2"
+  source_id: "eurostat"
+  tags: [welfare-lavoro, domanda-lavoro, vacancy, eurostat, nuts2, trimestrale]
+  category: welfare-lavoro
+  description: "Job vacancy statistics by NACE Rev. 2 — posti vacanti, posti occupati e tasso vacanza per trimestre, EU countries"
+  years: [2026]
+  time_coverage:
+    start_year: 2001
+    end_year: 2026
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_jvs_q_nace2"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "JVS_Q_NACE2"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  required_columns:
+    - freq
+    - s_adj
+    - nace_r2
+    - sizeclas
+    - indic_em
+    - geo
+    - year
+    - quarter
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+  validate:
+    min_rows: 1000
+    # NOTE: `value` is NOT in not_null — Eurostat has legitimate coverage gaps.
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_quarterly"
+      sql: "sql/mart_quarterly.sql"
+    - name: "mart_italia"
+      sql: "sql/mart_italia.sql"
+    - name: "mart_confronto"
+      sql: "sql/mart_confronto.sql"
+  required_tables:
+    - "mart_quarterly"
+  validate:
+    table_rules:
+      mart_quarterly:
+        required_columns: [year, quarter, geo, nace_r2, indic_em, value]
+        primary_key: [year, quarter, geo, nace_r2, s_adj, sizeclas, indic_em]
+        min_rows: 500
+      mart_italia:
+        required_columns: [year, quarter, vacancy_rate_pct]
+        primary_key: [year, quarter]
+        min_rows: 30
+      mart_confronto:
+        required_columns: [year, quarter, geo, vacancy_rate_pct]
+        primary_key: [year, quarter, geo]
+        min_rows: 100
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "JVS_Q_NACE2"
+  theme: "Job vacancy statistics by NACE Rev. 2 activity"
+  nuts_level: 2
+  dimensions: ["freq", "s_adj", "nace_r2", "sizeclas", "indic_em", "geo"]
+  description: "Job vacancies, occupied posts and vacancy rate by NACE Rev. 2 — quarterly"
