@@ -1,0 +1,434 @@
+{
+  "source_id": "eurostat",
+  "generated_at": "2026-10-12T12:46:44+00:00",
+  "report_version": 1,
+  "timing": {},
+  "identity": {
+    "source_id": "eurostat",
+    "protocol": "sdmx",
+    "base_url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/dataflow/ESTAT/all/latest",
+    "source_kind": "catalog",
+    "observation_mode": "catalog-watch",
+    "verdict": "go",
+    "note": "Catalogo SDMX Eurostat (dataflow ESTAT). Toolkit scarica i data con format=TSV.",
+    "last_probed": "2026-10-12"
+  },
+  "health": {
+    "radar_status": "GREEN",
+    "http_code": "200",
+    "note": null,
+    "ssl_fallback": false,
+    "streak": 4
+  },
+  "inventory": {
+    "total_items": 8146,
+    "method": null,
+    "captured_at": "2026-10-12T12:46:38+00:00",
+    "baseline_value": null,
+    "baseline_date": null,
+    "freshness_hours": 0.0,
+    "delta": null,
+    "delta_pct": 0.0,
+    "formats": {
+      "SDMX": 8146
+    }
+  },
+  "source_check": {
+    "last_run": null,
+    "total_scored": 0,
+    "reachable": 0,
+    "csv_count": 0,
+    "with_csv_schema": 0,
+    "avg_readiness": null,
+    "top_items": [],
+    "coverage_pct": null,
+    "formato_aperto": {
+      "score": 20.0,
+      "perc_aperto": 0.0,
+      "total": 8146,
+      "fonte": "inventory"
+    }
+  },
+  "datasets_in_use": [
+    {
+      "slug": "eurostat_area_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "REG_AREA3",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_bd_hgnace2_r3_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "BD_HGNACE2_R3",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_business_demography_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "BD_SIZE_R3",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_crime_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "CRIM_GEN_REG",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_demo_balance_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "DEMO_R_GIND3",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_demo_r_fagec3_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "DEMO_R_FAGEC3",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_demo_r_magec3_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "DEMO_R_MAGEC3",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_demo_r_pjangrp3_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "DEMO_R_PJANGRP3",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_early_school_leavers_nuts2",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "EDAT_LFSE_16",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_emp_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "NAMA_10R_3EMPERS",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_employment_sex_age_nuts2",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "LFST_R_LFE2EMPRT",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_energy_poverty_nuts2",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "ILC_MDES01_R",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_fertility_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "DEMO_R_FIND3",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_gdp_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "NAMA_10R_3GDP",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_gfcf_nuts2",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "NAMA_10R_2GFCF",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_gva_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "NAMA_10R_3GVA",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_hospital_beds_nuts2",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "HLTH_RS_BDSRG2",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_income_inequality_nuts2",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "ILC_DI11_R",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_labour_productivity_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "NAMA_10R_3NLP",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_nama10_gdp",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "NAMA_10_GDP",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_namq10_gdp",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "NAMQ_10_GDP",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_nrg_chddr2_a_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "NRG_CHDDR2_A",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_nrg_chddr2_m_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "NRG_CHDDR2_M",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_physicians_nuts2",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "HLTH_RS_PHYSREG",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_pop_density_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "DEMO_R_D3DENS",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_pop_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "DEMO_R_D2JAN",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_pop_structure_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "DEMO_R_PJANIND3",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_poverty_risk_nuts2",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "ILC_LI41",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_rd_expenditure_nuts2",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "RD_E_GERDREG",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_soil_erosion_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "AEI_PR_SOILER",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_tertiary_education_nuts2",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "TGS00109",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_tourism_nuts3",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "TOUR_OCC_NIN2",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_tran_sf_roadnu",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "TRAN_SF_ROADNU",
+          "agency": "ESTAT"
+        }
+      ]
+    }
+  ],
+  "signals": [
+    {
+      "type": "validated_metrics",
+      "result": "stabile",
+      "detail": "Metriche da validated.parquet."
+    }
+  ],
+  "operational_verdict": {
+    "label": "STABLE",
+    "score": "stable",
+    "triggers": [
+      "all_green"
+    ],
+    "next_action": null
+  },
+  "repo": "eurostat",
+  "catalog_schema_version": 1
+}
