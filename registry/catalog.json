@@ -1,6 +1,6 @@
 {
   "source_id": "eurostat",
-  "generated_at": "2026-10-12T12:46:44+00:00",
+  "generated_at": "2026-10-13T13:23:01+00:00",
   "report_version": 1,
   "timing": {},
   "identity": {
@@ -11,19 +11,19 @@
     "observation_mode": "catalog-watch",
     "verdict": "go",
     "note": "Catalogo SDMX Eurostat (dataflow ESTAT). Toolkit scarica i data con format=TSV.",
-    "last_probed": "2026-10-12"
+    "last_probed": "2026-10-13"
   },
   "health": {
     "radar_status": "GREEN",
     "http_code": "200",
     "note": null,
     "ssl_fallback": false,
-    "streak": 4
+    "streak": 5
   },
   "inventory": {
     "total_items": 8146,
     "method": null,
-    "captured_at": "2026-10-12T12:46:38+00:00",
+    "captured_at": "2026-10-13T13:22:37+00:00",
     "baseline_value": null,
     "baseline_date": null,
     "freshness_hours": 0.0,
@@ -34,19 +34,56 @@
     }
   },
   "source_check": {
-    "last_run": null,
-    "total_scored": 0,
-    "reachable": 0,
+    "last_run": "2026-10-13T13:23:01Z",
+    "total_scored": 6586,
+    "reachable": 6586,
     "csv_count": 0,
     "with_csv_schema": 0,
-    "avg_readiness": null,
-    "top_items": [],
-    "coverage_pct": null,
+    "avg_readiness": 5.0,
+    "top_items": [
+      {
+        "name": "eurostat/3-month-interest-rate",
+        "score": 5,
+        "year_range": null,
+        "format": "SDMX",
+        "reachable": true
+      },
+      {
+        "name": "eurostat/3-month-rates-for-euro-area-countries-annual-data",
+        "score": 5,
+        "year_range": null,
+        "format": "SDMX",
+        "reachable": true
+      },
+      {
+        "name": "eurostat/3-month-rates-for-euro-area-countries-monthly-data",
+        "score": 5,
+        "year_range": null,
+        "format": "SDMX",
+        "reachable": true
+      },
+      {
+        "name": "eurostat/3-month-rates-for-euro-area-countries-quarterly-data",
+        "score": 5,
+        "year_range": null,
+        "format": "SDMX",
+        "reachable": true
+      },
+      {
+        "name": "eurostat/3d-printing-and-robotics-by-nace-rev-2-activity",
+        "score": 5,
+        "year_range": null,
+        "format": "SDMX",
+        "reachable": true
+      }
+    ],
+    "coverage_pct": 80.8,
     "formato_aperto": {
-      "score": 20.0,
+      "score": 5.0,
       "perc_aperto": 0.0,
-      "total": 8146,
-      "fonte": "inventory"
+      "perc_reachable": 100.0,
+      "total": 6586,
+      "fonte": "source_check"
     }
   },
   "datasets_in_use": [
@@ -244,6 +281,17 @@
         {
           "kind": "dataflow",
           "id": "ILC_DI11_R",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_jvs_nace2",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "JVS_Q_NACE2",
           "agency": "ESTAT"
         }
       ]
