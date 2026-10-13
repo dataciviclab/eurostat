@@ -1,0 +1,29 @@
+name: Catalog
+
+# Source catalog per-repo: genera/aggiorna registry/catalog.json (so-catalog).
+# - schedule: la fonte upstream Eurostat cambia per conto proprio, non con i nostri PR
+# - pull_request su pyproject.toml: dry-run di validazione quando cambia [tool.observatory]
+# - workflow_dispatch: run manuale
+
+on:
+  schedule:
+    - cron: "30 4 * * 1"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "pyproject.toml"
+
+concurrency:
+  group: eurostat-catalog-${{ github.event.pull_request.number || github.ref || 'schedule' }}
+  cancel-in-progress: false
+
+jobs:
+  catalog:
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: dataciviclab/.github/.github/workflows/catalog-reusable.yml@main
+    with:
+      repo-slug: eurostat
+      catalog-args: "--workers 4"
+      dry-run: ${{ github.event_name == 'pull_request' }}

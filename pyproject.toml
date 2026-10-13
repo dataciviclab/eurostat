@@ -32,6 +32,11 @@ dev = [
 pipeline = [
     "dataciviclab-toolkit @ git+https://github.com/dataciviclab/toolkit.git@v1.50.0",
 ]
+# Catalog engine per-repo (probe, inventory, source report).
+# Tag stabili: https://github.com/dataciviclab/source-observatory/tags
+observatory = [
+    "dataciviclab-source-observatory @ git+https://github.com/dataciviclab/source-observatory.git@main",
+]
 
 [project.urls]
 Home = "https://github.com/dataciviclab/eurostat"
@@ -48,3 +53,11 @@ markers = [
 
 [tool.toolkit.extends]
 source_id = "eurostat"
+
+[tool.observatory]
+source_id = "eurostat"
+protocol = "sdmx"
+base_url = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/dataflow/ESTAT/all/latest"
+observation_mode = "catalog-watch"
+verdict = "go"
+note = "Catalogo SDMX Eurostat (dataflow ESTAT). Toolkit scarica i data con format=TSV."
