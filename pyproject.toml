@@ -30,7 +30,7 @@ dev = [
     "ruff>=0.5",
 ]
 pipeline = [
-    "dataciviclab-toolkit @ git+https://github.com/dataciviclab/toolkit.git@v1.50.0",
+    "dataciviclab-toolkit @ git+https://github.com/dataciviclab/toolkit.git@main",
 ]
 # Catalog engine per-repo (probe, inventory, source report).
 # Tag stabili: https://github.com/dataciviclab/source-observatory/tags
