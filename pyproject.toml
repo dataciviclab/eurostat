@@ -35,7 +35,7 @@ pipeline = [
 # Catalog engine per-repo (probe, inventory, source report).
 # Tag stabili: https://github.com/dataciviclab/source-observatory/tags
 observatory = [
-    "dataciviclab-source-observatory @ git+https://github.com/dataciviclab/source-observatory.git@main",
+    "dataciviclab-source-observatory[validate] @ git+https://github.com/dataciviclab/source-observatory.git@main",
 ]
 
 [project.urls]
