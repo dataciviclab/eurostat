@@ -10,7 +10,7 @@ SQL-queryable.
 
 | | |
 |---|---|
-| **Published datasets** | **21 NUTS3 + 9 NUTS2** (30 total) |
+| **Published datasets** | **21 NUTS3 + 9 NUTS2 + 4 country/NUTS** (34 total) |
 | **Period** | 1980 — 2025 (varies by dataset) |
 | **Coverage** | All EU + EFTA + candidate countries |
 | **Format** | Parquet on public GCS |
@@ -23,7 +23,7 @@ SQL-queryable.
 | 👥 Demography | Population, Deaths, Births, Ageing |
 | 🚓 Crime | Recorded offences by ICCS |
 | 🏨 Tourism | Nights spent at accommodation |
-| 🚗 Transport | Road accidents |
+| 🚗 Transport | Road accidents, modal split (passengers/freight), vehicle stock, networks |
 | 🌡️ Climate | Heating/cooling degree days |
 | 🌱 Environment | Soil erosion |
 | 🏢 Business | Enterprise births/deaths |
@@ -34,7 +34,7 @@ SQL-queryable.
 
 Full list: [docs/dataset-registry.md](docs/dataset-registry.md)
 
-> **Note**: all 28 datasets use the declarative SDMX pipeline (`type: sdmx`,
+> **Note**: all 34 datasets use the declarative SDMX pipeline (`type: sdmx`,
 > agency ESTAT). The two historical script-based connectors
 > (`eurostat-bd-hgnace2-r3-nuts3`, `eurostat-pop-nuts3`) were migrated to SDMX
 > and now produce the same analytical marts as the rest of the catalog.
@@ -104,5 +104,13 @@ Public GCS buckets:
 
 - [Dataset registry](docs/dataset-registry.md) — published + planned
 - [License: MIT](LICENSE)
+
+## Data licence
+
+Code is MIT. The underlying data is Eurostat's: reuse is allowed, including
+commercially, with source attribution (Commission Decision 2011/833/EU on the
+reuse of Commission documents — "© European Union, 1995–2026, source: Eurostat").
+Each published dataset keeps the original Eurostat dataflow code in
+`registry.dataflow` so every number can be traced back to its source.
 
 Part of [DataCivicLab](https://github.com/dataciviclab).
