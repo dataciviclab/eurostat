@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repo": "eurostat",
   "source_repo": "dataciviclab/eurostat",
-  "updated_at": "2026-10-12",
+  "updated_at": "2026-11-01",
   "datasets": [
     {
       "slug": "eurostat_area_nuts3",
@@ -97,7 +97,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -229,7 +230,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -373,7 +375,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -505,7 +508,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -625,7 +629,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -750,7 +755,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -887,7 +893,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -1031,7 +1038,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -1186,7 +1194,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -1330,7 +1339,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -1463,7 +1473,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -1595,7 +1606,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -1727,7 +1739,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -1846,7 +1859,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -1978,7 +1992,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -2108,7 +2123,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -2228,7 +2244,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -2348,7 +2365,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -2606,7 +2624,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -2738,7 +2757,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -2880,7 +2900,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -3010,7 +3031,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -3156,7 +3178,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -3275,7 +3298,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -3395,7 +3419,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -3527,7 +3552,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -3671,7 +3697,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -3790,7 +3817,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -3922,7 +3950,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -4066,7 +4095,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -4221,7 +4251,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -4365,7 +4396,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -4485,7 +4517,8 @@
           "name": "nuts_parent_code",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": ""
+          "description": "",
+          "semantic_type": "nuts_code"
         },
         {
           "name": "nuts_parent_label_en",
@@ -5506,7 +5539,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150258Z_7743776d",
+        "run_id": "20261101T162901Z_2952f27c",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5522,11 +5555,11 @@
         "output_bytes": {
           "raw": 2007029,
           "clean": 131435,
-          "mart": 230445
+          "mart": 230444
         },
-        "started_at": "2026-09-27T15:02:58.728155+00:00",
-        "finished_at": "2026-09-27T15:03:01.561177+00:00",
-        "duration_seconds": 2.833
+        "started_at": "2026-11-01T16:29:01.491471+00:00",
+        "finished_at": "2026-11-01T16:29:04.004270+00:00",
+        "duration_seconds": 2.513
       }
     },
     {
@@ -5537,7 +5570,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150302Z_a4c13da5",
+        "run_id": "20261101T162905Z_66c73f92",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5552,12 +5585,12 @@
         },
         "output_bytes": {
           "raw": 131138881,
-          "clean": 20340080,
+          "clean": 7588864,
           "mart": 6500825
         },
-        "started_at": "2026-09-27T15:03:02.821734+00:00",
-        "finished_at": "2026-09-27T15:03:56.794433+00:00",
-        "duration_seconds": 53.973
+        "started_at": "2026-11-01T16:29:05.591520+00:00",
+        "finished_at": "2026-11-01T16:29:51.701584+00:00",
+        "duration_seconds": 46.11
       }
     },
     {
@@ -5568,7 +5601,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150357Z_42966fba",
+        "run_id": "20261101T162952Z_97018cb1",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5583,12 +5616,12 @@
         },
         "output_bytes": {
           "raw": 69016536,
-          "clean": 7341618,
+          "clean": 3295469,
           "mart": 2645310
         },
-        "started_at": "2026-09-27T15:03:57.265462+00:00",
-        "finished_at": "2026-09-27T15:04:22.573506+00:00",
-        "duration_seconds": 25.308
+        "started_at": "2026-11-01T16:29:52.171211+00:00",
+        "finished_at": "2026-11-01T16:30:13.052643+00:00",
+        "duration_seconds": 20.881
       }
     },
     {
@@ -5599,7 +5632,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150423Z_38ac39c0",
+        "run_id": "20261101T163013Z_c7b10fa4",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5615,11 +5648,11 @@
         "output_bytes": {
           "raw": 14922768,
           "clean": 1068741,
-          "mart": 2348210
+          "mart": 2348166
         },
-        "started_at": "2026-09-27T15:04:23.035791+00:00",
-        "finished_at": "2026-09-27T15:04:30.255349+00:00",
-        "duration_seconds": 7.22
+        "started_at": "2026-11-01T16:30:13.560689+00:00",
+        "finished_at": "2026-11-01T16:30:20.021326+00:00",
+        "duration_seconds": 6.461
       }
     },
     {
@@ -5630,7 +5663,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150430Z_630d0be2",
+        "run_id": "20261101T163020Z_1f5ea270",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5645,12 +5678,12 @@
         },
         "output_bytes": {
           "raw": 17319217,
-          "clean": 1655759,
-          "mart": 1726433
+          "clean": 1643285,
+          "mart": 1726451
         },
-        "started_at": "2026-09-27T15:04:30.710967+00:00",
-        "finished_at": "2026-09-27T15:04:39.289098+00:00",
-        "duration_seconds": 8.578
+        "started_at": "2026-11-01T16:30:20.507063+00:00",
+        "finished_at": "2026-11-01T16:30:28.528778+00:00",
+        "duration_seconds": 8.022
       }
     },
     {
@@ -5661,7 +5694,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150439Z_22f58e73",
+        "run_id": "20261101T163028Z_9fe111a0",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5675,13 +5708,13 @@
           "mart": 250716
         },
         "output_bytes": {
-          "raw": 9414690,
-          "clean": 709169,
-          "mart": 791080
+          "raw": 9414694,
+          "clean": 615965,
+          "mart": 791096
         },
-        "started_at": "2026-09-27T15:04:39.392229+00:00",
-        "finished_at": "2026-09-27T15:04:45.049840+00:00",
-        "duration_seconds": 5.658
+        "started_at": "2026-11-01T16:30:28.601432+00:00",
+        "finished_at": "2026-11-01T16:30:33.581861+00:00",
+        "duration_seconds": 4.98
       }
     },
     {
@@ -5692,7 +5725,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150445Z_5be2cdeb",
+        "run_id": "20261101T163033Z_6ea05acc",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5707,12 +5740,12 @@
         },
         "output_bytes": {
           "raw": 50025267,
-          "clean": 4242939,
-          "mart": 2647226
+          "clean": 2747557,
+          "mart": 2647236
         },
-        "started_at": "2026-09-27T15:04:45.156809+00:00",
-        "finished_at": "2026-09-27T15:05:06.255460+00:00",
-        "duration_seconds": 21.099
+        "started_at": "2026-11-01T16:30:33.671321+00:00",
+        "finished_at": "2026-11-01T16:30:51.501737+00:00",
+        "duration_seconds": 17.83
       }
     },
     {
@@ -5723,7 +5756,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150506Z_bb13e246",
+        "run_id": "20261101T163051Z_ee550faa",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5738,12 +5771,12 @@
         },
         "output_bytes": {
           "raw": 56029638,
-          "clean": 6855001,
-          "mart": 4810904
+          "clean": 5030422,
+          "mart": 4810969
         },
-        "started_at": "2026-09-27T15:05:06.361159+00:00",
-        "finished_at": "2026-09-27T15:05:31.896308+00:00",
-        "duration_seconds": 25.535
+        "started_at": "2026-11-01T16:30:51.569313+00:00",
+        "finished_at": "2026-11-01T16:31:14.158076+00:00",
+        "duration_seconds": 22.589
       }
     },
     {
@@ -5754,7 +5787,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150531Z_9388a0b6",
+        "run_id": "20261101T163114Z_6fc25fb1",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5765,16 +5798,16 @@
         "output_rows": {
           "raw": 39936,
           "clean": 39936,
-          "mart": 26269
+          "mart": 26273
         },
         "output_bytes": {
-          "raw": 1180307,
-          "clean": 125823,
-          "mart": 188065
+          "raw": 1180316,
+          "clean": 125824,
+          "mart": 188474
         },
-        "started_at": "2026-09-27T15:05:31.998587+00:00",
-        "finished_at": "2026-09-27T15:05:34.042212+00:00",
-        "duration_seconds": 2.044
+        "started_at": "2026-11-01T16:31:14.229656+00:00",
+        "finished_at": "2026-11-01T16:31:16.190559+00:00",
+        "duration_seconds": 1.961
       }
     },
     {
@@ -5785,7 +5818,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150534Z_66f69c59",
+        "run_id": "20261101T163116Z_7693af7b",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5800,12 +5833,12 @@
         },
         "output_bytes": {
           "raw": 48279499,
-          "clean": 4853160,
-          "mart": 4911909
+          "clean": 4291277,
+          "mart": 4917161
         },
-        "started_at": "2026-09-27T15:05:34.512351+00:00",
-        "finished_at": "2026-09-27T15:05:57.433432+00:00",
-        "duration_seconds": 22.921
+        "started_at": "2026-11-01T16:31:16.661439+00:00",
+        "finished_at": "2026-11-01T16:31:35.793045+00:00",
+        "duration_seconds": 19.132
       }
     },
     {
@@ -5816,7 +5849,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150557Z_50208e8a",
+        "run_id": "20261101T163135Z_4fbf06c7",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5827,16 +5860,16 @@
         "output_rows": {
           "raw": 497664,
           "clean": 497664,
-          "mart": 374710
+          "mart": 374713
         },
         "output_bytes": {
-          "raw": 15010982,
-          "clean": 973064,
-          "mart": 754945
+          "raw": 15010988,
+          "clean": 816308,
+          "mart": 754972
         },
-        "started_at": "2026-09-27T15:05:57.548792+00:00",
-        "finished_at": "2026-09-27T15:06:05.786137+00:00",
-        "duration_seconds": 8.237
+        "started_at": "2026-11-01T16:31:35.862256+00:00",
+        "finished_at": "2026-11-01T16:31:42.962015+00:00",
+        "duration_seconds": 7.1
       }
     },
     {
@@ -5847,7 +5880,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150605Z_a22dbf17",
+        "run_id": "20261101T163143Z_aa36f2ff",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5856,18 +5889,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 1840,
-          "clean": 1840,
-          "mart": 2273
+          "raw": 1855,
+          "clean": 1855,
+          "mart": 2293
         },
         "output_bytes": {
-          "raw": 38272,
-          "clean": 20767,
-          "mart": 44913
+          "raw": 38591,
+          "clean": 20885,
+          "mart": 45602
         },
-        "started_at": "2026-09-27T15:06:05.891332+00:00",
-        "finished_at": "2026-09-27T15:06:07.001011+00:00",
-        "duration_seconds": 1.11
+        "started_at": "2026-11-01T16:31:43.028598+00:00",
+        "finished_at": "2026-11-01T16:31:44.178760+00:00",
+        "duration_seconds": 1.15
       }
     },
     {
@@ -5878,7 +5911,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150607Z_00063396",
+        "run_id": "20261101T163144Z_58754fef",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5893,12 +5926,12 @@
         },
         "output_bytes": {
           "raw": 2398857,
-          "clean": 179315,
-          "mart": 350866
+          "clean": 179307,
+          "mart": 350830
         },
-        "started_at": "2026-09-27T15:06:07.102179+00:00",
-        "finished_at": "2026-09-27T15:06:09.938024+00:00",
-        "duration_seconds": 2.836
+        "started_at": "2026-11-01T16:31:44.243717+00:00",
+        "finished_at": "2026-11-01T16:31:46.806899+00:00",
+        "duration_seconds": 2.563
       }
     },
     {
@@ -5909,7 +5942,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150610Z_cf398a86",
+        "run_id": "20261101T163146Z_f8eca15d",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5925,11 +5958,11 @@
         "output_bytes": {
           "raw": 10958722,
           "clean": 1014606,
-          "mart": 1376141
+          "mart": 1376171
         },
-        "started_at": "2026-09-27T15:06:10.037507+00:00",
-        "finished_at": "2026-09-27T15:06:16.143246+00:00",
-        "duration_seconds": 6.106
+        "started_at": "2026-11-01T16:31:46.871000+00:00",
+        "finished_at": "2026-11-01T16:31:52.310668+00:00",
+        "duration_seconds": 5.44
       }
     },
     {
@@ -5940,7 +5973,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150616Z_c3d79b01",
+        "run_id": "20261101T163152Z_e3c4e375",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5956,11 +5989,11 @@
         "output_bytes": {
           "raw": 10813493,
           "clean": 1455267,
-          "mart": 128941
+          "mart": 128951
         },
-        "started_at": "2026-09-27T15:06:16.244735+00:00",
-        "finished_at": "2026-09-27T15:06:21.988196+00:00",
-        "duration_seconds": 5.743
+        "started_at": "2026-11-01T16:31:52.375479+00:00",
+        "finished_at": "2026-11-01T16:31:57.736381+00:00",
+        "duration_seconds": 5.361
       }
     },
     {
@@ -5971,7 +6004,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150622Z_43e6fe75",
+        "run_id": "20261101T163157Z_b03dab9b",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -5986,12 +6019,12 @@
         },
         "output_bytes": {
           "raw": 44111167,
-          "clean": 6088883,
-          "mart": 4294883
+          "clean": 4995720,
+          "mart": 4294898
         },
-        "started_at": "2026-09-27T15:06:22.080956+00:00",
-        "finished_at": "2026-09-27T15:06:47.082029+00:00",
-        "duration_seconds": 25.001
+        "started_at": "2026-11-01T16:31:57.795380+00:00",
+        "finished_at": "2026-11-01T16:32:17.156807+00:00",
+        "duration_seconds": 19.361
       }
     },
     {
@@ -6002,7 +6035,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150647Z_33f2c60f",
+        "run_id": "20261101T163217Z_2527d99f",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6017,12 +6050,12 @@
         },
         "output_bytes": {
           "raw": 58170672,
-          "clean": 5200751,
-          "mart": 9044825
+          "clean": 4026342,
+          "mart": 9044788
         },
-        "started_at": "2026-09-27T15:06:47.543262+00:00",
-        "finished_at": "2026-09-27T15:07:16.430922+00:00",
-        "duration_seconds": 28.888
+        "started_at": "2026-11-01T16:32:17.682658+00:00",
+        "finished_at": "2026-11-01T16:32:42.443206+00:00",
+        "duration_seconds": 24.761
       }
     },
     {
@@ -6033,7 +6066,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150716Z_fed55ee3",
+        "run_id": "20261101T163242Z_a2bcd063",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6049,11 +6082,11 @@
         "output_bytes": {
           "raw": 635846,
           "clean": 76018,
-          "mart": 130493
+          "mart": 130489
         },
-        "started_at": "2026-09-27T15:07:16.535152+00:00",
-        "finished_at": "2026-09-27T15:07:18.237296+00:00",
-        "duration_seconds": 1.702
+        "started_at": "2026-11-01T16:32:42.518964+00:00",
+        "finished_at": "2026-11-01T16:32:44.276937+00:00",
+        "duration_seconds": 1.758
       }
     },
     {
@@ -6064,7 +6097,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150718Z_c8103268",
+        "run_id": "20261101T163244Z_c73351eb",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6073,18 +6106,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 8533,
-          "clean": 8533,
-          "mart": 5354
+          "raw": 8602,
+          "clean": 8602,
+          "mart": 5381
         },
         "output_bytes": {
-          "raw": 172249,
-          "clean": 30384,
-          "mart": 68424
+          "raw": 173566,
+          "clean": 30083,
+          "mart": 68625
         },
-        "started_at": "2026-09-27T15:07:18.335908+00:00",
-        "finished_at": "2026-09-27T15:07:19.692037+00:00",
-        "duration_seconds": 1.356
+        "started_at": "2026-11-01T16:32:44.340563+00:00",
+        "finished_at": "2026-11-01T16:32:45.558998+00:00",
+        "duration_seconds": 1.218
       }
     },
     {
@@ -6095,7 +6128,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261012T163627Z_422c9752",
+        "run_id": "20261101T163245Z_5904afb2",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6110,12 +6143,12 @@
         },
         "output_bytes": {
           "raw": 45018406,
-          "clean": 3004521,
-          "mart": 1169023
+          "clean": 3000912,
+          "mart": 1168867
         },
-        "started_at": "2026-10-12T16:36:27.679748+00:00",
-        "finished_at": "2026-10-12T16:36:39.963887+00:00",
-        "duration_seconds": 12.284
+        "started_at": "2026-11-01T16:32:45.623498+00:00",
+        "finished_at": "2026-11-01T16:32:57.440028+00:00",
+        "duration_seconds": 11.817
       }
     },
     {
@@ -6126,7 +6159,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150720Z_f15a8fa6",
+        "run_id": "20261101T163257Z_0b3fde28",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6142,11 +6175,11 @@
         "output_bytes": {
           "raw": 4922138,
           "clean": 274777,
-          "mart": 562409
+          "mart": 562407
         },
-        "started_at": "2026-09-27T15:07:20.170803+00:00",
-        "finished_at": "2026-09-27T15:07:23.814735+00:00",
-        "duration_seconds": 3.644
+        "started_at": "2026-11-01T16:32:57.917371+00:00",
+        "finished_at": "2026-11-01T16:33:01.190530+00:00",
+        "duration_seconds": 3.273
       }
     },
     {
@@ -6157,7 +6190,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150723Z_9f1dc946",
+        "run_id": "20261101T163301Z_f757ce44",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6166,18 +6199,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 1833756,
-          "clean": 1833756,
-          "mart": 6171
+          "raw": 1808358,
+          "clean": 1808358,
+          "mart": 6018
         },
         "output_bytes": {
-          "raw": 61081730,
-          "clean": 9832096,
-          "mart": 120004
+          "raw": 60247110,
+          "clean": 9685754,
+          "mart": 115109
         },
-        "started_at": "2026-09-27T15:07:23.916653+00:00",
-        "finished_at": "2026-09-27T15:07:44.788494+00:00",
-        "duration_seconds": 20.872
+        "started_at": "2026-11-01T16:33:01.253387+00:00",
+        "finished_at": "2026-11-01T16:33:19.865033+00:00",
+        "duration_seconds": 18.612
       }
     },
     {
@@ -6188,7 +6221,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T150744Z_0f90fbdd",
+        "run_id": "20261101T163319Z_ca7a3134",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6197,18 +6230,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 12730086,
-          "clean": 12730086,
-          "mart": 27936
+          "raw": 13158405,
+          "clean": 13158405,
+          "mart": 28080
         },
         "output_bytes": {
-          "raw": 500901748,
-          "clean": 43619876,
-          "mart": 24899
+          "raw": 517668965,
+          "clean": 43415130,
+          "mart": 26125
         },
-        "started_at": "2026-09-27T15:07:44.867791+00:00",
-        "finished_at": "2026-09-27T15:10:09.367332+00:00",
-        "duration_seconds": 144.5
+        "started_at": "2026-11-01T16:33:19.912704+00:00",
+        "finished_at": "2026-11-01T16:35:38.447401+00:00",
+        "duration_seconds": 138.535
       }
     },
     {
@@ -6219,7 +6252,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T151009Z_c5fab2ac",
+        "run_id": "20261101T163538Z_2ac0638a",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6235,11 +6268,11 @@
         "output_bytes": {
           "raw": 4693876,
           "clean": 596278,
-          "mart": 992198
+          "mart": 992184
         },
-        "started_at": "2026-09-27T15:10:09.451545+00:00",
-        "finished_at": "2026-09-27T15:10:13.738596+00:00",
-        "duration_seconds": 4.287
+        "started_at": "2026-11-01T16:35:38.500414+00:00",
+        "finished_at": "2026-11-01T16:35:42.466004+00:00",
+        "duration_seconds": 3.966
       }
     },
     {
@@ -6250,7 +6283,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T151013Z_561ec241",
+        "run_id": "20261101T163542Z_39cb685a",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6266,11 +6299,11 @@
         "output_bytes": {
           "raw": 658236,
           "clean": 79933,
-          "mart": 129877
+          "mart": 129848
         },
-        "started_at": "2026-09-27T15:10:13.839099+00:00",
-        "finished_at": "2026-09-27T15:10:15.655725+00:00",
-        "duration_seconds": 1.817
+        "started_at": "2026-11-01T16:35:42.531437+00:00",
+        "finished_at": "2026-11-01T16:35:44.263520+00:00",
+        "duration_seconds": 1.732
       }
     },
     {
@@ -6281,7 +6314,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T151015Z_40f983d4",
+        "run_id": "20261101T163544Z_15c60708",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6297,11 +6330,11 @@
         "output_bytes": {
           "raw": 1998269,
           "clean": 255379,
-          "mart": 568405
+          "mart": 568411
         },
-        "started_at": "2026-09-27T15:10:15.752742+00:00",
-        "finished_at": "2026-09-27T15:10:18.311673+00:00",
-        "duration_seconds": 2.559
+        "started_at": "2026-11-01T16:35:44.332698+00:00",
+        "finished_at": "2026-11-01T16:35:46.685567+00:00",
+        "duration_seconds": 2.353
       }
     },
     {
@@ -6312,7 +6345,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T151018Z_6e270e05",
+        "run_id": "20261101T163546Z_5e3cfb9b",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6327,12 +6360,12 @@
         },
         "output_bytes": {
           "raw": 169619953,
-          "clean": 21678608,
-          "mart": 12059265
+          "clean": 12967887,
+          "mart": 12059340
         },
-        "started_at": "2026-09-27T15:10:18.413668+00:00",
-        "finished_at": "2026-09-27T15:11:34.183030+00:00",
-        "duration_seconds": 75.769
+        "started_at": "2026-11-01T16:35:46.751482+00:00",
+        "finished_at": "2026-11-01T16:36:50.882421+00:00",
+        "duration_seconds": 64.131
       }
     },
     {
@@ -6343,7 +6376,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T151134Z_be37ffd6",
+        "run_id": "20261101T163650Z_4e6dbf28",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6358,12 +6391,12 @@
         },
         "output_bytes": {
           "raw": 42114392,
-          "clean": 4157805,
-          "mart": 2178329
+          "clean": 4460527,
+          "mart": 2178323
         },
-        "started_at": "2026-09-27T15:11:34.291624+00:00",
-        "finished_at": "2026-09-27T15:11:53.733063+00:00",
-        "duration_seconds": 19.441
+        "started_at": "2026-11-01T16:36:50.952516+00:00",
+        "finished_at": "2026-11-01T16:37:09.176691+00:00",
+        "duration_seconds": 18.224
       }
     },
     {
@@ -6374,7 +6407,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T151153Z_4d535e73",
+        "run_id": "20261101T163709Z_e17e5980",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6383,18 +6416,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 9706,
-          "clean": 9706,
-          "mart": 6281
+          "raw": 9775,
+          "clean": 9775,
+          "mart": 6316
         },
         "output_bytes": {
-          "raw": 191877,
-          "clean": 31516,
-          "mart": 82897
+          "raw": 193179,
+          "clean": 31191,
+          "mart": 82656
         },
-        "started_at": "2026-09-27T15:11:53.835765+00:00",
-        "finished_at": "2026-09-27T15:11:55.267134+00:00",
-        "duration_seconds": 1.431
+        "started_at": "2026-11-01T16:37:09.239368+00:00",
+        "finished_at": "2026-11-01T16:37:10.601108+00:00",
+        "duration_seconds": 1.362
       }
     },
     {
@@ -6405,7 +6438,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T151155Z_b7dc5e2f",
+        "run_id": "20261101T163711Z_929b2541",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6414,18 +6447,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 909090,
-          "clean": 909090,
-          "mart": 240382
+          "raw": 911340,
+          "clean": 911340,
+          "mart": 245504
         },
         "output_bytes": {
-          "raw": 27550488,
-          "clean": 2070591,
-          "mart": 955205
+          "raw": 27642051,
+          "clean": 2072471,
+          "mart": 972859
         },
-        "started_at": "2026-09-27T15:11:55.734998+00:00",
-        "finished_at": "2026-09-27T15:12:06.175691+00:00",
-        "duration_seconds": 10.441
+        "started_at": "2026-11-01T16:37:11.055485+00:00",
+        "finished_at": "2026-11-01T16:37:20.439691+00:00",
+        "duration_seconds": 9.384
       }
     },
     {
@@ -6436,7 +6469,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T151207Z_d7126559",
+        "run_id": "20261101T163721Z_4a3f8adb",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6451,12 +6484,12 @@
         },
         "output_bytes": {
           "raw": 20860158,
-          "clean": 1164823,
-          "mart": 1021242
+          "clean": 1269394,
+          "mart": 1021244
         },
-        "started_at": "2026-09-27T15:12:07.053905+00:00",
-        "finished_at": "2026-09-27T15:12:18.281750+00:00",
-        "duration_seconds": 11.228
+        "started_at": "2026-11-01T16:37:21.319586+00:00",
+        "finished_at": "2026-11-01T16:37:31.033501+00:00",
+        "duration_seconds": 9.714
       }
     },
     {
@@ -6467,7 +6500,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T151218Z_2eba73d5",
+        "run_id": "20261101T163731Z_39b8f559",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6483,11 +6516,11 @@
         "output_bytes": {
           "raw": 451832,
           "clean": 44663,
-          "mart": 87670
+          "mart": 87669
         },
-        "started_at": "2026-09-27T15:12:18.386265+00:00",
-        "finished_at": "2026-09-27T15:12:19.973881+00:00",
-        "duration_seconds": 1.588
+        "started_at": "2026-11-01T16:37:31.102379+00:00",
+        "finished_at": "2026-11-01T16:37:32.526095+00:00",
+        "duration_seconds": 1.424
       }
     },
     {
@@ -6498,7 +6531,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T151221Z_9fc21020",
+        "run_id": "20261101T163733Z_47e1f8bf",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6507,18 +6540,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 1208556,
-          "clean": 1208556,
-          "mart": 371259
+          "raw": 1206432,
+          "clean": 1206432,
+          "mart": 372535
         },
         "output_bytes": {
-          "raw": 44286892,
-          "clean": 3527671,
-          "mart": 1672508
+          "raw": 44230431,
+          "clean": 2155562,
+          "mart": 1686902
         },
-        "started_at": "2026-09-27T15:12:21.246893+00:00",
-        "finished_at": "2026-09-27T15:12:36.123157+00:00",
-        "duration_seconds": 14.876
+        "started_at": "2026-11-01T16:37:33.873403+00:00",
+        "finished_at": "2026-11-01T16:37:47.556027+00:00",
+        "duration_seconds": 13.683
       }
     },
     {
@@ -6529,7 +6562,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260927T151236Z_2214ea1f",
+        "run_id": "20261101T163747Z_50ca8b43",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -6545,11 +6578,11 @@
         "output_bytes": {
           "raw": 2575454,
           "clean": 212963,
-          "mart": 409925
+          "mart": 409908
         },
-        "started_at": "2026-09-27T15:12:36.227469+00:00",
-        "finished_at": "2026-09-27T15:12:39.016167+00:00",
-        "duration_seconds": 2.789
+        "started_at": "2026-11-01T16:37:47.623351+00:00",
+        "finished_at": "2026-11-01T16:37:50.040397+00:00",
+        "duration_seconds": 2.417
       }
     }
   ],
@@ -6797,9 +6830,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_area_nuts3",
+            "name": "Eurostat Area Nuts3",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_bd_hgnace2_r3_nuts3",
             "name": "Eurostat Bd Hgnace2 R3 Nuts3",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_bd_hgnace2_r3_nuts3",
+            "name": "Eurostat Bd Hgnace2 R3 Nuts3",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6809,9 +6854,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_business_demography_nuts3",
+            "name": "Eurostat Business Demography Nuts3",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_crime_nuts3",
             "name": "Eurostat Crime Nuts3",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_crime_nuts3",
+            "name": "Eurostat Crime Nuts3",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6821,9 +6878,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_demo_balance_nuts3",
+            "name": "Eurostat Demo Balance Nuts3",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_demo_r_fagec3_nuts3",
             "name": "Eurostat Demo R Fagec3 Nuts3",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_demo_r_fagec3_nuts3",
+            "name": "Eurostat Demo R Fagec3 Nuts3",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6833,9 +6902,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_demo_r_magec3_nuts3",
+            "name": "Eurostat Demo R Magec3 Nuts3",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_demo_r_pjangrp3_nuts3",
             "name": "Eurostat Demo R Pjangrp3 Nuts3",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_demo_r_pjangrp3_nuts3",
+            "name": "Eurostat Demo R Pjangrp3 Nuts3",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6845,9 +6926,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_early_school_leavers_nuts2",
+            "name": "Eurostat Early School Leavers Nuts2",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_emp_nuts3",
             "name": "Eurostat Emp Nuts3",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_emp_nuts3",
+            "name": "Eurostat Emp Nuts3",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6857,9 +6950,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_employment_sex_age_nuts2",
+            "name": "Eurostat Employment Sex Age Nuts2",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_energy_poverty_nuts2",
             "name": "Eurostat Energy Poverty Nuts2",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_energy_poverty_nuts2",
+            "name": "Eurostat Energy Poverty Nuts2",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6869,9 +6974,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_fertility_nuts3",
+            "name": "Eurostat Fertility Nuts3",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_gdp_nuts3",
             "name": "Eurostat Gdp Nuts3",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_gdp_nuts3",
+            "name": "Eurostat Gdp Nuts3",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6881,9 +6998,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_gfcf_nuts2",
+            "name": "Eurostat Gfcf Nuts2",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_gva_nuts3",
             "name": "Eurostat Gva Nuts3",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_gva_nuts3",
+            "name": "Eurostat Gva Nuts3",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6893,9 +7022,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_hospital_beds_nuts2",
+            "name": "Eurostat Hospital Beds Nuts2",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_income_inequality_nuts2",
             "name": "Eurostat Income Inequality Nuts2",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_income_inequality_nuts2",
+            "name": "Eurostat Income Inequality Nuts2",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6911,9 +7052,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_labour_productivity_nuts3",
+            "name": "Eurostat Labour Productivity Nuts3",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_nama10_gdp",
             "name": "Eurostat Nama10 Gdp",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_nama10_gdp",
+            "name": "Eurostat Nama10 Gdp",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6923,9 +7076,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_namq10_gdp",
+            "name": "Eurostat Namq10 Gdp",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_nrg_chddr2_a_nuts3",
             "name": "Eurostat Nrg Chddr2 A Nuts3",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_nrg_chddr2_a_nuts3",
+            "name": "Eurostat Nrg Chddr2 A Nuts3",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6935,9 +7100,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_nrg_chddr2_m_nuts3",
+            "name": "Eurostat Nrg Chddr2 M Nuts3",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_physicians_nuts2",
             "name": "Eurostat Physicians Nuts2",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_physicians_nuts2",
+            "name": "Eurostat Physicians Nuts2",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6947,9 +7124,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_pop_density_nuts3",
+            "name": "Eurostat Pop Density Nuts3",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_pop_nuts3",
             "name": "Eurostat Pop Nuts3",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_pop_nuts3",
+            "name": "Eurostat Pop Nuts3",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6959,9 +7148,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_pop_structure_nuts3",
+            "name": "Eurostat Pop Structure Nuts3",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_poverty_risk_nuts2",
             "name": "Eurostat Poverty Risk Nuts2",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_poverty_risk_nuts2",
+            "name": "Eurostat Poverty Risk Nuts2",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6971,9 +7172,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_rd_expenditure_nuts2",
+            "name": "Eurostat Rd Expenditure Nuts2",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_soil_erosion_nuts3",
             "name": "Eurostat Soil Erosion Nuts3",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_soil_erosion_nuts3",
+            "name": "Eurostat Soil Erosion Nuts3",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6983,9 +7196,21 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_tertiary_education_nuts2",
+            "name": "Eurostat Tertiary Education Nuts2",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_tourism_nuts3",
             "name": "Eurostat Tourism Nuts3",
             "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_tourism_nuts3",
+            "name": "Eurostat Tourism Nuts3",
+            "column": "nuts_parent_code",
             "semantic_type": "nuts_code"
           },
           {
@@ -6993,10 +7218,16 @@
             "name": "Eurostat Tran Sf Roadnu",
             "column": "geo",
             "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_tran_sf_roadnu",
+            "name": "Eurostat Tran Sf Roadnu",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
           }
         ],
         "types": {
-          "nuts_code": 34
+          "nuts_code": 67
         }
       },
       "Tempo": {
