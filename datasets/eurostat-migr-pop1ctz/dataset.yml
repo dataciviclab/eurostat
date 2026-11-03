@@ -1,0 +1,142 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_migr_pop1ctz"
+  source_id: "eurostat"
+  tags: [immigrazione, popolazione-straniera, cittadinanza, migranti, eurostat, benchmark]
+  category: immigrazione
+  description: "Popolazione residente al 1 gennaio per cittadinanza. Paese, 1998-2025, confronto UE. Base per la quota di stranieri residenti."
+  years: [2026]
+  time_coverage:
+    start_year: 1998
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_migr_pop1ctz"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "MIGR_POP1CTZ"
+        # Solo totali per eta e sesso (i mart non usano l'incrocio): il cubo
+        # completo sarebbe ~80x piu' grande senza valore aggiunto civico.
+        filters:
+          age: "TOTAL"
+          sex: "T"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: age
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: AGE
+  - name: sex
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: SEX
+  - name: citizen
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: CITIZEN
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+    # Tipi espliciti: col filtro sex=T il solo valore 'T' viene sniffato come
+    # BOOLEAN da DuckDB (auto_detect) → conversione errata. Dichiararli evita
+    # il problema (stesso motivo di eurostat-pop-nuts3).
+    columns:
+      freq: VARCHAR
+      citizen: VARCHAR
+      age: VARCHAR
+      unit: VARCHAR
+      sex: VARCHAR
+      geo: VARCHAR
+      year: INTEGER
+      value: DOUBLE
+      flag: VARCHAR
+  required_columns:
+    - freq
+    - citizen
+    - age
+    - unit
+    - sex
+    - geo
+    - year
+    - citizen_label_en
+    - age_label_en
+    - sex_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 100000
+    not_null:
+      - geo
+      - year
+      - citizen
+
+mart:
+  tables:
+    - name: "mart_popolazione_straniera"
+      sql: "sql/mart_popolazione_straniera.sql"
+    - name: "mart_popolazione_cittadinanza"
+      sql: "sql/mart_popolazione_cittadinanza.sql"
+  required_tables:
+    - "mart_popolazione_straniera"
+    - "mart_popolazione_cittadinanza"
+  validate:
+    table_rules:
+      mart_popolazione_straniera:
+        required_columns: [year, geo, country, popolazione_totale, nazionali, stranieri, quota_stranieri_pct]
+        primary_key: [year, geo]
+        min_rows: 200
+      mart_popolazione_cittadinanza:
+        required_columns: [year, geo, citizen, persone]
+        primary_key: [year, geo, citizen]
+        min_rows: 1000
+
+validation:
+  fail_on_error: true
+
+# Cubo grande (tutti i paesi x tutte le cittadinanze): alza il limite DuckDB.
+duckdb:
+  memory_limit: "4GB"
+
+registry:
+  dataflow: "MIGR_POP1CTZ"
+  theme: "Population on 1 January by age group, sex and citizenship"
+  nuts_level: 0
+  dimensions: ["freq", "citizen", "age", "unit", "sex", "geo"]
+  description: "Population on 1 January by age group, sex and citizenship"

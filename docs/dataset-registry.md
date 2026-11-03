@@ -38,6 +38,13 @@
 | `eurostat-tran-hv-frmod` | `TRAN_HV_FRMOD` | Transport / Modal split freight | 4 (freq, unit, tra_mode, geo) | 2,480 | ✅ |
 | `eurostat-tran-r-vehst` | `TRAN_R_VEHST` | Transport / Road vehicle stock | 4 (freq, vehicle, unit, geo) | 190,295 | ✅ |
 | `eurostat-tran-r-net` | `TRAN_R_NET` | Transport / Road, rail and waterway networks | 4 (freq, tra_infr, unit, geo) | 136,115 | ✅ |
+| `eurostat-migr-pop1ctz` | `MIGR_POP1CTZ` | Migration / Population by citizenship | 6 (freq, citizen, age, unit, sex, geo) | 236,208 | ✅ |
+| `eurostat-migr-resfirst` | `MIGR_RESFIRST` | Migration / First residence permits | 6 (freq, reason, citizen, duration, unit, geo) | 2,242,440 | ✅ |
+| `eurostat-migr-resvalid` | `MIGR_RESVALID` | Migration / Valid residence permits | 6 (freq, duration, reason, unit, citizen, geo) | 2,967,552 | ✅ |
+| `eurostat-migr-acq` | `MIGR_ACQ` | Migration / Acquisition of citizenship | 7 (freq, citizen, agedef, age, unit, sex, geo) | 297,135 | ✅ |
+| `eurostat-migr-eirtn` | `MIGR_EIRTN` | Migration / Returns following an order to leave | 7 (freq, citizen, c_dest, age, sex, unit, geo) | 213,552 | ✅ |
+| `eurostat-migr-imm1ctz` | `MIGR_IMM1CTZ` | Migration / Immigration by citizenship | 7 (freq, citizen, agedef, age, unit, sex, geo) | 261,009 | ✅ |
+| `eurostat-migr-emi1ctz` | `MIGR_EMI1CTZ` | Migration / Emigration by citizenship | 7 (freq, citizen, agedef, age, unit, sex, geo) | 233,280 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)

@@ -10,7 +10,7 @@ SQL-queryable.
 
 | | |
 |---|---|
-| **Published datasets** | **21 NUTS3 + 9 NUTS2 + 4 country/NUTS** (34 total) |
+| **Published datasets** | **21 NUTS3 + 9 NUTS2 + 11 country/NUTS** (41 total) |
 | **Period** | 1980 — 2025 (varies by dataset) |
 | **Coverage** | All EU + EFTA + candidate countries |
 | **Format** | Parquet on public GCS |
@@ -21,6 +21,7 @@ SQL-queryable.
 |---|---|
 | 💼 Economy | GDP, GVA, Employment, Productivity |
 | 👥 Demography | Population, Deaths, Births, Ageing |
+| 🌍 Migration | Foreign population, residence permits, asylum, citizenship, returns |
 | 🚓 Crime | Recorded offences by ICCS |
 | 🏨 Tourism | Nights spent at accommodation |
 | 🚗 Transport | Road accidents, modal split (passengers/freight), vehicle stock, networks |
@@ -34,7 +35,7 @@ SQL-queryable.
 
 Full list: [docs/dataset-registry.md](docs/dataset-registry.md)
 
-> **Note**: all 34 datasets use the declarative SDMX pipeline (`type: sdmx`,
+> **Note**: all 41 datasets use the declarative SDMX pipeline (`type: sdmx`,
 > agency ESTAT). The two historical script-based connectors
 > (`eurostat-bd-hgnace2-r3-nuts3`, `eurostat-pop-nuts3`) were migrated to SDMX
 > and now produce the same analytical marts as the rest of the catalog.
@@ -46,6 +47,7 @@ Full list: [docs/dataset-registry.md](docs/dataset-registry.md)
 - **Which regions have the oldest population?** And the youngest?
 - **Where is R&D spending growing fastest in Europe?**
 - **How does the poverty risk differ between northern and southern Europe?**
+- **How does Italy's migration profile compare with the rest of the EU?** (foreign population, permits, asylum, returns)
 
 ## Three ways to access
 

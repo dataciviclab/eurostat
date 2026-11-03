@@ -1,0 +1,157 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_migr_imm1ctz"
+  source_id: "eurostat"
+  tags: [immigrazione, flussi, immigrazioni, migranti, eurostat, benchmark]
+  category: immigrazione
+  description: "Immigrazioni per cittadinanza: chi entra e si stabilisce (flusso reale, non solo sbarchi). Paese, 1998-2025, confronto UE."
+  years: [2026]
+  time_coverage:
+    start_year: 1998
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_migr_imm1ctz"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "MIGR_IMM1CTZ"
+        # Solo totali per eta e sesso (i mart non usano l'incrocio). A
+        # age=TOTAL i due agedef (REACH/COMPLET) coincidono: si tiene REACH.
+        filters:
+          age: "TOTAL"
+          sex: "T"
+          agedef: "REACH"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: agedef
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: AGEDEF
+  - name: age
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: AGE
+  - name: sex
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: SEX
+  - name: citizen
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: CITIZEN
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+    # Tipi espliciti: col filtro sex=T il solo valore 'T' viene sniffato come
+    # BOOLEAN da DuckDB (auto_detect) → conversione errata. Dichiararli evita
+    # il problema (stesso motivo di eurostat-pop-nuts3).
+    columns:
+      freq: VARCHAR
+      citizen: VARCHAR
+      agedef: VARCHAR
+      age: VARCHAR
+      unit: VARCHAR
+      sex: VARCHAR
+      geo: VARCHAR
+      year: INTEGER
+      value: DOUBLE
+      flag: VARCHAR
+  required_columns:
+    - freq
+    - citizen
+    - agedef
+    - age
+    - unit
+    - sex
+    - geo
+    - year
+    - freq_label_en
+    - unit_label_en
+    - citizen_label_en
+    - agedef_label_en
+    - age_label_en
+    - sex_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - nuts_parent_code
+    - nuts_parent_label_en
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 5000
+    not_null:
+      - geo
+      - year
+      - citizen
+      - agedef
+
+mart:
+  tables:
+    - name: "mart_immigrazioni"
+      sql: "sql/mart_immigrazioni.sql"
+    - name: "mart_benchmark_it"
+      sql: "sql/mart_benchmark_it.sql"
+  required_tables:
+    - "mart_immigrazioni"
+    - "mart_benchmark_it"
+  validate:
+    table_rules:
+      mart_immigrazioni:
+        required_columns: [year, geo, country, citizen, immigrazioni]
+        primary_key: [year, geo, citizen]
+        min_rows: 500
+      mart_benchmark_it:
+        required_columns: [year, valore_it, posizione_it, n_paesi, valore_ue27, quota_it_su_ue27_pct]
+        primary_key: [year]
+        min_rows: 15
+
+validation:
+  fail_on_error: true
+
+# Cubo grande (tutti i paesi x tutte le cittadinanze x eta x sesso):
+# alza il limite DuckDB per evitare OOM nel clean.
+duckdb:
+  memory_limit: "4GB"
+
+registry:
+  dataflow: "MIGR_IMM1CTZ"
+  theme: "Immigration by age group, sex and citizenship"
+  nuts_level: 0
+  dimensions: ["freq", "citizen", "agedef", "age", "unit", "sex", "geo"]
+  description: "Immigration by age group, sex and citizenship"

@@ -1,0 +1,125 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_migr_resvalid"
+  source_id: "eurostat"
+  tags: [immigrazione, permessi-soggiorno, migranti, eurostat, benchmark]
+  category: immigrazione
+  description: "Permessi di soggiorno validi al 31 dicembre per motivo (famiglia, studio, lavoro, protezione, altro) e durata. Paese, 2008-2025, confronto UE."
+  years: [2026]
+  time_coverage:
+    start_year: 2008
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_migr_resvalid"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "MIGR_RESVALID"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: reason
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: REASON
+  - name: duration
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: DURATION
+  - name: citizen
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: CITIZEN
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  required_columns:
+    - freq
+    - duration
+    - reason
+    - unit
+    - citizen
+    - geo
+    - year
+    - duration_label_en
+    - reason_label_en
+    - citizen_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 5000
+    not_null:
+      - geo
+      - year
+      - citizen
+      - reason
+
+mart:
+  tables:
+    - name: "mart_permessi_validi"
+      sql: "sql/mart_permessi_validi.sql"
+    - name: "mart_benchmark_it"
+      sql: "sql/mart_benchmark_it.sql"
+  required_tables:
+    - "mart_permessi_validi"
+    - "mart_benchmark_it"
+  validate:
+    table_rules:
+      mart_permessi_validi:
+        required_columns: [year, geo, country, reason, permessi_validi]
+        primary_key: [year, geo, reason]
+        min_rows: 200
+      mart_benchmark_it:
+        required_columns: [year, reason, quota_it_pct, quota_ue27_pct, delta_pp]
+        primary_key: [year, reason]
+        min_rows: 40
+
+validation:
+  fail_on_error: true
+
+# Cubo grande (tutti i paesi): alza il limite DuckDB per evitare OOM nel clean.
+duckdb:
+  memory_limit: "4GB"
+
+registry:
+  dataflow: "MIGR_RESVALID"
+  theme: "All valid permits by reason, length of validity and citizenship on 31 December"
+  nuts_level: 0
+  dimensions: ["freq", "duration", "reason", "unit", "citizen", "geo"]
+  description: "All valid permits by reason and length of validity on 31 December of each year"

@@ -1,0 +1,149 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_migr_eirtn"
+  source_id: "eurostat"
+  tags: [immigrazione, rimpatri, allontanamenti, migranti, eurostat, benchmark]
+  category: immigrazione
+  description: "Cittadini di paesi terzi allontanati dopo un ordine di lasciare il territorio, per cittadinanza e destinazione. Paese, 2008-2025, confronto UE."
+  years: [2026]
+  time_coverage:
+    start_year: 2008
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_migr_eirtn"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "MIGR_EIRTN"
+        # Solo totali per eta e sesso (i mart non usano l'incrocio).
+        filters:
+          age: "TOTAL"
+          sex: "T"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: c_dest
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: C_DEST
+  - name: age
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: AGE
+  - name: sex
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: SEX
+  - name: citizen
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: CITIZEN
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+    # Tipi espliciti: col filtro sex=T il solo valore 'T' viene sniffato come
+    # BOOLEAN da DuckDB (auto_detect) → conversione errata. Dichiararli evita
+    # il problema (stesso motivo di eurostat-pop-nuts3).
+    columns:
+      freq: VARCHAR
+      citizen: VARCHAR
+      c_dest: VARCHAR
+      age: VARCHAR
+      sex: VARCHAR
+      unit: VARCHAR
+      geo: VARCHAR
+      year: INTEGER
+      value: DOUBLE
+      flag: VARCHAR
+  required_columns:
+    - freq
+    - citizen
+    - c_dest
+    - age
+    - sex
+    - unit
+    - geo
+    - year
+    - citizen_label_en
+    - c_dest_label_en
+    - age_label_en
+    - sex_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 5000
+    not_null:
+      - geo
+      - year
+      - citizen
+
+mart:
+  tables:
+    - name: "mart_rimpatri"
+      sql: "sql/mart_rimpatri.sql"
+    - name: "mart_benchmark_it"
+      sql: "sql/mart_benchmark_it.sql"
+  required_tables:
+    - "mart_rimpatri"
+    - "mart_benchmark_it"
+  validate:
+    table_rules:
+      mart_rimpatri:
+        required_columns: [year, geo, country, c_dest, rimpatri]
+        primary_key: [year, geo, c_dest]
+        min_rows: 100
+      mart_benchmark_it:
+        required_columns: [year, valore_it, posizione_it, n_paesi, valore_ue27, quota_it_su_ue27_pct]
+        primary_key: [year]
+        min_rows: 15
+
+validation:
+  fail_on_error: true
+
+# Cubo grande (tutti i paesi): alza il limite DuckDB per evitare OOM nel clean.
+duckdb:
+  memory_limit: "4GB"
+
+registry:
+  dataflow: "MIGR_EIRTN"
+  theme: "Third country nationals returned following an order to leave - annual data"
+  nuts_level: 0
+  dimensions: ["freq", "citizen", "c_dest", "age", "sex", "unit", "geo"]
+  description: "Third country nationals returned following an order to leave, by citizenship and destination"
