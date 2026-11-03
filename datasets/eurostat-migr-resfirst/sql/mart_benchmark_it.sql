@@ -1,11 +1,23 @@
 -- mart_benchmark_it.sql: Italia vs UE27 — composizione dei primi permessi per
 -- motivo, in quota % (confronto di composizione, non di volume).
 --
--- quota_*_pct = permessi del motivo / totale permessi del paese, per anno.
+-- quota_*_pct = permessi del motivo / TOTALE ufficiale del paese (riga
+-- reason='TOTAL'), per anno. Per resfirst i 4 motivi (FAM/EDUC/EMP/OTH) sommano
+-- gia' al totale, ma si usa comunque la riga TOTAL per coerenza col resto.
 -- delta_pp = quota IT - quota UE27 (punti percentuali). Non imputiamo: se un
 -- lato manca, il delta resta NULL.
 
-WITH base AS (
+WITH tot AS (
+    SELECT year, geo, value AS tot
+    FROM clean_input
+    WHERE unit = 'PER'
+      AND citizen = 'TOTAL'
+      AND duration = 'TOTAL'
+      AND geo IN ('IT', 'EU27_2020')
+      AND reason = 'TOTAL'
+      AND value IS NOT NULL
+),
+base AS (
     SELECT year, geo, reason, value
     FROM clean_input
     WHERE unit = 'PER'
@@ -14,11 +26,6 @@ WITH base AS (
       AND geo IN ('IT', 'EU27_2020')
       AND reason IN ('FAM', 'EDUC', 'EMP', 'OTH')
       AND value IS NOT NULL
-),
-tot AS (
-    SELECT year, geo, SUM(value) AS tot
-    FROM base
-    GROUP BY year, geo
 ),
 quota AS (
     SELECT b.year, b.geo, b.reason, b.value / NULLIF(t.tot, 0) * 100 AS quota_pct

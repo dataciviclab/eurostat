@@ -6,11 +6,11 @@ dataset:
   source_id: "eurostat"
   tags: [immigrazione, flussi, emigrazioni, mobilita, eurostat, benchmark]
   category: immigrazione
-  description: "Emigrazioni per cittadinanza: chi parte dal paese. Paese, 1998-2025, confronto UE. Complementa le immigrazioni."
+  description: "Emigrazioni per cittadinanza: chi parte dal paese. Paese, 1998-2024, confronto UE. Complementa le immigrazioni."
   years: [2026]
   time_coverage:
     start_year: 1998
-    end_year: 2025
+    end_year: 2024
 
 raw:
   output_policy: overwrite
