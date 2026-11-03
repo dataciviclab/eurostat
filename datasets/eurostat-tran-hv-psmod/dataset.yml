@@ -1,0 +1,105 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_tran_hv_psmod"
+  source_id: "eurostat"
+  tags: [trasporti, mobilita, modal-split, passeggeri, dipendenza-auto, eurostat, benchmark]
+  category: trasporti
+  description: "Modal split del trasporto passeggeri: quota % dei passeggeri-km per modo (auto, bus, treno). Nazionale, 1990-2024, confronto UE."
+  years: [2026]
+  time_coverage:
+    start_year: 1990
+    end_year: 2024
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_tran_hv_psmod"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "TRAN_HV_PSMOD"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: vehicle
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: VEHICLE
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  required_columns:
+    - freq
+    - unit
+    - vehicle
+    - geo
+    - year
+    - vehicle_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 500
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_modal_split"
+      sql: "sql/mart_modal_split.sql"
+    - name: "mart_benchmark_it"
+      sql: "sql/mart_benchmark_it.sql"
+  required_tables:
+    - "mart_modal_split"
+    - "mart_benchmark_it"
+  validate:
+    table_rules:
+      mart_modal_split:
+        required_columns: [year, country, quota_auto_pct, quota_bus_pct, quota_treno_pct]
+        primary_key: [year, country]
+        min_rows: 300
+      mart_benchmark_it:
+        required_columns: [year, modo, quota_it_pct, quota_ue27_pct, delta_pp]
+        primary_key: [year, modo]
+        min_rows: 60
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "TRAN_HV_PSMOD"
+  theme: "Modal split of passenger transport"
+  nuts_level: 0
+  dimensions: ["freq", "unit", "vehicle", "geo"]
+  description: "Share of passenger-kilometres by transport mode (percentage)"

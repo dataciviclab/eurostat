@@ -34,6 +34,10 @@
 | `eurostat-business-demography-nuts3` | `BD_SIZE_R3` | Business / Business demography by size class | 5 (freq, indic_sb, sizeclas, nace_r2, geo) | 120,955 | ✅ |
 | `eurostat-energy-poverty-nuts2` | `ILC_MDES01_R` | Social / Inability to keep home warm (energy poverty) | 3 (freq, unit, geo) | 1,840 | ✅ |
 | `eurostat-employment-sex-age-nuts2` | `LFST_R_LFE2EMPRT` | Labour / Employment rate by sex and age | 5 (freq, unit, sex, age, geo) | 497,664 | ✅ |
+| `eurostat-tran-hv-psmod` | `TRAN_HV_PSMOD` | Transport / Modal split passengers | 4 (freq, unit, vehicle, geo) | 5,180 | ✅ |
+| `eurostat-tran-hv-frmod` | `TRAN_HV_FRMOD` | Transport / Modal split freight | 4 (freq, unit, tra_mode, geo) | 2,480 | ✅ |
+| `eurostat-tran-r-vehst` | `TRAN_R_VEHST` | Transport / Road vehicle stock | 4 (freq, vehicle, unit, geo) | 190,295 | ✅ |
+| `eurostat-tran-r-net` | `TRAN_R_NET` | Transport / Road, rail and waterway networks | 4 (freq, tra_infr, unit, geo) | 136,115 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)

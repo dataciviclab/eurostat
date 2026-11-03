@@ -1,0 +1,105 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_tran_r_vehst"
+  source_id: "eurostat"
+  tags: [trasporti, parco-veicolare, auto, moto, camion, motorizzazione, eurostat, nuts2]
+  category: trasporti
+  description: "Parco veicolare per tipo (auto, bus, camion, moto): valori assoluti e per 1000 abitanti, paese e regioni NUTS, 1990-2024. ATTENZIONE: il per-1000 regionale è gonfiato dalle sedi di noleggio/leasing (Valle d'Aosta, Trento) — vedi commento in sql/mart_auto_per_1000.sql."
+  years: [2026]
+  time_coverage:
+    start_year: 1990
+    end_year: 2024
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_tran_r_vehst"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "TRAN_R_VEHST"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: vehicle
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: VEHICLE
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  required_columns:
+    - freq
+    - unit
+    - vehicle
+    - geo
+    - year
+    - vehicle_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 2000
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_parco"
+      sql: "sql/mart_parco.sql"
+    - name: "mart_auto_per_1000"
+      sql: "sql/mart_auto_per_1000.sql"
+  required_tables:
+    - "mart_parco"
+    - "mart_auto_per_1000"
+  validate:
+    table_rules:
+      mart_parco:
+        required_columns: [year, geo, country, nuts_level, vehicle, veicoli]
+        primary_key: [year, geo, vehicle]
+        min_rows: 1000
+      mart_auto_per_1000:
+        required_columns: [year, geo, country, nuts_level, auto_per_1000]
+        primary_key: [year, geo]
+        min_rows: 300
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "TRAN_R_VEHST"
+  theme: "Road vehicle stock"
+  nuts_level: 2
+  dimensions: ["freq", "vehicle", "unit", "geo"]
+  description: "Stock of road vehicles by type, absolute and per thousand inhabitants"

@@ -1,0 +1,105 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_tran_hv_frmod"
+  source_id: "eurostat"
+  tags: [trasporti, merci, modal-split, logistica, gomma, ferro, eurostat, benchmark]
+  category: trasporti
+  description: "Modal split del trasporto merci: quota % delle tonnellate-km su strada, ferrovia e vie navigabili. Nazionale, 2005-2024, confronto UE."
+  years: [2026]
+  time_coverage:
+    start_year: 2005
+    end_year: 2024
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_tran_hv_frmod"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "TRAN_HV_FRMOD"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: tra_mode
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: TRA_MODE
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  required_columns:
+    - freq
+    - unit
+    - tra_mode
+    - geo
+    - year
+    - tra_mode_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 300
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_modal_split_merci"
+      sql: "sql/mart_modal_split_merci.sql"
+    - name: "mart_benchmark_it"
+      sql: "sql/mart_benchmark_it.sql"
+  required_tables:
+    - "mart_modal_split_merci"
+    - "mart_benchmark_it"
+  validate:
+    table_rules:
+      mart_modal_split_merci:
+        required_columns: [year, country, quota_strada_pct, quota_ferrovia_pct]
+        primary_key: [year, country]
+        min_rows: 200
+      mart_benchmark_it:
+        required_columns: [year, modo, quota_it_pct, quota_ue27_pct, delta_pp]
+        primary_key: [year, modo]
+        min_rows: 40
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "TRAN_HV_FRMOD"
+  theme: "Modal split of freight transport"
+  nuts_level: 0
+  dimensions: ["freq", "unit", "tra_mode", "geo"]
+  description: "Share of tonne-kilometres by transport mode (percentage)"

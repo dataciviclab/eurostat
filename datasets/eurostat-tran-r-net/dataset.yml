@@ -1,0 +1,105 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_tran_r_net"
+  source_id: "eurostat"
+  tags: [trasporti, infrastrutture, autostrade, ferrovia, rete, eurostat, nuts2]
+  category: trasporti
+  description: "Estensione delle reti di trasporto: autostrade, altre strade, linee ferroviarie (totali, elettrificate, doppio binario), vie navigabili. Paese e regioni NUTS, 1990-2024."
+  years: [2026]
+  time_coverage:
+    start_year: 1990
+    end_year: 2024
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_tran_r_net"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "TRAN_R_NET"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: tra_infr
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: TRA_INFR
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  required_columns:
+    - freq
+    - unit
+    - tra_infr
+    - geo
+    - year
+    - tra_infr_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 2000
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_rete"
+      sql: "sql/mart_rete.sql"
+    - name: "mart_rete_it_regioni"
+      sql: "sql/mart_rete_it_regioni.sql"
+  required_tables:
+    - "mart_rete"
+    - "mart_rete_it_regioni"
+  validate:
+    table_rules:
+      mart_rete:
+        required_columns: [year, geo, country, nuts_level, tra_infr, km]
+        primary_key: [year, geo, tra_infr]
+        min_rows: 1000
+      mart_rete_it_regioni:
+        required_columns: [year, geo, tra_infr, km]
+        primary_key: [year, geo, tra_infr]
+        min_rows: 50
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "TRAN_R_NET"
+  theme: "Transport networks length"
+  nuts_level: 2
+  dimensions: ["freq", "tra_infr", "unit", "geo"]
+  description: "Length of road, rail and inland waterway networks"
