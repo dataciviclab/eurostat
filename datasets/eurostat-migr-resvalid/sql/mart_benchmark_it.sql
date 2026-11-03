@@ -4,7 +4,7 @@
 -- quota_*_pct = permessi del motivo / TOTALE ufficiale del paese (riga
 -- reason='TOTAL'), per anno. NON si usa SUM(reason): per l'UE27 RFG/SPROT non
 -- sono pubblicati, quindi la somma dei motivi presenti e' minore del totale e
--- gonfierebbe le quote (es. FAM 2023: +3,95 pp con la somma vs +9,56 pp col
+-- gonfierebbe le quote (es. FAM 2024: +3,95 pp con la somma vs +9,56 pp col
 -- totale ufficiale).
 -- delta_pp = quota IT - quota UE27 (punti percentuali). Non imputiamo: dove un
 -- motivo non e' pubblicato per un lato, la quota resta NULL.

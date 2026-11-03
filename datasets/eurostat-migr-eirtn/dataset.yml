@@ -126,7 +126,7 @@ mart:
   validate:
     table_rules:
       mart_rimpatri:
-        required_columns: [year, geo, country, c_dest, rimpatri]
+        required_columns: [year, geo, country, c_dest, is_total, rimpatri]
         primary_key: [year, geo, c_dest]
         min_rows: 100
       mart_benchmark_it:

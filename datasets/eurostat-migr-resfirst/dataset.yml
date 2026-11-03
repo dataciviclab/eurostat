@@ -102,7 +102,7 @@ mart:
   validate:
     table_rules:
       mart_permessi_primi:
-        required_columns: [year, geo, country, reason, permessi]
+        required_columns: [year, geo, country, reason, is_total, permessi]
         primary_key: [year, geo, reason]
         min_rows: 200
       mart_benchmark_it:

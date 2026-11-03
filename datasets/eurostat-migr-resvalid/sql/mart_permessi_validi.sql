@@ -1,10 +1,12 @@
 -- mart_permessi_validi.sql: permessi di soggiorno validi al 31/12 per motivo,
 -- paese x anno.
 --
--- Slice: citizen = TOTAL, duration = TOTAL. `reason` e' il solo dettaglio
--- (FAM/EDUC/EMP/RFG/SPROT/OTH): la riga aggregata TOTAL e' ESCLUSA, come nei
--- mart per cittadinanza, per non far sommare il doppio. Attenzione: per l'UE27
--- RFG/SPROT non sono pubblicati, quindi la somma dei motivi < totale ufficiale.
+-- Slice: citizen = TOTAL, duration = TOTAL.
+-- Il mart contiene il dettaglio per motivo (FAM/EDUC/EMP/RFG/SPROT/OTH) E la
+-- riga aggregata ufficiale (reason='TOTAL', `is_total = true`): per sommare i
+-- motivi filtrare `WHERE NOT is_total`, altrimenti si conta il doppio. La riga
+-- TOTAL e' l'unico totale affidabile per l'UE27 (dove RFG/SPROT non sono
+-- pubblicati, quindi la somma dei motivi e' minore del totale).
 -- `country` NULL sugli aggregati (EU27_2020, ...).
 
 SELECT
@@ -15,11 +17,11 @@ SELECT
     country,
     reason,
     reason_label_en,
+    (reason = 'TOTAL') AS is_total,
     CAST(value AS BIGINT) AS permessi_validi
 FROM clean_input
 WHERE unit = 'PER'
   AND citizen = 'TOTAL'
   AND duration = 'TOTAL'
-  AND reason != 'TOTAL'
   AND value IS NOT NULL
 ORDER BY year, geo, reason
