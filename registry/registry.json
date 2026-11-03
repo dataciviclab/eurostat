@@ -2665,6 +2665,1144 @@
       ]
     },
     {
+      "slug": "eurostat_migr_acq",
+      "name": "Eurostat Migr Acq",
+      "description": "Acquisizioni di cittadinanza per ex cittadinanza. Paese, 1998-2024, confronto UE. Esito finale del percorso di integrazione.",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 1998,
+        "end": 2024
+      },
+      "tags": [
+        "immigrazione",
+        "cittadinanza",
+        "naturalizzazioni",
+        "migranti",
+        "eurostat",
+        "benchmark"
+      ],
+      "category": "immigrazione",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "agedef",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "agedef_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_migr_acq/2026/eurostat_migr_acq_2026_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_migr_acq__mart_cittadinanze_acquisite",
+        "eurostat_migr_acq__mart_benchmark_it"
+      ]
+    },
+    {
+      "slug": "eurostat_migr_eirtn",
+      "name": "Eurostat Migr Eirtn",
+      "description": "Cittadini di paesi terzi allontanati dopo un ordine di lasciare il territorio, per cittadinanza e destinazione. Paese, 2008-2025, confronto UE.",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2008,
+        "end": 2025
+      },
+      "tags": [
+        "immigrazione",
+        "rimpatri",
+        "allontanamenti",
+        "migranti",
+        "eurostat",
+        "benchmark"
+      ],
+      "category": "immigrazione",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "c_dest",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "c_dest_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_migr_eirtn/2026/eurostat_migr_eirtn_2026_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_migr_eirtn__mart_rimpatri",
+        "eurostat_migr_eirtn__mart_benchmark_it"
+      ]
+    },
+    {
+      "slug": "eurostat_migr_emi1ctz",
+      "name": "Eurostat Migr Emi1Ctz",
+      "description": "Emigrazioni per cittadinanza: chi parte dal paese. Paese, 1998-2024, confronto UE. Complementa le immigrazioni.",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 1998,
+        "end": 2024
+      },
+      "tags": [
+        "immigrazione",
+        "flussi",
+        "emigrazioni",
+        "mobilita",
+        "eurostat",
+        "benchmark"
+      ],
+      "category": "immigrazione",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "agedef",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "agedef_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_migr_emi1ctz/2026/eurostat_migr_emi1ctz_2026_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_migr_emi1ctz__mart_emigrazioni",
+        "eurostat_migr_emi1ctz__mart_benchmark_it"
+      ]
+    },
+    {
+      "slug": "eurostat_migr_imm1ctz",
+      "name": "Eurostat Migr Imm1Ctz",
+      "description": "Immigrazioni per cittadinanza: chi entra e si stabilisce (flusso reale, non solo sbarchi). Paese, 1998-2024, confronto UE.",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 1998,
+        "end": 2024
+      },
+      "tags": [
+        "immigrazione",
+        "flussi",
+        "immigrazioni",
+        "migranti",
+        "eurostat",
+        "benchmark"
+      ],
+      "category": "immigrazione",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "agedef",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "agedef_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_migr_imm1ctz/2026/eurostat_migr_imm1ctz_2026_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_migr_imm1ctz__mart_immigrazioni",
+        "eurostat_migr_imm1ctz__mart_benchmark_it"
+      ]
+    },
+    {
+      "slug": "eurostat_migr_pop1ctz",
+      "name": "Eurostat Migr Pop1Ctz",
+      "description": "Popolazione residente al 1 gennaio per cittadinanza. Paese, 1998-2025, confronto UE. Base per la quota di stranieri residenti.",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 1998,
+        "end": 2025
+      },
+      "tags": [
+        "immigrazione",
+        "popolazione-straniera",
+        "cittadinanza",
+        "migranti",
+        "eurostat",
+        "benchmark"
+      ],
+      "category": "immigrazione",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_migr_pop1ctz/2026/eurostat_migr_pop1ctz_2026_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_migr_pop1ctz__mart_popolazione_straniera",
+        "eurostat_migr_pop1ctz__mart_popolazione_cittadinanza"
+      ]
+    },
+    {
+      "slug": "eurostat_migr_resfirst",
+      "name": "Eurostat Migr Resfirst",
+      "description": "Primi permessi di soggiorno rilasciati per motivo (famiglia, studio, lavoro, altro) e durata di validità. Paese, 2008-2025, confronto UE.",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2008,
+        "end": 2025
+      },
+      "tags": [
+        "immigrazione",
+        "permessi-soggiorno",
+        "migranti",
+        "eurostat",
+        "benchmark"
+      ],
+      "category": "immigrazione",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "reason",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "duration",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "reason_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "duration_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_migr_resfirst/2026/eurostat_migr_resfirst_2026_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_migr_resfirst__mart_permessi_primi",
+        "eurostat_migr_resfirst__mart_benchmark_it"
+      ]
+    },
+    {
+      "slug": "eurostat_migr_resvalid",
+      "name": "Eurostat Migr Resvalid",
+      "description": "Permessi di soggiorno validi al 31 dicembre per motivo (famiglia, studio, lavoro, protezione, altro) e durata. Paese, 2008-2025, confronto UE.",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2008,
+        "end": 2025
+      },
+      "tags": [
+        "immigrazione",
+        "permessi-soggiorno",
+        "migranti",
+        "eurostat",
+        "benchmark"
+      ],
+      "category": "immigrazione",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "duration",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "reason",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "duration_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "reason_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_migr_resvalid/2026/eurostat_migr_resvalid_2026_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_migr_resvalid__mart_permessi_validi",
+        "eurostat_migr_resvalid__mart_benchmark_it"
+      ]
+    },
+    {
       "slug": "eurostat_nama10_gdp",
       "name": "Eurostat Nama10 Gdp",
       "description": "GDP and main components by expenditure approach (national level)",
@@ -5684,6 +6822,146 @@
       }
     },
     {
+      "slug": "eurostat_migr_acq__mart_benchmark_it",
+      "dataset": "eurostat_migr_acq",
+      "table": "mart_benchmark_it",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_acq/2026/mart_benchmark_it.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_acq__mart_cittadinanze_acquisite",
+      "dataset": "eurostat_migr_acq",
+      "table": "mart_cittadinanze_acquisite",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_acq/2026/mart_cittadinanze_acquisite.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_eirtn__mart_benchmark_it",
+      "dataset": "eurostat_migr_eirtn",
+      "table": "mart_benchmark_it",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_eirtn/2026/mart_benchmark_it.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_eirtn__mart_rimpatri",
+      "dataset": "eurostat_migr_eirtn",
+      "table": "mart_rimpatri",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_eirtn/2026/mart_rimpatri.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_emi1ctz__mart_benchmark_it",
+      "dataset": "eurostat_migr_emi1ctz",
+      "table": "mart_benchmark_it",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_emi1ctz/2026/mart_benchmark_it.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_emi1ctz__mart_emigrazioni",
+      "dataset": "eurostat_migr_emi1ctz",
+      "table": "mart_emigrazioni",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_emi1ctz/2026/mart_emigrazioni.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_imm1ctz__mart_benchmark_it",
+      "dataset": "eurostat_migr_imm1ctz",
+      "table": "mart_benchmark_it",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_imm1ctz/2026/mart_benchmark_it.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_imm1ctz__mart_immigrazioni",
+      "dataset": "eurostat_migr_imm1ctz",
+      "table": "mart_immigrazioni",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_imm1ctz/2026/mart_immigrazioni.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_pop1ctz__mart_popolazione_cittadinanza",
+      "dataset": "eurostat_migr_pop1ctz",
+      "table": "mart_popolazione_cittadinanza",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_pop1ctz/2026/mart_popolazione_cittadinanza.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_pop1ctz__mart_popolazione_straniera",
+      "dataset": "eurostat_migr_pop1ctz",
+      "table": "mart_popolazione_straniera",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_pop1ctz/2026/mart_popolazione_straniera.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_resfirst__mart_benchmark_it",
+      "dataset": "eurostat_migr_resfirst",
+      "table": "mart_benchmark_it",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_resfirst/2026/mart_benchmark_it.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_resfirst__mart_permessi_primi",
+      "dataset": "eurostat_migr_resfirst",
+      "table": "mart_permessi_primi",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_resfirst/2026/mart_permessi_primi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_resvalid__mart_benchmark_it",
+      "dataset": "eurostat_migr_resvalid",
+      "table": "mart_benchmark_it",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_resvalid/2026/mart_benchmark_it.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_resvalid__mart_permessi_validi",
+      "dataset": "eurostat_migr_resvalid",
+      "table": "mart_permessi_validi",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_resvalid/2026/mart_permessi_validi.parquet",
+        "multi_file": false
+      }
+    },
+    {
       "slug": "eurostat_nama10_gdp__mart_expenditure",
       "dataset": "eurostat_nama10_gdp",
       "table": "mart_expenditure",
@@ -6797,6 +8075,223 @@
       }
     },
     {
+      "id": "eurostat_migr_acq",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_migr_acq",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261103T150451Z_b0b46516",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 297135,
+          "clean": 297135,
+          "mart": 144229
+        },
+        "output_bytes": {
+          "raw": 10690101,
+          "clean": 222340,
+          "mart": 369437
+        },
+        "started_at": "2026-11-03T15:04:51.647600+00:00",
+        "finished_at": "2026-11-03T15:04:58.513976+00:00",
+        "duration_seconds": 6.866
+      }
+    },
+    {
+      "id": "eurostat_migr_eirtn",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_migr_eirtn",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261103T150500Z_f28e25af",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 213552,
+          "clean": 213552,
+          "mart": 1109
+        },
+        "output_bytes": {
+          "raw": 7815636,
+          "clean": 101188,
+          "mart": 7405
+        },
+        "started_at": "2026-11-03T15:05:00.172379+00:00",
+        "finished_at": "2026-11-03T15:05:05.518700+00:00",
+        "duration_seconds": 5.346
+      }
+    },
+    {
+      "id": "eurostat_migr_emi1ctz",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_migr_emi1ctz",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261103T150505Z_f429b5bc",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 233280,
+          "clean": 233280,
+          "mart": 113840
+        },
+        "output_bytes": {
+          "raw": 8367646,
+          "clean": 218745,
+          "mart": 307551
+        },
+        "started_at": "2026-11-03T15:05:05.620565+00:00",
+        "finished_at": "2026-11-03T15:05:11.611761+00:00",
+        "duration_seconds": 5.991
+      }
+    },
+    {
+      "id": "eurostat_migr_imm1ctz",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_migr_imm1ctz",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261103T150511Z_9d822422",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 261009,
+          "clean": 261009,
+          "mart": 117910
+        },
+        "output_bytes": {
+          "raw": 9375425,
+          "clean": 301000,
+          "mart": 339568
+        },
+        "started_at": "2026-11-03T15:05:11.715327+00:00",
+        "finished_at": "2026-11-03T15:05:17.643723+00:00",
+        "duration_seconds": 5.928
+      }
+    },
+    {
+      "id": "eurostat_migr_pop1ctz",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_migr_pop1ctz",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261103T150517Z_9426db18",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 236208,
+          "clean": 236208,
+          "mart": 113408
+        },
+        "output_bytes": {
+          "raw": 7214705,
+          "clean": 366687,
+          "mart": 426869
+        },
+        "started_at": "2026-11-03T15:05:17.741647+00:00",
+        "finished_at": "2026-11-03T15:05:23.261332+00:00",
+        "duration_seconds": 5.52
+      }
+    },
+    {
+      "id": "eurostat_migr_resfirst",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_migr_resfirst",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261103T150524Z_8a2523cd",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 2242440,
+          "clean": 2242440,
+          "mart": 2947
+        },
+        "output_bytes": {
+          "raw": 76141909,
+          "clean": 4888726,
+          "mart": 14222
+        },
+        "started_at": "2026-11-03T15:05:24.914124+00:00",
+        "finished_at": "2026-11-03T15:05:51.409707+00:00",
+        "duration_seconds": 26.496
+      }
+    },
+    {
+      "id": "eurostat_migr_resvalid",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_migr_resvalid",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261103T150551Z_ec6805cd",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 2967552,
+          "clean": 2967552,
+          "mart": 3761
+        },
+        "output_bytes": {
+          "raw": 97953667,
+          "clean": 7370171,
+          "mart": 18071
+        },
+        "started_at": "2026-11-03T15:05:51.503706+00:00",
+        "finished_at": "2026-11-03T15:06:26.244292+00:00",
+        "duration_seconds": 34.741
+      }
+    },
+    {
       "id": "eurostat_nama10_gdp",
       "source_id": "eurostat",
       "status": "ok",
@@ -7469,6 +8964,48 @@
             "semantic_type": "country_code"
           },
           {
+            "slug": "eurostat_migr_acq",
+            "name": "Eurostat Migr Acq",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_migr_eirtn",
+            "name": "Eurostat Migr Eirtn",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_migr_emi1ctz",
+            "name": "Eurostat Migr Emi1Ctz",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_migr_imm1ctz",
+            "name": "Eurostat Migr Imm1Ctz",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_migr_pop1ctz",
+            "name": "Eurostat Migr Pop1Ctz",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_migr_resfirst",
+            "name": "Eurostat Migr Resfirst",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_migr_resvalid",
+            "name": "Eurostat Migr Resvalid",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
             "slug": "eurostat_nama10_gdp",
             "name": "Eurostat Nama10 Gdp",
             "column": "country",
@@ -7578,7 +9115,7 @@
           }
         ],
         "types": {
-          "country_code": 38
+          "country_code": 45
         }
       },
       "Provincia (tramite NUTS3)": {
@@ -7820,6 +9357,90 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_migr_acq",
+            "name": "Eurostat Migr Acq",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_acq",
+            "name": "Eurostat Migr Acq",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_eirtn",
+            "name": "Eurostat Migr Eirtn",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_eirtn",
+            "name": "Eurostat Migr Eirtn",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_emi1ctz",
+            "name": "Eurostat Migr Emi1Ctz",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_emi1ctz",
+            "name": "Eurostat Migr Emi1Ctz",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_imm1ctz",
+            "name": "Eurostat Migr Imm1Ctz",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_imm1ctz",
+            "name": "Eurostat Migr Imm1Ctz",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_pop1ctz",
+            "name": "Eurostat Migr Pop1Ctz",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_pop1ctz",
+            "name": "Eurostat Migr Pop1Ctz",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_resfirst",
+            "name": "Eurostat Migr Resfirst",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_resfirst",
+            "name": "Eurostat Migr Resfirst",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_resvalid",
+            "name": "Eurostat Migr Resvalid",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_resvalid",
+            "name": "Eurostat Migr Resvalid",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_nama10_gdp",
             "name": "Eurostat Nama10 Gdp",
             "column": "geo",
@@ -8037,7 +9658,7 @@
           }
         ],
         "types": {
-          "nuts_code": 75
+          "nuts_code": 89
         }
       },
       "Tempo": {
@@ -8165,6 +9786,48 @@
             "semantic_type": "year"
           },
           {
+            "slug": "eurostat_migr_acq",
+            "name": "Eurostat Migr Acq",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_migr_eirtn",
+            "name": "Eurostat Migr Eirtn",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_migr_emi1ctz",
+            "name": "Eurostat Migr Emi1Ctz",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_migr_imm1ctz",
+            "name": "Eurostat Migr Imm1Ctz",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_migr_pop1ctz",
+            "name": "Eurostat Migr Pop1Ctz",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_migr_resfirst",
+            "name": "Eurostat Migr Resfirst",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_migr_resvalid",
+            "name": "Eurostat Migr Resvalid",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
             "slug": "eurostat_nama10_gdp",
             "name": "Eurostat Nama10 Gdp",
             "column": "year",
@@ -8280,7 +9943,7 @@
           }
         ],
         "types": {
-          "year": 38,
+          "year": 45,
           "month": 1
         }
       }
