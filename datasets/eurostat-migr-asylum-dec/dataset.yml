@@ -1,0 +1,160 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_migr_asylum_dec"
+  source_id: "eurostat"
+  tags: [immigrazione, asilo, decisioni-asilo, migranti, eurostat, benchmark]
+  category: immigrazione
+  description: "Decisioni di primo grado sulle domande di protezione internazionale (accolte, dinieghi, status) per cittadinanza. Paese, 2008-2025, confronto UE."
+  years: [2026]
+  time_coverage:
+    start_year: 2008
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_migr_asylum_dec"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "MIGR_ASYDCFSTA"
+        # Solo totali per eta e sesso (i mart non usano l'incrocio).
+        filters:
+          age: "TOTAL"
+          sex: "T"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: decision
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: DECISION
+  - name: age
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: AGE
+  - name: sex
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: SEX
+  - name: citizen
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: CITIZEN
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+    # Tipi espliciti: col filtro sex=T il solo valore 'T' viene sniffato come
+    # BOOLEAN da DuckDB (auto_detect) → conversione errata. Dichiararli evita
+    # il problema (stesso motivo di eurostat-pop-nuts3 / eurostat-migr-acq).
+    columns:
+      freq: VARCHAR
+      unit: VARCHAR
+      citizen: VARCHAR
+      sex: VARCHAR
+      age: VARCHAR
+      decision: VARCHAR
+      geo: VARCHAR
+      year: INTEGER
+      value: DOUBLE
+      flag: VARCHAR
+  required_columns:
+    - freq
+    - unit
+    - citizen
+    - sex
+    - age
+    - decision
+    - geo
+    - year
+    - freq_label_en
+    - unit_label_en
+    - citizen_label_en
+    - sex_label_en
+    - age_label_en
+    - decision_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 5000
+    not_null:
+      - geo
+      - year
+      - citizen
+      - decision
+
+mart:
+  tables:
+    - name: "mart_decisioni_asilo"
+      sql: "sql/mart_decisioni_asilo.sql"
+    - name: "mart_decisioni_asilo_cittadinanza"
+      sql: "sql/mart_decisioni_asilo_cittadinanza.sql"
+    - name: "mart_benchmark_it"
+      sql: "sql/mart_benchmark_it.sql"
+  required_tables:
+    - "mart_decisioni_asilo"
+    - "mart_decisioni_asilo_cittadinanza"
+    - "mart_benchmark_it"
+  validate:
+    table_rules:
+      mart_decisioni_asilo:
+        required_columns: [year, geo, country, decision, is_total, decisioni]
+        primary_key: [year, geo, decision]
+        min_rows: 200
+      mart_decisioni_asilo_cittadinanza:
+        required_columns: [year, geo, country, citizen, decisioni]
+        primary_key: [year, geo, citizen]
+        min_rows: 1000
+      mart_benchmark_it:
+        required_columns: [year, decisioni_it, posizione_it, n_paesi, decisioni_ue27, quota_it_su_ue27_pct, tasso_riconoscimento_it_pct, tasso_riconoscimento_ue27_pct]
+        primary_key: [year]
+        min_rows: 15
+
+validation:
+  fail_on_error: true
+
+# Cubo grande (tutti i paesi x tutte le cittadinanze): alza il limite DuckDB
+# per evitare OOM nel clean.
+duckdb:
+  memory_limit: "4GB"
+
+registry:
+  dataflow: "MIGR_ASYDCFSTA"
+  theme: "First instance decisions on applications by citizenship, age and sex"
+  nuts_level: 0
+  dimensions: ["freq", "unit", "citizen", "sex", "age", "decision", "geo"]
+  description: "First instance decisions on asylum applications by citizenship, age and sex"

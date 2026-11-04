@@ -1,0 +1,160 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_migr_asylum_app"
+  source_id: "eurostat"
+  tags: [immigrazione, asilo, richiedenti-asilo, migranti, eurostat, benchmark]
+  category: immigrazione
+  description: "Domande di protezione internazionale (prima istanza e reiterate) per cittadinanza del richiedente. Paese, 2008-2025, confronto UE."
+  years: [2026]
+  time_coverage:
+    start_year: 2008
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_migr_asylum_app"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "MIGR_ASYAPPCTZA"
+        # Solo totali per eta e sesso (i mart non usano l'incrocio).
+        filters:
+          age: "TOTAL"
+          sex: "T"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: applicant
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: APPLICANT
+  - name: age
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: AGE
+  - name: sex
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: SEX
+  - name: citizen
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: CITIZEN
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+    # Tipi espliciti: col filtro sex=T il solo valore 'T' viene sniffato come
+    # BOOLEAN da DuckDB (auto_detect) → conversione errata. Dichiararli evita
+    # il problema (stesso motivo di eurostat-pop-nuts3 / eurostat-migr-acq).
+    columns:
+      freq: VARCHAR
+      citizen: VARCHAR
+      applicant: VARCHAR
+      sex: VARCHAR
+      unit: VARCHAR
+      age: VARCHAR
+      geo: VARCHAR
+      year: INTEGER
+      value: DOUBLE
+      flag: VARCHAR
+  required_columns:
+    - freq
+    - citizen
+    - applicant
+    - sex
+    - unit
+    - age
+    - geo
+    - year
+    - freq_label_en
+    - unit_label_en
+    - citizen_label_en
+    - applicant_label_en
+    - sex_label_en
+    - age_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 5000
+    not_null:
+      - geo
+      - year
+      - citizen
+      - applicant
+
+mart:
+  tables:
+    - name: "mart_domande_asilo"
+      sql: "sql/mart_domande_asilo.sql"
+    - name: "mart_domande_asilo_cittadinanza"
+      sql: "sql/mart_domande_asilo_cittadinanza.sql"
+    - name: "mart_benchmark_it"
+      sql: "sql/mart_benchmark_it.sql"
+  required_tables:
+    - "mart_domande_asilo"
+    - "mart_domande_asilo_cittadinanza"
+    - "mart_benchmark_it"
+  validate:
+    table_rules:
+      mart_domande_asilo:
+        required_columns: [year, geo, country, applicant, is_total, domande]
+        primary_key: [year, geo, applicant]
+        min_rows: 200
+      mart_domande_asilo_cittadinanza:
+        required_columns: [year, geo, country, citizen, domande]
+        primary_key: [year, geo, citizen]
+        min_rows: 1000
+      mart_benchmark_it:
+        required_columns: [year, domande_it, posizione_it, n_paesi, domande_ue27, quota_it_su_ue27_pct]
+        primary_key: [year]
+        min_rows: 15
+
+validation:
+  fail_on_error: true
+
+# Cubo grande (tutti i paesi x tutte le cittadinanze): alza il limite DuckDB
+# per evitare OOM nel clean.
+duckdb:
+  memory_limit: "4GB"
+
+registry:
+  dataflow: "MIGR_ASYAPPCTZA"
+  theme: "Asylum applicants by type of applicant, citizenship, age and sex"
+  nuts_level: 0
+  dimensions: ["freq", "citizen", "applicant", "sex", "unit", "age", "geo"]
+  description: "Asylum applicants by type of applicant, citizenship, age and sex"
