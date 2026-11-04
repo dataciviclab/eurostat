@@ -132,7 +132,7 @@ mart:
   validate:
     table_rules:
       mart_decisioni_asilo:
-        required_columns: [year, geo, country, decision, is_total, decisioni]
+        required_columns: [year, geo, country, decision, is_aggregato, decisioni]
         primary_key: [year, geo, decision]
         min_rows: 200
       mart_decisioni_asilo_cittadinanza:

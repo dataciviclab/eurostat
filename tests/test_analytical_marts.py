@@ -2367,13 +2367,13 @@ class TestMigrAsylumAppFacts:
         assert row[0] == 158605
         assert row[1] + row[2] == row[0]
 
-    def test_is_total_only_on_total_row(self):
-        """is_total is true only for applicant = 'TOTAL' (no double counting)."""
+    def test_is_aggregato_only_on_total_row(self):
+        """is_aggregato is true only for applicant = 'TOTAL' (no double counting)."""
         f = _skip_if_missing("eurostat_migr_asylum_app", "mart_domande_asilo")
         n_bad = duckdb.sql(
             f"""
             SELECT COUNT(*) FROM read_parquet('{f}')
-            WHERE is_total <> (applicant = 'TOTAL')
+            WHERE is_aggregato <> (applicant = 'TOTAL')
             """
         ).fetchone()[0]
         assert n_bad == 0
@@ -2412,16 +2412,31 @@ class TestMigrAsylumDecFacts:
         assert row is not None
         assert row[1] + row[2] + row[3] == row[0]
 
-    def test_is_total_only_on_total_row(self):
-        """is_total is true only for decision = 'TOTAL' (no double counting)."""
+    def test_is_aggregato_covers_pos_subtotal(self):
+        """is_aggregato marks both TOTAL and the POS subtotal (no double counting)."""
         f = _skip_if_missing("eurostat_migr_asylum_dec", "mart_decisioni_asilo")
         n_bad = duckdb.sql(
             f"""
             SELECT COUNT(*) FROM read_parquet('{f}')
-            WHERE is_total <> (decision = 'TOTAL')
+            WHERE is_aggregato <> (decision IN ('TOTAL', 'POS'))
             """
         ).fetchone()[0]
         assert n_bad == 0
+
+    def test_leaf_decisions_sum_to_total(self):
+        """Leaves (RFG+HUM+SPROT+NEG) sum to TOTAL within rounding (IT 2024)."""
+        f = _skip_if_missing("eurostat_migr_asylum_dec", "mart_decisioni_asilo")
+        row = duckdb.sql(
+            f"""
+            SELECT
+                MAX(decisioni) FILTER (WHERE decision = 'TOTAL') AS tot,
+                SUM(decisioni) FILTER (WHERE NOT is_aggregato) AS foglie
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND geo = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        assert abs(row[0] - row[1]) <= 10
 
     def test_italy_recognition_rate_below_eu27(self):
         """Italy 2024 recognition ~35.9%, well below EU27 ~51%."""
