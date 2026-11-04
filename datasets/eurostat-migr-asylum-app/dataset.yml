@@ -6,7 +6,7 @@ dataset:
   source_id: "eurostat"
   tags: [immigrazione, asilo, richiedenti-asilo, migranti, eurostat, benchmark]
   category: immigrazione
-  description: "Domande di protezione internazionale (prima istanza e reiterate) per cittadinanza del richiedente. Paese, 2008-2025, confronto UE."
+  description: "Domande di protezione internazionale (prima istanza dal 2014, reiterate dal 2021) per cittadinanza del richiedente. Paese, 2008-2025, confronto UE."
   years: [2026]
   time_coverage:
     start_year: 2008
