@@ -136,7 +136,7 @@ mart:
         primary_key: [year, geo, decision]
         min_rows: 200
       mart_decisioni_asilo_cittadinanza:
-        required_columns: [year, geo, country, citizen, decisioni]
+        required_columns: [year, geo, country, citizen, decisioni, accolte, dinieghi, tasso_riconoscimento_pct]
         primary_key: [year, geo, citizen]
         min_rows: 1000
       mart_benchmark_it:

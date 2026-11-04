@@ -2435,3 +2435,20 @@ class TestMigrAsylumDecFacts:
         assert row is not None
         assert 34 <= row[0] <= 38
         assert 50 <= row[1] <= 53
+
+    def test_citizenship_recognition_rate_2024(self):
+        """Italy 2024: Burkina Faso ~98.8% vs Morocco ~10.1% (per citizenship)."""
+        f = _skip_if_missing(
+            "eurostat_migr_asylum_dec", "mart_decisioni_asilo_cittadinanza"
+        )
+        rows = dict(
+            duckdb.sql(
+                f"""
+                SELECT citizen, tasso_riconoscimento_pct
+                FROM read_parquet('{f}')
+                WHERE year = 2024 AND geo = 'IT' AND citizen IN ('BF', 'MA')
+                """
+            ).fetchall()
+        )
+        assert 97 <= rows["BF"] <= 100
+        assert 8 <= rows["MA"] <= 12
