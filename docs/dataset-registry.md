@@ -25,6 +25,7 @@
 | `eurostat-area-nuts3` | `REG_AREA3` | Geography / Area by land use category | 4 (freq, landuse, unit, geo) | 65,240 | ✅ |
 | `eurostat-physicians-nuts2` | `HLTH_RS_PHYSREG` | Health / Physicians by NUTS2 region | 3 (freq, unit, geo) | 27,360 | ✅ |
 | `eurostat-hospital-beds-nuts2` | `HLTH_RS_BDSRG2` | Health / Available beds in hospitals by NUTS2 region | 3 (freq, unit, geo) | 25,888 | ✅ |
+| `eurostat-ltc-beds` | `HLTH_RS_BDLTC` | Health / Beds in nursing and residential long-term care facilities (country) | 3 (freq, unit, geo) | 5,106 | ✅ |
 | `eurostat-poverty-risk-nuts2` | `ILC_LI41` | Social / At-risk-of-poverty rate by NUTS2 region | 3 (freq, unit, geo) | 9,016 | ✅ |
 | `eurostat-early-school-leavers-nuts2` | `EDAT_LFSE_16` | Education / Early leavers from education by NUTS2 region | 5 (freq, unit, sex, age, geo) | 39,936 | ✅ |
 | `eurostat-rd-expenditure-nuts2` | `RD_E_GERDREG` | Innovation / GERD by sector of performance by NUTS2 region | 4 (freq, sectperf, unit, geo) | 909,090 | ✅ |

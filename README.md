@@ -10,7 +10,7 @@ SQL-queryable.
 
 | | |
 |---|---|
-| **Published datasets** | **21 NUTS3 + 9 NUTS2 + 11 country/NUTS** (41 total) |
+| **Published datasets** | **21 NUTS3 + 9 NUTS2 + 12 country/NUTS** (42 total) |
 | **Period** | 1980 — 2025 (varies by dataset) |
 | **Coverage** | All EU + EFTA + candidate countries |
 | **Format** | Parquet on public GCS |
@@ -28,14 +28,14 @@ SQL-queryable.
 | 🌡️ Climate | Heating/cooling degree days |
 | 🌱 Environment | Soil erosion |
 | 🏢 Business | Enterprise births/deaths |
-| 🏥 Health | Physicians, Hospital beds |
+| 🏥 Health | Physicians, Hospital beds, Long-term care beds |
 | 📊 Social | Poverty risk, Income inequality |
 | 📚 Education | Early school leaving, Tertiary attainment |
 | 🔬 Innovation | R&D expenditure |
 
 Full list: [docs/dataset-registry.md](docs/dataset-registry.md)
 
-> **Note**: all 41 datasets use the declarative SDMX pipeline (`type: sdmx`,
+> **Note**: all 42 datasets use the declarative SDMX pipeline (`type: sdmx`,
 > agency ESTAT). The two historical script-based connectors
 > (`eurostat-bd-hgnace2-r3-nuts3`, `eurostat-pop-nuts3`) were migrated to SDMX
 > and now produce the same analytical marts as the rest of the catalog.
