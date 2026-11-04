@@ -2345,3 +2345,125 @@ class TestEmploymentSexAgeNuts2Facts:
         assert row is not None
         assert row[0] == 1999
         assert row[1] == 2025
+
+
+class TestMigrAsylumAppFacts:
+    """Verified facts for eurostat-migr-asylum-app (domande di asilo)."""
+
+    def test_italy_2024_total_is_frst_plus_sseq(self):
+        """Italy 2024 = 158,605 domande; FRST + SSEQ = TOTAL."""
+        f = _skip_if_missing("eurostat_migr_asylum_app", "mart_domande_asilo")
+        row = duckdb.sql(
+            f"""
+            SELECT
+                MAX(domande) FILTER (WHERE applicant = 'TOTAL') AS total,
+                MAX(domande) FILTER (WHERE applicant = 'FRST') AS frst,
+                MAX(domande) FILTER (WHERE applicant = 'SSEQ') AS sseq
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND geo = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 158605
+        assert row[1] + row[2] == row[0]
+
+    def test_is_aggregato_only_on_total_row(self):
+        """is_aggregato is true only for applicant = 'TOTAL' (no double counting)."""
+        f = _skip_if_missing("eurostat_migr_asylum_app", "mart_domande_asilo")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*) FROM read_parquet('{f}')
+            WHERE is_aggregato <> (applicant = 'TOTAL')
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+    def test_italy_third_eu27_2024(self):
+        """Italy is 3rd in the EU27 by asylum applications in 2024 (~15.9%)."""
+        f = _skip_if_missing("eurostat_migr_asylum_app", "mart_benchmark_it")
+        row = duckdb.sql(
+            f"""
+            SELECT posizione_it, quota_it_su_ue27_pct
+            FROM read_parquet('{f}') WHERE year = 2024
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 3
+        assert 15 <= row[1] <= 17
+
+
+class TestMigrAsylumDecFacts:
+    """Verified facts for eurostat-migr-asylum-dec (decisioni di asilo)."""
+
+    def test_positive_is_sum_of_substatuses(self):
+        """POS = POS_RFG + POS_HUM + POS_SPROT (Italy 2024)."""
+        f = _skip_if_missing("eurostat_migr_asylum_dec", "mart_decisioni_asilo")
+        row = duckdb.sql(
+            f"""
+            SELECT
+                MAX(decisioni) FILTER (WHERE decision = 'POS') AS pos,
+                MAX(decisioni) FILTER (WHERE decision = 'POS_RFG') AS rfg,
+                MAX(decisioni) FILTER (WHERE decision = 'POS_HUM') AS hum,
+                MAX(decisioni) FILTER (WHERE decision = 'POS_SPROT') AS sprot
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND geo = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[1] + row[2] + row[3] == row[0]
+
+    def test_is_aggregato_covers_pos_subtotal(self):
+        """is_aggregato marks both TOTAL and the POS subtotal (no double counting)."""
+        f = _skip_if_missing("eurostat_migr_asylum_dec", "mart_decisioni_asilo")
+        n_bad = duckdb.sql(
+            f"""
+            SELECT COUNT(*) FROM read_parquet('{f}')
+            WHERE is_aggregato <> (decision IN ('TOTAL', 'POS'))
+            """
+        ).fetchone()[0]
+        assert n_bad == 0
+
+    def test_leaf_decisions_sum_to_total(self):
+        """Leaves (RFG+HUM+SPROT+NEG) sum to TOTAL within rounding (IT 2024)."""
+        f = _skip_if_missing("eurostat_migr_asylum_dec", "mart_decisioni_asilo")
+        row = duckdb.sql(
+            f"""
+            SELECT
+                MAX(decisioni) FILTER (WHERE decision = 'TOTAL') AS tot,
+                SUM(decisioni) FILTER (WHERE NOT is_aggregato) AS foglie
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND geo = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        assert abs(row[0] - row[1]) <= 10
+
+    def test_italy_recognition_rate_below_eu27(self):
+        """Italy 2024 recognition ~35.9%, well below EU27 ~51%."""
+        f = _skip_if_missing("eurostat_migr_asylum_dec", "mart_benchmark_it")
+        row = duckdb.sql(
+            f"""
+            SELECT tasso_riconoscimento_it_pct, tasso_riconoscimento_ue27_pct
+            FROM read_parquet('{f}') WHERE year = 2024
+            """
+        ).fetchone()
+        assert row is not None
+        assert 34 <= row[0] <= 38
+        assert 50 <= row[1] <= 53
+
+    def test_citizenship_recognition_rate_2024(self):
+        """Italy 2024: Burkina Faso ~98.8% vs Morocco ~10.1% (per citizenship)."""
+        f = _skip_if_missing(
+            "eurostat_migr_asylum_dec", "mart_decisioni_asilo_cittadinanza"
+        )
+        rows = dict(
+            duckdb.sql(
+                f"""
+                SELECT citizen, tasso_riconoscimento_pct
+                FROM read_parquet('{f}')
+                WHERE year = 2024 AND geo = 'IT' AND citizen IN ('BF', 'MA')
+                """
+            ).fetchall()
+        )
+        assert 97 <= rows["BF"] <= 100
+        assert 8 <= rows["MA"] <= 12

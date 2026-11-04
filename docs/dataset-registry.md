@@ -45,6 +45,8 @@
 | `eurostat-migr-eirtn` | `MIGR_EIRTN` | Migration / Returns following an order to leave | 7 (freq, citizen, c_dest, age, sex, unit, geo) | 213,552 | ✅ |
 | `eurostat-migr-imm1ctz` | `MIGR_IMM1CTZ` | Migration / Immigration by citizenship | 7 (freq, citizen, agedef, age, unit, sex, geo) | 261,009 | ✅ |
 | `eurostat-migr-emi1ctz` | `MIGR_EMI1CTZ` | Migration / Emigration by citizenship | 7 (freq, citizen, agedef, age, unit, sex, geo) | 233,280 | ✅ |
+| `eurostat-migr-asylum-app` | `MIGR_ASYAPPCTZA` | Migration / Asylum applicants by type of applicant | 7 (freq, citizen, applicant, sex, unit, age, geo) | 374,508 | ✅ |
+| `eurostat-migr-asylum-dec` | `MIGR_ASYDCFSTA` | Migration / First instance decisions on asylum applications | 7 (freq, unit, citizen, sex, age, decision, geo) | 756,432 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
