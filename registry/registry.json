@@ -2665,6 +2665,128 @@
       ]
     },
     {
+      "slug": "eurostat_ltc_beds",
+      "name": "Eurostat Ltc Beds",
+      "description": "Beds in nursing and other residential long-term care facilities",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 1980,
+        "end": 2025
+      },
+      "tags": [
+        "sanita",
+        "rsa",
+        "posti-letto",
+        "long-term-care",
+        "eurostat",
+        "benchmark",
+        "paesi"
+      ],
+      "category": "sanita",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "BIGINT",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_ltc_beds/2026/eurostat_ltc_beds_2026_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_ltc_beds__mart_geo_benchmark",
+        "eurostat_ltc_beds__mart_sintesi",
+        "eurostat_ltc_beds__mart_trend"
+      ]
+    },
+    {
       "slug": "eurostat_migr_acq",
       "name": "Eurostat Migr Acq",
       "description": "Acquisizioni di cittadinanza per ex cittadinanza. Paese, 1998-2024, confronto UE. Esito finale del percorso di integrazione.",
@@ -7160,6 +7282,36 @@
       }
     },
     {
+      "slug": "eurostat_ltc_beds__mart_geo_benchmark",
+      "dataset": "eurostat_ltc_beds",
+      "table": "mart_geo_benchmark",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_ltc_beds/2026/mart_geo_benchmark.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_ltc_beds__mart_sintesi",
+      "dataset": "eurostat_ltc_beds",
+      "table": "mart_sintesi",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_ltc_beds/2026/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_ltc_beds__mart_trend",
+      "dataset": "eurostat_ltc_beds",
+      "table": "mart_trend",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_ltc_beds/2026/mart_trend.parquet",
+        "multi_file": false
+      }
+    },
+    {
       "slug": "eurostat_migr_acq__mart_benchmark_it",
       "dataset": "eurostat_migr_acq",
       "table": "mart_benchmark_it",
@@ -8473,6 +8625,37 @@
       }
     },
     {
+      "id": "eurostat_ltc_beds",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_ltc_beds",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261104T191757Z_ce54737e",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 5106,
+          "clean": 5106,
+          "mart": 3643
+        },
+        "output_bytes": {
+          "raw": 113472,
+          "clean": 17838,
+          "mart": 45003
+        },
+        "started_at": "2026-11-04T19:17:57.547613+00:00",
+        "finished_at": "2026-11-04T19:17:59.003383+00:00",
+        "duration_seconds": 1.456
+      }
+    },
+    {
       "id": "eurostat_migr_acq",
       "source_id": "eurostat",
       "status": "ok",
@@ -9424,6 +9607,12 @@
             "semantic_type": "country_code"
           },
           {
+            "slug": "eurostat_ltc_beds",
+            "name": "Eurostat Ltc Beds",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
             "slug": "eurostat_migr_acq",
             "name": "Eurostat Migr Acq",
             "column": "country",
@@ -9587,7 +9776,7 @@
           }
         ],
         "types": {
-          "country_code": 47
+          "country_code": 48
         }
       },
       "Provincia (tramite NUTS3)": {
@@ -9829,6 +10018,18 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_ltc_beds",
+            "name": "Eurostat Ltc Beds",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_ltc_beds",
+            "name": "Eurostat Ltc Beds",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_migr_acq",
             "name": "Eurostat Migr Acq",
             "column": "geo",
@@ -10154,7 +10355,7 @@
           }
         ],
         "types": {
-          "nuts_code": 93
+          "nuts_code": 95
         }
       },
       "Tempo": {
@@ -10278,6 +10479,12 @@
           {
             "slug": "eurostat_labour_productivity_nuts3",
             "name": "Eurostat Labour Productivity Nuts3",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_ltc_beds",
+            "name": "Eurostat Ltc Beds",
             "column": "year",
             "semantic_type": "year"
           },
@@ -10451,7 +10658,7 @@
           }
         ],
         "types": {
-          "year": 47,
+          "year": 48,
           "month": 1
         }
       }
