@@ -6,7 +6,7 @@
 --   • absolute and relative delta over the observed window
 --   • CAGR (compound annual growth rate) when the window has > 1 year
 --
--- HAB_P only: relative growth of beds per 100k is the comparable metric.
+-- P_HTHAB only: relative growth of beds per 100k is the comparable metric.
 
 WITH yearly AS (
     SELECT
@@ -17,7 +17,7 @@ WITH yearly AS (
         year,
         value
     FROM clean_input
-    WHERE unit = 'HAB_P'
+    WHERE unit = 'P_HTHAB'
       AND value IS NOT NULL
       AND country IS NOT NULL
 ),

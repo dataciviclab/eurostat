@@ -14,7 +14,7 @@
 -- TR, RS, ME, MK, AL, ...) stay in the mart with NULL benchmark so they
 -- never distort EU averages/ranks/percentiles.
 --
--- Benchmark columns are computed for unit = 'HAB_P' (physicians per 100k
+-- Benchmark columns are computed for unit = 'P_HTHAB' (physicians per 100k
 -- inhabitants — the standard comparable measure). NR (absolute count) rows
 -- carry no benchmark so they never distort the comparison.
 
@@ -53,29 +53,29 @@ SELECT
     b.unit,
     b.unit_label_en,
     b.value,
-    -- EU average for the same year, NUTS level and unit (HAB_P only, meaningful benchmark)
+    -- EU average for the same year, NUTS level and unit (P_HTHAB only, meaningful benchmark)
     CASE
-        WHEN b.unit = 'HAB_P' THEN ROUND(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit), 2)
+        WHEN b.unit = 'P_HTHAB' THEN ROUND(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit), 2)
         ELSE NULL
     END AS media_eu_value,
     -- Country average for the same year, NUTS level and unit
     CASE
-        WHEN b.unit = 'HAB_P' THEN ROUND(AVG(b.value) OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit), 2)
+        WHEN b.unit = 'P_HTHAB' THEN ROUND(AVG(b.value) OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit), 2)
         ELSE NULL
     END AS media_paese_value,
     -- Percentile within the EU (same year, nuts_level, unit)
     CASE
-        WHEN b.unit = 'HAB_P' AND b.is_eu THEN ROUND(PERCENT_RANK() OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.is_eu ORDER BY b.value), 4)
+        WHEN b.unit = 'P_HTHAB' AND b.is_eu THEN ROUND(PERCENT_RANK() OVER (PARTITION BY b.year, b.nuts_level, b.unit, b.is_eu ORDER BY b.value), 4)
         ELSE NULL
     END AS percentile_eu,
     -- National rank (1 = most physicians per 100k in the country, same year/level/unit)
     CASE
-        WHEN b.unit = 'HAB_P' THEN RANK() OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit ORDER BY b.value DESC)
+        WHEN b.unit = 'P_HTHAB' THEN RANK() OVER (PARTITION BY b.year, b.country, b.nuts_level, b.unit ORDER BY b.value DESC)
         ELSE NULL
     END AS rank_nazionale,
     -- % distance from the EU27 average (same year, nuts_level, unit)
     CASE
-        WHEN b.unit = 'HAB_P' THEN ROUND(
+        WHEN b.unit = 'P_HTHAB' THEN ROUND(
             (b.value - AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit))
             / NULLIF(ABS(AVG(b.value) FILTER (WHERE b.is_eu) OVER (PARTITION BY b.year, b.nuts_level, b.unit)), 0) * 100, 1)
         ELSE NULL

@@ -60,14 +60,14 @@ ANALYTICAL_DATASETS = [
     },
     {
         "slug": "eurostat_physicians_nuts2",
-        "benchmark_unit": "HAB_P",
+        "benchmark_unit": "P_HTHAB",
         "other_unit": "NR",
         "nuts_level": "NUTS2",
         "other_unit_geo": "ITC4",
     },
     {
         "slug": "eurostat_hospital_beds_nuts2",
-        "benchmark_unit": "HAB_P",
+        "benchmark_unit": "P_HTHAB",
         "other_unit": "NR",
         "nuts_level": "NUTS2",
         "other_unit_geo": "ITC4",
@@ -769,7 +769,7 @@ class TestPhysiciansNuts2Facts:
             SELECT value, media_eu_value, media_paese_value, percentile_eu,
                    rank_nazionale, distanza_media_eu_pct
             FROM read_parquet('{f}')
-            WHERE year = 2024 AND unit = 'HAB_P' AND country = 'IT'
+            WHERE year = 2024 AND unit = 'P_HTHAB' AND country = 'IT'
               AND geo = 'ITH3'  -- Veneto
             """
         ).fetchone()
@@ -804,7 +804,7 @@ class TestPhysiciansNuts2Facts:
     def test_italy_2021_break_visible(self):
         """The 2021 Italian reporting break is present in the data.
 
-        Time-bomb: Italy drops from ~250 to ~185 physicians/100k in 2021
+        Time-bomb: Italy jumps from ~400 to ~542 physicians/100k in 2021
         (definition change in Italian reporting, verified against DE/ES/NL/PL
         which show no such break). The mart must preserve it — this test
         documents the break so it is never silently "smoothed out".
@@ -820,45 +820,45 @@ class TestPhysiciansNuts2Facts:
             """
         ).fetchone()
         assert y2020 is not None and y2021 is not None
-        assert y2021 < y2020 * 0.85  # break > 15% in a single year
+        assert y2021 > y2020 * 1.15  # break > 15% in a single year
 
 
 class TestHospitalBedsNuts2Facts:
     """Verified facts for eurostat-hospital-beds-nuts2."""
 
-    def test_italy_above_eu_average(self):
-        """Italy is above the EU average in beds per 100k (2024).
+    def test_italy_below_eu_average(self):
+        """Italy is below the EU average in beds per 100k (2024).
 
-        Verified: IT country value ~322 vs EU NUTS2 average ~262 — the
-        opposite pattern of physicians, where Italy is below the EU.
+        Verified: IT country value ~312 vs EU NUTS2 average ~477 — the
+        opposite pattern of physicians, where Italy is above the EU.
         """
         f = _skip_if_missing("eurostat_hospital_beds_nuts2", "mart_geo_benchmark")
         it_row, eu_row = duckdb.sql(
             f"""
             SELECT
                 (SELECT ROUND(value, 0) FROM read_parquet('{f}')
-                 WHERE year = 2024 AND unit = 'HAB_P' AND geo = 'IT'),
+                 WHERE year = 2024 AND unit = 'P_HTHAB' AND geo = 'IT'),
                 (SELECT ROUND(media_eu_value, 0) FROM read_parquet('{f}')
-                 WHERE year = 2024 AND unit = 'HAB_P' AND nuts_level = 'NUTS2'
+                 WHERE year = 2024 AND unit = 'P_HTHAB' AND nuts_level = 'NUTS2'
                    AND country = 'IT' LIMIT 1)
             """
         ).fetchone()
         assert it_row is not None and eu_row is not None
-        assert it_row > eu_row
+        assert it_row < eu_row
 
-    def test_calabria_top_italy(self):
-        """Calabria has the most beds per 100k among Italian regions (2024)."""
+    def test_emilia_romagna_top_italy(self):
+        """Emilia-Romagna has the most beds per 100k among Italian regions (2024)."""
         f = _skip_if_missing("eurostat_hospital_beds_nuts2", "mart_geo_benchmark")
         row = duckdb.sql(
             f"""
             SELECT rank_nazionale
             FROM read_parquet('{f}')
-            WHERE year = 2024 AND unit = 'HAB_P' AND nuts_level = 'NUTS2'
-              AND country = 'IT' AND geo = 'ITF6'
+            WHERE year = 2024 AND unit = 'P_HTHAB' AND nuts_level = 'NUTS2'
+              AND country = 'IT' AND geo = 'ITH5'
             """
         ).fetchone()
         assert row is not None
-        assert row[0] == 1  # Calabria ranked 1st in Italy
+        assert row[0] == 1  # Emilia-Romagna ranked 1st in Italy
 
     def test_window_is_long(self):
         """Hospital beds series spans multiple decades (>= 15 years observed)."""
