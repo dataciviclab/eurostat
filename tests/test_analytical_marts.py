@@ -73,6 +73,13 @@ ANALYTICAL_DATASETS = [
         "other_unit_geo": "ITC4",
     },
     {
+        "slug": "eurostat_ltc_beds",
+        "benchmark_unit": "P_HTHAB",
+        "other_unit": "NR",
+        "nuts_level": "country",
+        "other_unit_geo": "IT",
+    },
+    {
         "slug": "eurostat_crime_nuts3",
         "benchmark_unit": "P_HTHAB",
         "other_unit": "NR",
@@ -870,6 +877,52 @@ class TestHospitalBedsNuts2Facts:
         ).fetchone()
         assert row is not None
         assert row[0] >= 15
+
+
+class TestLtcBedsFacts:
+    """Verified facts for eurostat-ltc-beds (HLTH_RS_BDLTC, country-level)."""
+
+    def test_italy_beds_per_100k_2024(self):
+        """Italy has ~531 LTC beds per 100k in 2024, rank 20 in the EU27."""
+        f = _skip_if_missing("eurostat_ltc_beds", "mart_sintesi")
+        row = duckdb.sql(
+            f"""
+            SELECT posti_letto_per_100k, rank_eu
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND country = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == pytest.approx(531.1, abs=0.1)
+        assert row[1] == 20
+
+    def test_eu_average_2024(self):
+        """EU27 average is ~749 LTC beds per 100k in 2024."""
+        f = _skip_if_missing("eurostat_ltc_beds", "mart_geo_benchmark")
+        row = duckdb.sql(
+            f"""
+            SELECT DISTINCT media_eu_value
+            FROM read_parquet('{f}')
+            WHERE year = 2024 AND unit = 'P_HTHAB'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == pytest.approx(749.31, abs=0.1)
+
+    def test_italy_trend_window(self):
+        """Italy series spans 2000-2024 with positive CAGR (~3.7%/year)."""
+        f = _skip_if_missing("eurostat_ltc_beds", "mart_trend")
+        row = duckdb.sql(
+            f"""
+            SELECT first_year, last_year, cagr_pct
+            FROM read_parquet('{f}')
+            WHERE geo = 'IT'
+            """
+        ).fetchone()
+        assert row is not None
+        assert row[0] == 2000
+        assert row[1] == 2024
+        assert row[2] == pytest.approx(3.72, abs=0.01)
 
 
 class TestCrimeNuts3Facts:
