@@ -1,12 +1,12 @@
 -- mart_sintesi — Hospital beds by country: national aggregates and ranking.
 --
 -- One row per (country, year). Built from NUTS2-level data of each country:
---   • hospital beds per 100k inhabitants (country-level HAB_P value)
+--   • hospital beds per 100k inhabitants (country-level P_HTHAB value)
 --   • rank among EU27 countries by beds per 100k
 --   • % distance from the EU27 country average
 --
 -- The country geo (geo = country code, nuts_level = 'country') holds the
--- official HAB_P value; NUTS2 rows are the regional breakdown.
+-- official P_HTHAB value; NUTS2 rows are the regional breakdown.
 
 WITH eu_countries AS (
     SELECT unnest(['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','EL',
@@ -18,7 +18,7 @@ country_values AS (
         year,
         geo AS country,
         geo IN (SELECT code FROM eu_countries) AS is_eu,
-        MAX(CASE WHEN unit = 'HAB_P' THEN value END) AS posti_letto_per_100k
+        MAX(CASE WHEN unit = 'P_HTHAB' THEN value END) AS posti_letto_per_100k
     FROM clean_input
     WHERE nuts_level = 'country'
       AND value IS NOT NULL
