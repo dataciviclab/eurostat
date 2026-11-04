@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repo": "eurostat",
   "source_repo": "dataciviclab/eurostat",
-  "updated_at": "2026-11-03",
+  "updated_at": "2026-11-04",
   "datasets": [
     {
       "slug": "eurostat_area_nuts3",
@@ -2830,6 +2830,344 @@
       "mart_refs": [
         "eurostat_migr_acq__mart_cittadinanze_acquisite",
         "eurostat_migr_acq__mart_benchmark_it"
+      ]
+    },
+    {
+      "slug": "eurostat_migr_asylum_app",
+      "name": "Eurostat Migr Asylum App",
+      "description": "Domande di protezione internazionale (prima istanza dal 2008, reiterate dal 2021) per cittadinanza del richiedente. Paese, 2008-2025, confronto UE.",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2008,
+        "end": 2025
+      },
+      "tags": [
+        "immigrazione",
+        "asilo",
+        "richiedenti-asilo",
+        "migranti",
+        "eurostat",
+        "benchmark"
+      ],
+      "category": "immigrazione",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "applicant",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "applicant_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_migr_asylum_app/2026/eurostat_migr_asylum_app_2026_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_migr_asylum_app__mart_domande_asilo",
+        "eurostat_migr_asylum_app__mart_domande_asilo_cittadinanza",
+        "eurostat_migr_asylum_app__mart_benchmark_it"
+      ]
+    },
+    {
+      "slug": "eurostat_migr_asylum_dec",
+      "name": "Eurostat Migr Asylum Dec",
+      "description": "Decisioni di primo grado sulle domande di protezione internazionale (accolte, dinieghi, status) per cittadinanza. Paese, 2008-2025, confronto UE.",
+      "source": "",
+      "source_id": "eurostat",
+      "period": {
+        "start": 2008,
+        "end": 2025
+      },
+      "tags": [
+        "immigrazione",
+        "asilo",
+        "decisioni-asilo",
+        "migranti",
+        "eurostat",
+        "benchmark"
+      ],
+      "category": "immigrazione",
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "decision",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "citizen_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sex_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "age_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "decision_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/eurostat/eurostat_migr_asylum_dec/2026/eurostat_migr_asylum_dec_2026_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "eurostat_migr_asylum_dec__mart_decisioni_asilo",
+        "eurostat_migr_asylum_dec__mart_decisioni_asilo_cittadinanza",
+        "eurostat_migr_asylum_dec__mart_benchmark_it"
       ]
     },
     {
@@ -6842,6 +7180,66 @@
       }
     },
     {
+      "slug": "eurostat_migr_asylum_app__mart_benchmark_it",
+      "dataset": "eurostat_migr_asylum_app",
+      "table": "mart_benchmark_it",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_asylum_app/2026/mart_benchmark_it.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_asylum_app__mart_domande_asilo",
+      "dataset": "eurostat_migr_asylum_app",
+      "table": "mart_domande_asilo",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_asylum_app/2026/mart_domande_asilo.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_asylum_app__mart_domande_asilo_cittadinanza",
+      "dataset": "eurostat_migr_asylum_app",
+      "table": "mart_domande_asilo_cittadinanza",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_asylum_app/2026/mart_domande_asilo_cittadinanza.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_asylum_dec__mart_benchmark_it",
+      "dataset": "eurostat_migr_asylum_dec",
+      "table": "mart_benchmark_it",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_asylum_dec/2026/mart_benchmark_it.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_asylum_dec__mart_decisioni_asilo",
+      "dataset": "eurostat_migr_asylum_dec",
+      "table": "mart_decisioni_asilo",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_asylum_dec/2026/mart_decisioni_asilo.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "eurostat_migr_asylum_dec__mart_decisioni_asilo_cittadinanza",
+      "dataset": "eurostat_migr_asylum_dec",
+      "table": "mart_decisioni_asilo_cittadinanza",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/eurostat/eurostat_migr_asylum_dec/2026/mart_decisioni_asilo_cittadinanza.parquet",
+        "multi_file": false
+      }
+    },
+    {
       "slug": "eurostat_migr_eirtn__mart_benchmark_it",
       "dataset": "eurostat_migr_eirtn",
       "table": "mart_benchmark_it",
@@ -8106,6 +8504,68 @@
       }
     },
     {
+      "id": "eurostat_migr_asylum_app",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_migr_asylum_app",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261104T143114Z_e62f0079",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 374508,
+          "clean": 374508,
+          "mart": 116614
+        },
+        "output_bytes": {
+          "raw": 13487864,
+          "clean": 159092,
+          "mart": 268310
+        },
+        "started_at": "2026-11-04T14:31:14.841808+00:00",
+        "finished_at": "2026-11-04T14:31:21.601175+00:00",
+        "duration_seconds": 6.759
+      }
+    },
+    {
+      "id": "eurostat_migr_asylum_dec",
+      "source_id": "eurostat",
+      "status": "ok",
+      "label": "eurostat_migr_asylum_dec",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261104T143122Z_371edadc",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 756432,
+          "clean": 756432,
+          "mart": 120184
+        },
+        "output_bytes": {
+          "raw": 28716901,
+          "clean": 295648,
+          "mart": 375082
+        },
+        "started_at": "2026-11-04T14:31:22.111738+00:00",
+        "finished_at": "2026-11-04T14:31:40.365088+00:00",
+        "duration_seconds": 18.253
+      }
+    },
+    {
       "id": "eurostat_migr_eirtn",
       "source_id": "eurostat",
       "status": "ok",
@@ -8970,6 +9430,18 @@
             "semantic_type": "country_code"
           },
           {
+            "slug": "eurostat_migr_asylum_app",
+            "name": "Eurostat Migr Asylum App",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
+            "slug": "eurostat_migr_asylum_dec",
+            "name": "Eurostat Migr Asylum Dec",
+            "column": "country",
+            "semantic_type": "country_code"
+          },
+          {
             "slug": "eurostat_migr_eirtn",
             "name": "Eurostat Migr Eirtn",
             "column": "country",
@@ -9115,7 +9587,7 @@
           }
         ],
         "types": {
-          "country_code": 45
+          "country_code": 47
         }
       },
       "Provincia (tramite NUTS3)": {
@@ -9369,6 +9841,30 @@
             "semantic_type": "nuts_code"
           },
           {
+            "slug": "eurostat_migr_asylum_app",
+            "name": "Eurostat Migr Asylum App",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_asylum_app",
+            "name": "Eurostat Migr Asylum App",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_asylum_dec",
+            "name": "Eurostat Migr Asylum Dec",
+            "column": "geo",
+            "semantic_type": "nuts_code"
+          },
+          {
+            "slug": "eurostat_migr_asylum_dec",
+            "name": "Eurostat Migr Asylum Dec",
+            "column": "nuts_parent_code",
+            "semantic_type": "nuts_code"
+          },
+          {
             "slug": "eurostat_migr_eirtn",
             "name": "Eurostat Migr Eirtn",
             "column": "geo",
@@ -9658,7 +10154,7 @@
           }
         ],
         "types": {
-          "nuts_code": 89
+          "nuts_code": 93
         }
       },
       "Tempo": {
@@ -9788,6 +10284,18 @@
           {
             "slug": "eurostat_migr_acq",
             "name": "Eurostat Migr Acq",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_migr_asylum_app",
+            "name": "Eurostat Migr Asylum App",
+            "column": "year",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "eurostat_migr_asylum_dec",
+            "name": "Eurostat Migr Asylum Dec",
             "column": "year",
             "semantic_type": "year"
           },
@@ -9943,7 +10451,7 @@
           }
         ],
         "types": {
-          "year": 45,
+          "year": 47,
           "month": 1
         }
       }
