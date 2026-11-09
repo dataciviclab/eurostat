@@ -1,6 +1,6 @@
 {
   "source_id": "eurostat",
-  "generated_at": "2026-11-02T12:41:48+00:00",
+  "generated_at": "2026-11-09T13:07:18+00:00",
   "report_version": 1,
   "timing": {},
   "identity": {
@@ -11,32 +11,34 @@
     "observation_mode": "catalog-watch",
     "verdict": "go",
     "note": "Catalogo SDMX Eurostat (dataflow ESTAT). Toolkit scarica i data con format=TSV.",
-    "last_probed": "2026-11-02"
+    "last_probed": "2026-11-09"
   },
   "health": {
     "radar_status": "GREEN",
     "http_code": "200",
     "note": null,
     "ssl_fallback": false,
-    "streak": 9
+    "streak": 10
   },
   "inventory": {
-    "total_items": 8156,
+    "total_items": 8157,
+    "active_items": 8157,
+    "stale_items": 0,
     "method": null,
-    "captured_at": "2026-11-02T12:41:29+00:00",
+    "captured_at": "2026-11-09T13:07:01+00:00",
     "baseline_value": null,
     "baseline_date": null,
     "freshness_hours": 0.0,
     "delta": null,
     "delta_pct": 0.0,
     "formats": {
-      "SDMX": 8156
+      "SDMX": 8157
     }
   },
   "source_check": {
-    "last_run": "2026-11-02T12:41:48Z",
-    "total_scored": 6603,
-    "reachable": 6603,
+    "last_run": "2026-11-09T13:07:18Z",
+    "total_scored": 6605,
+    "reachable": 6605,
     "csv_count": 0,
     "with_csv_schema": 0,
     "avg_readiness": 5.0,
@@ -77,12 +79,18 @@
         "reachable": true
       }
     ],
-    "coverage_pct": 81.0,
+    "not_checked_non_csv": 0,
+    "blocked_items": 0,
+    "validation_skipped": 0,
+    "catalog_only": false,
+    "probeable_items": 6605,
+    "reachability_pct": 100.0,
+    "coverage_pct": 100.0,
     "formato_aperto": {
       "score": 5.0,
       "perc_aperto": 0.0,
       "perc_reachable": 100.0,
-      "total": 6603,
+      "total": 6605,
       "fonte": "source_check"
     }
   },
@@ -308,6 +316,116 @@
       ]
     },
     {
+      "slug": "eurostat_ltc_beds",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "HLTH_RS_BDLTC",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_migr_acq",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "MIGR_ACQ",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_migr_asylum_app",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "MIGR_ASYAPPCTZA",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_migr_asylum_dec",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "MIGR_ASYDCFSTA",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_migr_eirtn",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "MIGR_EIRTN",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_migr_emi1ctz",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "MIGR_EMI1CTZ",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_migr_imm1ctz",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "MIGR_IMM1CTZ",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_migr_pop1ctz",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "MIGR_POP1CTZ",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_migr_resfirst",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "MIGR_RESFIRST",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_migr_resvalid",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "MIGR_RESVALID",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
       "slug": "eurostat_nama10_gdp",
       "status": "incubating",
       "upstream": [
@@ -451,6 +569,50 @@
       ]
     },
     {
+      "slug": "eurostat_tran_hv_frmod",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "TRAN_HV_FRMOD",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_tran_hv_psmod",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "TRAN_HV_PSMOD",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_tran_r_net",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "TRAN_R_NET",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
+      "slug": "eurostat_tran_r_vehst",
+      "status": "incubating",
+      "upstream": [
+        {
+          "kind": "dataflow",
+          "id": "TRAN_R_VEHST",
+          "agency": "ESTAT"
+        }
+      ]
+    },
+    {
       "slug": "eurostat_tran_sf_roadnu",
       "status": "incubating",
       "upstream": [
@@ -480,8 +642,8 @@
   "repo": "eurostat",
   "catalog_schema_version": 1,
   "referenced_items": {
-    "checked": 34,
-    "matched": 34,
+    "checked": 48,
+    "matched": 48,
     "missing": [],
     "unknown": []
   }
