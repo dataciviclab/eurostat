@@ -1,6 +1,6 @@
 {
   "source_id": "eurostat",
-  "generated_at": "2026-11-09T13:07:18+00:00",
+  "generated_at": "2026-11-16T12:58:46+00:00",
   "report_version": 1,
   "timing": {},
   "identity": {
@@ -11,34 +11,34 @@
     "observation_mode": "catalog-watch",
     "verdict": "go",
     "note": "Catalogo SDMX Eurostat (dataflow ESTAT). Toolkit scarica i data con format=TSV.",
-    "last_probed": "2026-11-09"
+    "last_probed": "2026-11-16"
   },
   "health": {
     "radar_status": "GREEN",
     "http_code": "200",
     "note": null,
     "ssl_fallback": false,
-    "streak": 10
+    "streak": 11
   },
   "inventory": {
-    "total_items": 8157,
-    "active_items": 8157,
+    "total_items": 8156,
+    "active_items": 8156,
     "stale_items": 0,
     "method": null,
-    "captured_at": "2026-11-09T13:07:01+00:00",
+    "captured_at": "2026-11-16T12:58:30+00:00",
     "baseline_value": null,
     "baseline_date": null,
     "freshness_hours": 0.0,
     "delta": null,
     "delta_pct": 0.0,
     "formats": {
-      "SDMX": 8157
+      "SDMX": 8156
     }
   },
   "source_check": {
-    "last_run": "2026-11-09T13:07:18Z",
-    "total_scored": 6605,
-    "reachable": 6605,
+    "last_run": "2026-11-16T12:58:46Z",
+    "total_scored": 6620,
+    "reachable": 6620,
     "csv_count": 0,
     "with_csv_schema": 0,
     "avg_readiness": 5.0,
@@ -83,14 +83,14 @@
     "blocked_items": 0,
     "validation_skipped": 0,
     "catalog_only": false,
-    "probeable_items": 6605,
+    "probeable_items": 6620,
     "reachability_pct": 100.0,
     "coverage_pct": 100.0,
     "formato_aperto": {
       "score": 5.0,
       "perc_aperto": 0.0,
       "perc_reachable": 100.0,
-      "total": 6605,
+      "total": 6620,
       "fonte": "source_check"
     }
   },
