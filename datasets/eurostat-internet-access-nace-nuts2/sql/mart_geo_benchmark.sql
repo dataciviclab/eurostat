@@ -1,4 +1,4 @@
--- mart_geo_benchmark — Enterprise internet access by region: EU27 benchmarks per speed class.
+-- mart_geo_benchmark — Enterprise internet access by region: EU27 benchmarks per access indicator.
 -- Totale attività escluso settore finanziario (C10-S951_X_K), imprese con 10+ addetti.
 -- NUTS 2 disponibile solo per alcuni paesi: per IT, DE, FR ecc. solo livello nazionale.
 

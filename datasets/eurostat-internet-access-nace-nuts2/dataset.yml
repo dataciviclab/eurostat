@@ -4,9 +4,9 @@ schema_version: 1
 dataset:
   name: "eurostat_internet_access_nace_nuts2"
   source_id: "eurostat"
-  tags: [digitale, internet, imprese, banda-larga, eurostat, benchmark, nuts2]
+  tags: [digitale, internet, imprese, eurostat, benchmark, nuts2]
   category: digitale
-  description: "Enterprise internet access speed by NACE activity and NUTS 2 region"
+  description: "Enterprise internet access (share of persons employed with access) by NACE activity and NUTS 2 region"
   years: [2026]
   time_coverage:
     start_year: 2023
@@ -116,4 +116,4 @@ registry:
   theme: "Digital / Enterprise internet access"
   nuts_level: 2
   dimensions: ["freq", "size_emp", "indic_is", "unit", "nace_r2", "geo"]
-  description: "Enterprises by maximum contracted internet download speed, NACE activity and NUTS 2 region. NUTS 2 detail only for some countries (AT, BG, CZ, DK, ES, HR, HU, LT, NO, PL, RO, SE, SI, SK); Italy, Germany, France and others are available at country level only."
+  description: "Enterprises by share of persons employed with internet access for business purposes, NACE activity and NUTS 2 region. NUTS 2 detail only for some countries (AT, BG, CZ, DK, ES, HR, HU, LT, NO, PL, RO, SE, SI, SK); Italy, Germany, France and others are available at country level only."

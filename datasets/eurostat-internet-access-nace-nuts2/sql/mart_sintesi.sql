@@ -1,5 +1,5 @@
 -- mart_sintesi — Enterprise internet access by country: national values and EU27 ranking.
--- Quota di imprese (10+ addetti, totale escluso settore finanziario) per classe di velocità.
+-- Quota di imprese (10+ addetti, totale escluso settore finanziario) per indicatore di accesso (quota di addetti con internet).
 
 WITH country_vals AS (
     SELECT year, country, geo_label_en, indic_is, indic_is_label_en,
