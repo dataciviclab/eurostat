@@ -1,0 +1,119 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_internet_access_nace_nuts2"
+  source_id: "eurostat"
+  tags: [digitale, internet, imprese, banda-larga, eurostat, benchmark, nuts2]
+  category: digitale
+  description: "Enterprise internet access speed by NACE activity and NUTS 2 region"
+  years: [2026]
+  time_coverage:
+    start_year: 2023
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_isoc_r_ci_in_en2"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "ISOC_R_CI_IN_EN2"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+  - name: size_emp
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: SIZE_EMP
+  - name: indic_is
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: INDIC_IS
+  - name: geo
+    type: file
+    path: "../../codelists/geo.csv"
+  - name: nace_r2
+    type: file
+    path: "../../codelists/nace_r2.csv"
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+  required_columns:
+    - freq
+    - size_emp
+    - indic_is
+    - unit
+    - nace_r2
+    - geo
+    - year
+    - freq_label_en
+    - size_emp_label_en
+    - indic_is_label_en
+    - unit_label_en
+    - nace_r2_label_en
+    - geo_label_en
+    - nuts_level
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 100
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_geo_benchmark"
+      sql: "sql/mart_geo_benchmark.sql"
+    - name: "mart_sintesi"
+      sql: "sql/mart_sintesi.sql"
+  required_tables:
+    - "mart_geo_benchmark"
+    - "mart_sintesi"
+  validate:
+    table_rules:
+      mart_geo_benchmark:
+        required_columns: [year, geo, geo_label_en, country, indic_is, value, valore_eu27, media_eu_value]
+        primary_key: [year, geo, indic_is]
+        min_rows: 500
+      mart_sintesi:
+        required_columns: [year, country, indic_is, quota_imprese_pct, valore_eu27, rank_eu]
+        primary_key: [year, country, indic_is]
+        min_rows: 100
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "ISOC_R_CI_IN_EN2"
+  theme: "Digital / Enterprise internet access"
+  nuts_level: 2
+  dimensions: ["freq", "size_emp", "indic_is", "unit", "nace_r2", "geo"]
+  description: "Enterprises by maximum contracted internet download speed, NACE activity and NUTS 2 region. NUTS 2 detail only for some countries (AT, BG, CZ, DK, ES, HR, HU, LT, NO, PL, RO, SE, SI, SK); Italy, Germany, France and others are available at country level only."

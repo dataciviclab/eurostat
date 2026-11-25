@@ -48,6 +48,7 @@
 | `eurostat-migr-emi1ctz` | `MIGR_EMI1CTZ` | Migration / Emigration by citizenship | 7 (freq, citizen, agedef, age, unit, sex, geo) | 233,280 | ✅ |
 | `eurostat-migr-asylum-app` | `MIGR_ASYAPPCTZA` | Migration / Asylum applicants by type of applicant | 7 (freq, citizen, applicant, sex, unit, age, geo) | 374,508 | ✅ |
 | `eurostat-migr-asylum-dec` | `MIGR_ASYDCFSTA` | Migration / First instance decisions on asylum applications | 7 (freq, unit, citizen, sex, age, decision, geo) | 756,432 | ✅ |
+| `eurostat-internet-access-nace-nuts2` | `ISOC_R_CI_IN_EN2` | Digital / Enterprise internet access (NUTS 2 solo per alcuni paesi; IT solo nazionale) | 6 (freq, size_emp, indic_is, unit, nace_r2, geo) | 27,807 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
