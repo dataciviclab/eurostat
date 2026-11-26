@@ -12,6 +12,8 @@
 -- country-level geo only for MK (verified). Regions with missing or
 -- confidential values make the sum a lower bound, hence the coverage
 -- columns (e.g. IT 2008-2011: 53 of 107 NUTS3 with a value).
+-- MK is therefore NOT in this mart (no NUTS3 rows): its country-level row
+-- is available in mart_geo_benchmark and mart_trend.
 
 WITH eu_countries AS (
     SELECT unnest(['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','EL',
@@ -24,8 +26,8 @@ country_values AS (
         country,
         country IN (SELECT code FROM eu_countries) AS is_eu,
         SUM(value) AS tonnellate_migliaia,
-        COUNT(value) AS n_nuts3_con_dato,
-        COUNT(*) AS n_nuts3
+        COUNT(DISTINCT geo) FILTER (WHERE value IS NOT NULL) AS n_nuts3_con_dato,
+        COUNT(DISTINCT geo) AS n_nuts3
     FROM clean_input
     WHERE nuts_level = 'NUTS3'
       AND nst07 = 'TOTAL'

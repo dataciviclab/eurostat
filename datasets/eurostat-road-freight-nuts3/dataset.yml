@@ -72,6 +72,8 @@ clean:
     - unit_label_en
     - geo_label_en
     - nuts_level
+    - nuts_parent_code
+    - nuts_parent_label_en
     - country
     - value
     - flag
