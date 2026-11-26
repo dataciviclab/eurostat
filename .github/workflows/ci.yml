@@ -30,8 +30,26 @@ jobs:
           test_dir: "tests"
           pytest_args: "-v --tb=short"
 
+  detect:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      dirs: ${{ steps.detect.outputs.dirs }}
+      found: ${{ steps.detect.outputs.found }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dataciviclab/.github/actions/detect-changed-datasets@main
+        id: detect
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          paths: "datasets"
+
   validate-config:
+    needs: detect
+    if: always() && (github.event_name != 'pull_request' || needs.detect.outputs.found == 'true')
     uses: dataciviclab/.github/.github/workflows/dataset-config-check-reusable.yml@main
     with:
-      globs: "datasets"
+      globs: "datasets"  # fallback su push: scan completo
+      configs: ${{ needs.detect.outputs.dirs }}
       years: "from-config"
