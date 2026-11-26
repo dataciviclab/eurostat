@@ -2,7 +2,7 @@
   "schema_version": 2,
   "repo": "eurostat",
   "source_repo": "dataciviclab/eurostat",
-  "updated_at": "2026-11-25",
+  "updated_at": "2026-11-26",
   "gcs": {
     "clean": "year",
     "prefix": "eurostat/"
@@ -486,6 +486,113 @@
       ],
       "last_run": {
         "at": "2026-11-25T08:42:17.746782+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "slug": "eurostat_cultural_employment_nuts2",
+      "name": "Eurostat Cultural Employment Nuts2",
+      "description": "Cultural employment by NUTS 2 region",
+      "source_id": "eurostat",
+      "tags": [
+        "cultura",
+        "occupazione",
+        "eurostat",
+        "benchmark",
+        "nuts2"
+      ],
+      "category": "cultura",
+      "period": {
+        "start": 2014,
+        "end": 2024
+      },
+      "partitions": {
+        "2026": 10010
+      },
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "BIGINT",
+          "role": "dimension",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric"
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        }
+      ],
+      "mart_refs": [
+        "eurostat_cultural_employment_nuts2__mart_geo_benchmark",
+        "eurostat_cultural_employment_nuts2__mart_sintesi",
+        "eurostat_cultural_employment_nuts2__mart_trend"
+      ],
+      "last_run": {
+        "at": "2026-11-26T14:49:07.455155+00:00",
         "year": 2026,
         "status": "SUCCESS"
       }
@@ -6059,6 +6166,39 @@
       "primary_key": [
         "geo",
         "iccs"
+      ]
+    },
+    {
+      "slug": "eurostat_cultural_employment_nuts2__mart_geo_benchmark",
+      "dataset": "eurostat_cultural_employment_nuts2",
+      "table": "mart_geo_benchmark",
+      "layout": "year",
+      "year": 2026,
+      "primary_key": [
+        "year",
+        "geo",
+        "unit"
+      ]
+    },
+    {
+      "slug": "eurostat_cultural_employment_nuts2__mart_sintesi",
+      "dataset": "eurostat_cultural_employment_nuts2",
+      "table": "mart_sintesi",
+      "layout": "year",
+      "year": 2026,
+      "primary_key": [
+        "year",
+        "country"
+      ]
+    },
+    {
+      "slug": "eurostat_cultural_employment_nuts2__mart_trend",
+      "dataset": "eurostat_cultural_employment_nuts2",
+      "table": "mart_trend",
+      "layout": "year",
+      "year": 2026,
+      "primary_key": [
+        "geo"
       ]
     },
     {
