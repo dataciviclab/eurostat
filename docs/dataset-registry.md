@@ -48,6 +48,7 @@
 | `eurostat-migr-emi1ctz` | `MIGR_EMI1CTZ` | Migration / Emigration by citizenship | 7 (freq, citizen, agedef, age, unit, sex, geo) | 233,280 | ✅ |
 | `eurostat-migr-asylum-app` | `MIGR_ASYAPPCTZA` | Migration / Asylum applicants by type of applicant | 7 (freq, citizen, applicant, sex, unit, age, geo) | 374,508 | ✅ |
 | `eurostat-migr-asylum-dec` | `MIGR_ASYDCFSTA` | Migration / First instance decisions on asylum applications | 7 (freq, unit, citizen, sex, age, decision, geo) | 756,432 | ✅ |
+| `eurostat-cultural-employment-nuts2` | `CULT_EMP_REG` | Culture / Cultural employment by NUTS2 region | 3 (freq, unit, geo) | 10,010 | ✅ |
 
 All published datasets:
 - Cover **all EU countries**, all available years (1990–2024 depending on dataflow)
