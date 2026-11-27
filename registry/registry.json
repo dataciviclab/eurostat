@@ -2245,6 +2245,143 @@
       }
     },
     {
+      "slug": "eurostat_internet_access_nace_nuts2",
+      "name": "Eurostat Internet Access Nace Nuts2",
+      "description": "Enterprise internet access (share of persons employed with access) by NACE activity and NUTS 2 region",
+      "source_id": "eurostat",
+      "tags": [
+        "digitale",
+        "internet",
+        "imprese",
+        "eurostat",
+        "benchmark",
+        "nuts2"
+      ],
+      "category": "digitale",
+      "period": {
+        "start": 2023,
+        "end": 2025
+      },
+      "partitions": {
+        "2026": 27807
+      },
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "size_emp",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "indic_is",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "nace_r2",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "BIGINT",
+          "role": "dimension",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "size_emp_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "indic_is_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "nace_r2_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric"
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        }
+      ],
+      "mart_refs": [
+        "eurostat_internet_access_nace_nuts2__mart_geo_benchmark",
+        "eurostat_internet_access_nace_nuts2__mart_sintesi"
+      ],
+      "last_run": {
+        "at": "2026-11-26T17:24:15.306370+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
+    },
+    {
       "slug": "eurostat_jvs_nace2",
       "name": "Eurostat Jvs Nace2",
       "description": "Job vacancy statistics by NACE Rev. 2 — posti vacanti, posti occupati e tasso vacanza per trimestre, EU countries",
@@ -6663,6 +6800,30 @@
       "year": 2026,
       "primary_key": [
         "geo"
+      ]
+    },
+    {
+      "slug": "eurostat_internet_access_nace_nuts2__mart_geo_benchmark",
+      "dataset": "eurostat_internet_access_nace_nuts2",
+      "table": "mart_geo_benchmark",
+      "layout": "year",
+      "year": 2026,
+      "primary_key": [
+        "year",
+        "geo",
+        "indic_is"
+      ]
+    },
+    {
+      "slug": "eurostat_internet_access_nace_nuts2__mart_sintesi",
+      "dataset": "eurostat_internet_access_nace_nuts2",
+      "table": "mart_sintesi",
+      "layout": "year",
+      "year": 2026,
+      "primary_key": [
+        "year",
+        "country",
+        "indic_is"
       ]
     },
     {
