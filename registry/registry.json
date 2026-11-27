@@ -2,7 +2,7 @@
   "schema_version": 2,
   "repo": "eurostat",
   "source_repo": "dataciviclab/eurostat",
-  "updated_at": "2026-11-26",
+  "updated_at": "2026-11-27",
   "gcs": {
     "clean": "year",
     "prefix": "eurostat/"
@@ -5190,6 +5190,124 @@
       }
     },
     {
+      "slug": "eurostat_road_freight_nuts3",
+      "name": "Eurostat Road Freight Nuts3",
+      "description": "Trasporto merci su strada nazionale per regione di scarico (NUTS3) e tipo di merce NST 2007",
+      "source_id": "eurostat",
+      "tags": [
+        "trasporti",
+        "merci",
+        "autotrasporto",
+        "eurostat",
+        "benchmark",
+        "nuts3"
+      ],
+      "category": "trasporti",
+      "period": {
+        "start": 2008,
+        "end": 2025
+      },
+      "partitions": {
+        "2026": 819252
+      },
+      "columns": [
+        {
+          "name": "freq",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "nst07",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "unit",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "geo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "year",
+          "type": "INTEGER",
+          "role": "dimension",
+          "semantic_type": "year"
+        },
+        {
+          "name": "freq_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "nst07_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "unit_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "geo_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "nuts_level",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "country",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "nuts_parent_code",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "semantic_type": "nuts_code"
+        },
+        {
+          "name": "nuts_parent_label_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "value",
+          "type": "DOUBLE",
+          "role": "metric"
+        },
+        {
+          "name": "flag",
+          "type": "VARCHAR",
+          "role": "dimension"
+        },
+        {
+          "name": "flag_desc_en",
+          "type": "VARCHAR",
+          "role": "dimension"
+        }
+      ],
+      "mart_refs": [
+        "eurostat_road_freight_nuts3__mart_geo_benchmark",
+        "eurostat_road_freight_nuts3__mart_sintesi",
+        "eurostat_road_freight_nuts3__mart_trend"
+      ],
+      "last_run": {
+        "at": "2026-11-27T16:44:43.489967+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
+    },
+    {
       "slug": "eurostat_soil_erosion_nuts3",
       "name": "Eurostat Soil Erosion Nuts3",
       "description": "Estimated soil erosion by water by NUTS 3 region",
@@ -7449,6 +7567,40 @@
     {
       "slug": "eurostat_rd_expenditure_nuts2__mart_trend",
       "dataset": "eurostat_rd_expenditure_nuts2",
+      "table": "mart_trend",
+      "layout": "year",
+      "year": 2026,
+      "primary_key": [
+        "geo"
+      ]
+    },
+    {
+      "slug": "eurostat_road_freight_nuts3__mart_geo_benchmark",
+      "dataset": "eurostat_road_freight_nuts3",
+      "table": "mart_geo_benchmark",
+      "layout": "year",
+      "year": 2026,
+      "primary_key": [
+        "year",
+        "geo",
+        "nst07",
+        "unit"
+      ]
+    },
+    {
+      "slug": "eurostat_road_freight_nuts3__mart_sintesi",
+      "dataset": "eurostat_road_freight_nuts3",
+      "table": "mart_sintesi",
+      "layout": "year",
+      "year": 2026,
+      "primary_key": [
+        "year",
+        "country"
+      ]
+    },
+    {
+      "slug": "eurostat_road_freight_nuts3__mart_trend",
+      "dataset": "eurostat_road_freight_nuts3",
       "table": "mart_trend",
       "layout": "year",
       "year": 2026,
