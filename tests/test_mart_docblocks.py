@@ -56,6 +56,7 @@ SUBJECT_OWNER: dict[str, set[str]] = {
     "soil erosion": {"eurostat-soil-erosion-nuts3"},
     "labour productivity": {"eurostat-labour-productivity-nuts3"},
     "tran road": {"eurostat-tran-sf-roadnu"},
+    "road freight": {"eurostat-road-freight-nuts3"},
     "internet access": {"eurostat-internet-access-nace-nuts2"},
 }
 

@@ -1,0 +1,123 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "eurostat_road_freight_nuts3"
+  source_id: "eurostat"
+  tags: [trasporti, merci, autotrasporto, eurostat, benchmark, nuts3]
+  category: trasporti
+  description: "Trasporto merci su strada nazionale per regione di scarico (NUTS3) e tipo di merce NST 2007"
+  years: [2026]
+  time_coverage:
+    start_year: 2008
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "eurostat_road_go_na_ru3g"
+      type: "sdmx"
+      args:
+        agency: "ESTAT"
+        flow: "ROAD_GO_NA_RU3G"
+      primary: true
+
+support:
+  - name: freq
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: FREQ
+  - name: nst07
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: NST07
+  - name: unit
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: UNIT
+  - name: flag
+    type: codelist
+    provider: sdmx
+    agency: ESTAT
+    id: OBS_FLAG
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: utf-8
+    header: true
+    # Ordine colonne = header CSV del source sdmx (freq,nst07,unit,geo)
+    columns:
+      freq: VARCHAR
+      nst07: VARCHAR
+      unit: VARCHAR
+      geo: VARCHAR
+      year: INTEGER
+      value: DOUBLE
+      flag: VARCHAR
+  required_columns:
+    - freq
+    - nst07
+    - unit
+    - geo
+    - year
+    - freq_label_en
+    - nst07_label_en
+    - unit_label_en
+    - geo_label_en
+    - nuts_level
+    - nuts_parent_code
+    - nuts_parent_label_en
+    - country
+    - value
+    - flag
+    - flag_desc_en
+  validate:
+    min_rows: 100
+    # NOTE: `value` is NOT in not_null — Eurostat has legitimate coverage gaps.
+    not_null:
+      - geo
+      - year
+
+mart:
+  tables:
+    - name: "mart_geo_benchmark"
+      sql: "sql/mart_geo_benchmark.sql"
+    - name: "mart_sintesi"
+      sql: "sql/mart_sintesi.sql"
+    - name: "mart_trend"
+      sql: "sql/mart_trend.sql"
+  required_tables:
+    - "mart_geo_benchmark"
+    - "mart_sintesi"
+    - "mart_trend"
+  validate:
+    table_rules:
+      mart_geo_benchmark:
+        required_columns: [year, geo, geo_label_en, country, nst07, unit, value]
+        primary_key: [year, geo, nst07, unit]
+        min_rows: 1000
+      mart_sintesi:
+        required_columns: [year, country, tonnellate_migliaia, copertura_pct, rank_eu]
+        primary_key: [year, country]
+        min_rows: 30
+      mart_trend:
+        required_columns: [geo, geo_label_en, first_year, last_year, cagr_pct]
+        primary_key: [geo]
+        min_rows: 100
+
+validation:
+  fail_on_error: true
+
+registry:
+  dataflow: "ROAD_GO_NA_RU3G"
+  theme: "National road freight transport by region of unloading (NUTS 3) and type of goods"
+  nuts_level: 3
+  dimensions: ["freq", "nst07", "unit", "geo"]
+  description: "National road freight transport by region of unloading (NUTS 3) and type of goods (thousand tonnes)"
